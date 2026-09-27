@@ -1,0 +1,101 @@
+// This is your Prisma schema file
+// Learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id                  String   @id @default(cuid())
+  fullName            String   @default("")
+  phone               String   @default("")
+  email               String   @default("")
+  studentId           String   @default("")
+  university          String   @default("")
+  major               String   @default("")
+  company             String   @default("Amazon Web Services Viet Nam")
+  position            String   @default("Workforce Bootcamp - First Cloud AI Journey")
+  internshipStartDate String   @default("")
+  internshipEndDate   String   @default("")
+  avatar              String?
+  class               String   @default("")
+  createdAt           DateTime @default(now())
+  updatedAt           DateTime @updatedAt
+}
+
+model Week {
+  id               String     @id @default(cuid())
+  weekNumber       Int        @unique
+  startDate        String
+  endDate          String
+  status           String     @default("NOT_STARTED")
+  progress         Int        @default(0)
+  totalHours       Float      @default(0)
+  summaryEnglish   String     @default("")
+  summaryVietnamese String    @default("")
+  createdAt        DateTime   @default(now())
+  updatedAt        DateTime   @updatedAt
+
+  worklogs         Worklog[]
+  references       Reference[]
+}
+
+model Worklog {
+  id          String          @id @default(cuid())
+  weekId      String
+  projectId   String?
+  date        String
+  startTime   String
+  endTime     String
+  duration    Float           @default(0)
+  title       String
+  description String
+  result      String
+  status      String          @default("COMPLETED")
+  category    String          @default("DEVELOPMENT")
+  createdAt   DateTime        @default(now())
+  updatedAt   DateTime        @updatedAt
+
+  week        Week        @relation(fields: [weekId], references: [id], onDelete: Cascade)
+  project     Project?    @relation(fields: [projectId], references: [id])
+  references  Reference[]
+}
+
+model Reference {
+  id          String   @id @default(cuid())
+  title       String
+  url         String
+  source      String   @default("")
+  category    String   @default("General")
+  description String   @default("")
+  accessDate  String
+  weekId      String?
+  worklogId   String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  week        Week?    @relation(fields: [weekId], references: [id])
+  worklog     Worklog? @relation(fields: [worklogId], references: [id], onDelete: Cascade)
+}
+
+model Project {
+  id          String        @id @default(cuid())
+  name        String
+  description String        @default("")
+  status      String        @default("IN_PROGRESS")
+  progress    Int           @default(0)
+  startDate   String
+  endDate     String        @default("")
+  totalHours  Float         @default(0)
+  color       String        @default("#4F46E5")
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+
+  worklogs    Worklog[]
+}
+

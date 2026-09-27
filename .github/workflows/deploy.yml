@@ -1,0 +1,75 @@
+# ============================================================
+# GitHub Pages Auto-Deploy Workflow
+# ============================================================
+#
+# HOW TO USE:
+# 1. In vite.config.js, set GITHUB_REPO_NAME to your repo name.
+# 2. In your GitHub repo settings:
+#    → Settings → Pages → Source → GitHub Actions
+# 3. Push to the 'main' branch.
+# 4. GitHub Actions will build and deploy automatically.
+#
+# Your site will be live at:
+# https://<YOUR-GITHUB-USERNAME>.github.io/<YOUR-REPO-NAME>/
+#
+# ============================================================
+
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches:
+      - main   # Change to 'master' if your default branch is master
+  workflow_dispatch: # Allow manual trigger from GitHub UI
+
+# Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Allow only one concurrent deployment
+concurrency:
+  group: 'pages'
+  cancel-in-progress: false
+
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build for production
+        run: |
+          npm run build
+          cp dist/index.html dist/404.html
+        env:
+          NODE_ENV: production
+
+      - name: Upload GitHub Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: ./dist
+
+  deploy:
+    name: Deploy
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
