@@ -1,21 +1,22 @@
 import { useState, useEffect } from 'react';
-import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Navigate, useLocation } from 'react-router-dom';
 import { AnimatePresence, motion, useScroll, useSpring } from 'framer-motion';
 import { ArrowUp } from 'lucide-react';
 import { LanguageProvider } from './contexts/LanguageContext';
 import { ThemeProvider, useTheme } from './contexts/ThemeContext';
+import { SettingsProvider, useSettings } from './contexts/SettingsContext';
+import { DataProvider } from './contexts/DataContext';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
+import EditBar from './components/EditBar';
+import WebsiteSettingsDrawer from './components/WebsiteSettingsDrawer';
 import Home from './pages/Home';
-import About from './pages/About';
 import Team from './pages/Team';
 import Workshop from './pages/Workshop';
 import Worklog from './pages/Worklog';
 import Projects from './pages/Projects';
-import Certificates from './pages/Certificates';
-import Contact from './pages/Contact';
 
-// Scroll to top automatically upon navigation
+// Reset scroll position on route change
 const ScrollToTopOnRoute = () => {
   const { pathname } = useLocation();
   useEffect(() => {
@@ -27,18 +28,19 @@ const ScrollToTopOnRoute = () => {
 // Page transition wrapper
 const PageWrapper = ({ children }) => (
   <motion.div
-    initial={{ opacity: 0, y: 14 }}
+    initial={{ opacity: 0, y: 12 }}
     animate={{ opacity: 1, y: 0 }}
-    exit={{ opacity: 0, y: -10 }}
-    transition={{ duration: 0.35, ease: 'easeOut' }}
+    exit={{ opacity: 0, y: -8 }}
+    transition={{ duration: 0.3, ease: 'easeOut' }}
   >
     {children}
   </motion.div>
 );
 
-// Inner app that has access to theme context
+// Inner app
 const AppInner = () => {
   const { isDark } = useTheme();
+  const { settings } = useSettings();
   const location = useLocation();
   const [showScrollTop, setShowScrollTop] = useState(false);
 
@@ -52,7 +54,7 @@ const AppInner = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-      setShowScrollTop(window.scrollY > 400);
+      setShowScrollTop(window.scrollY > 350);
     };
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
@@ -62,48 +64,56 @@ const AppInner = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
+  const containerStyle = {
+    fontFamily: `var(--app-font-family, '"Plus Jakarta Sans", sans-serif')`,
+  };
+
   return (
     <div
+      style={containerStyle}
       className={`min-h-screen flex flex-col transition-colors duration-300 ${
         isDark ? 'bg-[#120b1e] text-gray-100' : 'bg-[#FFF9FB] text-[#5B5566]'
       }`}
     >
       <ScrollToTopOnRoute />
 
-      {/* ── Scroll Progress Bar at very top ── */}
+      {/* ── Scroll Progress Bar ── */}
       <motion.div
-        className="fixed top-0 left-0 right-0 h-1 bg-gradient-to-r from-[#CDB4DB] via-[#A2D2FF] to-[#FFC8DD] z-[999] origin-left"
-        style={{ scaleX }}
+        className="fixed top-0 left-0 right-0 h-1 z-[999] origin-left"
+        style={{
+          scaleX,
+          background: `linear-gradient(to right, ${settings.primaryColor}, ${settings.secondaryColor}, #FFC8DD)`,
+        }}
       />
 
-      {/* Subtle pastel ambient gradient backdrop */}
+      {/* Ambient gradient background */}
       <div
         className="fixed inset-0 pointer-events-none z-0"
         style={{
           background: isDark
-            ? 'radial-gradient(ellipse 80% 60% at 50% -10%, #2D1B4E25 0%, transparent 70%)'
-            : 'radial-gradient(ellipse 80% 60% at 50% -10%, #E9D5FF30 0%, transparent 70%)',
+            ? `radial-gradient(ellipse 80% 60% at 50% -10%, ${settings.primaryColor}15 0%, transparent 70%)`
+            : `radial-gradient(ellipse 80% 60% at 50% -10%, ${settings.primaryColor}25 0%, transparent 70%)`,
         }}
       />
 
       <Navbar />
 
-      <div className="flex-1 relative z-10">
+      {/* Main Pages Container (Only 5 Pages) */}
+      <div className="flex-1 relative z-10 w-full" style={{ maxWidth: 'var(--page-max-width, 1080px)', margin: '0 auto' }}>
         <AnimatePresence mode="wait">
           <Routes location={location} key={location.pathname}>
             <Route path="/" element={<PageWrapper><Home /></PageWrapper>} />
-            <Route path="/about" element={<PageWrapper><About /></PageWrapper>} />
             <Route path="/team" element={<PageWrapper><Team /></PageWrapper>} />
             <Route path="/workshop" element={<PageWrapper><Workshop /></PageWrapper>} />
             <Route path="/worklog" element={<PageWrapper><Worklog /></PageWrapper>} />
             <Route path="/projects" element={<PageWrapper><Projects /></PageWrapper>} />
-            <Route path="/certificates" element={<PageWrapper><Certificates /></PageWrapper>} />
-            <Route path="/contact" element={<PageWrapper><Contact /></PageWrapper>} />
+            {/* Fallback to home */}
+            <Route path="*" element={<Navigate to="/" replace />} />
           </Routes>
         </AnimatePresence>
       </div>
 
-      {/* Floating Back-to-Top Action */}
+      {/* Floating Back to top button */}
       <AnimatePresence>
         {showScrollTop && (
           <motion.button
@@ -125,6 +135,12 @@ const AppInner = () => {
         )}
       </AnimatePresence>
 
+      {/* Edit Mode Toolbar */}
+      <EditBar />
+
+      {/* Website Settings Drawer */}
+      <WebsiteSettingsDrawer />
+
       <Footer />
     </div>
   );
@@ -132,11 +148,15 @@ const AppInner = () => {
 
 const App = () => (
   <BrowserRouter basename={import.meta.env.BASE_URL}>
-    <ThemeProvider>
-      <LanguageProvider>
-        <AppInner />
-      </LanguageProvider>
-    </ThemeProvider>
+    <SettingsProvider>
+      <ThemeProvider>
+        <LanguageProvider>
+          <DataProvider>
+            <AppInner />
+          </DataProvider>
+        </LanguageProvider>
+      </ThemeProvider>
+    </SettingsProvider>
   </BrowserRouter>
 );
 

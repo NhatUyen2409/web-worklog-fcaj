@@ -3,27 +3,30 @@ import { motion } from 'framer-motion';
 import { CheckCircle, Clock, Filter, Sparkles } from 'lucide-react';
 import { useLanguage } from '../contexts/LanguageContext';
 import { useTheme } from '../contexts/ThemeContext';
+import { useData } from '../contexts/DataContext';
 import { translations } from '../data/translations';
-import { worklogData } from '../data/worklogData';
 import WorklogCard from '../components/WorklogCard';
 
 const Worklog = () => {
   const [filter, setFilter] = useState('all');
   const { lang } = useLanguage();
   const { isDark } = useTheme();
+  const { data } = useData();
   const t = translations[lang].worklog;
 
+  const worklogList = data?.worklog || [];
+
   const counts = useMemo(() => ({
-    all:       worklogData.length,
-    completed: worklogData.filter(w => w.status === 'Completed').length,
-    progress:  worklogData.filter(w => w.status === 'In Progress').length,
-  }), []);
+    all:       worklogList.length,
+    completed: worklogList.filter(w => w.status === 'Completed').length,
+    progress:  worklogList.filter(w => w.status === 'In Progress').length,
+  }), [worklogList]);
 
   const filtered = useMemo(() => {
-    if (filter === 'completed') return worklogData.filter(w => w.status === 'Completed');
-    if (filter === 'progress')  return worklogData.filter(w => w.status === 'In Progress');
-    return worklogData;
-  }, [filter]);
+    if (filter === 'completed') return worklogList.filter(w => w.status === 'Completed');
+    if (filter === 'progress')  return worklogList.filter(w => w.status === 'In Progress');
+    return worklogList;
+  }, [filter, worklogList]);
 
   const filterOptions = [
     { key: 'all',       label: t.filterAll,       count: counts.all,       icon: Filter },

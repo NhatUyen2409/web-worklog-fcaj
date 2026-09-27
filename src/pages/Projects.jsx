@@ -2,14 +2,17 @@ import { motion } from 'framer-motion';
 import { Sparkles } from 'lucide-react';
 import { useLanguage } from '../contexts/LanguageContext';
 import { useTheme } from '../contexts/ThemeContext';
+import { useData } from '../contexts/DataContext';
 import { translations } from '../data/translations';
-import { projectsData } from '../data/projectsData';
 import ProjectCard from '../components/ProjectCard';
 
 const Projects = () => {
   const { lang } = useLanguage();
   const { isDark } = useTheme();
+  const { data } = useData();
   const t = translations[lang].projects;
+
+  const projectsList = data?.projects || [];
 
   return (
     <main className="pt-28 pb-20 px-6 max-w-5xl mx-auto">
@@ -41,8 +44,8 @@ const Projects = () => {
 
       {/* Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-        {projectsData.map((project, i) => (
-          <ProjectCard key={project.id} project={project} index={i} />
+        {projectsList.map((project, i) => (
+          <ProjectCard key={project.id || i} project={project} index={i} />
         ))}
       </div>
     </main>

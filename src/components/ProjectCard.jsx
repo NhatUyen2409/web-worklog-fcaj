@@ -1,8 +1,9 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ChevronDown, Tag, Github, ExternalLink, ShieldCheck } from 'lucide-react';
+import { ChevronDown, Tag, Github, ExternalLink, ShieldCheck, Edit3, Image as ImageIcon } from 'lucide-react';
 import { useLanguage } from '../contexts/LanguageContext';
 import { useTheme } from '../contexts/ThemeContext';
+import { useData } from '../contexts/DataContext';
 import { translations } from '../data/translations';
 import { getText } from '../utils/text';
 
@@ -10,6 +11,7 @@ const ProjectCard = ({ project, index }) => {
   const [expanded, setExpanded] = useState(false);
   const { lang } = useLanguage();
   const { isDark } = useTheme();
+  const { isEditMode, updateProject } = useData();
   const t = translations[lang].projects;
 
   const isCompleted = project.status === 'Completed';
@@ -20,6 +22,19 @@ const ProjectCard = ({ project, index }) => {
   const longDesc = getText(project.longDescription, lang);
   const imageCaption = getText(project.imageCaption, lang);
 
+  const handleFieldChange = (field, value) => {
+    if (typeof project[field] === 'object' && project[field] !== null && !Array.isArray(project[field])) {
+      updateProject(index, {
+        [field]: {
+          ...project[field],
+          [lang]: value,
+        },
+      });
+    } else {
+      updateProject(index, { [field]: value });
+    }
+  };
+
   return (
     <motion.article
       initial={{ opacity: 0, y: 30 }}
@@ -28,14 +43,14 @@ const ProjectCard = ({ project, index }) => {
       transition={{ duration: 0.45, delay: index * 0.1 }}
       className={`rounded-[28px] border overflow-hidden transition-all duration-300 flex flex-col justify-between ${
         isDark ? 'bg-white/5 border-white/10 hover:border-white/20' : 'bg-white/80 border-white shadow-lg hover:shadow-2xl'
-      } backdrop-blur-sm`}
+      } backdrop-blur-sm ${isEditMode ? 'ring-2 ring-purple-300/40' : ''}`}
     >
       <div>
-        {/* ── Banner Header / Visual ── */}
+        {/* ── Banner Header / Visual / Image ── */}
         <div
           className="relative h-48 flex items-center justify-center overflow-hidden p-6"
           style={{
-            background: `linear-gradient(135deg, ${project.badgeColor}35, ${project.badgeColor}15)`,
+            background: `linear-gradient(135deg, ${project.badgeColor || '#CDB4DB'}35, ${project.badgeColor || '#CDB4DB'}15)`,
           }}
         >
           {project.image ? (
@@ -48,9 +63,9 @@ const ProjectCard = ({ project, index }) => {
             <div className="flex flex-col items-center gap-2.5 text-center px-4 relative z-10">
               <div
                 className="w-14 h-14 rounded-2xl flex items-center justify-center shadow-md"
-                style={{ backgroundColor: project.badgeColor + '40', border: `1.5px solid ${project.badgeColor}` }}
+                style={{ backgroundColor: (project.badgeColor || '#CDB4DB') + '40', border: `1.5px solid ${project.badgeColor || '#CDB4DB'}` }}
               >
-                <ShieldCheck className="w-8 h-8" style={{ color: project.badgeColor }} />
+                <ShieldCheck className="w-8 h-8" style={{ color: project.badgeColor || '#7C3AED' }} />
               </div>
               <p className={`text-xs font-semibold max-w-[280px] leading-tight ${isDark ? 'text-gray-200' : 'text-[#5B5566]'}`}>
                 {imageCaption || title}
@@ -58,10 +73,10 @@ const ProjectCard = ({ project, index }) => {
             </div>
           )}
 
-          {/* Floating gradient circles */}
+          {/* Floating gradient circle */}
           <div
             className="absolute -top-10 -right-10 w-32 h-32 rounded-full blur-2xl opacity-40 pointer-events-none"
-            style={{ backgroundColor: project.badgeColor }}
+            style={{ backgroundColor: project.badgeColor || '#CDB4DB' }}
           />
 
           {/* Status badge */}
@@ -87,67 +102,153 @@ const ProjectCard = ({ project, index }) => {
 
         {/* ── Card Body ── */}
         <div className="p-6">
-          {/* Category */}
-          <div className="flex items-center justify-between gap-2 mb-2">
-            <span
-              className="text-xs font-bold px-3 py-1 rounded-full"
-              style={{ backgroundColor: project.badgeColor + '25', color: project.badgeColor }}
-            >
-              {project.category}
-            </span>
-            <span className={`text-xs font-medium ${isDark ? 'text-gray-400' : 'text-[#9C93B0]'}`}>
-              {project.timeline}
-            </span>
-          </div>
-
-          {/* Title & Subtitle */}
-          <h3 className={`text-xl font-extrabold mt-1 mb-1 leading-snug ${isDark ? 'text-white' : 'text-[#5B5566]'}`}>
-            {title}
-          </h3>
-          <p className={`text-xs font-medium mb-3.5 ${isDark ? 'text-gray-400' : 'text-[#8A829D]'}`}>
-            {subtitle}
-          </p>
-
-          {/* Short description */}
-          <p className={`text-sm leading-relaxed mb-5 ${isDark ? 'text-gray-300' : 'text-[#6A6377]'}`}>
-            {shortDesc}
-          </p>
-
-          {/* Technologies */}
-          {project.technologies && project.technologies.length > 0 && (
-            <div className="flex flex-wrap gap-1.5 mb-5">
-              {project.technologies.map(tech => (
-                <span
-                  key={tech}
-                  className={`text-xs px-2.5 py-1 rounded-xl font-medium flex items-center gap-1 ${
-                    isDark ? 'bg-white/10 text-gray-200' : 'bg-[#F3E8FF] text-[#7C3AED]'
-                  }`}
-                >
-                  <Tag className="w-2.5 h-2.5" />{tech}
-                </span>
-              ))}
+          {/* Edit Mode badge */}
+          {isEditMode && (
+            <div className="mb-3 flex items-center gap-2">
+              <span className="text-[11px] font-bold px-2 py-0.5 rounded-md bg-purple-100 text-purple-700 dark:bg-purple-900/50 dark:text-purple-300 flex items-center gap-1">
+                <Edit3 className="w-2.5 h-2.5" /> Chỉnh sửa Dự án #{index + 1}
+              </span>
             </div>
           )}
 
-          {/* Metrics */}
-          {project.metrics && project.metrics.length > 0 && (
-            <div className="grid grid-cols-3 gap-2 mb-5">
-              {project.metrics.map((m, i) => (
-                <div
-                  key={i}
-                  className={`rounded-2xl p-2.5 text-center transition-colors ${
-                    isDark ? 'bg-white/5' : 'bg-[#F8F5FF]'
-                  }`}
-                >
-                  <p className="text-sm font-extrabold text-[#7C3AED] dark:text-[#CDB4DB]">
-                    {m.value}
-                  </p>
-                  <p className={`text-[11px] mt-0.5 leading-tight font-medium ${isDark ? 'text-gray-400' : 'text-[#9C93B0]'}`}>
-                    {getText(m.label, lang)}
-                  </p>
+          {/* Category & Timeline */}
+          <div className="flex items-center justify-between gap-2 mb-2">
+            <span
+              className="text-xs font-bold px-3 py-1 rounded-full"
+              style={{ backgroundColor: (project.badgeColor || '#CDB4DB') + '25', color: project.badgeColor || '#7C3AED' }}
+            >
+              {project.category || 'AWS Security'}
+            </span>
+            <span className={`text-xs font-medium ${isDark ? 'text-gray-400' : 'text-[#9C93B0]'}`}>
+              {project.timeline || 'FCAJ 2026'}
+            </span>
+          </div>
+
+          {/* Title */}
+          {isEditMode ? (
+            <div className="space-y-3 mb-4">
+              <div>
+                <label className="text-[11px] font-bold text-gray-500 block mb-1">Tiêu đề dự án (Title):</label>
+                <input
+                  type="text"
+                  value={title}
+                  onChange={(e) => handleFieldChange('title', e.target.value)}
+                  className={`w-full text-base font-bold px-3 py-1.5 rounded-xl border ${
+                    isDark ? 'bg-white/10 border-white/20 text-white' : 'bg-white border-[#E9D5FF] text-[#5B5566]'
+                  } focus:outline-none focus:ring-2 focus:ring-[#CDB4DB]`}
+                />
+              </div>
+
+              <div>
+                <label className="text-[11px] font-bold text-gray-500 block mb-1">Mô tả dự án (Description):</label>
+                <textarea
+                  rows={3}
+                  value={shortDesc}
+                  onChange={(e) => handleFieldChange('shortDescription', e.target.value)}
+                  className={`w-full text-xs sm:text-sm p-2.5 rounded-xl border ${
+                    isDark ? 'bg-white/10 border-white/20 text-white' : 'bg-white border-[#E9D5FF] text-[#5B5566]'
+                  } focus:outline-none focus:ring-2 focus:ring-[#CDB4DB]`}
+                />
+              </div>
+
+              <div>
+                <label className="text-[11px] font-bold text-gray-500 block mb-1">Công nghệ (Technologies, cách nhau bằng dấu phẩy):</label>
+                <input
+                  type="text"
+                  value={(project.technologies || []).join(', ')}
+                  onChange={(e) => {
+                    const arr = e.target.value.split(',').map(s => s.trim()).filter(Boolean);
+                    updateProject(index, { technologies: arr });
+                  }}
+                  className={`w-full text-xs sm:text-sm px-3 py-1.5 rounded-xl border ${
+                    isDark ? 'bg-white/10 border-white/20 text-white' : 'bg-white border-[#E9D5FF] text-[#5B5566]'
+                  } focus:outline-none focus:ring-2 focus:ring-[#CDB4DB]`}
+                />
+              </div>
+
+              <div>
+                <label className="text-[11px] font-bold text-gray-500 block mb-1">GitHub Link:</label>
+                <div className="flex items-center gap-2">
+                  <Github className="w-4 h-4 text-gray-400" />
+                  <input
+                    type="text"
+                    value={project.githubUrl || ''}
+                    onChange={(e) => updateProject(index, { githubUrl: e.target.value })}
+                    placeholder="https://github.com/..."
+                    className={`flex-1 text-xs sm:text-sm px-3 py-1.5 rounded-xl border ${
+                      isDark ? 'bg-white/10 border-white/20 text-white' : 'bg-white border-[#E9D5FF] text-[#5B5566]'
+                    } focus:outline-none focus:ring-2 focus:ring-[#CDB4DB]`}
+                  />
                 </div>
-              ))}
+              </div>
+
+              <div>
+                <label className="text-[11px] font-bold text-gray-500 block mb-1">Đường dẫn ảnh (Image URL):</label>
+                <div className="flex items-center gap-2">
+                  <ImageIcon className="w-4 h-4 text-gray-400" />
+                  <input
+                    type="text"
+                    value={project.image || ''}
+                    onChange={(e) => updateProject(index, { image: e.target.value })}
+                    placeholder="https://... hoặc /assets/..."
+                    className={`flex-1 text-xs sm:text-sm px-3 py-1.5 rounded-xl border ${
+                      isDark ? 'bg-white/10 border-white/20 text-white' : 'bg-white border-[#E9D5FF] text-[#5B5566]'
+                    } focus:outline-none focus:ring-2 focus:ring-[#CDB4DB]`}
+                  />
+                </div>
+              </div>
             </div>
+          ) : (
+            <>
+              <h3 className={`text-xl font-extrabold mt-1 mb-1 leading-snug ${isDark ? 'text-white' : 'text-[#5B5566]'}`}>
+                {title}
+              </h3>
+              <p className={`text-xs font-medium mb-3.5 ${isDark ? 'text-gray-400' : 'text-[#8A829D]'}`}>
+                {subtitle}
+              </p>
+
+              {/* Short description */}
+              <p className={`text-sm leading-relaxed mb-5 ${isDark ? 'text-gray-300' : 'text-[#6A6377]'}`}>
+                {shortDesc}
+              </p>
+
+              {/* Technologies */}
+              {project.technologies && project.technologies.length > 0 && (
+                <div className="flex flex-wrap gap-1.5 mb-5">
+                  {project.technologies.map(tech => (
+                    <span
+                      key={tech}
+                      className={`text-xs px-2.5 py-1 rounded-xl font-medium flex items-center gap-1 ${
+                        isDark ? 'bg-white/10 text-gray-200' : 'bg-[#F3E8FF] text-[#7C3AED]'
+                      }`}
+                    >
+                      <Tag className="w-2.5 h-2.5" />{tech}
+                    </span>
+                  ))}
+                </div>
+              )}
+
+              {/* Metrics */}
+              {project.metrics && project.metrics.length > 0 && (
+                <div className="grid grid-cols-3 gap-2 mb-5">
+                  {project.metrics.map((m, i) => (
+                    <div
+                      key={i}
+                      className={`rounded-2xl p-2.5 text-center transition-colors ${
+                        isDark ? 'bg-white/5' : 'bg-[#F8F5FF]'
+                      }`}
+                    >
+                      <p className="text-sm font-extrabold text-[#7C3AED] dark:text-[#CDB4DB]">
+                        {m.value}
+                      </p>
+                      <p className={`text-[11px] mt-0.5 leading-tight font-medium ${isDark ? 'text-gray-400' : 'text-[#9C93B0]'}`}>
+                        {getText(m.label, lang)}
+                      </p>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </>
           )}
 
           {/* Expandable Details */}
@@ -161,12 +262,26 @@ const ProjectCard = ({ project, index }) => {
                 className="overflow-hidden mb-4"
               >
                 <div className={`pt-4 border-t space-y-4 ${isDark ? 'border-white/10' : 'border-[#E9D5FF]/40'}`}>
-                  <p className={`text-sm leading-relaxed ${isDark ? 'text-gray-300' : 'text-[#6A6377]'}`}>
-                    {longDesc}
-                  </p>
+                  {isEditMode ? (
+                    <div>
+                      <label className="text-[11px] font-bold text-gray-500 block mb-1">Mô tả chi tiết (Long Description):</label>
+                      <textarea
+                        rows={4}
+                        value={longDesc}
+                        onChange={(e) => handleFieldChange('longDescription', e.target.value)}
+                        className={`w-full text-xs sm:text-sm p-2.5 rounded-xl border ${
+                          isDark ? 'bg-white/10 border-white/20 text-white' : 'bg-white border-[#E9D5FF] text-[#5B5566]'
+                        } focus:outline-none focus:ring-2 focus:ring-[#CDB4DB]`}
+                      />
+                    </div>
+                  ) : (
+                    <p className={`text-sm leading-relaxed ${isDark ? 'text-gray-300' : 'text-[#6A6377]'}`}>
+                      {longDesc}
+                    </p>
+                  )}
 
                   {/* Highlights / Features */}
-                  {project.features && project.features.length > 0 && (
+                  {project.features && project.features.length > 0 && !isEditMode && (
                     <div className="space-y-2">
                       <h4 className={`text-xs font-bold uppercase tracking-wider ${isDark ? 'text-gray-300' : 'text-[#5B5566]'}`}>
                         {t.keyHighlights}

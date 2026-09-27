@@ -2,40 +2,41 @@ import { NavLink } from 'react-router-dom';
 import { Github, Mail, Linkedin, Shield, Heart } from 'lucide-react';
 import { useLanguage } from '../contexts/LanguageContext';
 import { useTheme } from '../contexts/ThemeContext';
+import { useSettings } from '../contexts/SettingsContext';
+import { useData } from '../contexts/DataContext';
 import { translations } from '../data/translations';
-import { profileData } from '../data/profileData';
 
 const Footer = () => {
   const { lang } = useLanguage();
   const { isDark } = useTheme();
+  const { settings } = useSettings();
+  const { data } = useData();
   const t = translations[lang];
 
+  // ONLY 5 pages
   const navLinks = [
     { to: '/', label: t.nav.home },
-    { to: '/about', label: t.nav.about },
     { to: '/team', label: t.nav.team },
     { to: '/workshop', label: t.nav.workshop },
     { to: '/worklog', label: t.nav.worklog },
     { to: '/projects', label: t.nav.projects },
-    { to: '/certificates', label: t.nav.certificates },
-    { to: '/contact', label: t.nav.contact },
   ];
 
   const socialLinks = [
     {
-      href: `mailto:${profileData.contacts.email}`,
+      href: 'mailto:nhatuyen.sec@gmail.com',
       icon: Mail,
       label: 'Email',
-      color: '#CDB4DB',
+      color: settings.primaryColor,
     },
     {
-      href: profileData.contacts.github,
+      href: 'https://github.com/NhatUyen2409',
       icon: Github,
       label: 'GitHub',
-      color: '#A2D2FF',
+      color: settings.secondaryColor,
     },
     {
-      href: profileData.contacts.linkedin,
+      href: 'https://linkedin.com/in/nhatuyen-phan',
       icon: Linkedin,
       label: 'LinkedIn',
       color: '#FFC8DD',
@@ -47,18 +48,28 @@ const Footer = () => {
       isDark ? 'bg-[#120b1e]/90 border-white/10' : 'bg-white/80 border-[#E9D5FF]/50'
     } backdrop-blur-md`}>
       {/* Decorative top gradient rule */}
-      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#CDB4DB] to-transparent opacity-60" />
+      <div
+        className="absolute top-0 left-0 right-0 h-px opacity-60"
+        style={{
+          background: `linear-gradient(to right, transparent, ${settings.primaryColor}, transparent)`
+        }}
+      />
 
       <div className="max-w-7xl mx-auto px-6 py-12">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-10 mb-10">
           {/* Brand & Introduction */}
           <div>
             <div className="flex items-center gap-2.5 mb-3.5">
-              <div className="w-8 h-8 rounded-xl bg-gradient-to-br from-[#CDB4DB] to-[#A2D2FF] flex items-center justify-center shadow-md">
+              <div
+                className="w-8 h-8 rounded-xl flex items-center justify-center shadow-md"
+                style={{
+                  background: `linear-gradient(135deg, ${settings.primaryColor}, ${settings.secondaryColor})`
+                }}
+              >
                 <Shield className="w-4 h-4 text-white" />
               </div>
               <span className={`font-extrabold text-base ${isDark ? 'text-white' : 'text-[#5B5566]'}`}>
-                {profileData.name}
+                {data.home.name}
               </span>
             </div>
             <p className={`text-xs sm:text-sm leading-relaxed ${isDark ? 'text-gray-300' : 'text-[#6A6377]'}`}>
@@ -84,7 +95,7 @@ const Footer = () => {
             </div>
           </div>
 
-          {/* Quick Links */}
+          {/* Quick Links (5 pages only) */}
           <div>
             <h4 className={`font-bold text-xs uppercase tracking-wider mb-4 ${isDark ? 'text-gray-200' : 'text-[#5B5566]'}`}>
               {t.footer.quickLinks}
@@ -111,9 +122,9 @@ const Footer = () => {
             </h4>
             <div className="space-y-2.5">
               {[
-                { label: t.common.university, value: profileData.university },
-                { label: t.common.major, value: profileData.major },
-                { label: t.common.program, value: profileData.program },
+                { label: t.common.university, value: data.home.university },
+                { label: t.common.major, value: data.home.major },
+                { label: t.common.program, value: data.home.program },
               ].map(({ label, value }) => (
                 <div key={label}>
                   <p className={`text-[11px] font-semibold ${isDark ? 'text-gray-400' : 'text-[#9C93B0]'}`}>{label}</p>
@@ -131,7 +142,7 @@ const Footer = () => {
           <p className={`text-xs flex items-center gap-1.5 font-medium ${isDark ? 'text-gray-400' : 'text-[#8A829D]'}`}>
             {t.footer.copyright.replace('❤️', '')}
             <Heart className="w-3.5 h-3.5 text-[#FFC8DD] fill-[#FFC8DD]" />
-            <span>Phan Nhật Uyên</span>
+            <span>{data.home.name}</span>
           </p>
           <p className={`text-xs font-semibold ${isDark ? 'text-gray-400' : 'text-[#8A829D]'}`}>
             {t.footer.madeWith}
