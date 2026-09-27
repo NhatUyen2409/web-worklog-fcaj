@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion';
+import { Award, Sparkles } from 'lucide-react';
 import { useLanguage } from '../contexts/LanguageContext';
 import { useTheme } from '../contexts/ThemeContext';
 import { translations } from '../data/translations';
@@ -11,33 +12,49 @@ const Certificates = () => {
   const t = translations[lang].certificates;
 
   return (
-    <main className="pt-24 pb-16 px-4 max-w-5xl mx-auto">
+    <main className="pt-28 pb-20 px-6 max-w-5xl mx-auto">
       {/* Header */}
       <motion.div
-        initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6 }} className="text-center mb-12"
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6 }}
+        className="text-center mb-12"
       >
-        <h1 className={`text-4xl font-extrabold mb-3 ${isDark ? 'text-white' : 'text-[#5B5566]'}`}>
+        <span
+          className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-bold mb-3 border shadow-sm"
+          style={{
+            background: isDark ? 'rgba(205, 180, 219, 0.15)' : '#F3E8FF',
+            borderColor: '#CDB4DB60',
+            color: isDark ? '#E9D5FF' : '#7C3AED',
+          }}
+        >
+          <Award className="w-3.5 h-3.5" />
+          Industry Badges & Accreditations
+        </span>
+        <h1 className={`text-4xl sm:text-5xl font-extrabold mb-4 tracking-tight ${isDark ? 'text-white' : 'text-[#5B5566]'}`}>
           {t.pageTitle}
         </h1>
-        <p className={`text-sm sm:text-base ${isDark ? 'text-gray-400' : 'text-[#7E7791]'}`}>
+        <p className={`text-sm sm:text-base max-w-2xl mx-auto font-normal ${isDark ? 'text-gray-300' : 'text-[#7E7791]'}`}>
           {t.pageSubtitle}
         </p>
       </motion.div>
 
-      {/* Count badge */}
+      {/* Count Badge */}
       <motion.div
-        initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, delay: 0.2 }}
-        className="flex justify-center mb-10"
+        className="flex justify-center mb-12"
       >
-        <div className={`inline-flex items-center gap-3 px-6 py-3 rounded-2xl border ${
-          isDark ? 'bg-white/5 border-white/10' : 'bg-white/80 border-white shadow-sm'
-        }`}>
-          <span className="text-2xl">🏅</span>
+        <div className={`inline-flex items-center gap-4 px-7 py-3.5 rounded-[28px] border ${
+          isDark ? 'bg-white/5 border-white/10' : 'bg-white/80 border-white shadow-md'
+        } backdrop-blur-md`}>
+          <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-[#CDB4DB] to-[#A2D2FF] flex items-center justify-center text-2xl shadow-sm">
+            🏅
+          </div>
           <div>
-            <p className={`text-xs ${isDark ? 'text-gray-500' : 'text-[#B0AAC0]'}`}>{t.totalLabel}</p>
-            <p className={`text-xl font-extrabold ${isDark ? 'text-white' : 'text-[#5B5566]'}`}>
+            <p className={`text-xs font-semibold ${isDark ? 'text-gray-400' : 'text-[#9C93B0]'}`}>{t.totalLabel}</p>
+            <p className={`text-2xl font-extrabold ${isDark ? 'text-white' : 'text-[#5B5566]'}`}>
               {certificatesData.length}
             </p>
           </div>
@@ -45,20 +62,11 @@ const Certificates = () => {
       </motion.div>
 
       {/* Grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-8">
         {certificatesData.map((cert, i) => (
           <CertificateCard key={cert.id} cert={cert} index={i} />
         ))}
       </div>
-
-      {/* Edit hint */}
-      <motion.p
-        initial={{ opacity: 0 }} whileInView={{ opacity: 1 }}
-        viewport={{ once: true }} transition={{ delay: 0.5 }}
-        className={`text-center text-xs mt-10 ${isDark ? 'text-gray-600' : 'text-[#C5BDD8]'}`}
-      >
-        ✏️ Thêm chứng chỉ bằng cách chỉnh sửa <code className="font-mono">src/data/certificatesData.js</code>
-      </motion.p>
     </main>
   );
 };

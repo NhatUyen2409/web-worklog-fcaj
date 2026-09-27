@@ -1,106 +1,123 @@
 // ============================================================
-// PROFILE DATA — Edit your personal info here
-// ============================================================
-// This file controls all personal details shown across the site.
-// Replace every value marked with ← before publishing.
+// PROFILE DATA — Phan Nhật Uyên
+// AWS First Cloud AI Journey (FCAJ) 2026
 // ============================================================
 
 export const profileData = {
   // ── Identity ──────────────────────────────────────────────
-  name:        'Phan Nhật Uyên',         // ← your full name (Vietnamese)
-  englishName: 'Uyen Phan',              // ← your name in English
-  role:        'Cloud & Security Engineering Trainee',
+  name:        'Phan Nhật Uyên',
+  englishName: 'Uyen Phan',
+  role:        'Information Assurance Student · Cloud & Security Trainee',
   university:  'FPT University',
   major:       'Information Assurance (Cyber Security)',
-  program:     'First Cloud AI Journey (FCAJ) 2026',
-  location:    'Vietnam',                // ← your city / country
-
-  // ── Biography (shown on About page) ───────────────────────
-  // Write 2–4 sentences. Displayed in the selected language via translations.js
-  bio: '[Write your biography here in 2–4 sentences. Share your passion and journey.]',
-
-  // ── Career Goal (shown on About page) ─────────────────────
-  careerGoal: '[Write your career objective here.]',
+  program:     'AWS First Cloud AI Journey (FCAJ) 2026',
+  location:    'Ho Chi Minh City, Vietnam',
 
   // ── Contact Info ───────────────────────────────────────────
   contacts: {
-    email:        'your.email@example.com',         // ← your email
-    github:       'https://github.com/your-username', // ← your GitHub URL
-    linkedin:     'https://linkedin.com/in/your-profile', // ← your LinkedIn URL
-    portfolioUrl: 'https://your-username.github.io/fcaj-portfolio/', // ← after deploy
+    email:        'nhatuyen.sec@gmail.com',
+    github:       'https://github.com/NhatUyen2409',
+    linkedin:     'https://linkedin.com/in/nhatuyen-phan',
+    portfolioUrl: 'https://nhatuyen2409.github.io/web-worklog-fcaj/',
   },
 
   // ── Skills ─────────────────────────────────────────────────
-  // Add or remove skills. Available icons (Lucide): Cloud, Terminal, Code, Activity,
-  // ShieldAlert, Cpu, Network, Lock, Globe, Database, Server, Wifi
-  // Levels: 'Advanced' | 'Proficient' | 'Intermediate' | 'Beginner'
-  // Colors: use any pastel hex, e.g. '#CDB4DB', '#A2D2FF', '#FFC8DD', '#95D5B2'
   skills: [
     {
-      name:        'AWS',
-      level:       'Intermediate',   // ← adjust your level
+      name:        'AWS Cloud Security',
+      level:       'Advanced',
       badgeColor:  '#CDB4DB',
-      description: '[List the AWS services you use, e.g. VPC, EC2, IAM, S3, CloudWatch]',
-      category:    'Cloud Security',
+      category:    'Cloud Infrastructure',
       icon:        'Cloud',
+      description: {
+        vi: 'Thiết kế VPC Multi-tier, IAM Least-Privilege, AWS KMS, Security Groups, WAF, CloudWatch & GuardDuty.',
+        en: 'Multi-tier VPC architecture, IAM Least-Privilege, AWS KMS encryption, Security Groups, WAF, CloudWatch & GuardDuty.',
+      },
     },
     {
-      name:        'Linux',
-      level:       'Intermediate',
+      name:        'Linux & Hardening',
+      level:       'Proficient',
       badgeColor:  '#A2D2FF',
-      description: '[e.g. Ubuntu, Bash Scripting, SSH Hardening, UFW, Systemd]',
-      category:    'System Administration',
+      category:    'Operating Systems',
       icon:        'Terminal',
+      description: {
+        vi: 'Quản trị Ubuntu/Debian, SSH Key Authentication, cấu hình UFW/iptables, Fail2ban, Systemd và Bash scripting.',
+        en: 'Ubuntu/Debian administration, SSH hardening, UFW/iptables firewall rules, Fail2ban, Systemd, and automation via Bash.',
+      },
     },
     {
-      name:        'Python',
-      level:       'Intermediate',
-      badgeColor:  '#CDB4DB',
-      description: '[e.g. Security Automation, Scapy, Socket Programming, Boto3]',
-      category:    'Programming',
-      icon:        'Code',
-    },
-    {
-      name:        'Networking',
-      level:       'Intermediate',
-      badgeColor:  '#A2D2FF',
-      description: '[e.g. TCP/IP, Subnetting, DNS, SSL/TLS, Firewalls, VPN]',
-      category:    'Infrastructure',
-      icon:        'Network',
-    },
-    {
-      name:        'Burp Suite',
-      level:       'Intermediate',
-      badgeColor:  '#FFC8DD',
-      description: '[e.g. Web Vulnerability Assessment, OWASP Top 10, Proxy]',
-      category:    'Penetration Testing',
-      icon:        'ShieldAlert',
-    },
-    {
-      name:        'Wireshark',
-      level:       'Intermediate',
+      name:        'Network Defense & Protocols',
+      level:       'Advanced',
       badgeColor:  '#BDE0FE',
-      description: '[e.g. Packet Analysis, TCP/IP, DDoS Pattern Detection]',
+      category:    'Networking',
+      icon:        'Network',
+      description: {
+        vi: 'Phân tích giao thức TCP/IP, DNSSEC, TLS/SSL Certificates, Subnetting CIDR, VPN Tunneling và phòng chống DDoS.',
+        en: 'Deep TCP/IP analysis, DNSSEC, TLS/SSL certificate lifecycle, CIDR subnetting, site-to-site VPN, and DDoS mitigation.',
+      },
+    },
+    {
+      name:        'Python for Security',
+      level:       'Proficient',
+      badgeColor:  '#FFC8DD',
+      category:    'Programming & Automation',
+      icon:        'Code',
+      description: {
+        vi: 'Tự động hóa tác vụ bảo mật với Boto3 SDK, trích xuất log an ninh, Scapy packet manipulation và xử lý telemetry.',
+        en: 'Security automation via AWS Boto3 SDK, log parsing pipelines, packet crafting with Scapy, and telemetry anomaly analysis.',
+      },
+    },
+    {
+      name:        'Packet Inspection & Forensics',
+      level:       'Proficient',
+      badgeColor:  '#95D5B2',
       category:    'Network Forensics',
       icon:        'Activity',
+      description: {
+        vi: 'Bắt và phân tích gói tin mạng chuyên sâu với Wireshark, phát hiện bất thường SYN Flood, ARP Spoofing và DNS tunneling.',
+        en: 'Packet analysis via Wireshark, dissecting malicious payloads, detecting SYN Floods, ARP spoofing, and covert DNS tunnels.',
+      },
     },
     {
-      name:        'Java',
+      name:        'Web Security & OWASP',
       level:       'Intermediate',
-      badgeColor:  '#FFC8DD',
-      description: '[e.g. OOP, Secure Coding, Cryptography APIs]',
-      category:    'Software Development',
-      icon:        'Cpu',
+      badgeColor:  '#FFAFCC',
+      category:    'Application Security',
+      icon:        'ShieldAlert',
+      description: {
+        vi: 'Đánh giá lỗ hổng ứng dụng web theo chuẩn OWASP Top 10, kiểm thử Burp Suite proxy, SQL Injection và XSS defense.',
+        en: 'Web application vulnerability assessments targeting OWASP Top 10, Burp Suite proxy intercept, SQLi and XSS defenses.',
+      },
     },
-    // Add more skills by copying a block above ↑
+    {
+      name:        'Infrastructure as Code (IaC)',
+      level:       'Intermediate',
+      badgeColor:  '#E9D5FF',
+      category:    'DevSecOps',
+      icon:        'Cpu',
+      description: {
+        vi: 'Mô hình hóa hạ tầng đám mây với AWS CloudFormation và Terraform, đảm bảo tính nhất quán và bất biến cho hệ thống.',
+        en: 'Automating immutable cloud infrastructure provisioning with AWS CloudFormation templates and HashiCorp Terraform.',
+      },
+    },
+    {
+      name:        'Docker & Microservices',
+      level:       'Intermediate',
+      badgeColor:  '#D8F3E3',
+      category:    'Containerization',
+      icon:        'Server',
+      description: {
+        vi: 'Đóng gói ứng dụng containerized an toàn, quét lỗ hổng image và triển khai trên Amazon ECR / ECS Fargate.',
+        en: 'Building lightweight, hardened container images, container vulnerability scanning, and deploying to Amazon ECS Fargate.',
+      },
+    },
   ],
 
-  // ── Stats shown on Home page ───────────────────────────────
-  // Edit values when you have completed the program
+  // ── Stats ──────────────────────────────────────────────────
   stats: [
-    { label: 'Tuần thực hành', value: '12 Tuần' },
-    { label: 'Dự án hoàn thành', value: '4' },
-    { label: 'Dịch vụ AWS', value: '—' },  // ← fill in when done
-    { label: 'Kỹ năng cốt lõi', value: '—' }, // ← fill in when done
+    { label: { vi: 'Tuần thực tập', en: 'Internship Weeks' }, value: '12 Tuần' },
+    { label: { vi: 'Dự án hoàn thành', en: 'Completed Projects' }, value: '4' },
+    { label: { vi: 'Dịch vụ AWS', en: 'AWS Services' }, value: '16+' },
+    { label: { vi: 'Kỹ năng chuyên sâu', en: 'Core Competencies' }, value: '8+' },
   ],
-}
+};

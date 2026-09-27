@@ -17,7 +17,7 @@ const Navbar = () => {
   const location = useLocation();
 
   useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 20);
+    const handleScroll = () => setScrolled(window.scrollY > 15);
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
@@ -38,21 +38,23 @@ const Navbar = () => {
 
   const glassClass = scrolled
     ? isDark
-      ? 'bg-[#1a1025]/80 backdrop-blur-xl shadow-lg border-b border-white/10'
-      : 'bg-white/70 backdrop-blur-xl shadow-lg border-b border-[#E9D5FF]/40'
-    : 'bg-transparent';
+      ? 'bg-[#120b1e]/90 backdrop-blur-xl shadow-lg border-b border-white/10'
+      : 'bg-white/85 backdrop-blur-xl shadow-sm border-b border-[#E9D5FF]/50'
+    : isDark
+      ? 'bg-[#120b1e]/60 backdrop-blur-md border-b border-transparent'
+      : 'bg-white/50 backdrop-blur-md border-b border-transparent';
 
   return (
-    <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${glassClass}`}>
+    <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${glassClass}`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
-          <NavLink to="/" className="flex items-center gap-2 group">
+          <NavLink to="/" className="flex items-center gap-2.5 group">
             <div className="w-8 h-8 rounded-xl bg-gradient-to-br from-[#CDB4DB] to-[#A2D2FF] flex items-center justify-center shadow-md group-hover:scale-110 transition-transform duration-200">
               <Shield className="w-4 h-4 text-white" />
             </div>
-            <span className={`font-bold text-sm tracking-tight hidden sm:block ${isDark ? 'text-white' : 'text-[#5B5566]'}`}>
-              Nhật Uyên <span className="text-[#CDB4DB] font-light">FCAJ</span>
+            <span className={`font-extrabold text-sm sm:text-base tracking-tight hidden sm:block ${isDark ? 'text-white' : 'text-[#5B5566]'}`}>
+              Nhật Uyên <span className="text-[#7C3AED] dark:text-[#CDB4DB] font-semibold text-xs px-2 py-0.5 rounded-full bg-[#E9D5FF]/40 ml-1">FCAJ</span>
             </span>
           </NavLink>
 
@@ -64,12 +66,12 @@ const Navbar = () => {
                 to={to}
                 end={to === '/'}
                 className={({ isActive }) =>
-                  `px-3 py-1.5 rounded-xl text-sm font-medium transition-all duration-200 ${
+                  `px-3 py-1.5 rounded-xl text-xs sm:text-sm font-bold transition-all duration-200 ${
                     isActive
-                      ? 'bg-[#E9D5FF] text-[#7C3AED]'
+                      ? 'bg-gradient-to-r from-[#CDB4DB]/40 to-[#A2D2FF]/40 text-[#7C3AED] dark:text-white shadow-sm'
                       : isDark
                         ? 'text-gray-300 hover:text-white hover:bg-white/10'
-                        : 'text-[#5B5566] hover:text-[#7C3AED] hover:bg-[#F3E8FF]'
+                        : 'text-[#6A6377] hover:text-[#7C3AED] hover:bg-[#F3E8FF]'
                   }`
                 }
               >
@@ -86,7 +88,7 @@ const Navbar = () => {
             <button
               onClick={() => setIsOpen(!isOpen)}
               className={`lg:hidden p-2 rounded-xl transition-colors duration-200 ${
-                isDark ? 'text-gray-300 hover:bg-white/10' : 'text-[#5B5566] hover:bg-[#F3E8FF]'
+                isDark ? 'text-gray-200 hover:bg-white/10' : 'text-[#5B5566] hover:bg-[#F3E8FF]'
               }`}
               aria-label="Toggle mobile menu"
             >
@@ -103,24 +105,24 @@ const Navbar = () => {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
-            transition={{ duration: 0.2 }}
+            transition={{ duration: 0.25 }}
             className={`lg:hidden border-t overflow-hidden ${
-              isDark ? 'bg-[#1a1025]/95 border-white/10' : 'bg-white/95 border-[#E9D5FF]/40'
-            } backdrop-blur-xl`}
+              isDark ? 'bg-[#120b1e]/98 border-white/10' : 'bg-white/98 border-[#E9D5FF]/50'
+            } backdrop-blur-2xl`}
           >
-            <div className="px-4 py-3 space-y-1">
+            <div className="px-5 py-4 space-y-1.5">
               {navLinks.map(({ to, label }) => (
                 <NavLink
                   key={to}
                   to={to}
                   end={to === '/'}
                   className={({ isActive }) =>
-                    `block px-4 py-2.5 rounded-xl text-sm font-medium transition-all duration-200 ${
+                    `block px-4 py-2.5 rounded-2xl text-sm font-bold transition-all duration-200 ${
                       isActive
-                        ? 'bg-[#E9D5FF] text-[#7C3AED]'
+                        ? 'bg-gradient-to-r from-[#CDB4DB]/30 to-[#A2D2FF]/30 text-[#7C3AED] dark:text-white shadow-sm'
                         : isDark
                           ? 'text-gray-300 hover:bg-white/10'
-                          : 'text-[#5B5566] hover:bg-[#F3E8FF]'
+                          : 'text-[#6A6377] hover:bg-[#F3E8FF]'
                     }`
                   }
                 >

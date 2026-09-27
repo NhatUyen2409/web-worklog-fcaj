@@ -3,6 +3,7 @@ import { Github, Mail, Linkedin, Shield, Heart } from 'lucide-react';
 import { useLanguage } from '../contexts/LanguageContext';
 import { useTheme } from '../contexts/ThemeContext';
 import { translations } from '../data/translations';
+import { profileData } from '../data/profileData';
 
 const Footer = () => {
   const { lang } = useLanguage();
@@ -22,19 +23,19 @@ const Footer = () => {
 
   const socialLinks = [
     {
-      href: 'mailto:uyenpn.fcaj@gmail.com',
+      href: `mailto:${profileData.contacts.email}`,
       icon: Mail,
       label: 'Email',
       color: '#CDB4DB',
     },
     {
-      href: 'https://github.com/nhatuyen-sec',
+      href: profileData.contacts.github,
       icon: Github,
       label: 'GitHub',
       color: '#A2D2FF',
     },
     {
-      href: 'https://linkedin.com/in/nhatuyen-phan',
+      href: profileData.contacts.linkedin,
       icon: Linkedin,
       label: 'LinkedIn',
       color: '#FFC8DD',
@@ -43,29 +44,28 @@ const Footer = () => {
 
   return (
     <footer className={`relative mt-auto border-t transition-colors duration-300 ${
-      isDark ? 'bg-[#120b1e] border-white/10' : 'bg-white/80 border-[#E9D5FF]/40'
-    }`}>
-      {/* Decorative top gradient */}
+      isDark ? 'bg-[#120b1e]/90 border-white/10' : 'bg-white/80 border-[#E9D5FF]/50'
+    } backdrop-blur-md`}>
+      {/* Decorative top gradient rule */}
       <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#CDB4DB] to-transparent opacity-60" />
 
       <div className="max-w-7xl mx-auto px-6 py-12">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-10 mb-10">
-          {/* Brand */}
+          {/* Brand & Introduction */}
           <div>
-            <div className="flex items-center gap-2 mb-3">
+            <div className="flex items-center gap-2.5 mb-3.5">
               <div className="w-8 h-8 rounded-xl bg-gradient-to-br from-[#CDB4DB] to-[#A2D2FF] flex items-center justify-center shadow-md">
                 <Shield className="w-4 h-4 text-white" />
               </div>
-              <span className={`font-bold ${isDark ? 'text-white' : 'text-[#5B5566]'}`}>
-                Phan Nhật Uyên
+              <span className={`font-extrabold text-base ${isDark ? 'text-white' : 'text-[#5B5566]'}`}>
+                {profileData.name}
               </span>
             </div>
-            <p className={`text-sm leading-relaxed ${isDark ? 'text-gray-400' : 'text-[#7E7791]'}`}>
-              Information Assurance Student · FPT University<br />
-              AWS First Cloud AI Journey 2026
+            <p className={`text-xs sm:text-sm leading-relaxed ${isDark ? 'text-gray-300' : 'text-[#6A6377]'}`}>
+              {t.footer.tagline}
             </p>
-            {/* Social icons */}
-            <div className="flex gap-3 mt-4">
+            {/* Social Icons */}
+            <div className="flex gap-2.5 mt-5">
               {socialLinks.map(({ href, icon: Icon, label, color }) => (
                 <a
                   key={label}
@@ -86,16 +86,16 @@ const Footer = () => {
 
           {/* Quick Links */}
           <div>
-            <h4 className={`font-semibold text-sm mb-4 ${isDark ? 'text-white' : 'text-[#5B5566]'}`}>
-              Quick Links
+            <h4 className={`font-bold text-xs uppercase tracking-wider mb-4 ${isDark ? 'text-gray-200' : 'text-[#5B5566]'}`}>
+              {t.footer.quickLinks}
             </h4>
-            <div className="grid grid-cols-2 gap-1">
+            <div className="grid grid-cols-2 gap-2">
               {navLinks.map(({ to, label }) => (
                 <NavLink
                   key={to}
                   to={to}
-                  className={`text-sm py-1 transition-colors duration-200 hover:text-[#9C5FD6] ${
-                    isDark ? 'text-gray-400' : 'text-[#7E7791]'
+                  className={`text-xs sm:text-sm py-1 font-medium transition-colors duration-200 hover:text-[#7C3AED] ${
+                    isDark ? 'text-gray-300 hover:text-white' : 'text-[#7E7791]'
                   }`}
                 >
                   {label}
@@ -104,36 +104,36 @@ const Footer = () => {
             </div>
           </div>
 
-          {/* Program Info */}
+          {/* Academic Info */}
           <div>
-            <h4 className={`font-semibold text-sm mb-4 ${isDark ? 'text-white' : 'text-[#5B5566]'}`}>
-              {t.common.program}
+            <h4 className={`font-bold text-xs uppercase tracking-wider mb-4 ${isDark ? 'text-gray-200' : 'text-[#5B5566]'}`}>
+              {t.footer.academicInfo}
             </h4>
-            <div className="space-y-2">
+            <div className="space-y-2.5">
               {[
-                { label: t.common.university, value: 'FPT University' },
-                { label: t.common.major, value: 'Information Assurance' },
-                { label: t.common.program, value: 'FCAJ 2026' },
+                { label: t.common.university, value: profileData.university },
+                { label: t.common.major, value: profileData.major },
+                { label: t.common.program, value: profileData.program },
               ].map(({ label, value }) => (
                 <div key={label}>
-                  <p className={`text-xs ${isDark ? 'text-gray-500' : 'text-[#B0AAC0]'}`}>{label}</p>
-                  <p className={`text-sm font-medium ${isDark ? 'text-gray-300' : 'text-[#5B5566]'}`}>{value}</p>
+                  <p className={`text-[11px] font-semibold ${isDark ? 'text-gray-400' : 'text-[#9C93B0]'}`}>{label}</p>
+                  <p className={`text-xs sm:text-sm font-bold ${isDark ? 'text-gray-200' : 'text-[#5B5566]'}`}>{value}</p>
                 </div>
               ))}
             </div>
           </div>
         </div>
 
-        {/* Bottom bar */}
+        {/* Bottom Bar */}
         <div className={`border-t pt-6 flex flex-col sm:flex-row items-center justify-between gap-3 ${
           isDark ? 'border-white/10' : 'border-[#E9D5FF]/50'
         }`}>
-          <p className={`text-xs flex items-center gap-1 ${isDark ? 'text-gray-500' : 'text-[#B0AAC0]'}`}>
+          <p className={`text-xs flex items-center gap-1.5 font-medium ${isDark ? 'text-gray-400' : 'text-[#8A829D]'}`}>
             {t.footer.copyright.replace('❤️', '')}
-            <Heart className="w-3 h-3 text-[#FFC8DD] fill-[#FFC8DD]" />
-            {lang === 'vi' ? 'cho FCAJ 2026.' : 'for FCAJ 2026.'}
+            <Heart className="w-3.5 h-3.5 text-[#FFC8DD] fill-[#FFC8DD]" />
+            <span>Phan Nhật Uyên</span>
           </p>
-          <p className={`text-xs ${isDark ? 'text-gray-500' : 'text-[#B0AAC0]'}`}>
+          <p className={`text-xs font-semibold ${isDark ? 'text-gray-400' : 'text-[#8A829D]'}`}>
             {t.footer.madeWith}
           </p>
         </div>
