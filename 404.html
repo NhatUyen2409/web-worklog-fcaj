@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Đang chuyển hướng... | Redirecting...</title>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+      background: #F8FAFC;
+      color: #000000;
+      text-align: center;
+      padding: 20px;
+    }
+    .spinner {
+      width: 40px;
+      height: 40px;
+      border: 3px solid #E2E8F0;
+      border-top-color: #000000;
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+      margin-bottom: 20px;
+    }
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+    h2 { font-size: 18px; margin-bottom: 8px; font-weight: 700; }
+    p { font-size: 14px; color: #475569; margin-bottom: 16px; }
+    a {
+      display: inline-block;
+      padding: 8px 16px;
+      background: #000000;
+      color: #FFFFFF;
+      text-decoration: none;
+      border-radius: 6px;
+      font-weight: 600;
+      font-size: 13px;
+    }
+  </style>
+  <script>
+    // GitHub Pages SPA Redirect Script
+    // Redirects deep direct links (e.g. /repo/worklog) to hash routes (e.g. /repo/#/worklog)
+    (function() {
+      var l = window.location;
+      var path = l.pathname;
+      var segments = path.split('/').filter(Boolean);
+
+      // In GitHub Pages Project site: https://<username>.github.io/<repo>/<subroute>
+      // segments[0] is <repo>, segments[1..] are the subroutes
+      if (segments.length > 0) {
+        var repo = segments[0];
+        var route = segments.slice(1).join('/');
+        var search = l.search || '';
+        var hash = l.hash || '';
+
+        var targetUrl = l.protocol + '//' + l.host + '/' + repo + '/';
+        if (route) {
+          targetUrl += '#/' + route;
+        } else if (hash) {
+          targetUrl += hash;
+        }
+        if (search) {
+          targetUrl += search;
+        }
+        window.location.replace(targetUrl);
+      } else {
+        window.location.replace(l.protocol + '//' + l.host + '/');
+      }
+    })();
+  </script>
+</head>
+<body>
+  <div class="spinner"></div>
+  <h2>Báo cáo thực tập FCAJ - Đang tải...</h2>
+  <p>Vui lòng chờ trong giây lát hoặc nhấn vào nút bên dưới để về trang chủ.</p>
+  <a href="./">Về trang chủ báo cáo</a>
+</body>
+</html>

@@ -1,0 +1,825 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Báo cáo thực tập :: Phan Nhat Uyen - AWS First Cloud AI Journey</title>
+  <meta name="description" content="Báo cáo thực tập tốt nghiệp chính thức của Phan Nhat Uyen tại Amazon Web Services Việt Nam - First Cloud AI Journey (FCAJ).">
+  
+  <!-- Google Fonts: Plus Jakarta Sans for modern, clean corporate SaaS design -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="app-layout">
+    
+    <!-- LEFT SIDEBAR NAVIGATION (Matching https://workshop-sample.awsfcaj.com/) -->
+    <aside class="sidebar" id="sidebar">
+      
+      <!-- Brand Header -->
+      <div class="sidebar-header">
+        <a href="#/thong-tin" class="brand-logo">
+          <div class="logo-icon aws-gradient">
+            <svg viewBox="0 0 60 30" width="28" height="15" fill="currentColor">
+              <path d="M14.09 10.85a4.7 4.7.0 00.19 1.48 7.73 7.73.0 00.54 1.19.77.77.0 01.12.38.64.64.0 01-.32.49l-1 .7a.83.83.0 01-.44.15.69.69.0 01-.49-.23 3.8 3.8.0 01-.6-.77q-.25-.42-.51-1a6.14 6.14.0 01-4.89 2.3 4.54 4.54.0 01-3.32-1.19 4.27 4.27.0 01-1.22-3.2 4.28 4.28.0 011.46-3.4A6.06 6.06.0 017.69 6.46a12.47 12.47.0 011.76.13q.92.13 1.91.36V5.73a3.65 3.65.0 00-.79-2.66A3.81 3.81.0 007.86 2.3a7.71 7.71.0 00-1.79.22 12.78 12.78.0 00-1.79.57 4.55 4.55.0 01-.58.22h-.26q-.35.0-.35-.52V2a1.09 1.09.0 01.12-.58 1.2 1.2.0 01.47-.35A10.88 10.88.0 015.77.32 10.19 10.19.0 018.36.0a6 6 0 014.35 1.35 5.49 5.49.0 011.38 4.09zM7.34 13.38a5.36 5.36.0 001.72-.31A3.63 3.63.0 0010.63 12 2.62 2.62.0 0011.19 11a5.63 5.63.0 00.16-1.44v-.7a14.35 14.35.0 00-1.53-.28 12.37 12.37.0 00-1.56-.1 3.84 3.84.0 00-2.47.67A2.34 2.34.0 005 11a2.35 2.35.0 00.61 1.76A2.4 2.4.0 007.34 13.38z"/>
+              <path d="M45.19 23.81C39.72 27.85 31.78 30 25 30A36.64 36.64.0 01.22 20.57c-.51-.46-.06-1.09.56-.74A49.78 49.78.0 0025.53 26.4 49.23 49.23.0 0044.4 22.53C45.32 22.14 46.1 23.14 45.19 23.81z"/>
+            </svg>
+          </div>
+          <div class="logo-text">
+            <span class="brand-name" data-i18n="brandName">Báo cáo thực tập</span>
+            <span class="brand-desc" data-i18n="brandDesc">AWS First Cloud AI Journey</span>
+          </div>
+        </a>
+      </div>
+
+      <!-- Search in Sidebar -->
+      <div class="sidebar-search">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+        <input type="text" id="sidebar-quick-search" data-i18n-placeholder="searchPlaceholder" placeholder="Tìm kiếm nội dung báo cáo...">
+      </div>
+
+      <!-- Navigation Menu Structure from workshop-sample.awsfcaj.com -->
+      <nav class="sidebar-nav">
+        <div class="nav-section-title" data-i18n="reportContentTitle">NỘI DUNG BÁO CÁO</div>
+        <ul class="nav-list">
+          
+          <li class="nav-item">
+            <a href="#/thong-tin" class="nav-link active" data-page="thong-tin">
+              <span class="nav-num">📌</span>
+              <span class="nav-label" data-i18n="navStudentInfo">Thông tin sinh viên</span>
+            </a>
+          </li>
+
+          <!-- 1. Worklog -->
+          <li class="nav-item">
+            <a href="#/worklog" class="nav-link" data-page="worklog">
+              <span class="nav-num">1.</span>
+              <span class="nav-label" data-i18n="navWorklog">1. Nhật ký công việc</span>
+            </a>
+          </li>
+
+          <!-- 2. Proposal -->
+          <li class="nav-item">
+            <a href="#/proposal" class="nav-link" data-page="proposal">
+              <span class="nav-num">2.</span>
+              <span class="nav-label" data-i18n="navProposal">2. Đề xuất đồ án</span>
+            </a>
+          </li>
+
+          <!-- 3. Blogs Posted -->
+          <li class="nav-item">
+            <a href="#/blogs-posted" class="nav-link" data-page="blogs-posted">
+              <span class="nav-num">3.</span>
+              <span class="nav-label" data-i18n="navBlogs">3. Bài viết Blog</span>
+            </a>
+          </li>
+
+          <!-- 4. Events Participated -->
+          <li class="nav-item">
+            <a href="#/events" class="nav-link" data-page="events">
+              <span class="nav-num">4.</span>
+              <span class="nav-label" data-i18n="navEvents">4. Sự kiện tham gia</span>
+            </a>
+          </li>
+
+          <!-- 5. Workshop -->
+          <li class="nav-item">
+            <a href="#/workshop" class="nav-link" data-page="workshop">
+              <span class="nav-num">5.</span>
+              <span class="nav-label" data-i18n="navWorkshop">5. Bài thực hành Workshop</span>
+            </a>
+          </li>
+
+          <!-- 6. Self-Assessment -->
+          <li class="nav-item">
+            <a href="#/self-evaluation" class="nav-link" data-page="self-evaluation">
+              <span class="nav-num">6.</span>
+              <span class="nav-label" data-i18n="navSelfAssessment">6. Tự đánh giá</span>
+            </a>
+          </li>
+
+          <!-- 7. Sharing and Feedback -->
+          <li class="nav-item">
+            <a href="#/feedback" class="nav-link" data-page="feedback">
+              <span class="nav-num">7.</span>
+              <span class="nav-label" data-i18n="navFeedback">7. Chia sẻ & Góp ý</span>
+            </a>
+          </li>
+
+          <!-- 8. Settings & Backup -->
+          <li class="nav-item" style="margin-top: 12px; border-top: 1px dashed var(--border-light); padding-top: 8px;">
+            <a href="#/cai-dat" class="nav-link" data-page="cai-dat">
+              <span class="nav-num">⚙️</span>
+              <span class="nav-label" data-i18n="navSettings">Cài đặt & Sao lưu</span>
+            </a>
+          </li>
+        </ul>
+
+        <!-- External Communities as in workshop-sample -->
+        <div class="nav-section-title" style="margin-top: 18px;" data-i18n="externalLinksTitle">LIÊN KẾT NGOÀI</div>
+        <div class="external-links-box">
+          <a href="https://awsstudygroup.com" target="_blank" rel="noopener" class="ext-link">
+            <span>🌐 AWS Study Group - Blog</span>
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+          </a>
+          <a href="https://www.facebook.com/groups/awsstudygroupfcj" target="_blank" rel="noopener" class="ext-link">
+            <span>👥 AWS Study Group - FB Group</span>
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+          </a>
+        </div>
+      </nav>
+
+      <!-- Sidebar User Profile (Phan Nhat Uyen) -->
+      <div class="sidebar-footer">
+        <div class="user-profile-badge">
+          <div class="user-avatar" id="sidebar-avatar">U</div>
+          <div class="user-details">
+            <span class="user-name" id="sidebar-username">Phan Nhat Uyen</span>
+            <span class="user-sub" id="sidebar-company" data-i18n="sidebarCompany">Amazon Web Services Việt Nam</span>
+          </div>
+          <button class="btn-logout" onclick="navigateTo('thong-tin')" id="btn-sidebar-profile" data-i18n-title="sidebarViewProfile" title="Xem thông tin chi tiết">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          </button>
+        </div>
+      </div>
+    </aside>
+
+
+    <!-- MAIN CONTENT AREA -->
+    <main class="main-wrapper">
+      
+      <!-- TOP HEADER -->
+      <header class="top-header">
+        <div class="header-left">
+          <button class="mobile-toggle" id="btn-toggle-menu" aria-label="Toggle menu">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+          </button>
+          <div>
+            <h1 class="page-title" id="page-title">Thông tin sinh viên & Báo cáo</h1>
+            <p class="page-subtitle" id="current-date">Thứ Hai, 05/10/2026</p>
+          </div>
+        </div>
+
+        <div class="header-right">
+          <!-- Language Switcher Pill -->
+          <div class="lang-pill" id="lang-switcher">
+            <button type="button" class="lang-btn active" data-lang="vi" id="btn-lang-vi">Tiếng Việt</button>
+            <span class="lang-divider">|</span>
+            <button type="button" class="lang-btn" data-lang="en" id="btn-lang-en">English</button>
+          </div>
+
+          <!-- Quick Actions: Print / PDF & Add Worklog -->
+          <button type="button" class="btn btn-outline" id="btn-quick-print" title="In hoặc xuất file PDF">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect width="12" height="8" x="6" y="14"/></svg>
+            <span data-i18n="btnPrintPdf">In / Xuất PDF</span>
+          </button>
+
+          <button type="button" class="btn btn-primary" id="btn-open-log-modal">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+            <span data-i18n="btnAddWorklog">+ Thêm Worklog</span>
+          </button>
+
+          <!-- User Greeting Pill -->
+          <div class="user-greeting-pill">
+            <div class="avatar-sm">U</div>
+            <span class="greeting-text" id="greeting-display">Chào buổi sáng, Uyen</span>
+          </div>
+        </div>
+      </header>
+
+      <!-- PAGE CONTENT CONTAINER -->
+      <div class="content-body">
+
+        <!-- ============================================== -->
+        <!-- VIEW: THÔNG TIN SINH VIÊN (STUDENT INFO)       -->
+        <!-- ============================================== -->
+        <section class="page-view active" id="view-thong-tin">
+          
+          <!-- Warning note box matching official sample -->
+          <div class="notice-callout notice-warning">
+            <div class="notice-icon">⚠️</div>
+            <div class="notice-content" data-i18n="infoNotice">
+              Ghi chú quan trọng: Báo cáo thực tập tốt nghiệp này được xây dựng chuẩn theo khung cấu trúc yêu cầu của chương trình First Cloud AI Journey (FCAJ) thuộc Amazon Web Services (AWS) Việt Nam. Toàn bộ nội dung bên dưới có thể tự do chỉnh sửa và lưu trữ trực tiếp.
+            </div>
+          </div>
+
+          <div class="card form-card" style="max-width:100%; margin-top: 1.5rem;">
+            <div class="card-header-row">
+              <h2 class="card-title" data-i18n="infoCardTitle">Thông tin sinh viên thực tập</h2>
+              <span class="badge badge-purple" data-i18n="officialBadge">Chính thức • AWS FCAJ</span>
+            </div>
+
+            <form id="student-info-form">
+              <div class="info-grid-container">
+                <div class="form-group">
+                  <label class="form-label"><span data-i18n="labelFullName">Họ và tên</span> <span class="required-star">*</span></label>
+                  <input type="text" id="info-fullname" class="form-control" value="Phan Nhat Uyen" required>
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label"><span data-i18n="labelPhone">Số điện thoại</span> <span class="required-star">*</span></label>
+                  <input type="text" id="info-phone" class="form-control" value="0989888999" required>
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label"><span data-i18n="labelEmail">Email</span> <span class="required-star">*</span></label>
+                  <input type="email" id="info-email" class="form-control" value="uyen.phan@intern.aws.com" required>
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label"><span data-i18n="labelUniversity">Trường Đại học</span> <span class="required-star">*</span></label>
+                  <input type="text" id="info-university" class="form-control" value="Trường Đại học Sư phạm Kỹ thuật TP.HCM" required>
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label"><span data-i18n="labelMajor">Chuyên ngành</span> <span class="required-star">*</span></label>
+                  <input type="text" id="info-major" class="form-control" value="Công nghệ Thông tin" required>
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label" data-i18n="labelClass">Lớp / Khóa</label>
+                  <input type="text" id="info-class" class="form-control" value="AWS082025">
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label"><span data-i18n="labelCompany">Đơn vị thực tập</span> <span class="required-star">*</span></label>
+                  <input type="text" id="info-company" class="form-control" value="Công ty TNHH Amazon Web Services Việt Nam" required>
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label" data-i18n="labelPosition">Vị trí thực tập</label>
+                  <input type="text" id="info-position" class="form-control" value="Chương trình Đào tạo Nhân lực - First Cloud AI Journey">
+                </div>
+
+                <div class="form-group full-span">
+                  <label class="form-label" data-i18n="labelDuration">Thời gian thực tập</label>
+                  <input type="text" id="info-duration" class="form-control" value="Từ 12/08/2025 đến 12/11/2025">
+                </div>
+              </div>
+
+              <div class="form-actions">
+                <button type="submit" class="btn btn-primary" data-i18n="btnSaveInfo">Lưu cập nhật thông tin</button>
+              </div>
+            </form>
+          </div>
+
+          <!-- REPORT OVERVIEW TABLE OF CONTENTS (7 SECTIONS) -->
+          <div class="card" style="margin-top: 1.5rem;">
+            <h3 class="card-title" data-i18n="tocTitle">Cấu trúc các mục báo cáo</h3>
+            <p class="text-muted" style="margin-bottom: 1.5rem;" data-i18n="tocSubtitle">Nhấp vào từng phần để chuyển đến soạn thảo và xem chi tiết:</p>
+            
+            <div class="report-toc-grid">
+              <div class="toc-card" onclick="navigateTo('worklog')">
+                <div class="toc-badge">1</div>
+                <div>
+                  <h4 data-i18n="toc1Title">1. Nhật ký công việc</h4>
+                  <p data-i18n="toc1Desc">Nhật ký chi tiết 12 tuần thực tập (Mục tiêu, Bảng phân công công việc, Kết quả đạt được).</p>
+                </div>
+              </div>
+
+              <div class="toc-card" onclick="navigateTo('proposal')">
+                <div class="toc-badge">2</div>
+                <div>
+                  <h4 data-i18n="toc2Title">2. Đề xuất đồ án</h4>
+                  <p data-i18n="toc2Desc">Đề xuất đồ án: IoT Weather Platform - Giải pháp AWS Serverless Real-Time Monitoring.</p>
+                </div>
+              </div>
+
+              <div class="toc-card" onclick="navigateTo('blogs-posted')">
+                <div class="toc-badge">3</div>
+                <div>
+                  <h4 data-i18n="toc3Title">3. Bài viết kỹ thuật</h4>
+                  <p data-i18n="toc3Desc">Các bài viết kỹ thuật đã đăng tải trên AWS Study Group (EKS Pod Identity Session Policies,...).</p>
+                </div>
+              </div>
+
+              <div class="toc-card" onclick="navigateTo('events')">
+                <div class="toc-badge">4</div>
+                <div>
+                  <h4 data-i18n="toc4Title">4. Sự kiện tham gia</h4>
+                  <p data-i18n="toc4Desc">Báo cáo tham dự sự kiện thực tế: GenAI-powered App-DB Modernization Workshop tại Bitexco.</p>
+                </div>
+              </div>
+
+              <div class="toc-card" onclick="navigateTo('workshop')">
+                <div class="toc-badge">5</div>
+                <div>
+                  <h4 data-i18n="toc5Title">5. Bài thực hành Workshop</h4>
+                  <p data-i18n="toc5Desc">Bài thực hành chuyên sâu: Secure Hybrid Access to S3 using Gateway & Interface VPC Endpoints.</p>
+                </div>
+              </div>
+
+              <div class="toc-card" onclick="navigateTo('self-evaluation')">
+                <div class="toc-badge">6</div>
+                <div>
+                  <h4 data-i18n="toc6Title">6. Tự đánh giá</h4>
+                  <p data-i18n="toc6Desc">Bảng 12 tiêu chí tự đánh giá năng lực cá nhân và các điểm cần tiếp tục hoàn thiện.</p>
+                </div>
+              </div>
+
+              <div class="toc-card full-span" onclick="navigateTo('feedback')">
+                <div class="toc-badge">7</div>
+                <div>
+                  <h4 data-i18n="toc7Title">7. Chia sẻ & Góp ý</h4>
+                  <p data-i18n="toc7Desc">Đánh giá 6 khía cạnh môi trường làm việc, sự hỗ trợ từ Mentor, cơ hội phát triển tại FCAJ.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+
+        <!-- ============================================== -->
+        <!-- VIEW: 1. WORKLOG (12 WEEKS)                    -->
+        <!-- ============================================== -->
+        <section class="page-view" id="view-worklog">
+          <div class="section-header-flex">
+            <div>
+              <h2 class="section-title" data-i18n="worklogSectionTitle">1. Nhật ký 12 tuần thực tập</h2>
+              <p class="section-subtitle" data-i18n="worklogSectionSubtitle">Ghi lại mục tiêu, nhiệm vụ từng ngày và kết quả đạt được qua từng tuần</p>
+            </div>
+            <button class="btn btn-primary" id="btn-add-week-task" data-i18n="btnAddTaskThisWeek">+ Thêm công việc vào tuần này</button>
+          </div>
+
+          <!-- Week Navigation Tabs (Week 1 -> Week 12) -->
+          <div class="week-tabs-scroll" id="week-tabs-bar">
+            <!-- Dynamically populated or rendered -->
+          </div>
+
+          <!-- Current Week Worklog Container -->
+          <div class="card" style="margin-top: 1.25rem;">
+            <div class="card-header-row">
+              <div>
+                <h3 class="card-title" id="current-week-heading">Nhật ký Tuần 1</h3>
+                <span class="text-muted" id="current-week-subtitle" data-i18n="bootcampSubtitle">Chương trình đào tạo First Cloud AI Journey</span>
+              </div>
+              <button class="btn btn-outline" id="btn-edit-week-meta" data-i18n="btnEditWeekMeta">Sửa mục tiêu & thành tích</button>
+            </div>
+
+            <!-- Objectives & Achievements -->
+            <div class="week-meta-grid">
+              <div class="meta-box">
+                <h4 class="meta-title" data-i18n="metaObjectivesTitle">🎯 Mục tiêu tuần</h4>
+                <p id="week-objectives-text" class="meta-body"></p>
+              </div>
+
+              <div class="meta-box">
+                <h4 class="meta-title" data-i18n="metaAchievementsTitle">🏆 Thành tích đạt được</h4>
+                <div id="week-achievements-text" class="meta-body"></div>
+              </div>
+            </div>
+
+            <!-- Tasks Table -->
+            <h4 style="font-size:15px; font-weight:700; margin: 24px 0 12px; color: var(--text-main);" data-i18n="tasksTableTitle">
+              📋 Nội dung công việc thực hiện trong tuần
+            </h4>
+            
+            <div class="table-responsive">
+              <table class="report-table" id="week-tasks-table">
+                <thead>
+                  <tr>
+                    <th style="width: 100px;" data-i18n="thDay">Thứ</th>
+                    <th data-i18n="thTaskDesc">Nội dung công việc</th>
+                    <th style="width: 130px;" data-i18n="thStartDate">Ngày bắt đầu</th>
+                    <th style="width: 130px;" data-i18n="thEndDate">Ngày hoàn thành</th>
+                    <th data-i18n="thRef">Tài liệu tham khảo</th>
+                    <th style="width: 90px; text-align:right;" data-i18n="thActions">Thao tác</th>
+                  </tr>
+                </thead>
+                <tbody id="week-tasks-tbody">
+                  <!-- Populated by JS -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+
+        <!-- ============================================== -->
+        <!-- VIEW: 2. PROPOSAL                              -->
+        <!-- ============================================== -->
+        <section class="page-view" id="view-proposal">
+          <div class="section-header-flex">
+            <div>
+              <h2 class="section-title" data-i18n="proposalSectionTitle">2. Đề xuất đồ án thực tập</h2>
+              <p class="section-subtitle" data-i18n="proposalSectionSubtitle">Giải pháp AWS Serverless toàn diện cho giám sát thời tiết thời gian thực</p>
+            </div>
+            <button class="btn btn-primary" id="btn-save-proposal" data-i18n="btnSaveProposal">Lưu đề xuất đồ án</button>
+          </div>
+
+          <div class="notice-callout notice-info" style="margin-top: 1rem;">
+            <div class="notice-icon">💡</div>
+            <div class="notice-content" data-i18n="proposalNotice">
+              Đề tài nghiên cứu: Nền tảng quan trắc thời tiết IoT cho phòng thí nghiệm - Giải pháp AWS Serverless Real-Time Monitoring sử dụng AWS IoT Core, Lambda, S3 Data Lake, AWS Glue và Amplify Next.js.
+            </div>
+          </div>
+
+          <div class="proposal-container card" style="margin-top: 1.5rem;">
+            
+            <!-- 1. Executive Summary -->
+            <div class="proposal-block">
+              <h3 class="proposal-h3" data-i18n="prop1Heading">1. Tóm tắt điều hành</h3>
+              <textarea id="prop-summary" class="form-control report-textarea" rows="4"></textarea>
+            </div>
+
+            <!-- 2. Problem Statement -->
+            <div class="proposal-block">
+              <h3 class="proposal-h3" data-i18n="prop2Heading">2. Đặt vấn đề & Giải pháp</h3>
+              <label class="form-label" data-i18n="propProblemLabel">Thách thức hiện tại</label>
+              <textarea id="prop-problem" class="form-control report-textarea" rows="3"></textarea>
+
+              <label class="form-label" style="margin-top:12px;" data-i18n="propSolutionLabel">Giải pháp & Lợi ích mang lại</label>
+              <textarea id="prop-solution" class="form-control report-textarea" rows="4"></textarea>
+            </div>
+
+            <!-- 3. Solution Architecture -->
+            <div class="proposal-block">
+              <h3 class="proposal-h3" data-i18n="prop3Heading">3. Kiến trúc giải pháp & Dịch vụ AWS sử dụng</h3>
+              <div class="services-badge-grid">
+                <span class="badge badge-purple">AWS IoT Core</span>
+                <span class="badge badge-blue">AWS Lambda</span>
+                <span class="badge badge-blue">Amazon API Gateway</span>
+                <span class="badge badge-green">Amazon S3 (Data Lake)</span>
+                <span class="badge badge-green">AWS Glue (Crawler & ETL)</span>
+                <span class="badge badge-purple">AWS Amplify (Next.js)</span>
+                <span class="badge badge-gray">Amazon Cognito</span>
+                <span class="badge badge-gray">Amazon CloudWatch</span>
+              </div>
+              <textarea id="prop-arch" class="form-control report-textarea" rows="4" style="margin-top:12px;"></textarea>
+            </div>
+
+            <!-- 4. Budget Estimation -->
+            <div class="proposal-block">
+              <h3 class="proposal-h3" data-i18n="prop4Heading">4. Dự toán chi phí hạ tầng AWS hàng tháng</h3>
+              <textarea id="prop-budget" class="form-control report-textarea" rows="4"></textarea>
+            </div>
+          </div>
+        </section>
+
+
+        <!-- ============================================== -->
+        <!-- VIEW: 3. BLOGS POSTED                          -->
+        <!-- ============================================== -->
+        <section class="page-view" id="view-blogs-posted">
+          <div class="section-header-flex">
+            <div>
+              <h2 class="section-title" data-i18n="blogsSectionTitle">3. Các bài viết kỹ thuật đã đăng</h2>
+              <p class="section-subtitle" data-i18n="blogsSectionSubtitle">Chia sẻ kiến thức chuyên sâu trên cộng đồng AWS Study Group</p>
+            </div>
+            <button class="btn btn-primary" id="btn-add-blog" data-i18n="btnAddBlog">+ Viết bài blog mới</button>
+          </div>
+
+          <div class="blogs-grid" id="blogs-list-container" style="margin-top: 1.5rem;">
+            <!-- Rendered by JS -->
+          </div>
+        </section>
+
+
+        <!-- ============================================== -->
+        <!-- VIEW: 4. EVENTS PARTICIPATED                   -->
+        <!-- ============================================== -->
+        <section class="page-view" id="view-events">
+          <div class="section-header-flex">
+            <div>
+              <h2 class="section-title" data-i18n="eventsSectionTitle">4. Sự kiện thực tế đã tham gia</h2>
+              <p class="section-subtitle" data-i18n="eventsSectionSubtitle">Tham gia các buổi hội thảo công nghệ AWS chuyên sâu</p>
+            </div>
+            <button class="btn btn-primary" id="btn-add-event" data-i18n="btnAddEvent">+ Thêm sự kiện mới</button>
+          </div>
+
+          <div class="events-report-list" id="events-report-container" style="margin-top: 1.5rem;">
+            <!-- Rendered by JS -->
+          </div>
+        </section>
+
+
+        <!-- ============================================== -->
+        <!-- VIEW: 5. WORKSHOP (S3 VPC ENDPOINTS)           -->
+        <!-- ============================================== -->
+        <section class="page-view" id="view-workshop">
+          <div class="section-header-flex">
+            <div>
+              <h2 class="section-title" data-i18n="workshopSectionTitle">5. Bài thực hành: Truy cập S3 an toàn qua VPC Endpoints</h2>
+              <p class="section-subtitle" data-i18n="workshopSectionSubtitle">Bài thực hành chuyên sâu về AWS PrivateLink, Gateway & Interface Endpoints</p>
+            </div>
+            <button class="btn btn-outline" onclick="window.print()" data-i18n="btnPrintWorkshop">In nội dung Workshop</button>
+          </div>
+
+          <div class="card" style="margin-top: 1.5rem;">
+            <!-- Workshop Nav Pills -->
+            <div class="workshop-steps-nav">
+              <button class="ws-step-btn active" data-step="ws-overview" data-i18n="wsTabOverview">5.1 Tổng quan</button>
+              <button class="ws-step-btn" data-step="ws-prereq" data-i18n="wsTabPrereq">5.2 Điều kiện tiên quyết</button>
+              <button class="ws-step-btn" data-step="ws-vpc" data-i18n="wsTabVpc">5.3 Truy cập S3 từ VPC</button>
+              <button class="ws-step-btn" data-step="ws-onprem" data-i18n="wsTabOnPrem">5.4 Truy cập từ On-Premises</button>
+              <button class="ws-step-btn" data-step="ws-policy" data-i18n="wsTabPolicy">5.5 Chính sách Endpoint</button>
+              <button class="ws-step-btn" data-step="ws-cleanup" data-i18n="wsTabCleanup">5.6 Dọn dẹp tài nguyên</button>
+            </div>
+
+            <!-- Step 5.1 -->
+            <div class="ws-step-pane active" id="pane-ws-overview">
+              <h3 class="ws-pane-title" data-i18n="wsOverviewTitle">5.1 Tổng quan & Kiến trúc bài thực hành</h3>
+              <p data-i18n="wsOverviewDesc">AWS PrivateLink cung cấp kết nối riêng tư an toàn tới các dịch vụ AWS từ VPC và mạng On-premises nội bộ mà không cần đưa lưu lượng truy cập qua Internet công cộng.</p>
+              
+              <div class="endpoint-comparison-grid">
+                <div class="compare-card">
+                  <h4 data-i18n="wsGatewayCardTitle">Gateway VPC Endpoint</h4>
+                  <p data-i18n="wsGatewayCardDesc">Sử dụng cho tài nguyên bên trong VPC truy cập vào Amazon S3 và Amazon DynamoDB. Định tuyến lưu lượng thông qua Route Table mà không phát sinh thêm chi phí theo giờ.</p>
+                </div>
+                <div class="compare-card">
+                  <h4 data-i18n="wsInterfaceCardTitle">Interface VPC Endpoint</h4>
+                  <p data-i18n="wsInterfaceCardDesc">Được cấp phát Elastic Network Interface (ENI) với địa chỉ IP riêng trong Subnet của bạn. Hỗ trợ truy cập cả từ VPC lẫn mạng On-premises thông qua AWS Site-to-Site VPN hoặc Direct Connect.</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Step 5.2 -->
+            <div class="ws-step-pane" id="pane-ws-prereq">
+              <h3 class="ws-pane-title" data-i18n="wsPrereqTitle">5.2 Điều kiện tiên quyết & Chính sách IAM</h3>
+              <p data-i18n="wsPrereqDesc">Chính sách IAM quyền tối thiểu để khởi tạo tài nguyên CloudFormation và Transit Gateway:</p>
+              <div class="code-block">
+                <pre><code>{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": [
+        "ec2:*TransitGateway*",
+        "ec2:*VpcEndpoint*",
+        "ec2:*RouteTable*",
+        "s3:*",
+        "route53resolver:*"
+      ],
+      "Resource": "*"
+    }
+  ]
+}</code></pre>
+              </div>
+            </div>
+
+            <!-- Step 5.3 -->
+            <div class="ws-step-pane" id="pane-ws-vpc">
+              <h3 class="ws-pane-title" data-i18n="wsVpcTitle">5.3 Truy cập S3 từ VPC (Gateway Endpoint)</h3>
+              <p data-i18n="wsVpcDesc">Các bước thực hiện tạo Gateway Endpoint và kiểm thử kết nối riêng tư:</p>
+              <ol class="step-list">
+                <li data-i18n="wsVpcStep1">Vào VPC Console > Endpoints > Chọn Create Endpoint.</li>
+                <li data-i18n="wsVpcStep2">Chọn Service: com.amazonaws.us-east-1.s3 dạng Gateway.</li>
+                <li data-i18n="wsVpcStep3">Gắn Route Table của VPC Cloud để tự động cập nhật route prefix S3.</li>
+                <li><span data-i18n="wsVpcStep4">Kiểm tra lệnh từ EC2 instance:</span>
+                  <div class="code-block"><pre><code>aws s3 ls s3://&lt;your-bucket-name&gt;</code></pre></div>
+                </li>
+              </ol>
+            </div>
+
+            <!-- Step 5.4 -->
+            <div class="ws-step-pane" id="pane-ws-onprem">
+              <h3 class="ws-pane-title" data-i18n="wsOnpremTitle">5.4 Truy cập S3 từ On-Premises (Interface Endpoint)</h3>
+              <p data-i18n="wsOnpremDesc">Mô phỏng môi trường On-Premises kết nối qua strongSwan VPN và cấu hình Route 53 Resolver Rule:</p>
+              <div class="code-block">
+                <pre><code># Kiểm tra phân giải DNS nội bộ từ On-Premises
+nslookup s3.us-east-1.amazonaws.com
+
+# Tải file qua Interface Endpoint riêng tư
+aws s3 cp test-file.bin s3://&lt;your-bucket-name&gt;/ --endpoint-url https://bucket.vpce-xxxx.s3.us-east-1.vpce.amazonaws.com</code></pre>
+              </div>
+            </div>
+
+            <!-- Step 5.5 -->
+            <div class="ws-step-pane" id="pane-ws-policy">
+              <h3 class="ws-pane-title" data-i18n="wsPolicyTitle">5.5 Chính sách VPC Endpoint (Kiểm soát quyền truy cập)</h3>
+              <p data-i18n="wsPolicyDesc">Chính sách giới hạn chỉ cho phép truy cập vào duy nhất bucket yourbucketname-2:</p>
+              <div class="code-block">
+                <pre><code>{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "RestrictSpecificBucket",
+      "Effect": "Allow",
+      "Principal": "*",
+      "Action": "s3:*",
+      "Resource": [
+        "arn:aws:s3:::yourbucketname-2",
+        "arn:aws:s3:::yourbucketname-2/*"
+      ]
+    }
+  ]
+}</code></pre>
+              </div>
+            </div>
+
+            <!-- Step 5.6 -->
+            <div class="ws-step-pane" id="pane-ws-cleanup">
+              <h3 class="ws-pane-title" data-i18n="wsCleanupTitle">5.6 Dọn dẹp tài nguyên (Tối ưu chi phí)</h3>
+              <ul class="step-list">
+                <li data-i18n="wsCleanupStep1">Xóa Route 53 Hosted Zone s3.us-east-1.amazonaws.com.</li>
+                <li data-i18n="wsCleanupStep2">Hủy liên kết Route 53 Resolver Rule myS3Rule khỏi VPC On-prem.</li>
+                <li data-i18n="wsCleanupStep3">Xóa 2 CloudFormation Stacks: PLOnpremSetup và PLCloudSetup.</li>
+                <li data-i18n="wsCleanupStep4">Empty và Delete các S3 buckets đã tạo trong bài lab.</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+
+        <!-- ============================================== -->
+        <!-- VIEW: 6. SELF-ASSESSMENT                       -->
+        <!-- ============================================== -->
+        <section class="page-view" id="view-self-evaluation">
+          <div class="section-header-flex">
+            <div>
+              <h2 class="section-title" data-i18n="selfSectionTitle">6. Tự đánh giá kết quả thực tập</h2>
+              <p class="section-subtitle" data-i18n="selfSectionSubtitle">Bảng 12 tiêu chí đánh giá năng lực của sinh viên Phan Nhat Uyen</p>
+            </div>
+            <button class="btn btn-primary" id="btn-save-assessment" data-i18n="btnSaveAssessment">Lưu tự đánh giá</button>
+          </div>
+
+          <div class="card" style="margin-top: 1.5rem;">
+            <div class="form-group">
+              <label class="form-label" data-i18n="assessNarrativeLabel">Tóm tắt quá trình rèn luyện & công tác</label>
+              <textarea id="assess-narrative" class="form-control report-textarea" rows="4"></textarea>
+            </div>
+
+            <!-- 12 Criteria Table Matching Official Standard -->
+            <h4 style="font-size:15px; font-weight:700; margin: 24px 0 12px; color: var(--text-main);" data-i18n="criteriaTableTitle">
+              Bảng đánh giá theo 12 tiêu chí chuẩn của AWS FCAJ
+            </h4>
+
+            <div class="table-responsive">
+              <table class="report-table criteria-table">
+                <thead>
+                  <tr>
+                    <th style="width: 50px;" data-i18n="thCriteriaNo">STT</th>
+                    <th style="width: 280px;" data-i18n="thCriteriaName">Tiêu chí đánh giá</th>
+                    <th data-i18n="thCriteriaDesc">Mô tả chi tiết</th>
+                    <th style="width: 85px; text-align:center;" data-i18n="thGood">Tốt</th>
+                    <th style="width: 85px; text-align:center;" data-i18n="thFair">Khá</th>
+                    <th style="width: 85px; text-align:center;" data-i18n="thAvg">Trung bình</th>
+                  </tr>
+                </thead>
+                <tbody id="criteria-tbody">
+                  <!-- Populated by JS -->
+                </tbody>
+              </table>
+            </div>
+
+            <div class="form-group" style="margin-top: 24px;">
+              <label class="form-label" data-i18n="needsImprovementLabel">Các điểm cần tiếp tục hoàn thiện</label>
+              <textarea id="assess-improvement" class="form-control report-textarea" rows="3"></textarea>
+            </div>
+          </div>
+        </section>
+
+
+        <!-- ============================================== -->
+        <!-- VIEW: 7. SHARING AND FEEDBACK                  -->
+        <!-- ============================================== -->
+        <section class="page-view" id="view-feedback">
+          <div class="section-header-flex">
+            <div>
+              <h2 class="section-title" data-i18n="feedbackSectionTitle">7. Chia sẻ & Đóng góp ý kiến</h2>
+              <p class="section-subtitle" data-i18n="feedbackSectionSubtitle">Đóng góp ý kiến cải tiến cho chương trình First Cloud AI Journey</p>
+            </div>
+            <button class="btn btn-primary" id="btn-save-feedback" data-i18n="btnSaveFeedback">Lưu ý kiến đóng góp</button>
+          </div>
+
+          <div class="card" style="margin-top: 1.5rem;">
+            <div class="feedback-grid">
+              
+              <div class="feedback-item">
+                <label class="form-label" data-i18n="fb1Label">1. Môi trường làm việc</label>
+                <textarea id="fb-env" class="form-control report-textarea" rows="3"></textarea>
+              </div>
+
+              <div class="feedback-item">
+                <label class="form-label" data-i18n="fb2Label">2. Sự hỗ trợ từ Mentor & Ban tổ chức</label>
+                <textarea id="fb-mentor" class="form-control report-textarea" rows="3"></textarea>
+              </div>
+
+              <div class="feedback-item">
+                <label class="form-label" data-i18n="fb3Label">3. Mức độ phù hợp với ngành học</label>
+                <textarea id="fb-relevance" class="form-control report-textarea" rows="3"></textarea>
+              </div>
+
+              <div class="feedback-item">
+                <label class="form-label" data-i18n="fb4Label">4. Cơ hội học tập & Phát triển kỹ năng</label>
+                <textarea id="fb-learning" class="form-control report-textarea" rows="3"></textarea>
+              </div>
+
+              <div class="feedback-item">
+                <label class="form-label" data-i18n="fb5Label">5. Văn hóa công ty & Tinh thần đồng đội</label>
+                <textarea id="fb-culture" class="form-control report-textarea" rows="3"></textarea>
+              </div>
+
+              <div class="feedback-item">
+                <label class="form-label" data-i18n="fb6Label">6. Chính sách & Chế độ đãi ngộ</label>
+                <textarea id="fb-policies" class="form-control report-textarea" rows="3"></textarea>
+              </div>
+
+              <div class="feedback-item full-span">
+                <label class="form-label" data-i18n="fbSuggestionsLabel">Đề xuất & Kỳ vọng phát triển tương lai</label>
+                <textarea id="fb-suggestions" class="form-control report-textarea" rows="3"></textarea>
+              </div>
+            </div>
+          </div>
+        </section>
+
+
+        <!-- ============================================== -->
+        <!-- VIEW: CÀI ĐẶT & SAO LƯU DỮ LIỆU                -->
+        <!-- ============================================== -->
+        <section class="page-view" id="view-cai-dat">
+          <div class="section-header-flex">
+            <div>
+              <h2 class="section-title" data-i18n="settingsSectionTitle">Cài đặt & Quản lý dữ liệu báo cáo</h2>
+              <p class="section-subtitle" data-i18n="settingsSectionSubtitle">Sao lưu toàn bộ nội dung của bạn thành file JSON hoặc in báo cáo ra PDF</p>
+            </div>
+          </div>
+
+          <div class="card form-card" style="max-width:100%; margin-top: 1.5rem;">
+            <h3 class="card-title" data-i18n="settingsCardTitle">Sao lưu & Xuất file an toàn</h3>
+            <p class="text-muted" style="margin-bottom: 1.5rem;" data-i18n="settingsCardDesc">Tất cả nội dung viết của bạn (12 tuần worklog, proposal, bài blog, sự kiện, workshop, đánh giá) đều được lưu trữ trực tiếp trên trình duyệt. Bạn có thể xuất ra file JSON để lưu giữ dự phòng:</p>
+            
+            <div class="settings-actions-row">
+              <button class="btn btn-primary" id="btn-export-json" data-i18n="btnExportJson">
+                Tải file sao lưu (worklog-fcaj-backup.json)
+              </button>
+
+              <label class="btn btn-outline" style="cursor:pointer; margin-bottom:0;" data-i18n="btnImportJson">
+                Khôi phục từ file JSON
+                <input type="file" id="file-import-json" accept=".json" style="display:none;">
+              </label>
+
+              <button class="btn btn-outline-danger" id="btn-reset-data" data-i18n="btnResetData">
+                Đặt lại mẫu báo cáo chuẩn FCAJ
+              </button>
+            </div>
+          </div>
+        </section>
+
+      </div>
+    </main>
+  </div>
+
+
+  <!-- ============================================== -->
+  <!-- MODAL: THÊM NHANH TASK WORKLOG                 -->
+  <!-- ============================================== -->
+  <div class="modal-backdrop" id="worklog-task-modal">
+    <div class="modal-dialog">
+      <div class="modal-header">
+        <h3 class="modal-title" data-i18n="modalTitle">+ Thêm nhiệm vụ vào Worklog</h3>
+        <button type="button" class="btn-close-modal" id="btn-close-task-modal">&times;</button>
+      </div>
+      <form id="worklog-task-form">
+        <div class="modal-body">
+          <div class="form-row">
+            <div class="form-group col-half">
+              <label class="form-label"><span data-i18n="modalWeekSelectLabel">Chọn tuần áp dụng</span> <span class="required-star">*</span></label>
+              <select id="modal-task-week-select" class="form-control form-select">
+                <!-- Populated dynamically Week 1 -> Week 12 -->
+              </select>
+            </div>
+            <div class="form-group col-half">
+              <label class="form-label"><span data-i18n="modalDayLabel">Thứ trong tuần</span> <span class="required-star">*</span></label>
+              <input type="text" id="modal-task-day" class="form-control" data-i18n-placeholder="modalDayPlaceholder" required>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label"><span data-i18n="modalTaskDescLabel">Nội dung nhiệm vụ</span> <span class="required-star">*</span></label>
+            <textarea id="modal-task-desc" class="form-control" rows="3" data-i18n-placeholder="modalDescPlaceholder" required></textarea>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group col-half">
+              <label class="form-label" data-i18n="modalStartLabel">Ngày bắt đầu</label>
+              <input type="date" id="modal-task-start" class="form-control">
+            </div>
+            <div class="form-group col-half">
+              <label class="form-label" data-i18n="modalEndLabel">Ngày hoàn thành</label>
+              <input type="date" id="modal-task-end" class="form-control">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" data-i18n="modalRefLabel">Tài liệu tham khảo (URL hoặc ghi chú)</label>
+            <input type="text" id="modal-task-ref" class="form-control" data-i18n-placeholder="modalRefPlaceholder" placeholder="https://docs.aws.amazon.com/...">
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline" id="btn-cancel-task-modal" data-i18n="btnModalCancel">Hủy bỏ</button>
+          <button type="submit" class="btn btn-primary" data-i18n="btnModalSave">Lưu công việc</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- TOAST CONTAINER -->
+  <div class="toast-container" id="toast-container"></div>
+
+  <script src="app.js"></script>
+</body>
+</html>

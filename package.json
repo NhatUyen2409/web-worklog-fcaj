@@ -1,0 +1,12 @@
+{
+  "name": "worklog-app",
+  "version": "1.0.0",
+  "description": "WorkLog - Nền tảng theo dõi và quản lý thực tập thông minh",
+  "main": "index.html",
+  "scripts": {
+    "start": "npx serve -l 3000 ."
+  },
+  "keywords": ["worklog", "internship", "project-management"],
+  "author": "Phan Nhat Uyen",
+  "license": "MIT"
+}
