@@ -9,11 +9,11 @@ Trang web báo cáo thực tập chính thức được chuẩn hóa 100% theo m
 
 Website được triển khai trực tiếp lên **GitHub Pages** tại URL chính thức:
 
-👉 **[https://nhatuyen.github.io/web-worklog-fcaj/](https://nhatuyen.github.io/web-worklog-fcaj/)**
+👉 **[https://nhatuyen2409.github.io/web-worklog-fcaj/](https://nhatuyen2409.github.io/web-worklog-fcaj/)**
 
-- **GitHub Username:** `nhatuyen`
+- **GitHub Username:** `NhatUyen2409`
 - **Repository Name:** `web-worklog-fcaj`
-- **Repository URL:** `https://github.com/nhatuyen/web-worklog-fcaj`
+- **Repository URL:** `https://github.com/NhatUyen2409/web-worklog-fcaj`
 
 ---
 
