@@ -7,14 +7,13 @@ Trang web báo cáo thực tập chính thức được chuẩn hóa 100% theo m
 
 ### 🌐 1. Public GitHub Pages URL
 
-Website được thiết kế để triển khai trực tiếp lên **GitHub Pages**. Khi đẩy code lên repository GitHub của bạn, website sẽ có URL công khai theo định dạng:
+Website được triển khai trực tiếp lên **GitHub Pages** tại URL chính thức:
 
-```text
-https://<tên-tài-khoản-github>.github.io/<tên-repository>/
-```
+👉 **[https://nhatuyen.github.io/web-worklog-fcaj/](https://nhatuyen.github.io/web-worklog-fcaj/)**
 
-> **Ví dụ:** Nếu tài khoản GitHub của bạn là `phannhatuyen` và tên repository là `aws-internship-report`, URL truy cập sẽ là:  
-> 👉 **`https://phannhatuyen.github.io/aws-internship-report/`**
+- **GitHub Username:** `nhatuyen`
+- **Repository Name:** `web-worklog-fcaj`
+- **Repository URL:** `https://github.com/nhatuyen/web-worklog-fcaj`
 
 ---
 
