@@ -1,84 +1,79 @@
 # AWS First Cloud AI Journey (FCAJ) - Internship Report
-## Báo cáo thực tập tốt nghiệp :: Phan Nhat Uyen
+## Báo cáo thực tập tốt nghiệp :: Phan Nhật Uyên
 
-Trang web báo cáo thực tập chính thức được chuẩn hóa 100% theo mẫu của chương trình **AWS First Cloud AI Journey** ([https://workshop-sample.awsfcaj.com/](https://workshop-sample.awsfcaj.com/)).
+Trang web báo cáo thực tập chính thức được chuẩn hóa 100% theo khung chương trình **AWS First Cloud AI Journey (FCAJ)**.
 
 ---
 
-### 🌐 1. Public GitHub Pages URL
+### 🌐 1. Địa chỉ Website chính thức (GitHub Pages)
 
-Website được triển khai trực tiếp lên **GitHub Pages** tại URL chính thức:
+Website được triển khai tự động qua **GitHub Pages** tại đường dẫn:
 
 👉 **[https://nhatuyen2409.github.io/web-worklog-fcaj/](https://nhatuyen2409.github.io/web-worklog-fcaj/)**
 
-- **GitHub Username:** `NhatUyen2409`
-- **Repository Name:** `web-worklog-fcaj`
-- **Repository URL:** `https://github.com/NhatUyen2409/web-worklog-fcaj`
+* **Nhật ký công việc (Worklog):** [https://nhatuyen2409.github.io/web-worklog-fcaj/#/worklog](https://nhatuyen2409.github.io/web-worklog-fcaj/#/worklog)
+* **Đề xuất đồ án (Proposal):** [https://nhatuyen2409.github.io/web-worklog-fcaj/#/proposal](https://nhatuyen2409.github.io/web-worklog-fcaj/#/proposal)
+* **Bài viết Blog kỹ thuật:** [https://nhatuyen2409.github.io/web-worklog-fcaj/#/blogs-posted](https://nhatuyen2409.github.io/web-worklog-fcaj/#/blogs-posted)
+* **Sự kiện tham gia:** [https://nhatuyen2409.github.io/web-worklog-fcaj/#/events](https://nhatuyen2409.github.io/web-worklog-fcaj/#/events)
 
 ---
 
-### 🚀 2. Hướng dẫn Deploy lên GitHub Pages (Chỉ cần Push Code)
+### 📋 2. Thông tin sinh viên & Kỳ thực tập (Năm 2026)
 
-Dự án đã được cấu hình sẵn toàn bộ:
-- File `.nojekyll` giúp GitHub Pages nhận diện chính xác toàn bộ tài nguyên.
-- File `404.html` tích hợp cơ chế SPA URL Redirect tự động, đảm bảo mọi route con hoạt động trơn tru khi truy cập trực tiếp hoặc khi bấm F5/refresh trình duyệt.
-- Workflow GitHub Actions `.github/workflows/deploy.yml` tự động build và deploy lên GitHub Pages mỗi khi bạn push code lên branch `main` hoặc `master`.
-- File `.gitignore` bảo vệ tự động các file credentials, private keys (*.pem, *.csv).
-- Toàn bộ đường dẫn asset và mã nguồn sử dụng đường dẫn tương đối, không hard-code localhost hay cổng máy chủ.
-
-#### Các bước thực hiện:
-
-1. **Khởi tạo Git và Commit mã nguồn (nếu chưa khởi tạo):**
-   Mở PowerShell hoặc Terminal tại thư mục `C:\Users\Uyen\Documents\AWS`:
-   ```bash
-   cd C:\Users\Uyen\Documents\AWS
-   git init
-   git add .
-   git commit -m "Deploy AWS FCAJ Internship Report to GitHub Pages"
-   git branch -M main
-   ```
-
-2. **Tạo Repository mới trên GitHub:**
-   - Truy cập [https://github.com/new](https://github.com/new)
-   - Đặt tên Repository (ví dụ: `aws-internship-report` hoặc `internship-report`)
-   - Chọn chế độ **Public**
-   - Không tick chọn "Initialize this repository with a README"
-   - Bấm **Create repository**
-
-3. **Liên kết và Push lên GitHub:**
-   ```bash
-   git remote add origin https://github.com/<tên-tài-khoản-github>/<tên-repository>.git
-   git push -u origin main
-   ```
-
-4. **Kích hoạt GitHub Pages trên Repository:**
-   - Vào repository trên GitHub > **Settings** > tab **Pages** (cột bên trái).
-   - Tại mục **Build and deployment > Source**:
-     - **Cách 1 (Khuyên dùng - Tự động với GitHub Actions):** Chọn **GitHub Actions**. Hệ thống sẽ tự động chạy workflow `.github/workflows/deploy.yml` và xuất bản trang web trong khoảng 30 - 60 giây!
-     - **Cách 2 (Branch truyền thống):** Chọn **Deploy from a branch**, chọn Branch `main`, thư mục `/ (root)` và bấm **Save**.
-   - Sau khi hoàn tất, GitHub sẽ hiển thị đường link trang web công khai của bạn ở đầu mục Pages.
+* **Họ và tên sinh viên:** Phan Nhật Uyên
+* **Trường:** Trường Đại học Sư phạm Kỹ thuật TP.HCM
+* **Chuyên ngành:** Công nghệ Thông tin
+* **Đơn vị thực tập:** Công ty TNHH Amazon Web Services (AWS) Việt Nam
+* **Chương trình:** Workforce Bootcamp - First Cloud AI Journey (FCAJ)
+* **Lớp:** `AWS082026`
+* **Thời gian thực tập:** Từ **10/08/2026** đến **10/11/2026**
 
 ---
 
-### 📋 3. Tính năng nổi bật của Website
+### 📅 3. Tóm tắt Nội dung Tuần 1 (Week 1)
 
-1. **Chuyển đổi ngôn ngữ Tiếng Việt / English thuần túy:**
-   - Không hiển thị song ngữ Anh - Việt cùng lúc.
-   - Nút chuyển đổi ngôn ngữ hoạt động tức thì trên Header mà không cần reload trang.
-   - Giữ nguyên route hiện tại và toàn bộ dữ liệu bạn đang nhập dở.
-   - Lưu lựa chọn ngôn ngữ vào `localStorage` (`fcaj_report_lang`).
-2. **Giao diện Tông Đen Hiện Đại (Monochrome & High-Contrast Dark Slate):**
-   - Background chính giữ màu trắng/xám sáng thanh lịch (`#F8FAFC`, `#FFFFFF`), không biến thành Dark Mode.
-   - Các chi tiết nhấn, text tiêu đề, nút bấm, menu active, tab tuần, avatar đều mang phong cách tối giản màu đen tuyền và xám than sang trọng.
-3. **Cấu trúc 7 mục báo cáo chuẩn AWS FCAJ:**
-   - **Thông tin sinh viên:** Họ tên Phan Nhat Uyen, trường, khoa, đơn vị thực tập AWS Vietnam.
-   - **1. Worklog (12 Tuần):** Phân công công việc, mục tiêu, thành tích, tài liệu tham khảo cho từng ngày.
-   - **2. Đề xuất đồ án (Proposal):** IoT Weather Platform for Lab Research - AWS Serverless Solution.
-   - **3. Bài viết kỹ thuật (Blogs Posted):** EKS Pod Identity Session Policies, PrivateLink S3, Lambda SnapStart.
-   - **4. Sự kiện tham gia (Events):** GenAI App-DB Modernization Workshop, AWS Community Day.
-   - **5. Bài thực hành Workshop:** Secure Hybrid Access to S3 using Gateway & Interface VPC Endpoints.
-   - **6. Tự đánh giá (Self-Assessment):** Bảng 12 tiêu chí chuẩn FCAJ và định hướng hoàn thiện.
-   - **7. Chia sẻ & Góp ý (Feedback):** Đánh giá môi trường, mentor, văn hóa, chính sách tại FCAJ.
-4. **Xuất PDF & Sao lưu dữ liệu:**
-   - Nút **In / Xuất PDF** chuẩn hóa theo định dạng in ấn chính thức.
-   - Hỗ trợ xuất / nhập file sao lưu JSON (`fcaj_report_bilingual_v4`).
+#### Mục tiêu tuần (Week 1 Objectives):
+* Get acquainted with FCAJ members and understand the internship working process.
+* Complete the AWS Free $100 Credit registration for hands-on practice.
+* Understand fundamental AWS services and AWS global infrastructure.
+* Become familiar with AWS Management Console and AWS CLI.
+* Learn basic Amazon EC2 concepts and perform the first EC2 hands-on lab.
+
+#### Nội dung công việc từng ngày (Tasks):
+* **Thứ 2 (10/08/2026):**
+  * Làm quen với mentor và các thành viên FCAJ.
+  * Tìm hiểu lộ trình, quy trình làm việc, nội quy và quy định thực tập.
+  * Hoàn thành thủ tục đăng ký nhận AWS Free $100 Credit.
+  * Kiểm tra môi trường học tập AWS và biện pháp kiểm soát chi phí.
+  * *Tài liệu:* [AWS Account](https://000001.awsstudygroup.com/) | [AWS Budgets](https://000007.awsstudygroup.com/)
+* **Thứ 3 (11/08/2026):**
+  * Học nền tảng Điện toán đám mây và Amazon Web Services (AWS).
+  * Tìm hiểu Hạ tầng toàn cầu AWS: Region, Availability Zone, Edge Location.
+  * Khám phá các nhóm dịch vụ chính: Compute, Storage, Networking, Database, Security, Monitoring.
+  * *Tài liệu:* [First Cloud Journey](https://cloudjourney.awsstudygroup.com/)
+* **Thứ 4 (12/08/2026):**
+  * Tìm hiểu AWS Management Console và AWS CLI.
+  * Cài đặt và cấu hình AWS CLI trên máy tính (Access Key, Secret Key, Region, Output Format).
+  * Thực hành các lệnh CLI kiểm tra danh tính và tài nguyên.
+  * *Tài liệu:* [AWS CLI](https://000011.awsstudygroup.com/) | [AWS Account](https://000001.awsstudygroup.com/)
+* **Thứ 5 (13/08/2026 - 14/08/2026):**
+  * Học khái niệm cơ bản về Amazon EC2 (AMI, Instance Type, EBS, Key Pair, Security Group, IP).
+  * Vòng đời instance và cơ chế xác thực SSH.
+  * *Tài liệu:* [Amazon EC2](https://000004.awsstudygroup.com/) | [IAM Roles for EC2](https://000048.awsstudygroup.com/)
+* **Thứ 6 (14/08/2026):**
+  * Thực hành khởi chạy EC2 Linux instance, kết nối qua SSH.
+  * Tạo và gắn thêm ổ đĩa EBS volume mới vào máy chủ EC2.
+  * *Tài liệu:* [Amazon EC2](https://000004.awsstudygroup.com/) | [IAM Roles for EC2](https://000048.awsstudygroup.com/)
+
+---
+
+### ⚙️ 4. Tính năng kỹ thuật của Website
+
+1. **Chỉnh sửa trực tiếp trên Web:**
+   * Hỗ trợ sửa nhanh Mục tiêu tuần, Thành tích đạt được qua Modal chuyên nghiệp.
+   * Thêm / Sửa / Xóa từng dòng công việc linh hoạt.
+   * Xuất / Nhập dữ liệu sao lưu định dạng JSON.
+2. **Hỗ trợ chuyển đổi song ngữ:**
+   * Tiếng Việt / English mượt mà, lưu trạng thái tự động.
+3. **Triển khai tự động:**
+   * GitHub Actions Workflow `.github/workflows/deploy.yml` tự động build và xuất bản lên GitHub Pages khi push mã nguồn.

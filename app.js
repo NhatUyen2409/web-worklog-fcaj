@@ -844,8 +844,8 @@ const DEFAULT_BILINGUAL_DATA = {
 // ==========================================
 // 3. PERSISTENCE & STATE MANAGEMENT
 // ==========================================
-const STORAGE_KEY = 'fcaj_report_bilingual_v8';
-const PREV_STORAGE_KEY = 'fcaj_report_bilingual_v7';
+const STORAGE_KEY = 'fcaj_report_bilingual_v9';
+const PREV_STORAGE_KEY = 'fcaj_report_bilingual_v8';
 const LANG_KEY = 'fcaj_report_lang';
 
 class AppLanguageManager {
@@ -864,6 +864,7 @@ class AppLanguageManager {
       'fcaj_report_bilingual_v5',
       'fcaj_report_bilingual_v6',
       'fcaj_report_bilingual_v7',
+      'fcaj_report_bilingual_v8',
       'fcaj_internship_report_v2',
       'fcaj_internship_report_v1'
     ];
