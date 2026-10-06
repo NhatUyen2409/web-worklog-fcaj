@@ -105,6 +105,27 @@ const I18N_DICTIONARY = {
     thActions: "Thao tác",
     viewRefLink: "Xem tài liệu ↗",
     btnDelete: "Xóa",
+    btnEdit: "Sửa",
+    btnClearWeek: "Đặt lại tuần này",
+    worklogToolsLabel: "🛠️ Thao tác nhanh:",
+    btnExportWorklog: "Xuất JSON",
+    btnImportWorklog: "Nhập JSON",
+    modalMetaTitle: "🎯 Chỉnh sửa Mục tiêu & Thành tích",
+    modalMetaObjectivesLabel: "🎯 Mục tiêu trọng tâm tuần",
+    modalMetaObjectivesPlaceholder: "Nhập mục tiêu trọng tâm trong tuần...",
+    modalMetaAchievementsLabel: "🏆 Thành tích đạt được (mỗi ý một dòng, gạch đầu dòng -)",
+    modalMetaAchievementsPlaceholder: "- Hoàn thành nhiệm vụ...\n- Nắm vững kiến thức...",
+    btnModalSaveMeta: "Lưu mục tiêu & thành tích",
+    modalEditTaskTitle: "✏️ Chỉnh sửa công việc",
+    btnUpdateTask: "Cập nhật công việc",
+    toastUpdateTaskSuccess: "✓ Đã cập nhật công việc thành công!",
+    toastSaveMetaSuccess: "✓ Đã lưu mục tiêu & thành tích tuần thành công!",
+    toastResetWeekSuccess: "✓ Đã đặt lại nội dung tuần này thành trang trắng!",
+    confirmResetWeek: "Bạn có chắc chắn muốn xóa toàn bộ công việc và mục tiêu của tuần này để tự viết lại từ đầu?",
+    toastExportSuccess: "✓ Đã tải xuống file sao lưu Worklog JSON thành công!",
+    toastImportSuccess: "✓ Đã nhập dữ liệu Worklog thành công!",
+    emptyObjectivesMsg: "Chưa có mục tiêu tuần. Bấm \"Sửa mục tiêu & thành tích\" để thêm.",
+    emptyAchievementsMsg: "Chưa có thành tích đạt được. Bấm \"Sửa mục tiêu & thành tích\" để thêm.",
     emptyTasksMsg: "Chưa có đầu việc nào được ghi cho tuần này. Bấm nút \"+ Thêm công việc vào tuần này\" để thêm!",
     
     // 2. Proposal
@@ -341,6 +362,27 @@ const I18N_DICTIONARY = {
     thActions: "Actions",
     viewRefLink: "View Document ↗",
     btnDelete: "Delete",
+    btnEdit: "Edit",
+    btnClearWeek: "Reset Week",
+    worklogToolsLabel: "🛠️ Quick Tools:",
+    btnExportWorklog: "Export JSON",
+    btnImportWorklog: "Import JSON",
+    modalMetaTitle: "🎯 Edit Objectives & Achievements",
+    modalMetaObjectivesLabel: "🎯 Core Week Objectives",
+    modalMetaObjectivesPlaceholder: "Enter core technical/research objectives for this week...",
+    modalMetaAchievementsLabel: "🏆 Week Achievements (one per line, starting with -)",
+    modalMetaAchievementsPlaceholder: "- Mastered concepts...\n- Completed lab exercises...",
+    btnModalSaveMeta: "Save Objectives & Achievements",
+    modalEditTaskTitle: "✏️ Edit Task",
+    btnUpdateTask: "Update Task",
+    toastUpdateTaskSuccess: "✓ Task updated successfully!",
+    toastSaveMetaSuccess: "✓ Objectives & achievements saved successfully!",
+    toastResetWeekSuccess: "✓ Week content reset to blank successfully!",
+    confirmResetWeek: "Are you sure you want to clear all tasks and objectives for this week to write from scratch?",
+    toastExportSuccess: "✓ Worklog JSON backup downloaded successfully!",
+    toastImportSuccess: "✓ Worklog data imported successfully!",
+    emptyObjectivesMsg: "No objectives set yet. Click \"Edit Objectives & Achievements\" to add.",
+    emptyAchievementsMsg: "No achievements recorded yet. Click \"Edit Objectives & Achievements\" to add.",
     emptyTasksMsg: "No tasks recorded for this week. Click \"+ Add Task to This Week\" to add tasks!",
     
     // 2. Proposal
@@ -1092,6 +1134,8 @@ function getCurrentWeekWorklog() {
   }
   if (!week.vi) week.vi = { objectives: '', achievements: '', tasks: [] };
   if (!week.en) week.en = { objectives: '', achievements: '', tasks: [] };
+  if (!Array.isArray(week.vi.tasks)) week.vi.tasks = [];
+  if (!Array.isArray(week.en.tasks)) week.en.tasks = [];
   return week;
 }
 
@@ -1129,15 +1173,41 @@ function renderWorklogView() {
   const tbody = document.getElementById('week-tasks-tbody');
 
   if (heading) heading.textContent = `${t('weekHeadingPrefix')} ${week.weekNum}`;
-  if (objText) objText.textContent = content.objectives || '';
-  if (achText) achText.innerHTML = (content.achievements || '').replace(/\n/g, '<br>');
+  
+  if (objText) {
+    if (content.objectives && content.objectives.trim()) {
+      objText.textContent = content.objectives;
+      objText.style.color = '';
+      objText.style.fontStyle = '';
+    } else {
+      objText.textContent = t('emptyObjectivesMsg');
+      objText.style.color = '#94A3B8';
+      objText.style.fontStyle = 'italic';
+    }
+  }
+
+  if (achText) {
+    if (content.achievements && content.achievements.trim()) {
+      achText.innerHTML = escapeHtml(content.achievements).replace(/\n/g, '<br>');
+      achText.style.color = '';
+      achText.style.fontStyle = '';
+    } else {
+      achText.textContent = t('emptyAchievementsMsg');
+      achText.style.color = '#94A3B8';
+      achText.style.fontStyle = 'italic';
+    }
+  }
 
   if (tbody) {
     if (!content.tasks || content.tasks.length === 0) {
       tbody.innerHTML = `
         <tr>
-          <td colspan="6" style="text-align:center; padding: 24px; color: #64748B;">
-            ${t('emptyTasksMsg')}
+          <td colspan="6" style="text-align:center; padding: 32px 16px; color: #64748B;">
+            <div style="font-size: 14px; margin-bottom: 10px;">${t('emptyTasksMsg')}</div>
+            <button type="button" class="btn btn-outline btn-sm" onclick="openAddTaskModal()">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+              ${t('btnAddTaskThisWeek')}
+            </button>
           </td>
         </tr>
       `;
@@ -1147,14 +1217,21 @@ function renderWorklogView() {
     tbody.innerHTML = content.tasks.map((task, idx) => `
       <tr>
         <td><strong>${escapeHtml(task.day)}</strong></td>
-        <td style="white-space:pre-line;">${escapeHtml(task.desc)}</td>
-        <td>${escapeHtml(task.start || '-')}</td>
-        <td>${escapeHtml(task.end || '-')}</td>
+        <td style="white-space:pre-line; line-height: 1.5;">${escapeHtml(task.desc)}</td>
+        <td style="white-space:nowrap; font-size:13px; color:var(--text-subtle);">${escapeHtml(task.start || '-')}</td>
+        <td style="white-space:nowrap; font-size:13px; color:var(--text-subtle);">${escapeHtml(task.end || '-')}</td>
         <td>
-          ${task.ref ? (task.ref.startsWith('http') ? `<a href="${escapeHtml(task.ref)}" target="_blank" rel="noopener" style="color:var(--primary); font-weight:600;">${t('viewRefLink')}</a>` : escapeHtml(task.ref)) : '-'}
+          ${task.ref ? (task.ref.startsWith('http') ? `<a href="${escapeHtml(task.ref)}" target="_blank" rel="noopener" style="color:var(--primary); font-weight:600; text-decoration:underline;">${t('viewRefLink')}</a>` : `<span style="font-size:13px; color:var(--text-subtle);">${escapeHtml(task.ref)}</span>`) : '-'}
         </td>
-        <td style="text-align:right;">
-          <button type="button" class="btn-text-subtle" style="color:#EF4444;" onclick="deleteWeekTask(${idx})">${t('btnDelete')}</button>
+        <td style="text-align:right; white-space:nowrap;">
+          <button type="button" class="btn-table-action btn-table-edit" title="${t('btnEdit')}" onclick="openEditTaskModal(${idx})">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+            <span>${t('btnEdit')}</span>
+          </button>
+          <button type="button" class="btn-table-action btn-table-delete" title="${t('btnDelete')}" onclick="deleteWeekTask(${idx})">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
+            <span>${t('btnDelete')}</span>
+          </button>
         </td>
       </tr>
     `).join('');
@@ -1172,72 +1249,274 @@ function deleteWeekTask(idx) {
   }
 }
 
+function openEditTaskModal(idx) {
+  const week = getCurrentWeekWorklog();
+  const lang = app.currentLang;
+  const content = week[lang] || week.vi;
+  const task = content.tasks[idx];
+  if (!task) return;
+
+  const modal = document.getElementById('worklog-task-modal');
+  const title = document.getElementById('worklog-task-modal-title');
+  const submitBtn = document.getElementById('btn-submit-task-modal');
+  const select = document.getElementById('modal-task-week-select');
+  const editIndexInput = document.getElementById('modal-task-edit-index');
+
+  if (select) {
+    const prefix = t('weekPrefix');
+    select.innerHTML = Array.from({ length: 12 }, (_, i) => `<option value="${i + 1}">${prefix} ${i + 1}</option>`).join('');
+    select.value = app.data.currentWeek || 1;
+    select.disabled = true;
+  }
+
+  if (editIndexInput) editIndexInput.value = idx;
+  if (title) title.textContent = t('modalEditTaskTitle');
+  if (submitBtn) submitBtn.textContent = t('btnUpdateTask');
+
+  const dayInput = document.getElementById('modal-task-day');
+  const descInput = document.getElementById('modal-task-desc');
+  const startInput = document.getElementById('modal-task-start');
+  const endInput = document.getElementById('modal-task-end');
+  const refInput = document.getElementById('modal-task-ref');
+
+  if (dayInput) dayInput.value = task.day || '';
+  if (descInput) descInput.value = task.desc || '';
+  if (startInput) startInput.value = task.start || '';
+  if (endInput) endInput.value = task.end || '';
+  if (refInput) refInput.value = task.ref || '';
+
+  modal?.classList.add('show');
+}
+
+function openAddTaskModal() {
+  const modal = document.getElementById('worklog-task-modal');
+  const title = document.getElementById('worklog-task-modal-title');
+  const submitBtn = document.getElementById('btn-submit-task-modal');
+  const select = document.getElementById('modal-task-week-select');
+  const editIndexInput = document.getElementById('modal-task-edit-index');
+  const form = document.getElementById('worklog-task-form');
+
+  form?.reset();
+  if (editIndexInput) editIndexInput.value = -1;
+  if (select) {
+    const prefix = t('weekPrefix');
+    select.innerHTML = Array.from({ length: 12 }, (_, i) => `<option value="${i + 1}">${prefix} ${i + 1}</option>`).join('');
+    select.value = app.data.currentWeek || 1;
+    select.disabled = false;
+  }
+  if (title) title.textContent = t('modalTitle');
+  if (submitBtn) submitBtn.textContent = t('btnModalSave');
+
+  modal?.classList.add('show');
+}
+
+function openMetaModal() {
+  const week = getCurrentWeekWorklog();
+  const lang = app.currentLang;
+  const content = week[lang] || week.vi;
+
+  const modal = document.getElementById('worklog-meta-modal');
+  const title = document.getElementById('worklog-meta-modal-title');
+  const objInput = document.getElementById('modal-meta-objectives');
+  const achInput = document.getElementById('modal-meta-achievements');
+
+  if (title) title.textContent = `${t('modalMetaTitle')} - ${t('weekPrefix')} ${week.weekNum}`;
+  if (objInput) objInput.value = content.objectives || '';
+  if (achInput) achInput.value = content.achievements || '';
+
+  modal?.classList.add('show');
+}
+
+function closeMetaModal() {
+  const modal = document.getElementById('worklog-meta-modal');
+  modal?.classList.remove('show');
+}
+
+function clearCurrentWeek() {
+  if (confirm(t('confirmResetWeek'))) {
+    const week = getCurrentWeekWorklog();
+    const lang = app.currentLang;
+    if (week[lang]) {
+      week[lang].objectives = '';
+      week[lang].achievements = '';
+      week[lang].tasks = [];
+    }
+    app.saveData();
+    renderWorklogView();
+    showToast(t('toastResetWeekSuccess'));
+  }
+}
+
+function exportWorklogJson() {
+  const exportData = {
+    appName: "AWS FCAJ Internship Report",
+    exportedAt: new Date().toISOString(),
+    currentWeek: app.data.currentWeek || 1,
+    worklogs: app.data.worklogs
+  };
+  const jsonStr = JSON.stringify(exportData, null, 2);
+  const blob = new Blob([jsonStr], { type: 'application/json' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = `worklog-fcaj-backup-${new Date().toISOString().slice(0,10)}.json`;
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+  showToast(t('toastExportSuccess'));
+}
+
+function showExportCodeModal() {
+  const modal = document.getElementById('worklog-export-modal');
+  const textarea = document.getElementById('export-worklog-textarea');
+  if (!modal || !textarea) return;
+
+  const exportData = {
+    exportedAt: new Date().toISOString(),
+    worklogs: app.data.worklogs
+  };
+  textarea.value = JSON.stringify(exportData, null, 2);
+  modal.classList.add('show');
+}
+
+function closeExportCodeModal() {
+  const modal = document.getElementById('worklog-export-modal');
+  modal?.classList.remove('show');
+}
+
+function importWorklogJson(file) {
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = (e) => {
+    try {
+      const parsed = JSON.parse(e.target.result);
+      let worklogs = null;
+      if (Array.isArray(parsed)) {
+        worklogs = parsed;
+      } else if (parsed && Array.isArray(parsed.worklogs)) {
+        worklogs = parsed.worklogs;
+      }
+      if (!worklogs || worklogs.length === 0) {
+        throw new Error("File JSON không chứa dữ liệu worklogs hợp lệ.");
+      }
+      app.data.worklogs = worklogs;
+      app.saveData();
+      renderWeekTabs();
+      renderWorklogView();
+      showToast(t('toastImportSuccess'));
+    } catch (err) {
+      alert("Lỗi khi nhập file JSON: " + err.message);
+    }
+  };
+  reader.readAsText(file);
+}
+
 function setupWorklog() {
+  // Meta editing listeners
   const btnEditMeta = document.getElementById('btn-edit-week-meta');
-  if (btnEditMeta) {
-    btnEditMeta.addEventListener('click', () => {
+  const btnEditMetaBar = document.getElementById('btn-edit-week-meta-bar');
+  btnEditMeta?.addEventListener('click', openMetaModal);
+  btnEditMetaBar?.addEventListener('click', openMetaModal);
+
+  const btnCloseMeta = document.getElementById('btn-close-meta-modal');
+  const btnCancelMeta = document.getElementById('btn-cancel-meta-modal');
+  btnCloseMeta?.addEventListener('click', closeMetaModal);
+  btnCancelMeta?.addEventListener('click', closeMetaModal);
+
+  const metaForm = document.getElementById('worklog-meta-form');
+  if (metaForm) {
+    metaForm.addEventListener('submit', (e) => {
+      e.preventDefault();
       const week = getCurrentWeekWorklog();
       const lang = app.currentLang;
-      const content = week[lang];
+      if (!week[lang]) week[lang] = { objectives: '', achievements: '', tasks: [] };
 
-      const newObj = prompt(t('metaObjectivesTitle') + ':', content.objectives);
-      if (newObj !== null) {
-        content.objectives = newObj;
-        const newAch = prompt(t('metaAchievementsTitle') + ':', content.achievements);
-        if (newAch !== null) {
-          content.achievements = newAch;
-          app.saveData();
-          renderWorklogView();
-          showToast(t('toastSaveInfo'));
-        }
-      }
+      week[lang].objectives = document.getElementById('modal-meta-objectives')?.value.trim() || '';
+      week[lang].achievements = document.getElementById('modal-meta-achievements')?.value.trim() || '';
+
+      app.saveData();
+      renderWorklogView();
+      closeMetaModal();
+      showToast(t('toastSaveMetaSuccess'));
     });
   }
 
-  // Setup modal for adding tasks
+  // Worklog task modal listeners
   setupWorklogModal();
+
+  // Reset week listener
+  document.getElementById('btn-clear-week')?.addEventListener('click', clearCurrentWeek);
+
+  // Export / Import listeners
+  document.getElementById('btn-export-worklog-json')?.addEventListener('click', exportWorklogJson);
+
+  const fileInput = document.getElementById('worklog-import-input');
+  document.getElementById('btn-import-worklog-btn')?.addEventListener('click', () => {
+    fileInput?.click();
+  });
+  fileInput?.addEventListener('change', (e) => {
+    if (e.target.files && e.target.files[0]) {
+      importWorklogJson(e.target.files[0]);
+      fileInput.value = '';
+    }
+  });
+
+  // Code modal listeners
+  document.getElementById('btn-view-worklog-code')?.addEventListener('click', showExportCodeModal);
+  document.getElementById('btn-close-export-modal')?.addEventListener('click', closeExportCodeModal);
+  document.getElementById('btn-close-export-btn')?.addEventListener('click', closeExportCodeModal);
+  document.getElementById('btn-copy-export-json')?.addEventListener('click', () => {
+    const textarea = document.getElementById('export-worklog-textarea');
+    if (textarea) {
+      navigator.clipboard.writeText(textarea.value).then(() => {
+        showToast('✓ Đã sao chép toàn bộ mã JSON vào bộ nhớ tạm!');
+      }).catch(() => {
+        textarea.select();
+        document.execCommand('copy');
+        showToast('✓ Đã sao chép!');
+      });
+    }
+  });
 }
 
 function setupWorklogModal() {
   const modal = document.getElementById('worklog-task-modal');
   const btnOpen = document.getElementById('btn-add-week-task');
+  const btnOpenBar = document.getElementById('btn-add-week-task-bar');
+  const btnOpenCard = document.getElementById('btn-add-week-task-card');
+  const btnOpenBottom = document.getElementById('btn-add-task-bottom');
   const btnOpenHeader = document.getElementById('btn-open-log-modal');
   const btnClose = document.getElementById('btn-close-task-modal');
   const btnCancel = document.getElementById('btn-cancel-task-modal');
   const form = document.getElementById('worklog-task-form');
-  const select = document.getElementById('modal-task-week-select');
-
-  const updateModalWeekOptions = () => {
-    if (!select) return;
-    const prefix = t('weekPrefix');
-    select.innerHTML = Array.from({ length: 12 }, (_, i) => `<option value="${i + 1}">${prefix} ${i + 1}</option>`).join('');
-    select.value = app.data.currentWeek || 1;
-  };
-
-  const openModal = () => {
-    updateModalWeekOptions();
-    modal?.classList.add('show');
-  };
 
   const closeModal = () => {
     modal?.classList.remove('show');
     form?.reset();
+    const select = document.getElementById('modal-task-week-select');
+    if (select) select.disabled = false;
   };
 
-  btnOpen?.addEventListener('click', openModal);
-  btnOpenHeader?.addEventListener('click', openModal);
+  btnOpen?.addEventListener('click', openAddTaskModal);
+  btnOpenBar?.addEventListener('click', openAddTaskModal);
+  btnOpenCard?.addEventListener('click', openAddTaskModal);
+  btnOpenBottom?.addEventListener('click', openAddTaskModal);
+  btnOpenHeader?.addEventListener('click', openAddTaskModal);
   btnClose?.addEventListener('click', closeModal);
   btnCancel?.addEventListener('click', closeModal);
 
   if (form) {
     form.addEventListener('submit', (e) => {
       e.preventDefault();
+      const select = document.getElementById('modal-task-week-select');
       const weekNum = parseInt(select.value, 10);
       const day = document.getElementById('modal-task-day').value.trim();
       const desc = document.getElementById('modal-task-desc').value.trim();
       const start = document.getElementById('modal-task-start').value;
       const end = document.getElementById('modal-task-end').value;
       const ref = document.getElementById('modal-task-ref').value.trim();
+      const editIndex = parseInt(document.getElementById('modal-task-edit-index')?.value ?? '-1', 10);
 
       let week = app.data.worklogs.find(w => w.weekNum === weekNum);
       if (!week) {
@@ -1251,12 +1530,19 @@ function setupWorklogModal() {
 
       const lang = app.currentLang;
       if (!week[lang]) week[lang] = { objectives: '', achievements: '', tasks: [] };
-      week[lang].tasks.push({ day, desc, start, end, ref });
+      if (!Array.isArray(week[lang].tasks)) week[lang].tasks = [];
+
+      if (editIndex >= 0 && editIndex < week[lang].tasks.length) {
+        week[lang].tasks[editIndex] = { day, desc, start, end, ref };
+        showToast(t('toastUpdateTaskSuccess'));
+      } else {
+        week[lang].tasks.push({ day, desc, start, end, ref });
+        showToast(`${t('toastAddTaskSuccess')} ${weekNum}!`);
+      }
 
       app.data.currentWeek = weekNum;
       app.saveData();
 
-      showToast(`${t('toastAddTaskSuccess')} ${weekNum}!`);
       closeModal();
       navigateTo('worklog');
       renderWeekTabs();
@@ -1718,6 +2004,12 @@ window.app = app;
 window.navigateTo = navigateTo;
 window.selectWeek = selectWeek;
 window.deleteWeekTask = deleteWeekTask;
+window.openEditTaskModal = openEditTaskModal;
+window.openAddTaskModal = openAddTaskModal;
+window.openMetaModal = openMetaModal;
+window.clearCurrentWeek = clearCurrentWeek;
+window.exportWorklogJson = exportWorklogJson;
+window.showExportCodeModal = showExportCodeModal;
 window.deleteBlog = deleteBlog;
 window.deleteEvent = deleteEvent;
 window.setCriteriaRating = setCriteriaRating;
