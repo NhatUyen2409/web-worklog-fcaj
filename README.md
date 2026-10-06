@@ -26,7 +26,7 @@ Website được triển khai tự động qua **GitHub Pages** tại đường 
 * **Đơn vị thực tập:** Công ty TNHH Amazon Web Services (AWS) Việt Nam
 * **Chương trình:** Workforce Bootcamp - First Cloud AI Journey (FCAJ)
 * **Mã số sinh viên:** SE196682
-* **Lớp:** K19
+* **Email:** nhatuien218@gmail.com
 * **Thời gian thực tập:** Từ **14/09/2026** đến **14/12/2026**
 
 ---

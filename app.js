@@ -534,8 +534,7 @@ const DEFAULT_BILINGUAL_DATA = {
     fullName: "Phan Nhật Uyên",
     studentId: "SE196682",
     phone: "0989888999",
-    email: "uyen.phan@intern.aws.com",
-    className: "K19",
+    email: "nhatuien218@gmail.com",
     vi: {
       university: "Trường Đại học FPT",
       major: "An toàn thông tin",
@@ -837,8 +836,8 @@ const DEFAULT_BILINGUAL_DATA = {
 // ==========================================
 // 3. PERSISTENCE & STATE MANAGEMENT
 // ==========================================
-const STORAGE_KEY = 'fcaj_report_bilingual_v10';
-const PREV_STORAGE_KEY = 'fcaj_report_bilingual_v9';
+const STORAGE_KEY = 'fcaj_report_bilingual_v11';
+const PREV_STORAGE_KEY = 'fcaj_report_bilingual_v10';
 const LANG_KEY = 'fcaj_report_lang';
 
 class AppLanguageManager {
@@ -857,6 +856,7 @@ class AppLanguageManager {
       'fcaj_report_bilingual_v5',
       'fcaj_report_bilingual_v6',
       'fcaj_report_bilingual_v7',
+      'fcaj_report_bilingual_v10',
       'fcaj_report_bilingual_v9',
       'fcaj_report_bilingual_v8',
       'fcaj_internship_report_v2',
@@ -916,9 +916,6 @@ class AppLanguageManager {
     if (ph !== null) this.data.studentInfo.phone = ph;
     const em = getVal('info-email');
     if (em !== null) this.data.studentInfo.email = em;
-    const cl = getVal('info-class');
-    if (cl !== null) this.data.studentInfo.className = cl;
-
     // Language-specific student info
     if (!this.data.studentInfo[lang]) this.data.studentInfo[lang] = {};
     const uni = getVal('info-university');
@@ -1165,7 +1162,6 @@ function renderStudentInfoInputs() {
   setVal('info-student-id', info.studentId);
   setVal('info-phone', info.phone);
   setVal('info-email', info.email);
-  setVal('info-class', info.className);
   setVal('info-university', loc.university);
   setVal('info-major', loc.major);
   setVal('info-company', loc.company);
@@ -1188,8 +1184,6 @@ function setupStudentInfo() {
       if (sidEl) app.data.studentInfo.studentId = sidEl.value.trim();
       app.data.studentInfo.phone = document.getElementById('info-phone').value.trim();
       app.data.studentInfo.email = document.getElementById('info-email').value.trim();
-      app.data.studentInfo.className = document.getElementById('info-class').value.trim();
-
       app.data.studentInfo[lang] = {
         university: document.getElementById('info-university').value.trim(),
         major: document.getElementById('info-major').value.trim(),
