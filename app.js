@@ -850,8 +850,25 @@ const LANG_KEY = 'fcaj_report_lang';
 
 class AppLanguageManager {
   constructor() {
+    this.cleanupLegacyStorage();
     this.currentLang = localStorage.getItem(LANG_KEY) || 'vi';
     this.data = this.loadData();
+  }
+
+  cleanupLegacyStorage() {
+    const legacyKeys = [
+      'fcaj_report_bilingual_v1',
+      'fcaj_report_bilingual_v2',
+      'fcaj_report_bilingual_v3',
+      'fcaj_report_bilingual_v4',
+      'fcaj_report_bilingual_v5',
+      'fcaj_report_bilingual_v6',
+      'fcaj_internship_report_v2',
+      'fcaj_internship_report_v1'
+    ];
+    legacyKeys.forEach(k => {
+      try { localStorage.removeItem(k); } catch (e) {}
+    });
   }
 
   loadData() {
