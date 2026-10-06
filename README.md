@@ -21,12 +21,13 @@ Website được triển khai tự động qua **GitHub Pages** tại đường 
 ### 📋 2. Thông tin sinh viên & Kỳ thực tập (Năm 2026)
 
 * **Họ và tên sinh viên:** Phan Nhật Uyên
-* **Trường:** Trường Đại học Sư phạm Kỹ thuật TP.HCM
-* **Chuyên ngành:** Công nghệ Thông tin
+* **Trường:** Trường Đại học FPT
+* **Chuyên ngành:** An toàn thông tin
 * **Đơn vị thực tập:** Công ty TNHH Amazon Web Services (AWS) Việt Nam
 * **Chương trình:** Workforce Bootcamp - First Cloud AI Journey (FCAJ)
-* **Lớp:** `AWS082026`
-* **Thời gian thực tập:** Từ **10/08/2026** đến **10/11/2026**
+* **Mã số sinh viên:** SE196682
+* **Lớp:** K19
+* **Thời gian thực tập:** Từ **14/09/2026** đến **14/12/2026**
 
 ---
 
@@ -40,27 +41,27 @@ Website được triển khai tự động qua **GitHub Pages** tại đường 
 * Learn basic Amazon EC2 concepts and perform the first EC2 hands-on lab.
 
 #### Nội dung công việc từng ngày (Tasks):
-* **Thứ 2 (10/08/2026):**
+* **Thứ 2 (14/09/2026):**
   * Làm quen với mentor và các thành viên FCAJ.
   * Tìm hiểu lộ trình, quy trình làm việc, nội quy và quy định thực tập.
   * Hoàn thành thủ tục đăng ký nhận AWS Free $100 Credit.
   * Kiểm tra môi trường học tập AWS và biện pháp kiểm soát chi phí.
   * *Tài liệu:* [AWS Account](https://000001.awsstudygroup.com/) | [AWS Budgets](https://000007.awsstudygroup.com/)
-* **Thứ 3 (11/08/2026):**
+* **Thứ 3 (15/09/2026):**
   * Học nền tảng Điện toán đám mây và Amazon Web Services (AWS).
   * Tìm hiểu Hạ tầng toàn cầu AWS: Region, Availability Zone, Edge Location.
   * Khám phá các nhóm dịch vụ chính: Compute, Storage, Networking, Database, Security, Monitoring.
   * *Tài liệu:* [First Cloud Journey](https://cloudjourney.awsstudygroup.com/)
-* **Thứ 4 (12/08/2026):**
+* **Thứ 4 (16/09/2026):**
   * Tìm hiểu AWS Management Console và AWS CLI.
   * Cài đặt và cấu hình AWS CLI trên máy tính (Access Key, Secret Key, Region, Output Format).
   * Thực hành các lệnh CLI kiểm tra danh tính và tài nguyên.
   * *Tài liệu:* [AWS CLI](https://000011.awsstudygroup.com/) | [AWS Account](https://000001.awsstudygroup.com/)
-* **Thứ 5 (13/08/2026 - 14/08/2026):**
+* **Thứ 5 (17/09/2026 - 18/09/2026):**
   * Học khái niệm cơ bản về Amazon EC2 (AMI, Instance Type, EBS, Key Pair, Security Group, IP).
   * Vòng đời instance và cơ chế xác thực SSH.
   * *Tài liệu:* [Amazon EC2](https://000004.awsstudygroup.com/) | [IAM Roles for EC2](https://000048.awsstudygroup.com/)
-* **Thứ 6 (14/08/2026):**
+* **Thứ 6 (18/09/2026):**
   * Thực hành khởi chạy EC2 Linux instance, kết nối qua SSH.
   * Tạo và gắn thêm ổ đĩa EBS volume mới vào máy chủ EC2.
   * *Tài liệu:* [Amazon EC2](https://000004.awsstudygroup.com/) | [IAM Roles for EC2](https://000048.awsstudygroup.com/)

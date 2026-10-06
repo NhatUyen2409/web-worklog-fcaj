@@ -28,7 +28,7 @@ const I18N_DICTIONARY = {
     navSettings: "Cài đặt & Sao lưu",
     
     // Sidebar profile
-    sidebarCompany: "Amazon Web Services Việt Nam",
+    sidebarCompany: "Công ty TNHH Amazon Web Services (AWS) Việt Nam",
     sidebarViewProfile: "Xem thông tin chi tiết",
     
     // Header
@@ -58,13 +58,14 @@ const I18N_DICTIONARY = {
     infoCardTitle: "Thông tin sinh viên thực tập",
     officialBadge: "Chính thức • AWS FCAJ",
     labelFullName: "Họ và tên",
+    labelStudentId: "Mã số sinh viên",
     labelPhone: "Số điện thoại",
     labelEmail: "Email",
     labelUniversity: "Trường Đại học",
     labelMajor: "Chuyên ngành",
     labelClass: "Lớp / Khóa",
     labelCompany: "Đơn vị thực tập",
-    labelPosition: "Vị trí thực tập",
+    labelPosition: "Chương trình thực tập",
     labelDuration: "Thời gian thực tập",
     btnSaveInfo: "Lưu cập nhật thông tin",
     
@@ -285,7 +286,7 @@ const I18N_DICTIONARY = {
     navSettings: "Settings & Backup",
     
     // Sidebar profile
-    sidebarCompany: "Amazon Web Services Vietnam",
+    sidebarCompany: "Amazon Web Services (AWS) Vietnam Company Limited",
     sidebarViewProfile: "View detailed profile",
     
     // Header
@@ -315,13 +316,14 @@ const I18N_DICTIONARY = {
     infoCardTitle: "Student Information",
     officialBadge: "Official • AWS FCAJ",
     labelFullName: "Full Name",
+    labelStudentId: "Student ID",
     labelPhone: "Phone Number",
     labelEmail: "Email",
     labelUniversity: "University",
     labelMajor: "Major",
     labelClass: "Class",
     labelCompany: "Internship Company",
-    labelPosition: "Internship Position",
+    labelPosition: "Internship Program",
     labelDuration: "Internship Duration",
     btnSaveInfo: "Save Information Updates",
     
@@ -529,23 +531,24 @@ const I18N_DICTIONARY = {
 // ==========================================
 const DEFAULT_BILINGUAL_DATA = {
   studentInfo: {
-    fullName: "Phan Nhat Uyen",
+    fullName: "Phan Nhật Uyên",
+    studentId: "SE196682",
     phone: "0989888999",
     email: "uyen.phan@intern.aws.com",
-    className: "AWS082026",
+    className: "K19",
     vi: {
-      university: "Trường Đại học Sư phạm Kỹ thuật TP.HCM",
-      major: "Công nghệ Thông tin",
-      company: "Công ty TNHH Amazon Web Services Việt Nam",
-      position: "Chương trình Đào tạo Nhân lực - First Cloud AI Journey",
-      duration: "Từ 10/08/2026 đến 10/11/2026"
+      university: "Trường Đại học FPT",
+      major: "An toàn thông tin",
+      company: "Công ty TNHH Amazon Web Services (AWS) Việt Nam",
+      position: "Workforce Bootcamp - First Cloud AI Journey (FCAJ)",
+      duration: "Từ 14/09/2026 đến 14/12/2026"
     },
     en: {
-      university: "Ho Chi Minh City University of Technology and Education",
-      major: "Information Technology",
-      company: "Amazon Web Services Viet Nam Company Limited",
-      position: "Workforce Bootcamp - First Cloud AI Journey",
-      duration: "From 10/08/2026 to 10/11/2026"
+      university: "FPT University",
+      major: "Information Assurance",
+      company: "Amazon Web Services (AWS) Vietnam Company Limited",
+      position: "Workforce Bootcamp - First Cloud AI Journey (FCAJ)",
+      duration: "From 14/09/2026 to 14/12/2026"
     }
   },
   currentWeek: 1,
@@ -561,36 +564,31 @@ const DEFAULT_BILINGUAL_DATA = {
             {
               day: "2",
               desc: "- Get acquainted with FCAJ mentors and members.\n- Learn about the FCAJ internship roadmap, working process, rules, and regulations.\n- Understand weekly worklog requirements and expected learning outcomes.\n- Complete the required process to receive AWS Free $100 Credit for hands-on labs.\n- Check the AWS learning environment and understand basic cost-control precautions.",
-              start: "2026-08-10",
-              end: "2026-08-10",
+              start: "2026-09-14", end: "2026-09-14",
               ref: "AWS Account: https://000001.awsstudygroup.com/\nAWS Budgets: https://000007.awsstudygroup.com/"
             },
             {
               day: "3",
               desc: "- Learn the fundamentals of Cloud Computing and Amazon Web Services (AWS).\n- Understand AWS Global Infrastructure: Region, Availability Zone, Edge Location.\n- Learn major AWS service groups: Compute, Storage, Networking, Database, Security, Monitoring.\n- Explore AWS Management Console and locate commonly used AWS services.\n- Practice switching AWS Regions and checking available services/resources.",
-              start: "2026-08-11",
-              end: "2026-08-11",
+              start: "2026-09-15", end: "2026-09-15",
               ref: "First Cloud Journey: https://cloudjourney.awsstudygroup.com/"
             },
             {
               day: "4",
               desc: "- Learn about AWS Management Console and AWS CLI.\n- Install and configure AWS CLI on the local computer.\n- Configure Access Key, Secret Key, Default Region, and Output Format.\n- Practice basic CLI commands to check AWS identity, configuration, and available regions.\n- Use AWS CLI to retrieve EC2 information and compare results with AWS Console.\n- Understand the difference between managing AWS resources through Console and CLI.",
-              start: "2026-08-12",
-              end: "2026-08-12",
+              start: "2026-09-16", end: "2026-09-16",
               ref: "AWS CLI: https://000011.awsstudygroup.com/\nAWS Account: https://000001.awsstudygroup.com/"
             },
             {
               day: "5",
               desc: "- Learn basic concepts of Amazon EC2.\n- Study AMI, Instance Type, EBS, Key Pair, Security Group, Public IP, Private IP, and Elastic IP.\n- Understand EC2 instance lifecycle: Pending, Running, Stopping, Stopped, Terminated.\n- Learn how SSH authentication works when connecting to EC2.\n- Learn the role of Security Groups in controlling inbound/outbound traffic.\n- Explore the EC2 Dashboard and available instance configurations.",
-              start: "2026-08-13",
-              end: "2026-08-14",
+              start: "2026-09-17", end: "2026-09-18",
               ref: "Amazon EC2: https://000004.awsstudygroup.com/\nIAM Roles for EC2: https://000048.awsstudygroup.com/"
             },
             {
               day: "6",
               desc: "- Practice launching an Amazon EC2 instance.\n- Configure AMI, Instance Type, Key Pair, Network, and Security Group.\n- Connect to the EC2 Linux instance through SSH.\n- Execute basic Linux commands and verify server status.\n- Create and attach an additional EBS volume to EC2.\n- Practice Start/Stop EC2 and check instance status using both AWS Console and AWS CLI.",
-              start: "2026-08-14",
-              end: "2026-08-14",
+              start: "2026-09-18", end: "2026-09-18",
               ref: "Amazon EC2: https://000004.awsstudygroup.com/\nIAM Roles for EC2: https://000048.awsstudygroup.com/"
             }
           ]
@@ -602,36 +600,31 @@ const DEFAULT_BILINGUAL_DATA = {
             {
               day: "2",
               desc: "- Get acquainted with FCAJ mentors and members.\n- Learn about the FCAJ internship roadmap, working process, rules, and regulations.\n- Understand weekly worklog requirements and expected learning outcomes.\n- Complete the required process to receive AWS Free $100 Credit for hands-on labs.\n- Check the AWS learning environment and understand basic cost-control precautions.",
-              start: "2026-08-10",
-              end: "2026-08-10",
+              start: "2026-09-14", end: "2026-09-14",
               ref: "AWS Account: https://000001.awsstudygroup.com/\nAWS Budgets: https://000007.awsstudygroup.com/"
             },
             {
               day: "3",
               desc: "- Learn the fundamentals of Cloud Computing and Amazon Web Services (AWS).\n- Understand AWS Global Infrastructure: Region, Availability Zone, Edge Location.\n- Learn major AWS service groups: Compute, Storage, Networking, Database, Security, Monitoring.\n- Explore AWS Management Console and locate commonly used AWS services.\n- Practice switching AWS Regions and checking available services/resources.",
-              start: "2026-08-11",
-              end: "2026-08-11",
+              start: "2026-09-15", end: "2026-09-15",
               ref: "First Cloud Journey: https://cloudjourney.awsstudygroup.com/"
             },
             {
               day: "4",
               desc: "- Learn about AWS Management Console and AWS CLI.\n- Install and configure AWS CLI on the local computer.\n- Configure Access Key, Secret Key, Default Region, and Output Format.\n- Practice basic CLI commands to check AWS identity, configuration, and available regions.\n- Use AWS CLI to retrieve EC2 information and compare results with AWS Console.\n- Understand the difference between managing AWS resources through Console and CLI.",
-              start: "2026-08-12",
-              end: "2026-08-12",
+              start: "2026-09-16", end: "2026-09-16",
               ref: "AWS CLI: https://000011.awsstudygroup.com/\nAWS Account: https://000001.awsstudygroup.com/"
             },
             {
               day: "5",
               desc: "- Learn basic concepts of Amazon EC2.\n- Study AMI, Instance Type, EBS, Key Pair, Security Group, Public IP, Private IP, and Elastic IP.\n- Understand EC2 instance lifecycle: Pending, Running, Stopping, Stopped, Terminated.\n- Learn how SSH authentication works when connecting to EC2.\n- Learn the role of Security Groups in controlling inbound/outbound traffic.\n- Explore the EC2 Dashboard and available instance configurations.",
-              start: "2026-08-13",
-              end: "2026-08-14",
+              start: "2026-09-17", end: "2026-09-18",
               ref: "Amazon EC2: https://000004.awsstudygroup.com/\nIAM Roles for EC2: https://000048.awsstudygroup.com/"
             },
             {
               day: "6",
               desc: "- Practice launching an Amazon EC2 instance.\n- Configure AMI, Instance Type, Key Pair, Network, and Security Group.\n- Connect to the EC2 Linux instance through SSH.\n- Execute basic Linux commands and verify server status.\n- Create and attach an additional EBS volume to EC2.\n- Practice Start/Stop EC2 and check instance status using both AWS Console and AWS CLI.",
-              start: "2026-08-14",
-              end: "2026-08-14",
+              start: "2026-09-18", end: "2026-09-18",
               ref: "Amazon EC2: https://000004.awsstudygroup.com/\nIAM Roles for EC2: https://000048.awsstudygroup.com/"
             }
           ]
@@ -644,22 +637,22 @@ const DEFAULT_BILINGUAL_DATA = {
           objectives: "Nghiên cứu chuyên sâu về mạng Amazon VPC, phân chia Subnet, Route Table, NAT Gateway và Security Group.",
           achievements: "- Thiết kế và triển khai kiến trúc VPC đa tầng gồm Public và Private Subnet.\n- Cấu hình Bastion Host và NAT Gateway giúp máy chủ nội bộ kết nối Internet an toàn.\n- Thiết lập và kiểm thử quy tắc tường lửa Security Group và Network ACL thành công.",
           tasks: [
-            { day: "2", desc: "- Nghiên cứu quy hoạch dải mạng CIDR cho VPC\n- Phân chia Subnet và cấu hình Internet Gateway", start: "2026-08-17", end: "2026-08-17", ref: "AWS VPC User Guide" },
-            { day: "3", desc: "- Triển khai NAT Gateway\n- Cấu hình bảng định tuyến Private Route Table", start: "2026-08-18", end: "2026-08-18", ref: "https://docs.aws.amazon.com/vpc/" },
-            { day: "4", desc: "- Thực hành thiết lập Network ACL\n- So sánh NACL với Security Group theo nguyên tắc bảo mật tối thiểu", start: "2026-08-19", end: "2026-08-19", ref: "AWS Well-Architected Security" },
-            { day: "5", desc: "- Khởi tạo máy chủ EC2 trong Private Subnet\n- Kiểm tra kết nối Internet qua NAT Gateway", start: "2026-08-20", end: "2026-08-20", ref: "Internal Lab Guide" },
-            { day: "6", desc: "- Báo cáo tiến độ Sprint Review\n- Trao đổi 1-on-1 hàng tuần với Mentor Trần Anh Dũng", start: "2026-08-21", end: "2026-08-21", ref: "Weekly Assessment" }
+            { day: "2", desc: "- Nghiên cứu quy hoạch dải mạng CIDR cho VPC\n- Phân chia Subnet và cấu hình Internet Gateway", start: "2026-09-21", end: "2026-09-21", ref: "AWS VPC User Guide" },
+            { day: "3", desc: "- Triển khai NAT Gateway\n- Cấu hình bảng định tuyến Private Route Table", start: "2026-09-22", end: "2026-09-22", ref: "https://docs.aws.amazon.com/vpc/" },
+            { day: "4", desc: "- Thực hành thiết lập Network ACL\n- So sánh NACL với Security Group theo nguyên tắc bảo mật tối thiểu", start: "2026-09-23", end: "2026-09-23", ref: "AWS Well-Architected Security" },
+            { day: "5", desc: "- Khởi tạo máy chủ EC2 trong Private Subnet\n- Kiểm tra kết nối Internet qua NAT Gateway", start: "2026-09-24", end: "2026-09-24", ref: "Internal Lab Guide" },
+            { day: "6", desc: "- Báo cáo tiến độ Sprint Review\n- Trao đổi 1-on-1 hàng tuần với Mentor Trần Anh Dũng", start: "2026-09-25", end: "2026-09-25", ref: "Weekly Assessment" }
           ]
         },
         en: {
           objectives: "Deep dive into VPC Networking, Subnets, Routing, NAT Gateway and Security Groups.",
           achievements: "- Designed and deployed a multi-tier VPC architecture with Public and Private Subnets.\n- Configured Bastion Host and NAT Gateway for secure outbound internet access.\n- Tested security group inbound and outbound firewall rules successfully.",
           tasks: [
-            { day: "2", desc: "- Study VPC CIDR planning, IPv4 subnetting\n- Configure Internet Gateway routing", start: "2026-08-17", end: "2026-08-17", ref: "AWS VPC User Guide" },
-            { day: "3", desc: "- Deploy NAT Gateway\n- Configure Private Route Tables", start: "2026-08-18", end: "2026-08-18", ref: "https://docs.aws.amazon.com/vpc/" },
-            { day: "4", desc: "- Practice setting up Network Access Control Lists (NACLs) vs Security Groups\n- Apply principle of least privilege", start: "2026-08-19", end: "2026-08-19", ref: "AWS Well-Architected Security Pillar" },
-            { day: "5", desc: "- Setup EC2 inside Private Subnet\n- Verify internet connectivity via NAT Gateway", start: "2026-08-20", end: "2026-08-20", ref: "Internal Lab Guide" },
-            { day: "6", desc: "- Sprint Review & Weekly 1-on-1 with Mentor Trần Anh Dũng", start: "2026-08-21", end: "2026-08-21", ref: "Weekly Assessment" }
+            { day: "2", desc: "- Study VPC CIDR planning, IPv4 subnetting\n- Configure Internet Gateway routing", start: "2026-09-21", end: "2026-09-21", ref: "AWS VPC User Guide" },
+            { day: "3", desc: "- Deploy NAT Gateway\n- Configure Private Route Tables", start: "2026-09-22", end: "2026-09-22", ref: "https://docs.aws.amazon.com/vpc/" },
+            { day: "4", desc: "- Practice setting up Network Access Control Lists (NACLs) vs Security Groups\n- Apply principle of least privilege", start: "2026-09-23", end: "2026-09-23", ref: "AWS Well-Architected Security Pillar" },
+            { day: "5", desc: "- Setup EC2 inside Private Subnet\n- Verify internet connectivity via NAT Gateway", start: "2026-09-24", end: "2026-09-24", ref: "Internal Lab Guide" },
+            { day: "6", desc: "- Sprint Review & Weekly 1-on-1 with Mentor Trần Anh Dũng", start: "2026-09-25", end: "2026-09-25", ref: "Weekly Assessment" }
           ]
         }
       };
@@ -844,8 +837,8 @@ const DEFAULT_BILINGUAL_DATA = {
 // ==========================================
 // 3. PERSISTENCE & STATE MANAGEMENT
 // ==========================================
-const STORAGE_KEY = 'fcaj_report_bilingual_v9';
-const PREV_STORAGE_KEY = 'fcaj_report_bilingual_v8';
+const STORAGE_KEY = 'fcaj_report_bilingual_v10';
+const PREV_STORAGE_KEY = 'fcaj_report_bilingual_v9';
 const LANG_KEY = 'fcaj_report_lang';
 
 class AppLanguageManager {
@@ -864,6 +857,7 @@ class AppLanguageManager {
       'fcaj_report_bilingual_v5',
       'fcaj_report_bilingual_v6',
       'fcaj_report_bilingual_v7',
+      'fcaj_report_bilingual_v9',
       'fcaj_report_bilingual_v8',
       'fcaj_internship_report_v2',
       'fcaj_internship_report_v1'
@@ -1115,7 +1109,7 @@ function updateHeaderDate() {
 function updateHeaderGreeting() {
   const greetingEl = document.getElementById('greeting-display');
   if (!greetingEl) return;
-  const firstName = (app.data.studentInfo.fullName || 'Phan Nhat Uyen').split(' ').pop();
+  const firstName = (app.data.studentInfo.fullName || 'Phan Nhật Uyên').split(' ').pop();
   const hour = new Date().getHours();
   let greetKey = 'greetingMorning';
   if (hour >= 12 && hour < 18) {
@@ -1168,6 +1162,7 @@ function renderStudentInfoInputs() {
   };
 
   setVal('info-fullname', info.fullName);
+  setVal('info-student-id', info.studentId);
   setVal('info-phone', info.phone);
   setVal('info-email', info.email);
   setVal('info-class', info.className);
@@ -1189,6 +1184,8 @@ function setupStudentInfo() {
       e.preventDefault();
       const lang = app.currentLang;
       app.data.studentInfo.fullName = document.getElementById('info-fullname').value.trim();
+      const sidEl = document.getElementById('info-student-id');
+      if (sidEl) app.data.studentInfo.studentId = sidEl.value.trim();
       app.data.studentInfo.phone = document.getElementById('info-phone').value.trim();
       app.data.studentInfo.email = document.getElementById('info-email').value.trim();
       app.data.studentInfo.className = document.getElementById('info-class').value.trim();

@@ -3,15 +3,15 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Báo cáo thực tập :: Phan Nhat Uyen - AWS First Cloud AI Journey</title>
-  <meta name="description" content="Báo cáo thực tập tốt nghiệp chính thức của Phan Nhat Uyen tại Amazon Web Services Việt Nam - First Cloud AI Journey (FCAJ).">
+  <title>Báo cáo thực tập :: Phan Nhật Uyên - AWS First Cloud AI Journey</title>
+  <meta name="description" content="Báo cáo thực tập tốt nghiệp chính thức của Phan Nhật Uyên tại Amazon Web Services Việt Nam - First Cloud AI Journey (FCAJ).">
   
   <!-- Google Fonts: Plus Jakarta Sans for modern, clean corporate SaaS design -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
   
-  <link rel="stylesheet" href="styles.css?v=20261006_v9">
+  <link rel="stylesheet" href="styles.css?v=20261006_v10">
 </head>
 <body>
   <div class="app-layout">
@@ -138,8 +138,8 @@
         <div class="user-profile-badge">
           <div class="user-avatar" id="sidebar-avatar">U</div>
           <div class="user-details">
-            <span class="user-name" id="sidebar-username">Phan Nhat Uyen</span>
-            <span class="user-sub" id="sidebar-company" data-i18n="sidebarCompany">Amazon Web Services Việt Nam</span>
+            <span class="user-name" id="sidebar-username">Phan Nhật Uyên</span>
+            <span class="user-sub" id="sidebar-company" data-i18n="sidebarCompany">Công ty TNHH Amazon Web Services (AWS) Việt Nam</span>
           </div>
           <button class="btn-logout" onclick="navigateTo('thong-tin')" id="btn-sidebar-profile" data-i18n-title="sidebarViewProfile" title="Xem thông tin chi tiết">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
@@ -209,7 +209,42 @@
               <div class="info-grid-container">
                 <div class="form-group">
                   <label class="form-label"><span data-i18n="labelFullName">Họ và tên</span> <span class="required-star">*</span></label>
-                  <input type="text" id="info-fullname" class="form-control" value="Phan Nhat Uyen" required>
+                  <input type="text" id="info-fullname" class="form-control" value="Phan Nhật Uyên" required>
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label"><span data-i18n="labelStudentId">Mã số sinh viên</span> <span class="required-star">*</span></label>
+                  <input type="text" id="info-student-id" class="form-control" value="SE196682" required>
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label"><span data-i18n="labelUniversity">Trường Đại học</span> <span class="required-star">*</span></label>
+                  <input type="text" id="info-university" class="form-control" value="Trường Đại học FPT" required>
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label"><span data-i18n="labelMajor">Chuyên ngành</span> <span class="required-star">*</span></label>
+                  <input type="text" id="info-major" class="form-control" value="An toàn thông tin" required>
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label"><span data-i18n="labelCompany">Đơn vị thực tập</span> <span class="required-star">*</span></label>
+                  <input type="text" id="info-company" class="form-control" value="Công ty TNHH Amazon Web Services (AWS) Việt Nam" required>
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label" data-i18n="labelPosition">Chương trình thực tập</label>
+                  <input type="text" id="info-position" class="form-control" value="Workforce Bootcamp - First Cloud AI Journey (FCAJ)">
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label" data-i18n="labelClass">Lớp / Khóa</label>
+                  <input type="text" id="info-class" class="form-control" value="K19">
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label" data-i18n="labelDuration">Thời gian thực tập</label>
+                  <input type="text" id="info-duration" class="form-control" value="Từ 14/09/2026 đến 14/12/2026">
                 </div>
 
                 <div class="form-group">
@@ -220,36 +255,6 @@
                 <div class="form-group">
                   <label class="form-label"><span data-i18n="labelEmail">Email</span> <span class="required-star">*</span></label>
                   <input type="email" id="info-email" class="form-control" value="uyen.phan@intern.aws.com" required>
-                </div>
-
-                <div class="form-group">
-                  <label class="form-label"><span data-i18n="labelUniversity">Trường Đại học</span> <span class="required-star">*</span></label>
-                  <input type="text" id="info-university" class="form-control" value="Trường Đại học Sư phạm Kỹ thuật TP.HCM" required>
-                </div>
-
-                <div class="form-group">
-                  <label class="form-label"><span data-i18n="labelMajor">Chuyên ngành</span> <span class="required-star">*</span></label>
-                  <input type="text" id="info-major" class="form-control" value="Công nghệ Thông tin" required>
-                </div>
-
-                <div class="form-group">
-                  <label class="form-label" data-i18n="labelClass">Lớp / Khóa</label>
-                  <input type="text" id="info-class" class="form-control" value="AWS082026">
-                </div>
-
-                <div class="form-group">
-                  <label class="form-label"><span data-i18n="labelCompany">Đơn vị thực tập</span> <span class="required-star">*</span></label>
-                  <input type="text" id="info-company" class="form-control" value="Công ty TNHH Amazon Web Services Việt Nam" required>
-                </div>
-
-                <div class="form-group">
-                  <label class="form-label" data-i18n="labelPosition">Vị trí thực tập</label>
-                  <input type="text" id="info-position" class="form-control" value="Chương trình Đào tạo Nhân lực - First Cloud AI Journey">
-                </div>
-
-                <div class="form-group full-span">
-                  <label class="form-label" data-i18n="labelDuration">Thời gian thực tập</label>
-                  <input type="text" id="info-duration" class="form-control" value="Từ 10/08/2026 đến 10/11/2026">
                 </div>
               </div>
 
@@ -920,6 +925,6 @@ aws s3 cp test-file.bin s3://&lt;your-bucket-name&gt;/ --endpoint-url https://bu
   <!-- TOAST CONTAINER -->
   <div class="toast-container" id="toast-container"></div>
 
-  <script src="app.js?v=20261006_v9"></script>
+  <script src="app.js?v=20261006_v10"></script>
 </body>
 </html>
