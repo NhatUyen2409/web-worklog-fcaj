@@ -11,7 +11,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
   
-  <link rel="stylesheet" href="styles.css?v=20261006_v7">
+  <link rel="stylesheet" href="styles.css?v=20261006_v8">
 </head>
 <body>
   <div class="app-layout">
@@ -392,12 +392,12 @@
             <!-- Objectives & Achievements -->
             <div class="week-meta-grid">
               <div class="meta-box">
-                <h4 class="meta-title" data-i18n="metaObjectivesTitle">🎯 Mục tiêu tuần</h4>
+                <h4 class="meta-title" data-i18n="metaObjectivesTitle">Mục tiêu tuần</h4>
                 <p id="week-objectives-text" class="meta-body"></p>
               </div>
 
               <div class="meta-box">
-                <h4 class="meta-title" data-i18n="metaAchievementsTitle">🏆 Thành tích đạt được</h4>
+                <h4 class="meta-title" data-i18n="metaAchievementsTitle">Thành tích đạt được</h4>
                 <div id="week-achievements-text" class="meta-body"></div>
               </div>
             </div>
@@ -448,7 +448,7 @@
           </div>
 
           <div class="notice-callout notice-info" style="margin-top: 1rem;">
-            <div class="notice-icon">💡</div>
+            <div class="notice-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg></div>
             <div class="notice-content" data-i18n="proposalNotice">
               Đề tài nghiên cứu: Nền tảng quan trắc thời tiết IoT cho phòng thí nghiệm - Giải pháp AWS Serverless Real-Time Monitoring sử dụng AWS IoT Core, Lambda, S3 Data Lake, AWS Glue và Amplify Next.js.
             </div>
@@ -807,13 +807,13 @@ aws s3 cp test-file.bin s3://&lt;your-bucket-name&gt;/ --endpoint-url https://bu
   <div class="modal-backdrop" id="worklog-meta-modal">
     <div class="modal-dialog" style="max-width: 650px;">
       <div class="modal-header">
-        <h3 class="modal-title" id="worklog-meta-modal-title" data-i18n="modalMetaTitle">🎯 Chỉnh sửa Mục tiêu & Thành tích</h3>
+        <h3 class="modal-title" id="worklog-meta-modal-title" data-i18n="modalMetaTitle">Chỉnh sửa Mục tiêu & Thành tích</h3>
         <button type="button" class="btn-close-modal" id="btn-close-meta-modal">&times;</button>
       </div>
       <form id="worklog-meta-form">
         <div class="modal-body">
           <div class="notice-callout notice-info" style="margin-bottom: 16px; padding: 10px 14px; font-size: 13px;">
-            <div class="notice-icon">💡</div>
+            <div class="notice-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg></div>
             <div class="notice-content">
               Bạn có thể tự do gõ nội dung chi tiết. Đối với <strong>Thành tích đạt được</strong>, hãy xuống dòng và gạch đầu dòng (<code>- </code>) cho mỗi ý để báo cáo hiển thị đẹp mắt.
             </div>
@@ -821,14 +821,14 @@ aws s3 cp test-file.bin s3://&lt;your-bucket-name&gt;/ --endpoint-url https://bu
           
           <div class="form-group" style="margin-bottom: 16px;">
             <label class="form-label">
-              <span data-i18n="modalMetaObjectivesLabel">🎯 Mục tiêu trọng tâm tuần</span> <span class="required-star">*</span>
+              <span data-i18n="modalMetaObjectivesLabel">Mục tiêu trọng tâm tuần</span> <span class="required-star">*</span>
             </label>
             <textarea id="modal-meta-objectives" class="form-control" rows="3" data-i18n-placeholder="modalMetaObjectivesPlaceholder" placeholder="Nhập mục tiêu tuần..." required></textarea>
           </div>
 
           <div class="form-group">
             <label class="form-label">
-              <span data-i18n="modalMetaAchievementsLabel">🏆 Thành tích đạt được (mỗi ý một dòng, gạch đầu dòng -)</span> <span class="required-star">*</span>
+              <span data-i18n="modalMetaAchievementsLabel">Thành tích đạt được (mỗi ý một dòng, gạch đầu dòng -)</span> <span class="required-star">*</span>
             </label>
             <textarea id="modal-meta-achievements" class="form-control" rows="6" data-i18n-placeholder="modalMetaAchievementsPlaceholder" placeholder="- Hoàn thành nhiệm vụ...&#10;- Nắm vững kiến thức..." required></textarea>
           </div>
@@ -920,6 +920,6 @@ aws s3 cp test-file.bin s3://&lt;your-bucket-name&gt;/ --endpoint-url https://bu
   <!-- TOAST CONTAINER -->
   <div class="toast-container" id="toast-container"></div>
 
-  <script src="app.js?v=20261006_v7"></script>
+  <script src="app.js?v=20261006_v8"></script>
 </body>
 </html>

@@ -94,8 +94,8 @@ const I18N_DICTIONARY = {
     weekHeadingPrefix: "Nhật ký Tuần",
     bootcampSubtitle: "Chương trình đào tạo First Cloud AI Journey",
     btnEditWeekMeta: "Sửa mục tiêu & thành tích",
-    metaObjectivesTitle: "🎯 Mục tiêu tuần",
-    metaAchievementsTitle: "🏆 Thành tích đạt được",
+    metaObjectivesTitle: "Mục tiêu tuần",
+    metaAchievementsTitle: "Thành tích đạt được",
     tasksTableTitle: "📋 Nội dung công việc thực hiện trong tuần",
     thDay: "Thứ",
     thTaskDesc: "Nội dung công việc",
@@ -110,10 +110,10 @@ const I18N_DICTIONARY = {
     worklogToolsLabel: "🛠️ Thao tác nhanh:",
     btnExportWorklog: "Xuất JSON",
     btnImportWorklog: "Nhập JSON",
-    modalMetaTitle: "🎯 Chỉnh sửa Mục tiêu & Thành tích",
-    modalMetaObjectivesLabel: "🎯 Mục tiêu trọng tâm tuần",
+    modalMetaTitle: "Chỉnh sửa Mục tiêu & Thành tích",
+    modalMetaObjectivesLabel: "Mục tiêu trọng tâm tuần",
     modalMetaObjectivesPlaceholder: "Nhập mục tiêu trọng tâm trong tuần...",
-    modalMetaAchievementsLabel: "🏆 Thành tích đạt được (mỗi ý một dòng, gạch đầu dòng -)",
+    modalMetaAchievementsLabel: "Thành tích đạt được (mỗi ý một dòng, gạch đầu dòng -)",
     modalMetaAchievementsPlaceholder: "- Hoàn thành nhiệm vụ...\n- Nắm vững kiến thức...",
     btnModalSaveMeta: "Lưu mục tiêu & thành tích",
     modalEditTaskTitle: "✏️ Chỉnh sửa công việc",
@@ -351,8 +351,8 @@ const I18N_DICTIONARY = {
     weekHeadingPrefix: "Week",
     bootcampSubtitle: "First Cloud AI Journey Bootcamp",
     btnEditWeekMeta: "Edit Objectives & Achievements",
-    metaObjectivesTitle: "🎯 Week Objectives",
-    metaAchievementsTitle: "🏆 Week Achievements",
+    metaObjectivesTitle: "Week Objectives",
+    metaAchievementsTitle: "Week Achievements",
     tasksTableTitle: "📋 Tasks to be carried out this week",
     thDay: "Day",
     thTaskDesc: "Task Description",
@@ -367,10 +367,10 @@ const I18N_DICTIONARY = {
     worklogToolsLabel: "🛠️ Quick Tools:",
     btnExportWorklog: "Export JSON",
     btnImportWorklog: "Import JSON",
-    modalMetaTitle: "🎯 Edit Objectives & Achievements",
-    modalMetaObjectivesLabel: "🎯 Core Week Objectives",
+    modalMetaTitle: "Edit Objectives & Achievements",
+    modalMetaObjectivesLabel: "Core Week Objectives",
     modalMetaObjectivesPlaceholder: "Enter core technical/research objectives for this week...",
-    modalMetaAchievementsLabel: "🏆 Week Achievements (one per line, starting with -)",
+    modalMetaAchievementsLabel: "Week Achievements (one per line, starting with -)",
     modalMetaAchievementsPlaceholder: "- Mastered concepts...\n- Completed lab exercises...",
     btnModalSaveMeta: "Save Objectives & Achievements",
     modalEditTaskTitle: "✏️ Edit Task",
@@ -844,8 +844,8 @@ const DEFAULT_BILINGUAL_DATA = {
 // ==========================================
 // 3. PERSISTENCE & STATE MANAGEMENT
 // ==========================================
-const STORAGE_KEY = 'fcaj_report_bilingual_v7';
-const PREV_STORAGE_KEY = 'fcaj_report_bilingual_v6';
+const STORAGE_KEY = 'fcaj_report_bilingual_v8';
+const PREV_STORAGE_KEY = 'fcaj_report_bilingual_v7';
 const LANG_KEY = 'fcaj_report_lang';
 
 class AppLanguageManager {
@@ -863,6 +863,7 @@ class AppLanguageManager {
       'fcaj_report_bilingual_v4',
       'fcaj_report_bilingual_v5',
       'fcaj_report_bilingual_v6',
+      'fcaj_report_bilingual_v7',
       'fcaj_internship_report_v2',
       'fcaj_internship_report_v1'
     ];
