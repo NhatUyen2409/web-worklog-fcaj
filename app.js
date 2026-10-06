@@ -551,29 +551,89 @@ const DEFAULT_BILINGUAL_DATA = {
   currentWeek: 1,
   worklogs: Array.from({ length: 12 }, (_, i) => {
     const weekNum = i + 1;
-    if (weekNum === 1) {
+        if (weekNum === 1) {
       return {
         weekNum: 1,
         vi: {
-          objectives: "Kết nối, làm quen với các thành viên First Cloud AI Journey. Tìm hiểu các dịch vụ AWS cốt lõi, cách dùng Management Console và AWS CLI.",
-          achievements: "- Hiểu rõ khái niệm điện toán đám mây AWS và làm chủ các nhóm dịch vụ: Compute, Storage, Networking, Database.\n- Khởi tạo và thiết lập tài khoản AWS Free Tier thành công.\n- Cài đặt và cấu hình AWS CLI trên máy tính (Access Key, Secret Key, Default Region).\n- Quản lý tài nguyên đám mây song song qua giao diện Web và CLI thuần thục.",
+          objectives: "Connect and get acquainted with members of First Cloud AI Journey.\nUnderstand basic AWS services, how to use the console & CLI.",
+          achievements: "- Understood what AWS is and mastered the basic service groups:\n  + Compute\n  + Storage\n  + Networking\n  + Database\n  + …\n- Successfully created and configured an AWS Free Tier account.\n- Became familiar with the AWS Management Console and learned how to find, access, and use services via the web interface.\n- Installed and configured AWS CLI on the computer, including:\n  + Access Key\n  + Secret Key\n  + Default Region\n  + …\n- Used AWS CLI to perform basic operations such as:\n  + Check account & configuration information\n  + Retrieve the list of regions\n  + View EC2 service\n  + Create and manage key pairs\n  + Check information about running services\n  + …\n- Acquired the ability to connect between the web interface and CLI to manage AWS resources in parallel.",
           tasks: [
-            { day: "Thứ Hai", desc: "Làm quen với các thành viên FCAJ. Đọc và ghi chú kỹ các quy định, nội quy của đơn vị thực tập.", start: "2025-08-11", end: "2025-08-11", ref: "https://cloudjourney.awsstudygroup.com/" },
-            { day: "Thứ Ba", desc: "Nghiên cứu tổng quan về AWS và các nhóm dịch vụ chính: Compute, Storage, Networking, Database...", start: "2025-08-12", end: "2025-08-12", ref: "https://cloudjourney.awsstudygroup.com/" },
-            { day: "Thứ Tư", desc: "Khởi tạo tài khoản AWS Free Tier. Làm quen với AWS Management Console và AWS CLI. Thiết lập thông tin xác thực.", start: "2025-08-13", end: "2025-08-13", ref: "https://cloudjourney.awsstudygroup.com/" },
-            { day: "Thứ Năm", desc: "Học kiến trúc Amazon EC2 cơ bản: Instance types, AMI, ổ đĩa EBS, kết nối SSH keypair, địa chỉ Elastic IP.", start: "2025-08-14", end: "2025-08-15", ref: "https://cloudjourney.awsstudygroup.com/" },
-            { day: "Thứ Sáu", desc: "Thực hành: Khởi chạy máy chủ EC2, kết nối SSH từ máy cá nhân và gắn thêm volume EBS mới.", start: "2025-08-15", end: "2025-08-15", ref: "https://cloudjourney.awsstudygroup.com/" }
+            {
+              day: "2",
+              desc: "- Get acquainted with FCAJ members\n- Read and take note of internship unit rules and regulations",
+              start: "2025-08-11",
+              end: "2025-08-11",
+              ref: ""
+            },
+            {
+              day: "3",
+              desc: "- Learn about AWS and its types of services:\n  + Compute\n  + Storage\n  + Networking\n  + Database\n  + …",
+              start: "2025-08-12",
+              end: "2025-08-12",
+              ref: "https://cloudjourney.awsstudygroup.com/"
+            },
+            {
+              day: "4",
+              desc: "- Create AWS Free Tier account\n- Learn about AWS Console & AWS CLI\n- Practice:\n  + Create AWS account\n  + Install & configure AWS CLI\n  + How to use AWS CLI",
+              start: "2025-08-13",
+              end: "2025-08-13",
+              ref: "https://cloudjourney.awsstudygroup.com/"
+            },
+            {
+              day: "5",
+              desc: "- Learn basic EC2:\n  + Instance types\n  + AMI\n  + EBS\n  + …\n- SSH connection methods to EC2\n- Learn about Elastic IP",
+              start: "2025-08-14",
+              end: "2025-08-15",
+              ref: "https://cloudjourney.awsstudygroup.com/"
+            },
+            {
+              day: "6",
+              desc: "- Practice:\n  + Launch an EC2 instance\n  + Connect via SSH\n  + Attach an EBS volume",
+              start: "2025-08-15",
+              end: "2025-08-15",
+              ref: "https://cloudjourney.awsstudygroup.com/"
+            }
           ]
         },
         en: {
-          objectives: "Connect and get acquainted with members of First Cloud AI Journey. Understand basic AWS services, how to use the console & CLI.",
-          achievements: "- Understood what AWS is and mastered basic service groups: Compute, Storage, Networking, Database.\n- Successfully created and configured an AWS Free Tier account.\n- Installed and configured AWS CLI on computer (Access Key, Secret Key, Region).\n- Mastered parallel cloud resource management between Web Console and CLI.",
+          objectives: "Connect and get acquainted with members of First Cloud AI Journey.\nUnderstand basic AWS services, how to use the console & CLI.",
+          achievements: "- Understood what AWS is and mastered the basic service groups:\n  + Compute\n  + Storage\n  + Networking\n  + Database\n  + …\n- Successfully created and configured an AWS Free Tier account.\n- Became familiar with the AWS Management Console and learned how to find, access, and use services via the web interface.\n- Installed and configured AWS CLI on the computer, including:\n  + Access Key\n  + Secret Key\n  + Default Region\n  + …\n- Used AWS CLI to perform basic operations such as:\n  + Check account & configuration information\n  + Retrieve the list of regions\n  + View EC2 service\n  + Create and manage key pairs\n  + Check information about running services\n  + …\n- Acquired the ability to connect between the web interface and CLI to manage AWS resources in parallel.",
           tasks: [
-            { day: "Monday", desc: "Get acquainted with FCAJ members. Read and take note of internship unit rules and regulations.", start: "2025-08-11", end: "2025-08-11", ref: "https://cloudjourney.awsstudygroup.com/" },
-            { day: "Tuesday", desc: "Learn about AWS and its types of services: Compute, Storage, Networking, Database...", start: "2025-08-12", end: "2025-08-12", ref: "https://cloudjourney.awsstudygroup.com/" },
-            { day: "Wednesday", desc: "Create AWS Free Tier account. Learn about AWS Management Console & AWS CLI. Configure credentials.", start: "2025-08-13", end: "2025-08-13", ref: "https://cloudjourney.awsstudygroup.com/" },
-            { day: "Thursday", desc: "Learn basic Amazon EC2: Instance types, AMI, EBS volumes, SSH keypair connection, Elastic IP.", start: "2025-08-14", end: "2025-08-15", ref: "https://cloudjourney.awsstudygroup.com/" },
-            { day: "Friday", desc: "Hands-on practice: Launch an EC2 instance in custom VPC, connect via SSH, attach an EBS volume.", start: "2025-08-15", end: "2025-08-15", ref: "https://cloudjourney.awsstudygroup.com/" }
+            {
+              day: "2",
+              desc: "- Get acquainted with FCAJ members\n- Read and take note of internship unit rules and regulations",
+              start: "2025-08-11",
+              end: "2025-08-11",
+              ref: ""
+            },
+            {
+              day: "3",
+              desc: "- Learn about AWS and its types of services:\n  + Compute\n  + Storage\n  + Networking\n  + Database\n  + …",
+              start: "2025-08-12",
+              end: "2025-08-12",
+              ref: "https://cloudjourney.awsstudygroup.com/"
+            },
+            {
+              day: "4",
+              desc: "- Create AWS Free Tier account\n- Learn about AWS Console & AWS CLI\n- Practice:\n  + Create AWS account\n  + Install & configure AWS CLI\n  + How to use AWS CLI",
+              start: "2025-08-13",
+              end: "2025-08-13",
+              ref: "https://cloudjourney.awsstudygroup.com/"
+            },
+            {
+              day: "5",
+              desc: "- Learn basic EC2:\n  + Instance types\n  + AMI\n  + EBS\n  + …\n- SSH connection methods to EC2\n- Learn about Elastic IP",
+              start: "2025-08-14",
+              end: "2025-08-15",
+              ref: "https://cloudjourney.awsstudygroup.com/"
+            },
+            {
+              day: "6",
+              desc: "- Practice:\n  + Launch an EC2 instance\n  + Connect via SSH\n  + Attach an EBS volume",
+              start: "2025-08-15",
+              end: "2025-08-15",
+              ref: "https://cloudjourney.awsstudygroup.com/"
+            }
           ]
         }
       };
@@ -584,22 +644,22 @@ const DEFAULT_BILINGUAL_DATA = {
           objectives: "Nghiên cứu chuyên sâu về mạng Amazon VPC, phân chia Subnet, Route Table, NAT Gateway và Security Group.",
           achievements: "- Thiết kế và triển khai kiến trúc VPC đa tầng gồm Public và Private Subnet.\n- Cấu hình Bastion Host và NAT Gateway giúp máy chủ nội bộ kết nối Internet an toàn.\n- Thiết lập và kiểm thử quy tắc tường lửa Security Group và Network ACL thành công.",
           tasks: [
-            { day: "Thứ Hai", desc: "Nghiên cứu quy hoạch dải mạng CIDR cho VPC, phân chia Subnet và cấu hình Internet Gateway.", start: "2025-08-18", end: "2025-08-18", ref: "AWS VPC User Guide" },
-            { day: "Thứ Ba", desc: "Triển khai NAT Gateway và cấu hình bảng định tuyến Private Route Table.", start: "2025-08-19", end: "2025-08-19", ref: "https://docs.aws.amazon.com/vpc/" },
-            { day: "Thứ Tư", desc: "Thực hành thiết lập Network ACL so sánh với Security Group theo nguyên tắc bảo mật tối thiểu.", start: "2025-08-20", end: "2025-08-20", ref: "AWS Well-Architected Security" },
-            { day: "Thứ Năm", desc: "Khởi tạo máy chủ EC2 trong Private Subnet và kiểm tra kết nối Internet qua NAT Gateway.", start: "2025-08-21", end: "2025-08-21", ref: "Internal Lab Guide" },
-            { day: "Thứ Sáu", desc: "Báo cáo tiến độ Sprint Review và trao đổi 1-on-1 hàng tuần với Mentor Trần Anh Dũng.", start: "2025-08-22", end: "2025-08-22", ref: "Weekly Assessment" }
+            { day: "2", desc: "- Nghiên cứu quy hoạch dải mạng CIDR cho VPC\n- Phân chia Subnet và cấu hình Internet Gateway", start: "2025-08-18", end: "2025-08-18", ref: "AWS VPC User Guide" },
+            { day: "3", desc: "- Triển khai NAT Gateway\n- Cấu hình bảng định tuyến Private Route Table", start: "2025-08-19", end: "2025-08-19", ref: "https://docs.aws.amazon.com/vpc/" },
+            { day: "4", desc: "- Thực hành thiết lập Network ACL\n- So sánh NACL với Security Group theo nguyên tắc bảo mật tối thiểu", start: "2025-08-20", end: "2025-08-20", ref: "AWS Well-Architected Security" },
+            { day: "5", desc: "- Khởi tạo máy chủ EC2 trong Private Subnet\n- Kiểm tra kết nối Internet qua NAT Gateway", start: "2025-08-21", end: "2025-08-21", ref: "Internal Lab Guide" },
+            { day: "6", desc: "- Báo cáo tiến độ Sprint Review\n- Trao đổi 1-on-1 hàng tuần với Mentor Trần Anh Dũng", start: "2025-08-22", end: "2025-08-22", ref: "Weekly Assessment" }
           ]
         },
         en: {
           objectives: "Deep dive into VPC Networking, Subnets, Routing, NAT Gateway and Security Groups.",
           achievements: "- Designed and deployed a multi-tier VPC architecture with Public and Private Subnets.\n- Configured Bastion Host and NAT Gateway for secure outbound internet access.\n- Tested security group inbound and outbound firewall rules successfully.",
           tasks: [
-            { day: "Monday", desc: "Study VPC CIDR planning, IPv4 subnetting, and Internet Gateway routing.", start: "2025-08-18", end: "2025-08-18", ref: "AWS VPC User Guide" },
-            { day: "Tuesday", desc: "Deploy NAT Gateway and configure Private Route Tables.", start: "2025-08-19", end: "2025-08-19", ref: "https://docs.aws.amazon.com/vpc/" },
-            { day: "Wednesday", desc: "Practice setting up Network Access Control Lists (NACLs) vs Security Groups.", start: "2025-08-20", end: "2025-08-20", ref: "AWS Well-Architected Security Pillar" },
-            { day: "Thursday", desc: "Setup EC2 inside Private Subnet and verify internet connectivity via NAT Gateway.", start: "2025-08-21", end: "2025-08-21", ref: "Internal Lab Guide" },
-            { day: "Friday", desc: "Sprint Review & Weekly 1-on-1 with Mentor Trần Anh Dũng.", start: "2025-08-22", end: "2025-08-22", ref: "Weekly Assessment" }
+            { day: "2", desc: "- Study VPC CIDR planning, IPv4 subnetting\n- Configure Internet Gateway routing", start: "2025-08-18", end: "2025-08-18", ref: "AWS VPC User Guide" },
+            { day: "3", desc: "- Deploy NAT Gateway\n- Configure Private Route Tables", start: "2025-08-19", end: "2025-08-19", ref: "https://docs.aws.amazon.com/vpc/" },
+            { day: "4", desc: "- Practice setting up Network Access Control Lists (NACLs) vs Security Groups\n- Apply principle of least privilege", start: "2025-08-20", end: "2025-08-20", ref: "AWS Well-Architected Security Pillar" },
+            { day: "5", desc: "- Setup EC2 inside Private Subnet\n- Verify internet connectivity via NAT Gateway", start: "2025-08-21", end: "2025-08-21", ref: "Internal Lab Guide" },
+            { day: "6", desc: "- Sprint Review & Weekly 1-on-1 with Mentor Trần Anh Dũng", start: "2025-08-22", end: "2025-08-22", ref: "Weekly Assessment" }
           ]
         }
       };
@@ -608,20 +668,24 @@ const DEFAULT_BILINGUAL_DATA = {
         weekNum: weekNum,
         vi: {
           objectives: `Mục tiêu đào tạo và nghiên cứu kỹ thuật của Tuần ${weekNum}.`,
-          achievements: `- Hoàn thành xuất sắc các mục tiêu nghiên cứu và bài tập lab thực hành của tuần ${weekNum}.\n- Ghi chép đầy đủ tài liệu và trao đổi tiến độ với mentor.`,
+          achievements: `- Hoàn thành xuất sắc các mục tiêu nghiên cứu và bài tập lab thực hành của Tuần ${weekNum}:\n  + Nghiên cứu kiến trúc giải pháp AWS\n  + Thực hành cấu hình dịch vụ theo kịch bản\n  + Ghi chép tài liệu kỹ thuật chi tiết\n- Trao đổi tiến độ định kỳ và nhận đánh giá từ mentor.`,
           tasks: [
-            { day: "Thứ Hai", desc: `Khởi động tuần ${weekNum}, lập kế hoạch nhiệm vụ kỹ thuật.`, start: "", end: "", ref: "AWS Documentation" },
-            { day: "Thứ Tư", desc: `Thực hành cấu hình dịch vụ AWS và viết bài lab kỹ thuật.`, start: "", end: "", ref: "AWS Hands-on Guide" },
-            { day: "Thứ Sáu", desc: `Tổng kết kết quả tuần ${weekNum}, cập nhật nhật ký thực tập.`, start: "", end: "", ref: "FCAJ Tracker" }
+            { day: "2", desc: `- Khởi động Tuần ${weekNum}\n- Lập kế hoạch phân công nhiệm vụ kỹ thuật`, start: "", end: "", ref: "https://cloudjourney.awsstudygroup.com/" },
+            { day: "3", desc: `- Nghiên cứu lý thuyết dịch vụ AWS theo lộ trình Tuần ${weekNum}`, start: "", end: "", ref: "AWS Documentation" },
+            { day: "4", desc: `- Thực hành cấu hình Hands-on Lab trên AWS Console & CLI`, start: "", end: "", ref: "AWS Hands-on Guide" },
+            { day: "5", desc: `- Xây dựng tài liệu kỹ thuật và hoàn thiện bài lab`, start: "", end: "", ref: "Internal Lab Guide" },
+            { day: "6", desc: `- Tổng kết kết quả Tuần ${weekNum}\n- Báo cáo tiến độ Sprint Review với Mentor`, start: "", end: "", ref: "FCAJ Tracker" }
           ]
         },
         en: {
           objectives: `Technical training and research objectives for Week ${weekNum}.`,
-          achievements: `- Successfully accomplished technical research objectives and hands-on lab exercises for Week ${weekNum}.\n- Maintained thorough documentation and discussed weekly progress with mentor.`,
+          achievements: `- Successfully accomplished technical research objectives and hands-on lab exercises for Week ${weekNum}:\n  + Studied AWS solution architecture\n  + Configured hands-on labs per scenarios\n  + Maintained comprehensive technical documentation\n- Conducted weekly sprint review and progress alignment with mentor.`,
           tasks: [
-            { day: "Monday", desc: `Kickoff Week ${weekNum}, establish technical milestones and tasks.`, start: "", end: "", ref: "AWS Documentation" },
-            { day: "Wednesday", desc: `Hands-on configuration of AWS services and authoring lab guide.`, start: "", end: "", ref: "AWS Hands-on Guide" },
-            { day: "Friday", desc: `Weekly summary for Week ${weekNum}, update internship worklog.`, start: "", end: "", ref: "FCAJ Tracker" }
+            { day: "2", desc: `- Kickoff Week ${weekNum}\n- Establish technical milestones and tasks`, start: "", end: "", ref: "https://cloudjourney.awsstudygroup.com/" },
+            { day: "3", desc: `- Study foundational AWS documentation for Week ${weekNum}`, start: "", end: "", ref: "AWS Documentation" },
+            { day: "4", desc: `- Hands-on configuration of AWS services via Console & CLI`, start: "", end: "", ref: "AWS Hands-on Guide" },
+            { day: "5", desc: `- Author technical guide and finalize hands-on exercises`, start: "", end: "", ref: "Internal Lab Guide" },
+            { day: "6", desc: `- Weekly summary for Week ${weekNum}\n- Sprint review and 1-on-1 with mentor`, start: "", end: "", ref: "FCAJ Tracker" }
           ]
         }
       };
@@ -780,7 +844,8 @@ const DEFAULT_BILINGUAL_DATA = {
 // ==========================================
 // 3. PERSISTENCE & STATE MANAGEMENT
 // ==========================================
-const STORAGE_KEY = 'fcaj_report_bilingual_v4';
+const STORAGE_KEY = 'fcaj_report_bilingual_v5';
+const PREV_STORAGE_KEY = 'fcaj_report_bilingual_v4';
 const LANG_KEY = 'fcaj_report_lang';
 
 class AppLanguageManager {
@@ -794,14 +859,21 @@ class AppLanguageManager {
       const stored = localStorage.getItem(STORAGE_KEY);
       if (stored) {
         const parsed = JSON.parse(stored);
-        if (parsed && parsed.studentInfo && parsed.studentInfo.vi && parsed.studentInfo.en &&
-            parsed.proposal && parsed.proposal.vi && parsed.proposal.en &&
-            parsed.worklogs && parsed.worklogs.length > 0 && parsed.worklogs[0].vi &&
-            parsed.blogs && parsed.blogs.vi && parsed.blogs.en &&
-            parsed.events && parsed.events.vi && parsed.events.en &&
-            parsed.feedback && parsed.feedback.vi && parsed.feedback.en) {
+        if (parsed && parsed.worklogs && parsed.worklogs.length > 0) {
           return parsed;
         }
+      }
+      // Migrate from prev storage if available, updating worklogs[0] with new Week 1 format
+      const prev = localStorage.getItem(PREV_STORAGE_KEY);
+      if (prev) {
+        const prevParsed = JSON.parse(prev);
+        const fresh = JSON.parse(JSON.stringify(DEFAULT_BILINGUAL_DATA));
+        if (prevParsed.studentInfo) fresh.studentInfo = prevParsed.studentInfo;
+        if (prevParsed.proposal) fresh.proposal = prevParsed.proposal;
+        if (prevParsed.blogs) fresh.blogs = prevParsed.blogs;
+        if (prevParsed.events) fresh.events = prevParsed.events;
+        if (prevParsed.feedback) fresh.feedback = prevParsed.feedback;
+        return fresh;
       }
     } catch (e) {
       console.warn('Could not read stored bilingual data, using defaults', e);
@@ -1162,6 +1234,15 @@ function selectWeek(num) {
   renderWorklogView();
 }
 
+function formatWorklogDate(dateStr) {
+  if (!dateStr) return '-';
+  if (/^\d{4}-\d{2}-\d{2}$/.test(dateStr)) {
+    const [y, m, d] = dateStr.split('-');
+    return app.currentLang === 'vi' ? `${d}/${m}/${y}` : `${m}/${d}/${y}`;
+  }
+  return dateStr;
+}
+
 function renderWorklogView() {
   const week = getCurrentWeekWorklog();
   const lang = app.currentLang;
@@ -1176,9 +1257,11 @@ function renderWorklogView() {
   
   if (objText) {
     if (content.objectives && content.objectives.trim()) {
-      objText.textContent = content.objectives;
+      objText.innerHTML = escapeHtml(content.objectives).replace(/\n/g, '<br>');
       objText.style.color = '';
       objText.style.fontStyle = '';
+      objText.style.lineHeight = '1.6';
+      objText.style.whiteSpace = 'pre-wrap';
     } else {
       objText.textContent = t('emptyObjectivesMsg');
       objText.style.color = '#94A3B8';
@@ -1191,6 +1274,8 @@ function renderWorklogView() {
       achText.innerHTML = escapeHtml(content.achievements).replace(/\n/g, '<br>');
       achText.style.color = '';
       achText.style.fontStyle = '';
+      achText.style.lineHeight = '1.65';
+      achText.style.whiteSpace = 'pre-wrap';
     } else {
       achText.textContent = t('emptyAchievementsMsg');
       achText.style.color = '#94A3B8';
@@ -1216,14 +1301,14 @@ function renderWorklogView() {
 
     tbody.innerHTML = content.tasks.map((task, idx) => `
       <tr>
-        <td><strong>${escapeHtml(task.day)}</strong></td>
-        <td style="white-space:pre-line; line-height: 1.5;">${escapeHtml(task.desc)}</td>
-        <td style="white-space:nowrap; font-size:13px; color:var(--text-subtle);">${escapeHtml(task.start || '-')}</td>
-        <td style="white-space:nowrap; font-size:13px; color:var(--text-subtle);">${escapeHtml(task.end || '-')}</td>
-        <td>
-          ${task.ref ? (task.ref.startsWith('http') ? `<a href="${escapeHtml(task.ref)}" target="_blank" rel="noopener" style="color:var(--primary); font-weight:600; text-decoration:underline;">${t('viewRefLink')}</a>` : `<span style="font-size:13px; color:var(--text-subtle);">${escapeHtml(task.ref)}</span>`) : '-'}
+        <td style="font-weight:700; text-align:center; vertical-align:top; font-size:14px; padding-top:14px;">${escapeHtml(task.day)}</td>
+        <td style="white-space:pre-wrap; line-height: 1.6; font-size:13.5px; vertical-align:top; padding-top:14px;">${escapeHtml(task.desc)}</td>
+        <td style="white-space:nowrap; font-size:13px; color:var(--text-subtle); vertical-align:top; padding-top:14px;">${escapeHtml(formatWorklogDate(task.start))}</td>
+        <td style="white-space:nowrap; font-size:13px; color:var(--text-subtle); vertical-align:top; padding-top:14px;">${escapeHtml(formatWorklogDate(task.end))}</td>
+        <td style="vertical-align:top; padding-top:14px;">
+          ${task.ref ? (task.ref.startsWith('http') ? `<a href="${escapeHtml(task.ref)}" target="_blank" rel="noopener" style="color:var(--primary); font-weight:600; text-decoration:underline; font-size:13px; word-break:break-all;">${escapeHtml(task.ref)}</a>` : `<span style="font-size:13px; color:var(--text-subtle);">${escapeHtml(task.ref)}</span>`) : '-'}
         </td>
-        <td style="text-align:right; white-space:nowrap;">
+        <td style="text-align:right; white-space:nowrap; vertical-align:top; padding-top:14px;">
           <button type="button" class="btn-table-action btn-table-edit" title="${t('btnEdit')}" onclick="openEditTaskModal(${idx})">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
             <span>${t('btnEdit')}</span>
