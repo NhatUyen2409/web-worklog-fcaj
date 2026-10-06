@@ -551,78 +551,88 @@ const DEFAULT_BILINGUAL_DATA = {
   currentWeek: 1,
   worklogs: Array.from({ length: 12 }, (_, i) => {
     const weekNum = i + 1;
-        if (weekNum === 1) {
+            if (weekNum === 1) {
       return {
         weekNum: 1,
         vi: {
-          objectives: "Connect and get acquainted with members of First Cloud AI Journey.\nUnderstand basic AWS services, how to use the console & CLI.",
-          achievements: "- Understood what AWS is and mastered the basic service groups:\n  + Compute\n  + Storage\n  + Networking\n  + Database\n  + …\n- Successfully created and configured an AWS Free Tier account.\n- Became familiar with the AWS Management Console and learned how to find, access, and use services via the web interface.\n- Installed and configured AWS CLI on the computer, including:\n  + Access Key\n  + Secret Key\n  + Default Region\n  + …\n- Used AWS CLI to perform basic operations such as:\n  + Check account & configuration information\n  + Retrieve the list of regions\n  + View EC2 service\n  + Create and manage key pairs\n  + Check information about running services\n  + …\n- Acquired the ability to connect between the web interface and CLI to manage AWS resources in parallel.",
+          objectives: "- Get acquainted with FCAJ members and understand the internship working process.\n- Complete the AWS Free $100 Credit registration for hands-on practice.\n- Understand fundamental AWS services and AWS global infrastructure.\n- Become familiar with AWS Management Console and AWS CLI.\n- Learn basic Amazon EC2 concepts and perform the first EC2 hands-on lab.",
+          achievements: "- Successfully completed the AWS Free $100 Credit registration for AWS hands-on activities.\n- Understood the basic concepts of Cloud Computing and AWS Global Infrastructure:\n  - Region\n  - Availability Zone\n  - Edge Location\n- Understood the major AWS service groups:\n  - Compute\n  - Storage\n  - Networking\n  - Database\n  - Security\n  - Monitoring\n- Became familiar with the AWS Management Console and learned how to:\n  - Search and access AWS services\n  - Switch AWS Regions\n  - View and manage AWS resources\n  - Check basic resource information\n- Successfully installed and configured AWS CLI, including:\n  - Access Key\n  - Secret Key\n  - Default Region\n  - Output Format\n- Used AWS CLI to:\n  - Verify AWS identity and account information\n  - Check CLI configuration\n  - Retrieve the list of AWS Regions\n  - View EC2 instances and instance states\n  - Manage/check EC2 Key Pairs\n  - Retrieve basic AWS resource information\n- Learned the fundamental components of Amazon EC2:\n  - AMI\n  - Instance Type\n  - EBS\n  - Key Pair\n  - Security Group\n  - Public/Private IP\n  - Elastic IP\n- Successfully launched and managed an EC2 instance.\n- Successfully connected to a Linux EC2 instance through SSH.\n- Created and attached an additional EBS volume to an EC2 instance.\n- Practiced managing EC2 using both AWS Console and AWS CLI.\n- Gained the ability to perform a complete basic workflow:\n  AWS Account → Console/CLI → EC2 → Security Group → SSH → EBS → Resource Management.",
           tasks: [
             {
               day: "2",
-              desc: "- Get acquainted with FCAJ members\n- Read and take note of internship unit rules and regulations",
-              start: "2026-08-10", end: "2026-08-10",
-              ref: ""
+              desc: "- Get acquainted with FCAJ mentors and members.\n- Learn about the FCAJ internship roadmap, working process, rules, and regulations.\n- Understand weekly worklog requirements and expected learning outcomes.\n- Complete the required process to receive AWS Free $100 Credit for hands-on labs.\n- Check the AWS learning environment and understand basic cost-control precautions.",
+              start: "2026-08-10",
+              end: "2026-08-10",
+              ref: "AWS Account: https://000001.awsstudygroup.com/\nAWS Budgets: https://000007.awsstudygroup.com/"
             },
             {
               day: "3",
-              desc: "- Learn about AWS and its types of services:\n  + Compute\n  + Storage\n  + Networking\n  + Database\n  + …",
-              start: "2026-08-11", end: "2026-08-11",
-              ref: "https://cloudjourney.awsstudygroup.com/"
+              desc: "- Learn the fundamentals of Cloud Computing and Amazon Web Services (AWS).\n- Understand AWS Global Infrastructure: Region, Availability Zone, Edge Location.\n- Learn major AWS service groups: Compute, Storage, Networking, Database, Security, Monitoring.\n- Explore AWS Management Console and locate commonly used AWS services.\n- Practice switching AWS Regions and checking available services/resources.",
+              start: "2026-08-11",
+              end: "2026-08-11",
+              ref: "First Cloud Journey: https://cloudjourney.awsstudygroup.com/"
             },
             {
               day: "4",
-              desc: "- Create AWS Free Tier account\n- Learn about AWS Console & AWS CLI\n- Practice:\n  + Create AWS account\n  + Install & configure AWS CLI\n  + How to use AWS CLI",
-              start: "2026-08-12", end: "2026-08-12",
-              ref: "https://cloudjourney.awsstudygroup.com/"
+              desc: "- Learn about AWS Management Console and AWS CLI.\n- Install and configure AWS CLI on the local computer.\n- Configure Access Key, Secret Key, Default Region, and Output Format.\n- Practice basic CLI commands to check AWS identity, configuration, and available regions.\n- Use AWS CLI to retrieve EC2 information and compare results with AWS Console.\n- Understand the difference between managing AWS resources through Console and CLI.",
+              start: "2026-08-12",
+              end: "2026-08-12",
+              ref: "AWS CLI: https://000011.awsstudygroup.com/\nAWS Account: https://000001.awsstudygroup.com/"
             },
             {
               day: "5",
-              desc: "- Learn basic EC2:\n  + Instance types\n  + AMI\n  + EBS\n  + …\n- SSH connection methods to EC2\n- Learn about Elastic IP",
-              start: "2026-08-13", end: "2026-08-14",
-              ref: "https://cloudjourney.awsstudygroup.com/"
+              desc: "- Learn basic concepts of Amazon EC2.\n- Study AMI, Instance Type, EBS, Key Pair, Security Group, Public IP, Private IP, and Elastic IP.\n- Understand EC2 instance lifecycle: Pending, Running, Stopping, Stopped, Terminated.\n- Learn how SSH authentication works when connecting to EC2.\n- Learn the role of Security Groups in controlling inbound/outbound traffic.\n- Explore the EC2 Dashboard and available instance configurations.",
+              start: "2026-08-13",
+              end: "2026-08-14",
+              ref: "Amazon EC2: https://000004.awsstudygroup.com/\nIAM Roles for EC2: https://000048.awsstudygroup.com/"
             },
             {
               day: "6",
-              desc: "- Practice:\n  + Launch an EC2 instance\n  + Connect via SSH\n  + Attach an EBS volume",
-              start: "2026-08-14", end: "2026-08-14",
-              ref: "https://cloudjourney.awsstudygroup.com/"
+              desc: "- Practice launching an Amazon EC2 instance.\n- Configure AMI, Instance Type, Key Pair, Network, and Security Group.\n- Connect to the EC2 Linux instance through SSH.\n- Execute basic Linux commands and verify server status.\n- Create and attach an additional EBS volume to EC2.\n- Practice Start/Stop EC2 and check instance status using both AWS Console and AWS CLI.",
+              start: "2026-08-14",
+              end: "2026-08-14",
+              ref: "Amazon EC2: https://000004.awsstudygroup.com/\nIAM Roles for EC2: https://000048.awsstudygroup.com/"
             }
           ]
         },
         en: {
-          objectives: "Connect and get acquainted with members of First Cloud AI Journey.\nUnderstand basic AWS services, how to use the console & CLI.",
-          achievements: "- Understood what AWS is and mastered the basic service groups:\n  + Compute\n  + Storage\n  + Networking\n  + Database\n  + …\n- Successfully created and configured an AWS Free Tier account.\n- Became familiar with the AWS Management Console and learned how to find, access, and use services via the web interface.\n- Installed and configured AWS CLI on the computer, including:\n  + Access Key\n  + Secret Key\n  + Default Region\n  + …\n- Used AWS CLI to perform basic operations such as:\n  + Check account & configuration information\n  + Retrieve the list of regions\n  + View EC2 service\n  + Create and manage key pairs\n  + Check information about running services\n  + …\n- Acquired the ability to connect between the web interface and CLI to manage AWS resources in parallel.",
+          objectives: "- Get acquainted with FCAJ members and understand the internship working process.\n- Complete the AWS Free $100 Credit registration for hands-on practice.\n- Understand fundamental AWS services and AWS global infrastructure.\n- Become familiar with AWS Management Console and AWS CLI.\n- Learn basic Amazon EC2 concepts and perform the first EC2 hands-on lab.",
+          achievements: "- Successfully completed the AWS Free $100 Credit registration for AWS hands-on activities.\n- Understood the basic concepts of Cloud Computing and AWS Global Infrastructure:\n  - Region\n  - Availability Zone\n  - Edge Location\n- Understood the major AWS service groups:\n  - Compute\n  - Storage\n  - Networking\n  - Database\n  - Security\n  - Monitoring\n- Became familiar with the AWS Management Console and learned how to:\n  - Search and access AWS services\n  - Switch AWS Regions\n  - View and manage AWS resources\n  - Check basic resource information\n- Successfully installed and configured AWS CLI, including:\n  - Access Key\n  - Secret Key\n  - Default Region\n  - Output Format\n- Used AWS CLI to:\n  - Verify AWS identity and account information\n  - Check CLI configuration\n  - Retrieve the list of AWS Regions\n  - View EC2 instances and instance states\n  - Manage/check EC2 Key Pairs\n  - Retrieve basic AWS resource information\n- Learned the fundamental components of Amazon EC2:\n  - AMI\n  - Instance Type\n  - EBS\n  - Key Pair\n  - Security Group\n  - Public/Private IP\n  - Elastic IP\n- Successfully launched and managed an EC2 instance.\n- Successfully connected to a Linux EC2 instance through SSH.\n- Created and attached an additional EBS volume to an EC2 instance.\n- Practiced managing EC2 using both AWS Console and AWS CLI.\n- Gained the ability to perform a complete basic workflow:\n  AWS Account → Console/CLI → EC2 → Security Group → SSH → EBS → Resource Management.",
           tasks: [
             {
               day: "2",
-              desc: "- Get acquainted with FCAJ members\n- Read and take note of internship unit rules and regulations",
-              start: "2026-08-10", end: "2026-08-10",
-              ref: ""
+              desc: "- Get acquainted with FCAJ mentors and members.\n- Learn about the FCAJ internship roadmap, working process, rules, and regulations.\n- Understand weekly worklog requirements and expected learning outcomes.\n- Complete the required process to receive AWS Free $100 Credit for hands-on labs.\n- Check the AWS learning environment and understand basic cost-control precautions.",
+              start: "2026-08-10",
+              end: "2026-08-10",
+              ref: "AWS Account: https://000001.awsstudygroup.com/\nAWS Budgets: https://000007.awsstudygroup.com/"
             },
             {
               day: "3",
-              desc: "- Learn about AWS and its types of services:\n  + Compute\n  + Storage\n  + Networking\n  + Database\n  + …",
-              start: "2026-08-11", end: "2026-08-11",
-              ref: "https://cloudjourney.awsstudygroup.com/"
+              desc: "- Learn the fundamentals of Cloud Computing and Amazon Web Services (AWS).\n- Understand AWS Global Infrastructure: Region, Availability Zone, Edge Location.\n- Learn major AWS service groups: Compute, Storage, Networking, Database, Security, Monitoring.\n- Explore AWS Management Console and locate commonly used AWS services.\n- Practice switching AWS Regions and checking available services/resources.",
+              start: "2026-08-11",
+              end: "2026-08-11",
+              ref: "First Cloud Journey: https://cloudjourney.awsstudygroup.com/"
             },
             {
               day: "4",
-              desc: "- Create AWS Free Tier account\n- Learn about AWS Console & AWS CLI\n- Practice:\n  + Create AWS account\n  + Install & configure AWS CLI\n  + How to use AWS CLI",
-              start: "2026-08-12", end: "2026-08-12",
-              ref: "https://cloudjourney.awsstudygroup.com/"
+              desc: "- Learn about AWS Management Console and AWS CLI.\n- Install and configure AWS CLI on the local computer.\n- Configure Access Key, Secret Key, Default Region, and Output Format.\n- Practice basic CLI commands to check AWS identity, configuration, and available regions.\n- Use AWS CLI to retrieve EC2 information and compare results with AWS Console.\n- Understand the difference between managing AWS resources through Console and CLI.",
+              start: "2026-08-12",
+              end: "2026-08-12",
+              ref: "AWS CLI: https://000011.awsstudygroup.com/\nAWS Account: https://000001.awsstudygroup.com/"
             },
             {
               day: "5",
-              desc: "- Learn basic EC2:\n  + Instance types\n  + AMI\n  + EBS\n  + …\n- SSH connection methods to EC2\n- Learn about Elastic IP",
-              start: "2026-08-13", end: "2026-08-14",
-              ref: "https://cloudjourney.awsstudygroup.com/"
+              desc: "- Learn basic concepts of Amazon EC2.\n- Study AMI, Instance Type, EBS, Key Pair, Security Group, Public IP, Private IP, and Elastic IP.\n- Understand EC2 instance lifecycle: Pending, Running, Stopping, Stopped, Terminated.\n- Learn how SSH authentication works when connecting to EC2.\n- Learn the role of Security Groups in controlling inbound/outbound traffic.\n- Explore the EC2 Dashboard and available instance configurations.",
+              start: "2026-08-13",
+              end: "2026-08-14",
+              ref: "Amazon EC2: https://000004.awsstudygroup.com/\nIAM Roles for EC2: https://000048.awsstudygroup.com/"
             },
             {
               day: "6",
-              desc: "- Practice:\n  + Launch an EC2 instance\n  + Connect via SSH\n  + Attach an EBS volume",
-              start: "2026-08-14", end: "2026-08-14",
-              ref: "https://cloudjourney.awsstudygroup.com/"
+              desc: "- Practice launching an Amazon EC2 instance.\n- Configure AMI, Instance Type, Key Pair, Network, and Security Group.\n- Connect to the EC2 Linux instance through SSH.\n- Execute basic Linux commands and verify server status.\n- Create and attach an additional EBS volume to EC2.\n- Practice Start/Stop EC2 and check instance status using both AWS Console and AWS CLI.",
+              start: "2026-08-14",
+              end: "2026-08-14",
+              ref: "Amazon EC2: https://000004.awsstudygroup.com/\nIAM Roles for EC2: https://000048.awsstudygroup.com/"
             }
           ]
         }
@@ -834,8 +844,8 @@ const DEFAULT_BILINGUAL_DATA = {
 // ==========================================
 // 3. PERSISTENCE & STATE MANAGEMENT
 // ==========================================
-const STORAGE_KEY = 'fcaj_report_bilingual_v6';
-const PREV_STORAGE_KEY = 'fcaj_report_bilingual_v5';
+const STORAGE_KEY = 'fcaj_report_bilingual_v7';
+const PREV_STORAGE_KEY = 'fcaj_report_bilingual_v6';
 const LANG_KEY = 'fcaj_report_lang';
 
 class AppLanguageManager {
@@ -1224,6 +1234,23 @@ function selectWeek(num) {
   renderWorklogView();
 }
 
+function renderRefLinks(refStr) {
+  if (!refStr || !refStr.trim()) return '-';
+  const lines = refStr.split('\n').map(l => l.trim()).filter(Boolean);
+  return lines.map(line => {
+    const match = line.match(/(https?:\/\/[^\s]+)/);
+    if (match) {
+      const url = match[1];
+      const prefix = line.replace(url, '').trim();
+      return `<div style="margin-bottom: 5px; font-size: 13px; line-height: 1.45;">
+        ${prefix ? `<span style="font-weight:600; color:var(--text-main);">${escapeHtml(prefix)}</span> ` : ''}
+        <a href="${escapeHtml(url)}" target="_blank" rel="noopener" style="color:var(--primary); font-weight:600; text-decoration:underline; word-break:break-all;">${escapeHtml(url)} ↗</a>
+      </div>`;
+    }
+    return `<div style="margin-bottom: 5px; font-size: 13px; color:var(--text-subtle);">${escapeHtml(line)}</div>`;
+  }).join('');
+}
+
 function formatWorklogDate(dateStr) {
   if (!dateStr) return '-';
   if (/^\d{4}-\d{2}-\d{2}$/.test(dateStr)) {
@@ -1296,7 +1323,7 @@ function renderWorklogView() {
         <td style="white-space:nowrap; font-size:13px; color:var(--text-subtle); vertical-align:top; padding-top:14px;">${escapeHtml(formatWorklogDate(task.start))}</td>
         <td style="white-space:nowrap; font-size:13px; color:var(--text-subtle); vertical-align:top; padding-top:14px;">${escapeHtml(formatWorklogDate(task.end))}</td>
         <td style="vertical-align:top; padding-top:14px;">
-          ${task.ref ? (task.ref.startsWith('http') ? `<a href="${escapeHtml(task.ref)}" target="_blank" rel="noopener" style="color:var(--primary); font-weight:600; text-decoration:underline; font-size:13px; word-break:break-all;">${escapeHtml(task.ref)}</a>` : `<span style="font-size:13px; color:var(--text-subtle);">${escapeHtml(task.ref)}</span>`) : '-'}
+          ${renderRefLinks(task.ref)}
         </td>
         <td style="text-align:right; white-space:nowrap; vertical-align:top; padding-top:14px;">
           <button type="button" class="btn-table-action btn-table-edit" title="${t('btnEdit')}" onclick="openEditTaskModal(${idx})">
