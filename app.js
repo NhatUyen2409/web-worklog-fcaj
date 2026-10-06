@@ -532,20 +532,20 @@ const DEFAULT_BILINGUAL_DATA = {
     fullName: "Phan Nhat Uyen",
     phone: "0989888999",
     email: "uyen.phan@intern.aws.com",
-    className: "AWS082025",
+    className: "AWS082026",
     vi: {
       university: "Trường Đại học Sư phạm Kỹ thuật TP.HCM",
       major: "Công nghệ Thông tin",
       company: "Công ty TNHH Amazon Web Services Việt Nam",
       position: "Chương trình Đào tạo Nhân lực - First Cloud AI Journey",
-      duration: "Từ 12/08/2025 đến 12/11/2025"
+      duration: "Từ 10/08/2026 đến 10/11/2026"
     },
     en: {
       university: "Ho Chi Minh City University of Technology and Education",
       major: "Information Technology",
       company: "Amazon Web Services Viet Nam Company Limited",
       position: "Workforce Bootcamp - First Cloud AI Journey",
-      duration: "From 12/08/2025 to 12/11/2025"
+      duration: "From 10/08/2026 to 10/11/2026"
     }
   },
   currentWeek: 1,
@@ -561,36 +561,31 @@ const DEFAULT_BILINGUAL_DATA = {
             {
               day: "2",
               desc: "- Get acquainted with FCAJ members\n- Read and take note of internship unit rules and regulations",
-              start: "2025-08-11",
-              end: "2025-08-11",
+              start: "2026-08-10", end: "2026-08-10",
               ref: ""
             },
             {
               day: "3",
               desc: "- Learn about AWS and its types of services:\n  + Compute\n  + Storage\n  + Networking\n  + Database\n  + …",
-              start: "2025-08-12",
-              end: "2025-08-12",
+              start: "2026-08-11", end: "2026-08-11",
               ref: "https://cloudjourney.awsstudygroup.com/"
             },
             {
               day: "4",
               desc: "- Create AWS Free Tier account\n- Learn about AWS Console & AWS CLI\n- Practice:\n  + Create AWS account\n  + Install & configure AWS CLI\n  + How to use AWS CLI",
-              start: "2025-08-13",
-              end: "2025-08-13",
+              start: "2026-08-12", end: "2026-08-12",
               ref: "https://cloudjourney.awsstudygroup.com/"
             },
             {
               day: "5",
               desc: "- Learn basic EC2:\n  + Instance types\n  + AMI\n  + EBS\n  + …\n- SSH connection methods to EC2\n- Learn about Elastic IP",
-              start: "2025-08-14",
-              end: "2025-08-15",
+              start: "2026-08-13", end: "2026-08-14",
               ref: "https://cloudjourney.awsstudygroup.com/"
             },
             {
               day: "6",
               desc: "- Practice:\n  + Launch an EC2 instance\n  + Connect via SSH\n  + Attach an EBS volume",
-              start: "2025-08-15",
-              end: "2025-08-15",
+              start: "2026-08-14", end: "2026-08-14",
               ref: "https://cloudjourney.awsstudygroup.com/"
             }
           ]
@@ -602,36 +597,31 @@ const DEFAULT_BILINGUAL_DATA = {
             {
               day: "2",
               desc: "- Get acquainted with FCAJ members\n- Read and take note of internship unit rules and regulations",
-              start: "2025-08-11",
-              end: "2025-08-11",
+              start: "2026-08-10", end: "2026-08-10",
               ref: ""
             },
             {
               day: "3",
               desc: "- Learn about AWS and its types of services:\n  + Compute\n  + Storage\n  + Networking\n  + Database\n  + …",
-              start: "2025-08-12",
-              end: "2025-08-12",
+              start: "2026-08-11", end: "2026-08-11",
               ref: "https://cloudjourney.awsstudygroup.com/"
             },
             {
               day: "4",
               desc: "- Create AWS Free Tier account\n- Learn about AWS Console & AWS CLI\n- Practice:\n  + Create AWS account\n  + Install & configure AWS CLI\n  + How to use AWS CLI",
-              start: "2025-08-13",
-              end: "2025-08-13",
+              start: "2026-08-12", end: "2026-08-12",
               ref: "https://cloudjourney.awsstudygroup.com/"
             },
             {
               day: "5",
               desc: "- Learn basic EC2:\n  + Instance types\n  + AMI\n  + EBS\n  + …\n- SSH connection methods to EC2\n- Learn about Elastic IP",
-              start: "2025-08-14",
-              end: "2025-08-15",
+              start: "2026-08-13", end: "2026-08-14",
               ref: "https://cloudjourney.awsstudygroup.com/"
             },
             {
               day: "6",
               desc: "- Practice:\n  + Launch an EC2 instance\n  + Connect via SSH\n  + Attach an EBS volume",
-              start: "2025-08-15",
-              end: "2025-08-15",
+              start: "2026-08-14", end: "2026-08-14",
               ref: "https://cloudjourney.awsstudygroup.com/"
             }
           ]
@@ -644,22 +634,22 @@ const DEFAULT_BILINGUAL_DATA = {
           objectives: "Nghiên cứu chuyên sâu về mạng Amazon VPC, phân chia Subnet, Route Table, NAT Gateway và Security Group.",
           achievements: "- Thiết kế và triển khai kiến trúc VPC đa tầng gồm Public và Private Subnet.\n- Cấu hình Bastion Host và NAT Gateway giúp máy chủ nội bộ kết nối Internet an toàn.\n- Thiết lập và kiểm thử quy tắc tường lửa Security Group và Network ACL thành công.",
           tasks: [
-            { day: "2", desc: "- Nghiên cứu quy hoạch dải mạng CIDR cho VPC\n- Phân chia Subnet và cấu hình Internet Gateway", start: "2025-08-18", end: "2025-08-18", ref: "AWS VPC User Guide" },
-            { day: "3", desc: "- Triển khai NAT Gateway\n- Cấu hình bảng định tuyến Private Route Table", start: "2025-08-19", end: "2025-08-19", ref: "https://docs.aws.amazon.com/vpc/" },
-            { day: "4", desc: "- Thực hành thiết lập Network ACL\n- So sánh NACL với Security Group theo nguyên tắc bảo mật tối thiểu", start: "2025-08-20", end: "2025-08-20", ref: "AWS Well-Architected Security" },
-            { day: "5", desc: "- Khởi tạo máy chủ EC2 trong Private Subnet\n- Kiểm tra kết nối Internet qua NAT Gateway", start: "2025-08-21", end: "2025-08-21", ref: "Internal Lab Guide" },
-            { day: "6", desc: "- Báo cáo tiến độ Sprint Review\n- Trao đổi 1-on-1 hàng tuần với Mentor Trần Anh Dũng", start: "2025-08-22", end: "2025-08-22", ref: "Weekly Assessment" }
+            { day: "2", desc: "- Nghiên cứu quy hoạch dải mạng CIDR cho VPC\n- Phân chia Subnet và cấu hình Internet Gateway", start: "2026-08-17", end: "2026-08-17", ref: "AWS VPC User Guide" },
+            { day: "3", desc: "- Triển khai NAT Gateway\n- Cấu hình bảng định tuyến Private Route Table", start: "2026-08-18", end: "2026-08-18", ref: "https://docs.aws.amazon.com/vpc/" },
+            { day: "4", desc: "- Thực hành thiết lập Network ACL\n- So sánh NACL với Security Group theo nguyên tắc bảo mật tối thiểu", start: "2026-08-19", end: "2026-08-19", ref: "AWS Well-Architected Security" },
+            { day: "5", desc: "- Khởi tạo máy chủ EC2 trong Private Subnet\n- Kiểm tra kết nối Internet qua NAT Gateway", start: "2026-08-20", end: "2026-08-20", ref: "Internal Lab Guide" },
+            { day: "6", desc: "- Báo cáo tiến độ Sprint Review\n- Trao đổi 1-on-1 hàng tuần với Mentor Trần Anh Dũng", start: "2026-08-21", end: "2026-08-21", ref: "Weekly Assessment" }
           ]
         },
         en: {
           objectives: "Deep dive into VPC Networking, Subnets, Routing, NAT Gateway and Security Groups.",
           achievements: "- Designed and deployed a multi-tier VPC architecture with Public and Private Subnets.\n- Configured Bastion Host and NAT Gateway for secure outbound internet access.\n- Tested security group inbound and outbound firewall rules successfully.",
           tasks: [
-            { day: "2", desc: "- Study VPC CIDR planning, IPv4 subnetting\n- Configure Internet Gateway routing", start: "2025-08-18", end: "2025-08-18", ref: "AWS VPC User Guide" },
-            { day: "3", desc: "- Deploy NAT Gateway\n- Configure Private Route Tables", start: "2025-08-19", end: "2025-08-19", ref: "https://docs.aws.amazon.com/vpc/" },
-            { day: "4", desc: "- Practice setting up Network Access Control Lists (NACLs) vs Security Groups\n- Apply principle of least privilege", start: "2025-08-20", end: "2025-08-20", ref: "AWS Well-Architected Security Pillar" },
-            { day: "5", desc: "- Setup EC2 inside Private Subnet\n- Verify internet connectivity via NAT Gateway", start: "2025-08-21", end: "2025-08-21", ref: "Internal Lab Guide" },
-            { day: "6", desc: "- Sprint Review & Weekly 1-on-1 with Mentor Trần Anh Dũng", start: "2025-08-22", end: "2025-08-22", ref: "Weekly Assessment" }
+            { day: "2", desc: "- Study VPC CIDR planning, IPv4 subnetting\n- Configure Internet Gateway routing", start: "2026-08-17", end: "2026-08-17", ref: "AWS VPC User Guide" },
+            { day: "3", desc: "- Deploy NAT Gateway\n- Configure Private Route Tables", start: "2026-08-18", end: "2026-08-18", ref: "https://docs.aws.amazon.com/vpc/" },
+            { day: "4", desc: "- Practice setting up Network Access Control Lists (NACLs) vs Security Groups\n- Apply principle of least privilege", start: "2026-08-19", end: "2026-08-19", ref: "AWS Well-Architected Security Pillar" },
+            { day: "5", desc: "- Setup EC2 inside Private Subnet\n- Verify internet connectivity via NAT Gateway", start: "2026-08-20", end: "2026-08-20", ref: "Internal Lab Guide" },
+            { day: "6", desc: "- Sprint Review & Weekly 1-on-1 with Mentor Trần Anh Dũng", start: "2026-08-21", end: "2026-08-21", ref: "Weekly Assessment" }
           ]
         }
       };
@@ -713,21 +703,21 @@ const DEFAULT_BILINGUAL_DATA = {
         id: "blog-1",
         title: "Blog 1 - CHÍNH SÁCH SESSION POLICIES TRONG AMAZON EKS POD IDENTITY",
         url: "https://awsstudygroup.com",
-        date: "15/09/2025",
+        date: "15/09/2026",
         snippet: "Amazon EKS Pod Identity vừa bổ sung tính năng session policies, cho phép thu hẹp quyền hạn IAM một cách linh hoạt và chính xác cho từng pod mà không cần tạo nhiều IAM role riêng biệt. Đây là bước tiến quan trọng giúp áp dụng nguyên tắc đặc quyền tối thiểu hiệu quả hơn trong môi trường Kubernetes quy mô lớn.\n\nCác điểm cốt lõi cần nắm:\n• Session policy là chính sách IAM nội tuyến được chỉ định khi tạo hoặc cập nhật liên kết Pod Identity.\n• Quyền hạn thực tế = giao thoa giữa quyền của IAM role và session policy.\n• Giúp tái sử dụng an toàn cùng một IAM role cho nhiều workload có nhu cầu quyền khác nhau."
       },
       {
         id: "blog-2",
         title: "Blog 2 - BẢO MẬT TRUY CẬP S3 HYBRID THÔNG QUA AWS PRIVATELINK",
         url: "https://awsstudygroup.com",
-        date: "28/09/2025",
+        date: "28/09/2026",
         snippet: "Bài viết hướng dẫn chi tiết cách định tuyến lưu lượng giữa trung tâm dữ liệu On-premises và Amazon S3 một cách bảo mật tuyệt đối, không đi qua Internet công cộng bằng cách sử dụng Interface Endpoints, AWS Transit Gateway và Route 53 Resolver."
       },
       {
         id: "blog-3",
         title: "Blog 3 - TỐI ƯU HÓA COLD START CHO AWS LAMBDA VỚI SNAPSTART",
         url: "https://awsstudygroup.com",
-        date: "10/10/2025",
+        date: "10/10/2026",
         snippet: "Phân tích chuyên sâu về cơ chế chụp nhanh trạng thái bộ nhớ AWS Lambda SnapStart, tối ưu hóa thời gian khởi động nguội cho các microservices Serverless xuống mức dưới 100ms."
       }
     ],
@@ -736,21 +726,21 @@ const DEFAULT_BILINGUAL_DATA = {
         id: "blog-1",
         title: "Blog 1 - SESSION POLICIES IN AMAZON EKS POD IDENTITY",
         url: "https://awsstudygroup.com",
-        date: "15/09/2025",
+        date: "15/09/2026",
         snippet: "Amazon EKS Pod Identity has recently added the session policies feature, allowing you to narrow IAM permissions flexibly and precisely for each pod without needing to create many separate IAM roles. This is an important step forward that helps apply the principle of least privilege more effectively in large-scale Kubernetes environments.\n\nKey points to know:\n• A session policy is an inline IAM policy specified when creating or updating a Pod Identity association.\n• Effective permissions = intersection between IAM role permissions and session policy.\n• Helps avoid over-permissioning when reusing a single IAM role for multiple workloads."
       },
       {
         id: "blog-2",
         title: "Blog 2 - SECURING S3 HYBRID WORKLOADS VIA AWS PRIVATELINK",
         url: "https://awsstudygroup.com",
-        date: "28/09/2025",
+        date: "28/09/2026",
         snippet: "This blog details how to route traffic securely between on-premises datacenters and Amazon S3 without exposing endpoints to the public internet using Interface Endpoints, AWS Transit Gateway, and Route 53 Resolver Rules."
       },
       {
         id: "blog-3",
         title: "Blog 3 - REDUCING COLD STARTS IN JAVA & NODE.JS ON AWS LAMBDA",
         url: "https://awsstudygroup.com",
-        date: "10/10/2025",
+        date: "10/10/2026",
         snippet: "An in-depth exploration of AWS Lambda SnapStart, tiered compilation, and memory provisioning best practices to optimize serverless API response times down to sub-100ms."
       }
     ]
@@ -760,7 +750,7 @@ const DEFAULT_BILINGUAL_DATA = {
       {
         id: "event-1",
         name: "Sự kiện 1 - Hội thảo Hiện đại hóa Ứng dụng & CSDL với GenAI",
-        dateTime: "09:00, 13/08/2025",
+        dateTime: "09:00, 12/08/2026",
         location: "Tầng 26, Bitexco Financial Tower, Số 02 Hải Triều, Q.1, TP.HCM",
         role: "Khách mời tham dự",
         speakers: "Jignesh Shah (Giám đốc CSDL Mã nguồn mở), Erica Liu (Chuyên gia AppMod), Fabrianne Effendi (Kiến trúc sư giải pháp Serverless)",
@@ -768,8 +758,8 @@ const DEFAULT_BILINGUAL_DATA = {
       },
       {
         id: "event-2",
-        name: "Sự kiện 2 - Đại hội Cộng đồng AWS Community Day Vietnam 2025",
-        dateTime: "08:30, 20/09/2025",
+        name: "Sự kiện 2 - Đại hội Cộng đồng AWS Community Day Vietnam 2026",
+        dateTime: "08:30, 19/09/2026",
         location: "Trung tâm Hội nghị GEM Center, Quận 1, TP.HCM",
         role: "Thành viên tham dự & Tình nguyện viên hỗ trợ",
         speakers: "Các chuyên gia AWS Community Heroes và Kiến trúc sư giải pháp AWS Việt Nam",
@@ -780,7 +770,7 @@ const DEFAULT_BILINGUAL_DATA = {
       {
         id: "event-1",
         name: "Event 1 - GenAI-powered App-DB Modernization Workshop",
-        dateTime: "09:00, August 13, 2025",
+        dateTime: "09:00, August 12, 2026",
         location: "26th Floor, Bitexco Tower, 02 Hai Trieu Street, District 1, Ho Chi Minh City",
         role: "Attendee",
         speakers: "Jignesh Shah (Director, Open Source DBs), Erica Liu (Sr. GTM Specialist), Fabrianne Effendi (Assc. Specialist SA)",
@@ -788,8 +778,8 @@ const DEFAULT_BILINGUAL_DATA = {
       },
       {
         id: "event-2",
-        name: "Event 2 - AWS Community Day Vietnam 2025",
-        dateTime: "08:30, September 20, 2025",
+        name: "Event 2 - AWS Community Day Vietnam 2026",
+        dateTime: "08:30, September 19, 2026",
         location: "GEM Center, District 1, Ho Chi Minh City",
         role: "Attendee & Volunteer Support",
         speakers: "AWS Community Heroes & AWS Solution Architects",
@@ -812,8 +802,8 @@ const DEFAULT_BILINGUAL_DATA = {
     { id: 12, title_vi: "Đánh giá tổng thể", desc_vi: "Đánh giá chung cho toàn bộ thời gian thực tập", title_en: "Overall evaluation", desc_en: "General evaluation of the entire internship period", rating: "good" }
   ],
   selfNarrative: {
-    vi: "Trong suốt kỳ thực tập tại Amazon Web Services Việt Nam từ 12/08/2025 đến 12/11/2025, em đã có cơ hội quý báu để học hỏi, thực hành và vận dụng kiến thức chuyên ngành vào các dự án Cloud quy mô thực tế. Em luôn chủ động hoàn thành các bài tập lab, tham gia đầy đủ các sự kiện kỹ thuật và tích cực thảo luận cùng Mentor Trần Anh Dũng.",
-    en: "During my internship at Amazon Web Services Vietnam from 12/08/2025 to 12/11/2025, I had valuable opportunities to learn, practice, and apply academic knowledge to real-world cloud architectures. I consistently took the initiative to complete hands-on labs, attended technical events, and actively collaborated with Mentor Tran Anh Dung."
+    vi: "Trong suốt kỳ thực tập tại Amazon Web Services Việt Nam từ 10/08/2026 đến 10/11/2026, em đã có cơ hội quý báu để học hỏi, thực hành và vận dụng kiến thức chuyên ngành vào các dự án Cloud quy mô thực tế. Em luôn chủ động hoàn thành các bài tập lab, tham gia đầy đủ các sự kiện kỹ thuật và tích cực thảo luận cùng Mentor Trần Anh Dũng.",
+    en: "During my internship at Amazon Web Services Vietnam from 10/08/2026 to 10/11/2026, I had valuable opportunities to learn, practice, and apply academic knowledge to real-world cloud architectures. I consistently took the initiative to complete hands-on labs, attended technical events, and actively collaborated with Mentor Tran Anh Dung."
   },
   needsImprovement: {
     vi: "1. Tiếp tục rèn luyện tính kỷ luật, quản lý thời gian hiệu quả hơn khi xử lý nhiều đầu việc song song.\n2. Nâng cao tư duy phân tích và xử lý sự cố kỹ thuật khi đối mặt với các kiến trúc phân tán phức tạp.\n3. Tự tin hơn khi thuyết trình và báo cáo tiến độ kỹ thuật bằng tiếng Anh trong các cuộc họp quốc tế.",
@@ -844,8 +834,8 @@ const DEFAULT_BILINGUAL_DATA = {
 // ==========================================
 // 3. PERSISTENCE & STATE MANAGEMENT
 // ==========================================
-const STORAGE_KEY = 'fcaj_report_bilingual_v5';
-const PREV_STORAGE_KEY = 'fcaj_report_bilingual_v4';
+const STORAGE_KEY = 'fcaj_report_bilingual_v6';
+const PREV_STORAGE_KEY = 'fcaj_report_bilingual_v5';
 const LANG_KEY = 'fcaj_report_lang';
 
 class AppLanguageManager {
@@ -863,18 +853,18 @@ class AppLanguageManager {
           return parsed;
         }
       }
-      // Migrate from prev storage if available, updating worklogs[0] with new Week 1 format
-      const prev = localStorage.getItem(PREV_STORAGE_KEY);
+      // Migrate student personal details while using fresh 2026 calendar & report content
+      const prev = localStorage.getItem(PREV_STORAGE_KEY) || localStorage.getItem('fcaj_report_bilingual_v4');
+      const fresh = JSON.parse(JSON.stringify(DEFAULT_BILINGUAL_DATA));
       if (prev) {
         const prevParsed = JSON.parse(prev);
-        const fresh = JSON.parse(JSON.stringify(DEFAULT_BILINGUAL_DATA));
-        if (prevParsed.studentInfo) fresh.studentInfo = prevParsed.studentInfo;
-        if (prevParsed.proposal) fresh.proposal = prevParsed.proposal;
-        if (prevParsed.blogs) fresh.blogs = prevParsed.blogs;
-        if (prevParsed.events) fresh.events = prevParsed.events;
-        if (prevParsed.feedback) fresh.feedback = prevParsed.feedback;
-        return fresh;
+        if (prevParsed.studentInfo) {
+          if (prevParsed.studentInfo.fullName) fresh.studentInfo.fullName = prevParsed.studentInfo.fullName;
+          if (prevParsed.studentInfo.phone) fresh.studentInfo.phone = prevParsed.studentInfo.phone;
+          if (prevParsed.studentInfo.email) fresh.studentInfo.email = prevParsed.studentInfo.email;
+        }
       }
+      return fresh;
     } catch (e) {
       console.warn('Could not read stored bilingual data, using defaults', e);
     }
