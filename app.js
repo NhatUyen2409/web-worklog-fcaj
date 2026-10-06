@@ -533,7 +533,7 @@ const DEFAULT_BILINGUAL_DATA = {
   studentInfo: {
     fullName: "Phan Nhật Uyên",
     studentId: "SE196682",
-    phone: "0989888999",
+    phone: "0394728982",
     email: "nhatuien218@gmail.com",
     vi: {
       university: "Trường Đại học FPT",
@@ -836,8 +836,8 @@ const DEFAULT_BILINGUAL_DATA = {
 // ==========================================
 // 3. PERSISTENCE & STATE MANAGEMENT
 // ==========================================
-const STORAGE_KEY = 'fcaj_report_bilingual_v11';
-const PREV_STORAGE_KEY = 'fcaj_report_bilingual_v10';
+const STORAGE_KEY = 'fcaj_report_bilingual_v12';
+const PREV_STORAGE_KEY = 'fcaj_report_bilingual_v11';
 const LANG_KEY = 'fcaj_report_lang';
 
 class AppLanguageManager {
@@ -873,19 +873,30 @@ class AppLanguageManager {
       if (stored) {
         const parsed = JSON.parse(stored);
         if (parsed && parsed.worklogs && parsed.worklogs.length > 0) {
+          if (parsed.studentInfo && (parsed.studentInfo.phone === '0989888999' || !parsed.studentInfo.phone)) {
+            parsed.studentInfo.phone = '0394728982';
+            try { localStorage.setItem(STORAGE_KEY, JSON.stringify(parsed)); } catch (e) {}
+          }
           return parsed;
         }
       }
       // Migrate student personal details while using fresh 2026 calendar & report content
-      const prev = localStorage.getItem(PREV_STORAGE_KEY) || localStorage.getItem('fcaj_report_bilingual_v4');
+      const prev = localStorage.getItem(PREV_STORAGE_KEY) || localStorage.getItem('fcaj_report_bilingual_v11') || localStorage.getItem('fcaj_report_bilingual_v10');
       const fresh = JSON.parse(JSON.stringify(DEFAULT_BILINGUAL_DATA));
       if (prev) {
         const prevParsed = JSON.parse(prev);
+        if (prevParsed.worklogs && prevParsed.worklogs.length > 0) {
+          fresh.worklogs = prevParsed.worklogs;
+        }
+        if (prevParsed.currentWeek) fresh.currentWeek = prevParsed.currentWeek;
         if (prevParsed.studentInfo) {
           if (prevParsed.studentInfo.fullName) fresh.studentInfo.fullName = prevParsed.studentInfo.fullName;
-          if (prevParsed.studentInfo.phone) fresh.studentInfo.phone = prevParsed.studentInfo.phone;
+          if (prevParsed.studentInfo.phone && prevParsed.studentInfo.phone !== '0989888999') {
+            fresh.studentInfo.phone = prevParsed.studentInfo.phone;
+          }
           if (prevParsed.studentInfo.email) fresh.studentInfo.email = prevParsed.studentInfo.email;
         }
+        try { localStorage.removeItem(PREV_STORAGE_KEY); } catch (e) {}
       }
       return fresh;
     } catch (e) {
