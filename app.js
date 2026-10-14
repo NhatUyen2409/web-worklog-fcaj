@@ -551,7 +551,7 @@ const DEFAULT_BILINGUAL_DATA = {
       duration: "From 14/09/2026 to 14/12/2026"
     }
   },
-  currentWeek: 4,
+  currentWeek: 5,
   worklogs: Array.from({ length: 12 }, (_, i) => {
     const weekNum = i + 1;
     if (weekNum === 1) {
@@ -895,7 +895,95 @@ const DEFAULT_BILINGUAL_DATA = {
                         }
                 ]
         }
-};
+      };
+    } else if (weekNum === 5) {
+      return {
+        "weekNum": 5,
+        "vi": {
+          "topic": "Integrated AWS Lab, Testing & Documentation (12/10/2026 – 16/10/2026)",
+          "objectives": "- Review and consolidate the AWS knowledge acquired during the previous four weeks.\n- Understand how IAM, VPC, EC2, RDS, S3, and CloudWatch work together.\n- Design a basic AWS cloud architecture for a simple web application.\n- Practice deploying and configuring multiple AWS services in an integrated environment.\n- Test application connectivity, resource permissions, and network security.\n- Monitor AWS resources and review basic cloud operating costs.\n- Improve troubleshooting, technical documentation, and cloud infrastructure management skills.",
+          "achievements": "- Consolidated fundamental knowledge of AWS Cloud Computing and cloud infrastructure.\n- Understood the relationships between major AWS services:\n  - IAM\n  - VPC\n  - EC2\n  - EBS\n  - S3\n  - RDS\n  - CloudWatch\n  - AWS Budgets\n- Designed a basic AWS cloud architecture for a simple web application.\n- Practiced creating and configuring a custom VPC with public and private subnets.\n- Practiced deploying an EC2 instance and configuring network access.\n- Configured an IAM Role for EC2 to access authorized AWS resources.\n- Practiced storing and retrieving files from Amazon S3.\n- Practiced connecting an EC2-based application to an Amazon RDS database.\n- Learned how to verify network connectivity and troubleshoot configuration issues.\n- Practiced monitoring EC2 and RDS resources using Amazon CloudWatch.\n- Reviewed AWS security configurations, resource usage, and estimated costs.\n- Prepared technical documentation describing the deployed AWS infrastructure.\n- Improved practical skills in AWS resource deployment, monitoring, troubleshooting, and management.",
+          "tasks": [
+            {
+              "day": "2",
+              "desc": "- Review AWS knowledge acquired during Weeks 1–4.\n- Review IAM, VPC, EC2, S3, RDS, and CloudWatch concepts.\n- Learn about the architecture of a basic cloud-hosted web application.\n- Design a simple AWS infrastructure diagram.\n- Identify the required AWS resources and their relationships.\n- Prepare the environment for an integrated hands-on lab.",
+              "start": "2026-10-12",
+              "end": "2026-10-12",
+              "ref": "Cloud Journey: https://cloudjourney.awsstudygroup.com/\nAmazon VPC: https://000003.awsstudygroup.com/"
+            },
+            {
+              "day": "3",
+              "desc": "- Practice creating a custom VPC for a web application.\n- Configure public and private subnets.\n- Configure Internet Gateway, Route Tables, and Security Groups.\n- Launch an EC2 Linux instance in the public subnet.\n- Configure SSH access and verify instance connectivity.\n- Attach an IAM Role to the EC2 instance.",
+              "start": "2026-10-13",
+              "end": "2026-10-13",
+              "ref": "Amazon VPC: https://000003.awsstudygroup.com/\nAmazon EC2: https://000004.awsstudygroup.com/\nIAM Roles for EC2: https://000048.awsstudygroup.com/"
+            },
+            {
+              "day": "4",
+              "desc": "- Practice preparing a basic web application environment on EC2.\n- Configure a web server and verify HTTP connectivity.\n- Create an Amazon S3 Bucket for application files.\n- Configure appropriate IAM permissions for accessing S3.\n- Practice transferring files between EC2 and Amazon S3.\n- Review application security and resource access settings.",
+              "start": "2026-10-14",
+              "end": "2026-10-14",
+              "ref": "Amazon EC2: https://000004.awsstudygroup.com/\nAmazon S3: https://000057.awsstudygroup.com/"
+            },
+            {
+              "day": "5",
+              "desc": "- Review Amazon RDS configuration and database connectivity.\n- Practice creating an RDS database for the web application.\n- Configure database access through Security Groups.\n- Test connectivity between EC2 and RDS.\n- Execute basic SQL queries to verify database operations.\n- Identify and troubleshoot common connection issues.",
+              "start": "2026-10-15",
+              "end": "2026-10-15",
+              "ref": "Amazon RDS: https://000005.awsstudygroup.com/\nAmazon VPC: https://000003.awsstudygroup.com/"
+            },
+            {
+              "day": "6",
+              "desc": "- Review the integrated AWS architecture and deployed resources.\n- Practice monitoring EC2 and RDS using Amazon CloudWatch.\n- Check Security Groups, IAM Roles, and resource permissions.\n- Review AWS Budgets and estimated service costs.\n- Perform basic testing of the integrated AWS environment.\n- Clean up unnecessary AWS resources.\n- Prepare a summary of hands-on results and technical documentation.",
+              "start": "2026-10-16",
+              "end": "2026-10-16",
+              "ref": "Amazon CloudWatch: https://000008.awsstudygroup.com/\nAWS Budgets: https://000007.awsstudygroup.com/"
+            }
+          ]
+        },
+        "en": {
+          "topic": "Integrated AWS Lab, Testing & Documentation (12/10/2026 – 16/10/2026)",
+          "objectives": "- Review and consolidate the AWS knowledge acquired during the previous four weeks.\n- Understand how IAM, VPC, EC2, RDS, S3, and CloudWatch work together.\n- Design a basic AWS cloud architecture for a simple web application.\n- Practice deploying and configuring multiple AWS services in an integrated environment.\n- Test application connectivity, resource permissions, and network security.\n- Monitor AWS resources and review basic cloud operating costs.\n- Improve troubleshooting, technical documentation, and cloud infrastructure management skills.",
+          "achievements": "- Consolidated fundamental knowledge of AWS Cloud Computing and cloud infrastructure.\n- Understood the relationships between major AWS services:\n  - IAM\n  - VPC\n  - EC2\n  - EBS\n  - S3\n  - RDS\n  - CloudWatch\n  - AWS Budgets\n- Designed a basic AWS cloud architecture for a simple web application.\n- Practiced creating and configuring a custom VPC with public and private subnets.\n- Practiced deploying an EC2 instance and configuring network access.\n- Configured an IAM Role for EC2 to access authorized AWS resources.\n- Practiced storing and retrieving files from Amazon S3.\n- Practiced connecting an EC2-based application to an Amazon RDS database.\n- Learned how to verify network connectivity and troubleshoot configuration issues.\n- Practiced monitoring EC2 and RDS resources using Amazon CloudWatch.\n- Reviewed AWS security configurations, resource usage, and estimated costs.\n- Prepared technical documentation describing the deployed AWS infrastructure.\n- Improved practical skills in AWS resource deployment, monitoring, troubleshooting, and management.",
+          "tasks": [
+            {
+              "day": "2",
+              "desc": "- Review AWS knowledge acquired during Weeks 1–4.\n- Review IAM, VPC, EC2, S3, RDS, and CloudWatch concepts.\n- Learn about the architecture of a basic cloud-hosted web application.\n- Design a simple AWS infrastructure diagram.\n- Identify the required AWS resources and their relationships.\n- Prepare the environment for an integrated hands-on lab.",
+              "start": "2026-10-12",
+              "end": "2026-10-12",
+              "ref": "Cloud Journey: https://cloudjourney.awsstudygroup.com/\nAmazon VPC: https://000003.awsstudygroup.com/"
+            },
+            {
+              "day": "3",
+              "desc": "- Practice creating a custom VPC for a web application.\n- Configure public and private subnets.\n- Configure Internet Gateway, Route Tables, and Security Groups.\n- Launch an EC2 Linux instance in the public subnet.\n- Configure SSH access and verify instance connectivity.\n- Attach an IAM Role to the EC2 instance.",
+              "start": "2026-10-13",
+              "end": "2026-10-13",
+              "ref": "Amazon VPC: https://000003.awsstudygroup.com/\nAmazon EC2: https://000004.awsstudygroup.com/\nIAM Roles for EC2: https://000048.awsstudygroup.com/"
+            },
+            {
+              "day": "4",
+              "desc": "- Practice preparing a basic web application environment on EC2.\n- Configure a web server and verify HTTP connectivity.\n- Create an Amazon S3 Bucket for application files.\n- Configure appropriate IAM permissions for accessing S3.\n- Practice transferring files between EC2 and Amazon S3.\n- Review application security and resource access settings.",
+              "start": "2026-10-14",
+              "end": "2026-10-14",
+              "ref": "Amazon EC2: https://000004.awsstudygroup.com/\nAmazon S3: https://000057.awsstudygroup.com/"
+            },
+            {
+              "day": "5",
+              "desc": "- Review Amazon RDS configuration and database connectivity.\n- Practice creating an RDS database for the web application.\n- Configure database access through Security Groups.\n- Test connectivity between EC2 and RDS.\n- Execute basic SQL queries to verify database operations.\n- Identify and troubleshoot common connection issues.",
+              "start": "2026-10-15",
+              "end": "2026-10-15",
+              "ref": "Amazon RDS: https://000005.awsstudygroup.com/\nAmazon VPC: https://000003.awsstudygroup.com/"
+            },
+            {
+              "day": "6",
+              "desc": "- Review the integrated AWS architecture and deployed resources.\n- Practice monitoring EC2 and RDS using Amazon CloudWatch.\n- Check Security Groups, IAM Roles, and resource permissions.\n- Review AWS Budgets and estimated service costs.\n- Perform basic testing of the integrated AWS environment.\n- Clean up unnecessary AWS resources.\n- Prepare a summary of hands-on results and technical documentation.",
+              "start": "2026-10-16",
+              "end": "2026-10-16",
+              "ref": "Amazon CloudWatch: https://000008.awsstudygroup.com/\nAWS Budgets: https://000007.awsstudygroup.com/"
+            }
+          ]
+        }
+      };
     } else {
       return {
         weekNum: weekNum,
@@ -1077,8 +1165,8 @@ const DEFAULT_BILINGUAL_DATA = {
 // ==========================================
 // 3. PERSISTENCE & STATE MANAGEMENT
 // ==========================================
-const STORAGE_KEY = 'fcaj_report_bilingual_v15';
-const PREV_STORAGE_KEY = 'fcaj_report_bilingual_v14';
+const STORAGE_KEY = 'fcaj_report_bilingual_v16';
+const PREV_STORAGE_KEY = 'fcaj_report_bilingual_v15';
 const LANG_KEY = 'fcaj_report_lang';
 
 class AppLanguageManager {
@@ -1116,8 +1204,8 @@ class AppLanguageManager {
         if (parsed && parsed.worklogs && parsed.worklogs.length > 0) {
           // Thông tin sinh viên chỉ có thể sửa từ code, luôn đồng bộ từ DEFAULT_BILINGUAL_DATA
           parsed.studentInfo = JSON.parse(JSON.stringify(DEFAULT_BILINGUAL_DATA.studentInfo));
-          // Luôn đồng bộ nội dung chuẩn của Tuần 1, 2, 3, 4 từ code
-          [1, 2, 3, 4].forEach(wNum => {
+          // Luôn đồng bộ nội dung chuẩn của Tuần 1, 2, 3, 4, 5 từ code
+          [1, 2, 3, 4, 5].forEach(wNum => {
             const defWeek = DEFAULT_BILINGUAL_DATA.worklogs.find(w => w.weekNum === wNum);
             const pIdx = parsed.worklogs.findIndex(w => w.weekNum === wNum);
             if (defWeek && pIdx !== -1) {
@@ -1134,8 +1222,16 @@ class AppLanguageManager {
         const prevParsed = JSON.parse(prev);
         if (prevParsed.worklogs && prevParsed.worklogs.length > 0) {
           fresh.worklogs = prevParsed.worklogs;
+          [1, 2, 3, 4, 5].forEach(wNum => {
+            const defWeek = DEFAULT_BILINGUAL_DATA.worklogs.find(w => w.weekNum === wNum);
+            const pIdx = fresh.worklogs.findIndex(w => w.weekNum === wNum);
+            if (defWeek && pIdx !== -1) {
+              fresh.worklogs[pIdx] = JSON.parse(JSON.stringify(defWeek));
+            }
+          });
         }
         if (prevParsed.currentWeek) fresh.currentWeek = prevParsed.currentWeek;
+        else fresh.currentWeek = 5;
         if (prevParsed.studentInfo) {
           if (prevParsed.studentInfo.fullName) fresh.studentInfo.fullName = prevParsed.studentInfo.fullName;
           if (prevParsed.studentInfo.phone && prevParsed.studentInfo.phone !== '0989888999') {
