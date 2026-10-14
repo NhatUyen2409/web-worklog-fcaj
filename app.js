@@ -61,14 +61,22 @@ const I18N_DICTIONARY = {
     photoBoxTitle: "Ảnh thẻ / Cá nhân",
     photoBoxHint: "Bấm để tải ảnh",
     photoChangeText: "Thay đổi ảnh",
+    photoFitCover: "Cắt vừa",
+    photoFitFull: "Nguyên ảnh",
+    photoViewHd: "Xem HD",
+    hdModalTitle: "Ảnh cá nhân (Độ nét cao)",
+    hdModalDesc: "Ảnh được giữ nguyên độ phân giải gốc cao nhất, không bị mờ nhòe hay vỡ hạt.",
+    btnModalClose: "Đóng",
     btnUploadPhoto: "Tải ảnh lên",
     btnRemovePhoto: "Gỡ ảnh",
-    photoFormatNote: "PNG, JPG, WEBP (< 5MB)",
-    toastPhotoUpdated: "Đã cập nhật ảnh cá nhân thành công!",
+    photoFormatNote: "PNG, JPG, WEBP (Ảnh nét < 10MB)",
+    toastPhotoUpdated: "Đã cập nhật ảnh cá nhân với độ nét tối ưu!",
     toastPhotoRemoved: "Đã gỡ ảnh cá nhân!",
-    toastPhotoError: "Không thể lưu ảnh (dung lượng quá lớn hoặc lỗi tệp)!",
-    toastPhotoSizeLimit: "Dung lượng ảnh phải nhỏ hơn 5MB!",
+    toastPhotoError: "Không thể xử lý ảnh, vui lòng thử lại tệp ảnh khác!",
+    toastPhotoSizeLimit: "Dung lượng ảnh tối đa 10MB!",
     toastPhotoInvalidType: "Vui lòng chọn tệp hình ảnh hợp lệ!",
+    toastFitCover: "Đã chuyển sang chế độ Cắt vừa khung (Cover)!",
+    toastFitContain: "Đã chuyển sang chế độ Hiển thị nguyên ảnh (không bị cắt/vỡ nét)!",
     labelFullName: "Họ và tên",
     labelStudentId: "Mã số sinh viên",
     labelPhone: "Số điện thoại",
@@ -331,14 +339,22 @@ const I18N_DICTIONARY = {
     photoBoxTitle: "Portrait / Profile Photo",
     photoBoxHint: "Click to upload photo",
     photoChangeText: "Change Photo",
+    photoFitCover: "Cover",
+    photoFitFull: "Contain",
+    photoViewHd: "View HD",
+    hdModalTitle: "Personal Photo (High Definition)",
+    hdModalDesc: "Photo displayed in full original resolution without blur or pixelation.",
+    btnModalClose: "Close",
     btnUploadPhoto: "Upload Photo",
     btnRemovePhoto: "Remove Photo",
-    photoFormatNote: "PNG, JPG, WEBP (< 5MB)",
-    toastPhotoUpdated: "Personal photo updated successfully!",
+    photoFormatNote: "PNG, JPG, WEBP (HD < 10MB)",
+    toastPhotoUpdated: "Personal photo updated in high resolution!",
     toastPhotoRemoved: "Personal photo removed!",
-    toastPhotoError: "Could not save photo (file too large or error)!",
-    toastPhotoSizeLimit: "Photo file size must be under 5MB!",
+    toastPhotoError: "Could not process photo, please try another image file!",
+    toastPhotoSizeLimit: "Photo file size must be under 10MB!",
     toastPhotoInvalidType: "Please select a valid image file!",
+    toastFitCover: "Switched to Fill/Cover mode!",
+    toastFitContain: "Switched to Full/Contain mode (crisp, uncropped)!",
     labelFullName: "Full Name",
     labelStudentId: "Student ID",
     labelPhone: "Phone Number",
@@ -1509,6 +1525,91 @@ function handleHashChange() {
 // 6. STUDENT INFO
 // ==========================================
 const AVATAR_STORAGE_KEY = 'fcaj_student_avatar';
+const AVATAR_FIT_KEY = 'fcaj_student_avatar_fit';
+
+function getAvatarFitMode() {
+  return localStorage.getItem(AVATAR_FIT_KEY) || 'cover';
+}
+
+function setAvatarFitMode(mode) {
+  localStorage.setItem(AVATAR_FIT_KEY, mode);
+  applyAvatarFitMode();
+}
+
+function applyAvatarFitMode() {
+  const mode = getAvatarFitMode();
+  const imgEl = document.getElementById('student-photo-img');
+  const fitBtn = document.getElementById('btn-toggle-fit');
+  const fitLabel = document.getElementById('fit-label');
+
+  if (imgEl) {
+    if (mode === 'contain') {
+      imgEl.classList.add('fit-contain');
+    } else {
+      imgEl.classList.remove('fit-contain');
+    }
+  }
+
+  if (fitBtn && fitLabel) {
+    if (mode === 'contain') {
+      fitLabel.textContent = t('photoFitFull') || 'Nguyên ảnh';
+      fitBtn.classList.add('active');
+    } else {
+      fitLabel.textContent = t('photoFitCover') || 'Cắt vừa';
+      fitBtn.classList.remove('active');
+    }
+  }
+}
+
+function processHighQualityImage(file, callback) {
+  const reader = new FileReader();
+  reader.onload = (e) => {
+    const rawDataUrl = e.target.result;
+    const img = new Image();
+    img.onload = () => {
+      const origW = img.naturalWidth || img.width;
+      const origH = img.naturalHeight || img.height;
+
+      // If already a reasonable crisp size and compact file (< 800KB), keep 100% untouched
+      if (origW <= 1200 && origH <= 1600 && file.size < 800 * 1024) {
+        callback(rawDataUrl);
+        return;
+      }
+
+      // High-res retina canvas downsampling (max width 1200, max height 1600)
+      const MAX_W = 1200;
+      const MAX_H = 1600;
+      let targetW = origW;
+      let targetH = origH;
+
+      if (targetW > MAX_W || targetH > MAX_H) {
+        const ratio = Math.min(MAX_W / targetW, MAX_H / targetH);
+        targetW = Math.round(targetW * ratio);
+        targetH = Math.round(targetH * ratio);
+      }
+
+      const canvas = document.createElement('canvas');
+      canvas.width = targetW;
+      canvas.height = targetH;
+      const ctx = canvas.getContext('2d');
+      ctx.imageSmoothingEnabled = true;
+      ctx.imageSmoothingQuality = 'high';
+      ctx.drawImage(img, 0, 0, targetW, targetH);
+
+      // High quality 0.94 JPEG (visually lossless and compact Base64)
+      const highResDataUrl = canvas.toDataURL('image/jpeg', 0.94);
+      callback(highResDataUrl);
+    };
+    img.onerror = () => {
+      callback(rawDataUrl);
+    };
+    img.src = rawDataUrl;
+  };
+  reader.onerror = () => {
+    showToast(t('toastPhotoError'), 'error');
+  };
+  reader.readAsDataURL(file);
+}
 
 function updateStudentAvatarDisplay() {
   const avatar = localStorage.getItem(AVATAR_STORAGE_KEY);
@@ -1517,6 +1618,7 @@ function updateStudentAvatarDisplay() {
   const overlayEl = document.getElementById('photo-overlay');
   const btnRemove = document.getElementById('btn-remove-photo');
   const btnChooseLabel = document.querySelector('#btn-choose-photo span');
+  const toolbarEl = document.getElementById('photo-action-toolbar');
 
   if (avatar) {
     if (imgEl) {
@@ -1527,6 +1629,8 @@ function updateStudentAvatarDisplay() {
     if (overlayEl) overlayEl.classList.add('active');
     if (btnRemove) btnRemove.style.display = 'inline-flex';
     if (btnChooseLabel) btnChooseLabel.textContent = t('photoChangeText') || 'Thay đổi ảnh';
+    if (toolbarEl) toolbarEl.style.display = 'flex';
+    applyAvatarFitMode();
   } else {
     if (imgEl) {
       imgEl.src = '';
@@ -1536,6 +1640,7 @@ function updateStudentAvatarDisplay() {
     if (overlayEl) overlayEl.classList.remove('active');
     if (btnRemove) btnRemove.style.display = 'none';
     if (btnChooseLabel) btnChooseLabel.textContent = t('btnUploadPhoto') || 'Tải ảnh lên';
+    if (toolbarEl) toolbarEl.style.display = 'none';
   }
 
   // Update sidebar and top header greeting avatar
@@ -1606,6 +1711,12 @@ function setupStudentInfo() {
   const fileInput = document.getElementById('student-photo-input');
   const photoFrame = document.getElementById('student-photo-frame');
   const btnRemove = document.getElementById('btn-remove-photo');
+  const btnToggleFit = document.getElementById('btn-toggle-fit');
+  const btnViewHd = document.getElementById('btn-view-hd');
+  const hdModal = document.getElementById('photo-hd-modal');
+  const hdPreview = document.getElementById('photo-hd-preview');
+  const btnCloseHd = document.getElementById('btn-close-hd-modal');
+  const btnCloseHdBtn = document.getElementById('btn-close-hd-btn');
 
   const handleFile = (file) => {
     if (!file) return;
@@ -1613,15 +1724,13 @@ function setupStudentInfo() {
       showToast(t('toastPhotoInvalidType'), 'error');
       return;
     }
-    if (file.size > 5 * 1024 * 1024) {
+    if (file.size > 10 * 1024 * 1024) {
       showToast(t('toastPhotoSizeLimit'), 'error');
       return;
     }
 
-    const reader = new FileReader();
-    reader.onload = (e) => {
+    processHighQualityImage(file, (dataUrl) => {
       try {
-        const dataUrl = e.target.result;
         localStorage.setItem(AVATAR_STORAGE_KEY, dataUrl);
         updateStudentAvatarDisplay();
         showToast(t('toastPhotoUpdated'));
@@ -1629,11 +1738,7 @@ function setupStudentInfo() {
         console.error('Failed to save avatar:', err);
         showToast(t('toastPhotoError'), 'error');
       }
-    };
-    reader.onerror = () => {
-      showToast(t('toastPhotoError'), 'error');
-    };
-    reader.readAsDataURL(file);
+    });
   };
 
   if (fileInput) {
@@ -1675,6 +1780,38 @@ function setupStudentInfo() {
       if (fileInput) fileInput.value = '';
       updateStudentAvatarDisplay();
       showToast(t('toastPhotoRemoved'));
+    });
+  }
+
+  if (btnToggleFit) {
+    btnToggleFit.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const current = getAvatarFitMode();
+      const next = current === 'cover' ? 'contain' : 'cover';
+      setAvatarFitMode(next);
+      showToast(next === 'contain' ? t('toastFitContain') : t('toastFitCover'));
+    });
+  }
+
+  if (btnViewHd && hdModal && hdPreview) {
+    btnViewHd.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const avatar = localStorage.getItem(AVATAR_STORAGE_KEY);
+      if (avatar) {
+        hdPreview.src = avatar;
+        hdModal.classList.add('active');
+      }
+    });
+  }
+
+  const closeHdModal = () => {
+    if (hdModal) hdModal.classList.remove('active');
+  };
+  if (btnCloseHd) btnCloseHd.addEventListener('click', closeHdModal);
+  if (btnCloseHdBtn) btnCloseHdBtn.addEventListener('click', closeHdModal);
+  if (hdModal) {
+    hdModal.addEventListener('click', (e) => {
+      if (e.target === hdModal) closeHdModal();
     });
   }
 }
