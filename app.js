@@ -1522,10 +1522,85 @@ function handleHashChange() {
 }
 
 // ==========================================
-// 6. STUDENT INFO
+// 6. STUDENT INFO & HIGH-FIDELITY PHOTO STORAGE
 // ==========================================
 const AVATAR_STORAGE_KEY = 'fcaj_student_avatar';
+const AVATAR_ORIGINAL_IDB_KEY = 'fcaj_student_avatar_original';
 const AVATAR_FIT_KEY = 'fcaj_student_avatar_fit';
+const IDB_NAME = 'fcaj_media_db';
+const IDB_STORE = 'photos';
+
+function openPhotoDB() {
+  return new Promise((resolve) => {
+    if (!window.indexedDB) {
+      resolve(null);
+      return;
+    }
+    try {
+      const req = indexedDB.open(IDB_NAME, 1);
+      req.onupgradeneeded = (e) => {
+        const db = e.target.result;
+        if (!db.objectStoreNames.contains(IDB_STORE)) {
+          db.createObjectStore(IDB_STORE);
+        }
+      };
+      req.onsuccess = (e) => resolve(e.target.result);
+      req.onerror = () => resolve(null);
+    } catch (e) {
+      resolve(null);
+    }
+  });
+}
+
+async function saveOriginalPhotoToIDB(key, dataUrl) {
+  try {
+    const db = await openPhotoDB();
+    if (!db) return false;
+    return new Promise((resolve) => {
+      const tx = db.transaction(IDB_STORE, 'readwrite');
+      const store = tx.objectStore(IDB_STORE);
+      store.put(dataUrl, key);
+      tx.oncomplete = () => resolve(true);
+      tx.onerror = () => resolve(false);
+    });
+  } catch (err) {
+    console.warn('IDB put error', err);
+    return false;
+  }
+}
+
+async function getOriginalPhotoFromIDB(key) {
+  try {
+    const db = await openPhotoDB();
+    if (!db) return null;
+    return new Promise((resolve) => {
+      const tx = db.transaction(IDB_STORE, 'readonly');
+      const store = tx.objectStore(IDB_STORE);
+      const req = store.get(key);
+      req.onsuccess = () => resolve(req.result || null);
+      req.onerror = () => resolve(null);
+    });
+  } catch (err) {
+    console.warn('IDB get error', err);
+    return null;
+  }
+}
+
+async function deleteOriginalPhotoFromIDB(key) {
+  try {
+    const db = await openPhotoDB();
+    if (!db) return;
+    return new Promise((resolve) => {
+      const tx = db.transaction(IDB_STORE, 'readwrite');
+      const store = tx.objectStore(IDB_STORE);
+      store.delete(key);
+      tx.oncomplete = () => resolve(true);
+      tx.onerror = () => resolve(false);
+    });
+  } catch (err) {
+    console.warn('IDB delete error', err);
+  }
+}
 
 function getAvatarFitMode() {
   return localStorage.getItem(AVATAR_FIT_KEY) || 'cover';
@@ -1561,29 +1636,50 @@ function applyAvatarFitMode() {
   }
 }
 
-function processHighQualityImage(file, callback) {
+function handleStudentPhotoUpload(file) {
+  if (!file) return;
+  if (!file.type.startsWith('image/')) {
+    showToast(t('toastPhotoInvalidType'), 'error');
+    return;
+  }
+  // Allow high-res camera originals up to 15MB
+  if (file.size > 15 * 1024 * 1024) {
+    showToast(t('toastPhotoSizeLimit'), 'error');
+    return;
+  }
+
   const reader = new FileReader();
-  reader.onload = (e) => {
+  reader.onload = async (e) => {
     const rawDataUrl = e.target.result;
+
+    // 1. ALWAYS preserve 100% original uncompressed bytes in IndexedDB
+    await saveOriginalPhotoToIDB(AVATAR_ORIGINAL_IDB_KEY, rawDataUrl);
+
+    // 2. Determine display fallback for localStorage
+    // If under 1.2MB, store rawDataUrl directly (ZERO compression loss)
+    if (file.size <= 1.2 * 1024 * 1024) {
+      try {
+        localStorage.setItem(AVATAR_STORAGE_KEY, rawDataUrl);
+      } catch (err) {
+        console.warn('LocalStorage quota reached, using IndexedDB primary', err);
+      }
+      updateStudentAvatarDisplay();
+      showToast(t('toastPhotoUpdated'));
+      return;
+    }
+
+    // 3. For large camera/DSLR files (> 1.2MB), create a crisp high-DPI display copy
+    // (up to 1600px - razor sharp on 4K/Retina) for localStorage fallback
     const img = new Image();
     img.onload = () => {
       const origW = img.naturalWidth || img.width;
       const origH = img.naturalHeight || img.height;
-
-      // If already a reasonable crisp size and compact file (< 800KB), keep 100% untouched
-      if (origW <= 1200 && origH <= 1600 && file.size < 800 * 1024) {
-        callback(rawDataUrl);
-        return;
-      }
-
-      // High-res retina canvas downsampling (max width 1200, max height 1600)
-      const MAX_W = 1200;
-      const MAX_H = 1600;
+      const MAX_DIM = 1600;
       let targetW = origW;
       let targetH = origH;
 
-      if (targetW > MAX_W || targetH > MAX_H) {
-        const ratio = Math.min(MAX_W / targetW, MAX_H / targetH);
+      if (targetW > MAX_DIM || targetH > MAX_DIM) {
+        const ratio = Math.min(MAX_DIM / targetW, MAX_DIM / targetH);
         targetW = Math.round(targetW * ratio);
         targetH = Math.round(targetH * ratio);
       }
@@ -1596,12 +1692,23 @@ function processHighQualityImage(file, callback) {
       ctx.imageSmoothingQuality = 'high';
       ctx.drawImage(img, 0, 0, targetW, targetH);
 
-      // High quality 0.94 JPEG (visually lossless and compact Base64)
-      const highResDataUrl = canvas.toDataURL('image/jpeg', 0.94);
-      callback(highResDataUrl);
+      const mimeType = file.type === 'image/png' ? 'image/png' : 'image/jpeg';
+      const displayDataUrl = canvas.toDataURL(mimeType, 0.95);
+
+      try {
+        localStorage.setItem(AVATAR_STORAGE_KEY, displayDataUrl);
+      } catch (err) {
+        console.warn('LocalStorage quota full, using IndexedDB', err);
+      }
+      updateStudentAvatarDisplay();
+      showToast(t('toastPhotoUpdated'));
     };
     img.onerror = () => {
-      callback(rawDataUrl);
+      try {
+        localStorage.setItem(AVATAR_STORAGE_KEY, rawDataUrl);
+      } catch (err) {}
+      updateStudentAvatarDisplay();
+      showToast(t('toastPhotoUpdated'));
     };
     img.src = rawDataUrl;
   };
@@ -1611,8 +1718,16 @@ function processHighQualityImage(file, callback) {
   reader.readAsDataURL(file);
 }
 
-function updateStudentAvatarDisplay() {
-  const avatar = localStorage.getItem(AVATAR_STORAGE_KEY);
+async function updateStudentAvatarDisplay() {
+  // Synchronous read from localStorage for immediate flicker-free display
+  let avatar = localStorage.getItem(AVATAR_STORAGE_KEY);
+
+  // Check if original uncompressed image exists in IndexedDB
+  const idbOriginal = await getOriginalPhotoFromIDB(AVATAR_ORIGINAL_IDB_KEY);
+  if (idbOriginal) {
+    avatar = idbOriginal;
+  }
+
   const imgEl = document.getElementById('student-photo-img');
   const placeholderEl = document.getElementById('student-photo-placeholder');
   const overlayEl = document.getElementById('photo-overlay');
@@ -1718,33 +1833,10 @@ function setupStudentInfo() {
   const btnCloseHd = document.getElementById('btn-close-hd-modal');
   const btnCloseHdBtn = document.getElementById('btn-close-hd-btn');
 
-  const handleFile = (file) => {
-    if (!file) return;
-    if (!file.type.startsWith('image/')) {
-      showToast(t('toastPhotoInvalidType'), 'error');
-      return;
-    }
-    if (file.size > 10 * 1024 * 1024) {
-      showToast(t('toastPhotoSizeLimit'), 'error');
-      return;
-    }
-
-    processHighQualityImage(file, (dataUrl) => {
-      try {
-        localStorage.setItem(AVATAR_STORAGE_KEY, dataUrl);
-        updateStudentAvatarDisplay();
-        showToast(t('toastPhotoUpdated'));
-      } catch (err) {
-        console.error('Failed to save avatar:', err);
-        showToast(t('toastPhotoError'), 'error');
-      }
-    });
-  };
-
   if (fileInput) {
     fileInput.addEventListener('change', (e) => {
       if (e.target.files && e.target.files[0]) {
-        handleFile(e.target.files[0]);
+        handleStudentPhotoUpload(e.target.files[0]);
       }
     });
   }
@@ -1768,14 +1860,15 @@ function setupStudentInfo() {
       e.preventDefault();
       photoFrame.classList.remove('drag-over');
       if (e.dataTransfer && e.dataTransfer.files && e.dataTransfer.files[0]) {
-        handleFile(e.dataTransfer.files[0]);
+        handleStudentPhotoUpload(e.dataTransfer.files[0]);
       }
     });
   }
 
   if (btnRemove) {
-    btnRemove.addEventListener('click', (e) => {
+    btnRemove.addEventListener('click', async (e) => {
       e.stopPropagation();
+      await deleteOriginalPhotoFromIDB(AVATAR_ORIGINAL_IDB_KEY);
       localStorage.removeItem(AVATAR_STORAGE_KEY);
       if (fileInput) fileInput.value = '';
       updateStudentAvatarDisplay();
@@ -1794,11 +1887,20 @@ function setupStudentInfo() {
   }
 
   if (btnViewHd && hdModal && hdPreview) {
-    btnViewHd.addEventListener('click', (e) => {
+    btnViewHd.addEventListener('click', async (e) => {
       e.stopPropagation();
-      const avatar = localStorage.getItem(AVATAR_STORAGE_KEY);
-      if (avatar) {
-        hdPreview.src = avatar;
+      // Prioritize the bit-for-bit uncompressed original from IndexedDB
+      const idbOriginal = await getOriginalPhotoFromIDB(AVATAR_ORIGINAL_IDB_KEY);
+      const avatarSrc = idbOriginal || localStorage.getItem(AVATAR_STORAGE_KEY);
+      if (avatarSrc) {
+        hdPreview.onload = () => {
+          const resBadge = document.getElementById('hd-modal-resolution');
+          if (resBadge && hdPreview.naturalWidth && hdPreview.naturalHeight) {
+            resBadge.textContent = `${hdPreview.naturalWidth} × ${hdPreview.naturalHeight} px`;
+            resBadge.style.display = 'inline-block';
+          }
+        };
+        hdPreview.src = avatarSrc;
         hdModal.classList.add('active');
       }
     });
