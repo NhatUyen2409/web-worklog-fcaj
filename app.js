@@ -551,7 +551,7 @@ const DEFAULT_BILINGUAL_DATA = {
       duration: "From 14/09/2026 to 14/12/2026"
     }
   },
-  currentWeek: 2,
+  currentWeek: 4,
   worklogs: Array.from({ length: 12 }, (_, i) => {
     const weekNum = i + 1;
     if (weekNum === 1) {
@@ -716,6 +716,182 @@ const DEFAULT_BILINGUAL_DATA = {
                                 "start": "2026-09-25",
                                 "end": "2026-09-25",
                                 "ref": "Amazon VPC: https://000003.awsstudygroup.com/\nAmazon EC2: https://000004.awsstudygroup.com/"
+                        }
+                ]
+        }
+};
+    } else if (weekNum === 3) {
+      return {
+        "weekNum": 3,
+        "vi": {
+                "topic": "Amazon S3, Static Website & CloudFront (28/09/2026 – 02/10/2026)",
+                "objectives": "- Understand Amazon S3 and the fundamentals of object storage.\n- Learn how to create and manage S3 Buckets and Objects.\n- Understand S3 storage classes, versioning, encryption, and access permissions.\n- Practice uploading, downloading, and managing files using AWS Console and AWS CLI.\n- Learn how to deploy a static website using Amazon S3.\n- Understand Amazon CloudFront and its role in content delivery.\n- Practice integrating Amazon S3 with CloudFront for secure website delivery.",
+                "achievements": "- Understood the fundamentals of Amazon S3 and object storage.\n- Learned the differences between object storage, block storage, and file storage.\n- Understood the major Amazon S3 components:\n  - Bucket\n  - Object\n  - Object Key\n  - Storage Class\n  - Versioning\n  - Bucket Policy\n  - Block Public Access\n- Practiced creating and configuring S3 Buckets.\n- Successfully uploaded, downloaded, and managed files using AWS Console and AWS CLI.\n- Learned how S3 Versioning helps preserve multiple versions of objects.\n- Understood the purpose of S3 Bucket Policies and public access restrictions.\n- Practiced configuring Amazon S3 Static Website Hosting.\n- Learned the fundamentals of Amazon CloudFront and Content Delivery Networks (CDN).\n- Practiced delivering static website content through CloudFront.\n- Understood how to use CloudFront Origin Access Control (OAC) to restrict direct access to S3 content.\n- Gained practical experience in cloud storage management and static website deployment.",
+                "tasks": [
+                        {
+                                "day": "2",
+                                "desc": "- Learn the fundamentals of Amazon Simple Storage Service (S3).\n- Understand object storage and its common use cases.\n- Learn about S3 Buckets, Objects, Keys, and Storage Classes.\n- Compare Amazon S3 with Amazon EBS.\n- Explore the Amazon S3 Management Console.",
+                                "start": "2026-09-28",
+                                "end": "2026-09-28",
+                                "ref": "Amazon S3: https://000057.awsstudygroup.com/"
+                        },
+                        {
+                                "day": "3",
+                                "desc": "- Practice creating an Amazon S3 Bucket.\n- Upload, download, and delete files.\n- Practice managing objects using AWS CLI.\n- Learn about S3 Versioning and Server-Side Encryption.\n- Understand Bucket Policies and Block Public Access settings.",
+                                "start": "2026-09-29",
+                                "end": "2026-09-29",
+                                "ref": "Amazon S3: https://000057.awsstudygroup.com/\nAWS CLI: https://000011.awsstudygroup.com/"
+                        },
+                        {
+                                "day": "4",
+                                "desc": "- Learn about Static Website Hosting with Amazon S3.\n- Prepare a basic static website using HTML and CSS.\n- Upload website files to an S3 Bucket.\n- Configure Static Website Hosting settings.\n- Learn about index.html, error.html, and website endpoints.\n- Test website accessibility.",
+                                "start": "2026-09-30",
+                                "end": "2026-09-30",
+                                "ref": "Amazon S3 Static Website: https://000057.awsstudygroup.com/3-staticwebsite/"
+                        },
+                        {
+                                "day": "5",
+                                "desc": "- Learn the fundamentals of Content Delivery Networks (CDN).\n- Understand Amazon CloudFront, Edge Locations, and Distributions.\n- Learn how CloudFront caches and delivers web content.\n- Study CloudFront Origins and cache behavior.\n- Understand Origin Access Control (OAC) for Amazon S3.",
+                                "start": "2026-10-01",
+                                "end": "2026-10-01",
+                                "ref": "Amazon CloudFront: https://000094.awsstudygroup.com/"
+                        },
+                        {
+                                "day": "6",
+                                "desc": "- Practice creating a CloudFront Distribution.\n- Configure Amazon S3 as a CloudFront Origin.\n- Configure secure access to the S3 Bucket using OAC.\n- Test static website delivery through CloudFront.\n- Review the S3 and CloudFront architecture.\n- Clean up unnecessary resources and review service costs.",
+                                "start": "2026-10-02",
+                                "end": "2026-10-02",
+                                "ref": "Amazon S3: https://000057.awsstudygroup.com/\nAmazon CloudFront: https://000094.awsstudygroup.com/"
+                        }
+                ]
+        },
+        "en": {
+                "topic": "Amazon S3, Static Website & CloudFront (28/09/2026 – 02/10/2026)",
+                "objectives": "- Understand Amazon S3 and the fundamentals of object storage.\n- Learn how to create and manage S3 Buckets and Objects.\n- Understand S3 storage classes, versioning, encryption, and access permissions.\n- Practice uploading, downloading, and managing files using AWS Console and AWS CLI.\n- Learn how to deploy a static website using Amazon S3.\n- Understand Amazon CloudFront and its role in content delivery.\n- Practice integrating Amazon S3 with CloudFront for secure website delivery.",
+                "achievements": "- Understood the fundamentals of Amazon S3 and object storage.\n- Learned the differences between object storage, block storage, and file storage.\n- Understood the major Amazon S3 components:\n  - Bucket\n  - Object\n  - Object Key\n  - Storage Class\n  - Versioning\n  - Bucket Policy\n  - Block Public Access\n- Practiced creating and configuring S3 Buckets.\n- Successfully uploaded, downloaded, and managed files using AWS Console and AWS CLI.\n- Learned how S3 Versioning helps preserve multiple versions of objects.\n- Understood the purpose of S3 Bucket Policies and public access restrictions.\n- Practiced configuring Amazon S3 Static Website Hosting.\n- Learned the fundamentals of Amazon CloudFront and Content Delivery Networks (CDN).\n- Practiced delivering static website content through CloudFront.\n- Understood how to use CloudFront Origin Access Control (OAC) to restrict direct access to S3 content.\n- Gained practical experience in cloud storage management and static website deployment.",
+                "tasks": [
+                        {
+                                "day": "2",
+                                "desc": "- Learn the fundamentals of Amazon Simple Storage Service (S3).\n- Understand object storage and its common use cases.\n- Learn about S3 Buckets, Objects, Keys, and Storage Classes.\n- Compare Amazon S3 with Amazon EBS.\n- Explore the Amazon S3 Management Console.",
+                                "start": "2026-09-28",
+                                "end": "2026-09-28",
+                                "ref": "Amazon S3: https://000057.awsstudygroup.com/"
+                        },
+                        {
+                                "day": "3",
+                                "desc": "- Practice creating an Amazon S3 Bucket.\n- Upload, download, and delete files.\n- Practice managing objects using AWS CLI.\n- Learn about S3 Versioning and Server-Side Encryption.\n- Understand Bucket Policies and Block Public Access settings.",
+                                "start": "2026-09-29",
+                                "end": "2026-09-29",
+                                "ref": "Amazon S3: https://000057.awsstudygroup.com/\nAWS CLI: https://000011.awsstudygroup.com/"
+                        },
+                        {
+                                "day": "4",
+                                "desc": "- Learn about Static Website Hosting with Amazon S3.\n- Prepare a basic static website using HTML and CSS.\n- Upload website files to an S3 Bucket.\n- Configure Static Website Hosting settings.\n- Learn about index.html, error.html, and website endpoints.\n- Test website accessibility.",
+                                "start": "2026-09-30",
+                                "end": "2026-09-30",
+                                "ref": "Amazon S3 Static Website: https://000057.awsstudygroup.com/3-staticwebsite/"
+                        },
+                        {
+                                "day": "5",
+                                "desc": "- Learn the fundamentals of Content Delivery Networks (CDN).\n- Understand Amazon CloudFront, Edge Locations, and Distributions.\n- Learn how CloudFront caches and delivers web content.\n- Study CloudFront Origins and cache behavior.\n- Understand Origin Access Control (OAC) for Amazon S3.",
+                                "start": "2026-10-01",
+                                "end": "2026-10-01",
+                                "ref": "Amazon CloudFront: https://000094.awsstudygroup.com/"
+                        },
+                        {
+                                "day": "6",
+                                "desc": "- Practice creating a CloudFront Distribution.\n- Configure Amazon S3 as a CloudFront Origin.\n- Configure secure access to the S3 Bucket using OAC.\n- Test static website delivery through CloudFront.\n- Review the S3 and CloudFront architecture.\n- Clean up unnecessary resources and review service costs.",
+                                "start": "2026-10-02",
+                                "end": "2026-10-02",
+                                "ref": "Amazon S3: https://000057.awsstudygroup.com/\nAmazon CloudFront: https://000094.awsstudygroup.com/"
+                        }
+                ]
+        }
+};
+    } else if (weekNum === 4) {
+      return {
+        "weekNum": 4,
+        "vi": {
+                "topic": "Amazon RDS, CloudWatch & AWS Budgets (05/10/2026 – 09/10/2026)",
+                "objectives": "- Understand the fundamentals of Amazon Relational Database Service (RDS).\n- Learn about relational databases and managed database services on AWS.\n- Understand RDS DB Instances, Storage, Security Groups, and automated backups.\n- Practice creating and connecting to an Amazon RDS database.\n- Learn how Amazon CloudWatch monitors AWS resources and applications.\n- Practice monitoring EC2 performance using CloudWatch metrics and alarms.\n- Understand AWS Budgets and basic cloud cost management practices.",
+                "achievements": "- Understood the basic concepts of relational databases and Amazon RDS.\n- Learned the differences between self-managed databases on EC2 and managed databases using Amazon RDS.\n- Understood the fundamental components of Amazon RDS:\n  - DB Instance\n  - Database Engine\n  - DB Instance Class\n  - Storage\n  - DB Subnet Group\n  - Security Group\n  - Automated Backup\n  - Multi-AZ Deployment\n- Practiced creating and configuring an Amazon RDS database instance.\n- Learned how to configure database network connectivity and access permissions.\n- Practiced connecting to a database and executing basic SQL queries.\n- Understood the fundamentals of Amazon CloudWatch.\n- Learned about CloudWatch Metrics, Logs, Dashboards, and Alarms.\n- Practiced monitoring Amazon EC2 performance using CloudWatch.\n- Learned how to configure basic CloudWatch alarms.\n- Understood AWS Budgets and its role in cloud cost management.\n- Practiced reviewing AWS resource usage and estimated costs.",
+                "tasks": [
+                        {
+                                "day": "2",
+                                "desc": "- Learn the fundamentals of relational databases and Amazon RDS.\n- Understand managed database services on AWS.\n- Learn about supported RDS database engines.\n- Study DB Instance Classes, Storage, and Backup options.\n- Compare databases hosted on EC2 with Amazon RDS.",
+                                "start": "2026-10-05",
+                                "end": "2026-10-05",
+                                "ref": "Amazon RDS: https://000005.awsstudygroup.com/"
+                        },
+                        {
+                                "day": "3",
+                                "desc": "- Practice creating an Amazon RDS database instance.\n- Configure database engine, instance class, and storage.\n- Learn about DB Subnet Groups and VPC integration.\n- Configure Security Groups for database connectivity.\n- Review database endpoint, port, and connection settings.",
+                                "start": "2026-10-06",
+                                "end": "2026-10-06",
+                                "ref": "Amazon RDS: https://000005.awsstudygroup.com/\nAmazon VPC: https://000003.awsstudygroup.com/"
+                        },
+                        {
+                                "day": "4",
+                                "desc": "- Practice connecting to an Amazon RDS database.\n- Execute basic SQL queries to create tables and manage records.\n- Learn about automated backups and database snapshots.\n- Understand the concept of Multi-AZ Deployment.\n- Review RDS security and access management practices.",
+                                "start": "2026-10-07",
+                                "end": "2026-10-07",
+                                "ref": "Amazon RDS: https://000005.awsstudygroup.com/"
+                        },
+                        {
+                                "day": "5",
+                                "desc": "- Learn the fundamentals of Amazon CloudWatch.\n- Understand CloudWatch Metrics, Logs, Dashboards, and Alarms.\n- Explore CloudWatch metrics for Amazon EC2.\n- Practice monitoring CPU utilization and instance status.\n- Create a basic CloudWatch alarm for EC2 monitoring.",
+                                "start": "2026-10-08",
+                                "end": "2026-10-08",
+                                "ref": "Amazon CloudWatch: https://000008.awsstudygroup.com/"
+                        },
+                        {
+                                "day": "6",
+                                "desc": "- Learn about AWS Budgets and basic cloud cost optimization.\n- Review AWS billing information and estimated service costs.\n- Practice configuring a basic cost budget and alert threshold.\n- Review EC2, RDS, and CloudWatch resource usage.\n- Summarize the week's database and monitoring activities.\n- Delete unnecessary lab resources to minimize costs.",
+                                "start": "2026-10-09",
+                                "end": "2026-10-09",
+                                "ref": "AWS Budgets: https://000007.awsstudygroup.com/\nAmazon CloudWatch: https://000008.awsstudygroup.com/"
+                        }
+                ]
+        },
+        "en": {
+                "topic": "Amazon RDS, CloudWatch & AWS Budgets (05/10/2026 – 09/10/2026)",
+                "objectives": "- Understand the fundamentals of Amazon Relational Database Service (RDS).\n- Learn about relational databases and managed database services on AWS.\n- Understand RDS DB Instances, Storage, Security Groups, and automated backups.\n- Practice creating and connecting to an Amazon RDS database.\n- Learn how Amazon CloudWatch monitors AWS resources and applications.\n- Practice monitoring EC2 performance using CloudWatch metrics and alarms.\n- Understand AWS Budgets and basic cloud cost management practices.",
+                "achievements": "- Understood the basic concepts of relational databases and Amazon RDS.\n- Learned the differences between self-managed databases on EC2 and managed databases using Amazon RDS.\n- Understood the fundamental components of Amazon RDS:\n  - DB Instance\n  - Database Engine\n  - DB Instance Class\n  - Storage\n  - DB Subnet Group\n  - Security Group\n  - Automated Backup\n  - Multi-AZ Deployment\n- Practiced creating and configuring an Amazon RDS database instance.\n- Learned how to configure database network connectivity and access permissions.\n- Practiced connecting to a database and executing basic SQL queries.\n- Understood the fundamentals of Amazon CloudWatch.\n- Learned about CloudWatch Metrics, Logs, Dashboards, and Alarms.\n- Practiced monitoring Amazon EC2 performance using CloudWatch.\n- Learned how to configure basic CloudWatch alarms.\n- Understood AWS Budgets and its role in cloud cost management.\n- Practiced reviewing AWS resource usage and estimated costs.",
+                "tasks": [
+                        {
+                                "day": "2",
+                                "desc": "- Learn the fundamentals of relational databases and Amazon RDS.\n- Understand managed database services on AWS.\n- Learn about supported RDS database engines.\n- Study DB Instance Classes, Storage, and Backup options.\n- Compare databases hosted on EC2 with Amazon RDS.",
+                                "start": "2026-10-05",
+                                "end": "2026-10-05",
+                                "ref": "Amazon RDS: https://000005.awsstudygroup.com/"
+                        },
+                        {
+                                "day": "3",
+                                "desc": "- Practice creating an Amazon RDS database instance.\n- Configure database engine, instance class, and storage.\n- Learn about DB Subnet Groups and VPC integration.\n- Configure Security Groups for database connectivity.\n- Review database endpoint, port, and connection settings.",
+                                "start": "2026-10-06",
+                                "end": "2026-10-06",
+                                "ref": "Amazon RDS: https://000005.awsstudygroup.com/\nAmazon VPC: https://000003.awsstudygroup.com/"
+                        },
+                        {
+                                "day": "4",
+                                "desc": "- Practice connecting to an Amazon RDS database.\n- Execute basic SQL queries to create tables and manage records.\n- Learn about automated backups and database snapshots.\n- Understand the concept of Multi-AZ Deployment.\n- Review RDS security and access management practices.",
+                                "start": "2026-10-07",
+                                "end": "2026-10-07",
+                                "ref": "Amazon RDS: https://000005.awsstudygroup.com/"
+                        },
+                        {
+                                "day": "5",
+                                "desc": "- Learn the fundamentals of Amazon CloudWatch.\n- Understand CloudWatch Metrics, Logs, Dashboards, and Alarms.\n- Explore CloudWatch metrics for Amazon EC2.\n- Practice monitoring CPU utilization and instance status.\n- Create a basic CloudWatch alarm for EC2 monitoring.",
+                                "start": "2026-10-08",
+                                "end": "2026-10-08",
+                                "ref": "Amazon CloudWatch: https://000008.awsstudygroup.com/"
+                        },
+                        {
+                                "day": "6",
+                                "desc": "- Learn about AWS Budgets and basic cloud cost optimization.\n- Review AWS billing information and estimated service costs.\n- Practice configuring a basic cost budget and alert threshold.\n- Review EC2, RDS, and CloudWatch resource usage.\n- Summarize the week's database and monitoring activities.\n- Delete unnecessary lab resources to minimize costs.",
+                                "start": "2026-10-09",
+                                "end": "2026-10-09",
+                                "ref": "AWS Budgets: https://000007.awsstudygroup.com/\nAmazon CloudWatch: https://000008.awsstudygroup.com/"
                         }
                 ]
         }
@@ -901,8 +1077,8 @@ const DEFAULT_BILINGUAL_DATA = {
 // ==========================================
 // 3. PERSISTENCE & STATE MANAGEMENT
 // ==========================================
-const STORAGE_KEY = 'fcaj_report_bilingual_v14';
-const PREV_STORAGE_KEY = 'fcaj_report_bilingual_v13';
+const STORAGE_KEY = 'fcaj_report_bilingual_v15';
+const PREV_STORAGE_KEY = 'fcaj_report_bilingual_v14';
 const LANG_KEY = 'fcaj_report_lang';
 
 class AppLanguageManager {
@@ -940,13 +1116,14 @@ class AppLanguageManager {
         if (parsed && parsed.worklogs && parsed.worklogs.length > 0) {
           // Thông tin sinh viên chỉ có thể sửa từ code, luôn đồng bộ từ DEFAULT_BILINGUAL_DATA
           parsed.studentInfo = JSON.parse(JSON.stringify(DEFAULT_BILINGUAL_DATA.studentInfo));
-          // Luôn đồng bộ nội dung chuẩn của Tuần 1 và Tuần 2 từ code
-          const w1 = DEFAULT_BILINGUAL_DATA.worklogs.find(w => w.weekNum === 1);
-          const w2 = DEFAULT_BILINGUAL_DATA.worklogs.find(w => w.weekNum === 2);
-          const p1Idx = parsed.worklogs.findIndex(w => w.weekNum === 1);
-          const p2Idx = parsed.worklogs.findIndex(w => w.weekNum === 2);
-          if (w1 && p1Idx !== -1) parsed.worklogs[p1Idx] = JSON.parse(JSON.stringify(w1));
-          if (w2 && p2Idx !== -1) parsed.worklogs[p2Idx] = JSON.parse(JSON.stringify(w2));
+          // Luôn đồng bộ nội dung chuẩn của Tuần 1, 2, 3, 4 từ code
+          [1, 2, 3, 4].forEach(wNum => {
+            const defWeek = DEFAULT_BILINGUAL_DATA.worklogs.find(w => w.weekNum === wNum);
+            const pIdx = parsed.worklogs.findIndex(w => w.weekNum === wNum);
+            if (defWeek && pIdx !== -1) {
+              parsed.worklogs[pIdx] = JSON.parse(JSON.stringify(defWeek));
+            }
+          });
           return parsed;
         }
       }
