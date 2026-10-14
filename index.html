@@ -56,56 +56,49 @@
           <!-- 1. Worklog -->
           <li class="nav-item">
             <a href="#/worklog" class="nav-link" data-page="worklog">
-              <span class="nav-num">1.</span>
-              <span class="nav-label" data-i18n="navWorklog">1. Nhật ký công việc</span>
+              <span class="nav-label" data-i18n="navWorklog">Nhật ký công việc</span>
             </a>
           </li>
 
           <!-- 2. Proposal -->
           <li class="nav-item">
             <a href="#/proposal" class="nav-link" data-page="proposal">
-              <span class="nav-num">2.</span>
-              <span class="nav-label" data-i18n="navProposal">2. Đề xuất đồ án</span>
+              <span class="nav-label" data-i18n="navProposal">Đề xuất đồ án</span>
             </a>
           </li>
 
           <!-- 3. Blogs Posted -->
           <li class="nav-item">
             <a href="#/blogs-posted" class="nav-link" data-page="blogs-posted">
-              <span class="nav-num">3.</span>
-              <span class="nav-label" data-i18n="navBlogs">3. Bài viết Blog</span>
+              <span class="nav-label" data-i18n="navBlogs">Bài viết Blog</span>
             </a>
           </li>
 
           <!-- 4. Events Participated -->
           <li class="nav-item">
             <a href="#/events" class="nav-link" data-page="events">
-              <span class="nav-num">4.</span>
-              <span class="nav-label" data-i18n="navEvents">4. Sự kiện tham gia</span>
+              <span class="nav-label" data-i18n="navEvents">Sự kiện tham gia</span>
             </a>
           </li>
 
           <!-- 5. Workshop -->
           <li class="nav-item">
             <a href="#/workshop" class="nav-link" data-page="workshop">
-              <span class="nav-num">5.</span>
-              <span class="nav-label" data-i18n="navWorkshop">5. Bài thực hành Workshop</span>
+              <span class="nav-label" data-i18n="navWorkshop">Bài thực hành Workshop</span>
             </a>
           </li>
 
           <!-- 6. Self-Assessment -->
           <li class="nav-item">
             <a href="#/self-evaluation" class="nav-link" data-page="self-evaluation">
-              <span class="nav-num">6.</span>
-              <span class="nav-label" data-i18n="navSelfAssessment">6. Tự đánh giá</span>
+              <span class="nav-label" data-i18n="navSelfAssessment">Tự đánh giá</span>
             </a>
           </li>
 
           <!-- 7. Sharing and Feedback -->
           <li class="nav-item">
             <a href="#/feedback" class="nav-link" data-page="feedback">
-              <span class="nav-num">7.</span>
-              <span class="nav-label" data-i18n="navFeedback">7. Chia sẻ & Góp ý</span>
+              <span class="nav-label" data-i18n="navFeedback">Chia sẻ & Góp ý</span>
             </a>
           </li>
 
@@ -170,16 +163,6 @@
             <button type="button" class="lang-btn" data-lang="en" id="btn-lang-en">English</button>
           </div>
 
-          <!-- Quick Actions: Print / PDF & Add Worklog -->
-          <button type="button" class="btn btn-outline" id="btn-quick-print" title="In hoặc xuất file PDF">
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect width="12" height="8" x="6" y="14"/></svg>
-            <span data-i18n="btnPrintPdf">In / Xuất PDF</span>
-          </button>
-
-          <button type="button" class="btn btn-primary" id="btn-open-log-modal">
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-            <span data-i18n="btnAddWorklog">+ Thêm Worklog</span>
-          </button>
 
           <!-- User Greeting Pill -->
           <div class="user-greeting-pill">
@@ -402,7 +385,6 @@
               <h2 class="section-title" data-i18n="proposalSectionTitle">2. Đề xuất đồ án thực tập</h2>
               <p class="section-subtitle" data-i18n="proposalSectionSubtitle">Giải pháp AWS Serverless toàn diện cho giám sát thời tiết thời gian thực</p>
             </div>
-            <button class="btn btn-primary" id="btn-save-proposal" data-i18n="btnSaveProposal">Lưu đề xuất đồ án</button>
           </div>
 
           <div class="notice-callout notice-info" style="margin-top: 1rem;">
@@ -464,7 +446,6 @@
               <h2 class="section-title" data-i18n="blogsSectionTitle">3. Các bài viết kỹ thuật đã đăng</h2>
               <p class="section-subtitle" data-i18n="blogsSectionSubtitle">Chia sẻ kiến thức chuyên sâu trên cộng đồng AWS Study Group</p>
             </div>
-            <button class="btn btn-primary" id="btn-add-blog" data-i18n="btnAddBlog">+ Viết bài blog mới</button>
           </div>
 
           <div class="blogs-grid" id="blogs-list-container" style="margin-top: 1.5rem;">
@@ -482,7 +463,6 @@
               <h2 class="section-title" data-i18n="eventsSectionTitle">4. Sự kiện thực tế đã tham gia</h2>
               <p class="section-subtitle" data-i18n="eventsSectionSubtitle">Tham gia các buổi hội thảo công nghệ AWS chuyên sâu</p>
             </div>
-            <button class="btn btn-primary" id="btn-add-event" data-i18n="btnAddEvent">+ Thêm sự kiện mới</button>
           </div>
 
           <div class="events-report-list" id="events-report-container" style="margin-top: 1.5rem;">
@@ -500,7 +480,6 @@
               <h2 class="section-title" data-i18n="workshopSectionTitle">5. Bài thực hành: Truy cập S3 an toàn qua VPC Endpoints</h2>
               <p class="section-subtitle" data-i18n="workshopSectionSubtitle">Bài thực hành chuyên sâu về AWS PrivateLink, Gateway & Interface Endpoints</p>
             </div>
-            <button class="btn btn-outline" onclick="window.print()" data-i18n="btnPrintWorkshop">In nội dung Workshop</button>
           </div>
 
           <div class="card" style="margin-top: 1.5rem;">
@@ -628,7 +607,6 @@ aws s3 cp test-file.bin s3://&lt;your-bucket-name&gt;/ --endpoint-url https://bu
               <h2 class="section-title" data-i18n="selfSectionTitle">6. Tự đánh giá kết quả thực tập</h2>
               <p class="section-subtitle" data-i18n="selfSectionSubtitle">Bảng 12 tiêu chí đánh giá năng lực của sinh viên Phan Nhat Uyen</p>
             </div>
-            <button class="btn btn-primary" id="btn-save-assessment" data-i18n="btnSaveAssessment">Lưu tự đánh giá</button>
           </div>
 
           <div class="card" style="margin-top: 1.5rem;">
@@ -677,7 +655,6 @@ aws s3 cp test-file.bin s3://&lt;your-bucket-name&gt;/ --endpoint-url https://bu
               <h2 class="section-title" data-i18n="feedbackSectionTitle">7. Chia sẻ & Đóng góp ý kiến</h2>
               <p class="section-subtitle" data-i18n="feedbackSectionSubtitle">Đóng góp ý kiến cải tiến cho chương trình First Cloud AI Journey</p>
             </div>
-            <button class="btn btn-primary" id="btn-save-feedback" data-i18n="btnSaveFeedback">Lưu ý kiến đóng góp</button>
           </div>
 
           <div class="card" style="margin-top: 1.5rem;">
@@ -878,6 +855,6 @@ aws s3 cp test-file.bin s3://&lt;your-bucket-name&gt;/ --endpoint-url https://bu
   <!-- TOAST CONTAINER -->
   <div class="toast-container" id="toast-container"></div>
 
-  <script src="app.js?v=20261014_v4"></script>
+  <script src="app.js?v=20261014_v5"></script>
 </body>
 </html>

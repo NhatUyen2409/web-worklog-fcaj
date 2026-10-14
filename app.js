@@ -18,13 +18,13 @@ const I18N_DICTIONARY = {
     
     // Nav items
     navStudentInfo: "Thông tin sinh viên",
-    navWorklog: "1. Nhật ký công việc",
-    navProposal: "2. Đề xuất đồ án",
-    navBlogs: "3. Bài viết Blog",
-    navEvents: "4. Sự kiện tham gia",
-    navWorkshop: "5. Bài thực hành Workshop",
-    navSelfAssessment: "6. Tự đánh giá",
-    navFeedback: "7. Chia sẻ & Góp ý",
+    navWorklog: "Nhật ký công việc",
+    navProposal: "Đề xuất đồ án",
+    navBlogs: "Bài viết Blog",
+    navEvents: "Sự kiện tham gia",
+    navWorkshop: "Bài thực hành Workshop",
+    navSelfAssessment: "Tự đánh giá",
+    navFeedback: "Chia sẻ & Góp ý",
     navSettings: "Cài đặt & Sao lưu",
     
     // Sidebar profile
@@ -276,13 +276,13 @@ const I18N_DICTIONARY = {
     
     // Nav items
     navStudentInfo: "Student Information",
-    navWorklog: "1. Worklog",
-    navProposal: "2. Proposal",
-    navBlogs: "3. Blogs Posted",
-    navEvents: "4. Events Participated",
-    navWorkshop: "5. Workshop",
-    navSelfAssessment: "6. Self-Assessment",
-    navFeedback: "7. Sharing and Feedback",
+    navWorklog: "Worklog",
+    navProposal: "Proposal",
+    navBlogs: "Blogs Posted",
+    navEvents: "Events Participated",
+    navWorkshop: "Workshop",
+    navSelfAssessment: "Self-Assessment",
+    navFeedback: "Sharing and Feedback",
     navSettings: "Settings & Backup",
     
     // Sidebar profile
