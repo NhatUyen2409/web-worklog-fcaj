@@ -676,6 +676,20 @@ html, body {
   border-color: #000000;
   box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.08);
 }
+.form-control[readonly],
+.form-control:read-only {
+  background-color: #F8FAFC;
+  color: var(--text-main);
+  cursor: default;
+  border-color: #E2E8F0;
+}
+
+.form-control[readonly]:focus,
+.form-control:read-only:focus {
+  border-color: #CBD5E1;
+  box-shadow: none;
+}
+
 
 .report-textarea {
   height: auto;

@@ -97,7 +97,7 @@ const I18N_DICTIONARY = {
     btnEditWeekMeta: "Sửa mục tiêu & thành tích",
     metaObjectivesTitle: "Mục tiêu tuần",
     metaAchievementsTitle: "Thành tích đạt được",
-    tasksTableTitle: "📋 Nội dung công việc thực hiện trong tuần",
+    tasksTableTitle: "Nội dung công việc thực hiện trong tuần",
     thDay: "Thứ",
     thTaskDesc: "Nội dung công việc",
     thStartDate: "Ngày bắt đầu",
@@ -108,7 +108,7 @@ const I18N_DICTIONARY = {
     btnDelete: "Xóa",
     btnEdit: "Sửa",
     btnClearWeek: "Đặt lại tuần này",
-    worklogToolsLabel: "🛠️ Thao tác nhanh:",
+    worklogToolsLabel: "Thao tác nhanh:",
     btnExportWorklog: "Xuất JSON",
     btnImportWorklog: "Nhập JSON",
     modalMetaTitle: "Chỉnh sửa Mục tiêu & Thành tích",
@@ -117,7 +117,7 @@ const I18N_DICTIONARY = {
     modalMetaAchievementsLabel: "Thành tích đạt được (mỗi ý một dòng, gạch đầu dòng -)",
     modalMetaAchievementsPlaceholder: "- Hoàn thành nhiệm vụ...\n- Nắm vững kiến thức...",
     btnModalSaveMeta: "Lưu mục tiêu & thành tích",
-    modalEditTaskTitle: "✏️ Chỉnh sửa công việc",
+    modalEditTaskTitle: "Chỉnh sửa công việc",
     btnUpdateTask: "Cập nhật công việc",
     toastUpdateTaskSuccess: "✓ Đã cập nhật công việc thành công!",
     toastSaveMetaSuccess: "✓ Đã lưu mục tiêu & thành tích tuần thành công!",
@@ -355,7 +355,7 @@ const I18N_DICTIONARY = {
     btnEditWeekMeta: "Edit Objectives & Achievements",
     metaObjectivesTitle: "Week Objectives",
     metaAchievementsTitle: "Week Achievements",
-    tasksTableTitle: "📋 Tasks to be carried out this week",
+    tasksTableTitle: "Tasks to be carried out this week",
     thDay: "Day",
     thTaskDesc: "Task Description",
     thStartDate: "Start Date",
@@ -366,7 +366,7 @@ const I18N_DICTIONARY = {
     btnDelete: "Delete",
     btnEdit: "Edit",
     btnClearWeek: "Reset Week",
-    worklogToolsLabel: "🛠️ Quick Tools:",
+    worklogToolsLabel: "Quick Tools:",
     btnExportWorklog: "Export JSON",
     btnImportWorklog: "Import JSON",
     modalMetaTitle: "Edit Objectives & Achievements",
@@ -375,7 +375,7 @@ const I18N_DICTIONARY = {
     modalMetaAchievementsLabel: "Week Achievements (one per line, starting with -)",
     modalMetaAchievementsPlaceholder: "- Mastered concepts...\n- Completed lab exercises...",
     btnModalSaveMeta: "Save Objectives & Achievements",
-    modalEditTaskTitle: "✏️ Edit Task",
+    modalEditTaskTitle: "Edit Task",
     btnUpdateTask: "Update Task",
     toastUpdateTaskSuccess: "✓ Task updated successfully!",
     toastSaveMetaSuccess: "✓ Objectives & achievements saved successfully!",
@@ -528,6 +528,7 @@ const I18N_DICTIONARY = {
 
 // ==========================================
 // 2. DEFAULT BILINGUAL REPORT DATA
+// (CHỈNH SỬA THÔNG TIN SINH VIÊN TRỰC TIẾP TẠI ĐÂY TỪ CODE)
 // ==========================================
 const DEFAULT_BILINGUAL_DATA = {
   studentInfo: {
@@ -836,8 +837,8 @@ const DEFAULT_BILINGUAL_DATA = {
 // ==========================================
 // 3. PERSISTENCE & STATE MANAGEMENT
 // ==========================================
-const STORAGE_KEY = 'fcaj_report_bilingual_v12';
-const PREV_STORAGE_KEY = 'fcaj_report_bilingual_v11';
+const STORAGE_KEY = 'fcaj_report_bilingual_v13';
+const PREV_STORAGE_KEY = 'fcaj_report_bilingual_v12';
 const LANG_KEY = 'fcaj_report_lang';
 
 class AppLanguageManager {
@@ -873,10 +874,8 @@ class AppLanguageManager {
       if (stored) {
         const parsed = JSON.parse(stored);
         if (parsed && parsed.worklogs && parsed.worklogs.length > 0) {
-          if (parsed.studentInfo && (parsed.studentInfo.phone === '0989888999' || !parsed.studentInfo.phone)) {
-            parsed.studentInfo.phone = '0394728982';
-            try { localStorage.setItem(STORAGE_KEY, JSON.stringify(parsed)); } catch (e) {}
-          }
+          // Thông tin sinh viên chỉ có thể sửa từ code, luôn đồng bộ từ DEFAULT_BILINGUAL_DATA
+          parsed.studentInfo = JSON.parse(JSON.stringify(DEFAULT_BILINGUAL_DATA.studentInfo));
           return parsed;
         }
       }
@@ -920,25 +919,7 @@ class AppLanguageManager {
       return el ? el.value.trim() : null;
     };
 
-    // Shared student info fields
-    const fn = getVal('info-fullname');
-    if (fn !== null) this.data.studentInfo.fullName = fn;
-    const ph = getVal('info-phone');
-    if (ph !== null) this.data.studentInfo.phone = ph;
-    const em = getVal('info-email');
-    if (em !== null) this.data.studentInfo.email = em;
-    // Language-specific student info
-    if (!this.data.studentInfo[lang]) this.data.studentInfo[lang] = {};
-    const uni = getVal('info-university');
-    if (uni !== null) this.data.studentInfo[lang].university = uni;
-    const maj = getVal('info-major');
-    if (maj !== null) this.data.studentInfo[lang].major = maj;
-    const comp = getVal('info-company');
-    if (comp !== null) this.data.studentInfo[lang].company = comp;
-    const pos = getVal('info-position');
-    if (pos !== null) this.data.studentInfo[lang].position = pos;
-    const dur = getVal('info-duration');
-    if (dur !== null) this.data.studentInfo[lang].duration = dur;
+    // Lưu ý: Thông tin sinh viên cố định, chỉ chỉnh sửa từ code trong DEFAULT_BILINGUAL_DATA.studentInfo
 
     // Proposal
     if (!this.data.proposal[lang]) this.data.proposal[lang] = {};
@@ -1179,9 +1160,17 @@ function renderStudentInfoInputs() {
   setVal('info-position', loc.position);
   setVal('info-duration', loc.duration);
 
-  // Update sidebar company label
+  // Update sidebar company label, name, and avatar
   const sidebarCompany = document.getElementById('sidebar-company');
   if (sidebarCompany) sidebarCompany.textContent = loc.company;
+  const sidebarUser = document.getElementById('sidebar-username');
+  if (sidebarUser && info.fullName) sidebarUser.textContent = info.fullName;
+  const sidebarAvatar = document.getElementById('sidebar-avatar');
+  if (sidebarAvatar && info.fullName) {
+    const parts = info.fullName.trim().split(' ');
+    sidebarAvatar.textContent = (parts[parts.length - 1] || 'U')[0].toUpperCase();
+  }
+  updateHeaderGreeting();
 }
 
 function setupStudentInfo() {
@@ -1189,24 +1178,6 @@ function setupStudentInfo() {
   if (form) {
     form.addEventListener('submit', (e) => {
       e.preventDefault();
-      const lang = app.currentLang;
-      app.data.studentInfo.fullName = document.getElementById('info-fullname').value.trim();
-      const sidEl = document.getElementById('info-student-id');
-      if (sidEl) app.data.studentInfo.studentId = sidEl.value.trim();
-      app.data.studentInfo.phone = document.getElementById('info-phone').value.trim();
-      app.data.studentInfo.email = document.getElementById('info-email').value.trim();
-      app.data.studentInfo[lang] = {
-        university: document.getElementById('info-university').value.trim(),
-        major: document.getElementById('info-major').value.trim(),
-        company: document.getElementById('info-company').value.trim(),
-        position: document.getElementById('info-position').value.trim(),
-        duration: document.getElementById('info-duration').value.trim()
-      };
-
-      app.saveData();
-      updateHeaderGreeting();
-      renderStudentInfoInputs();
-      showToast(t('toastSaveInfo'));
     });
   }
 }
@@ -1792,8 +1763,8 @@ function renderEventsList() {
         <span class="badge badge-blue" style="margin-bottom:8px;">${t('eventBadge')}</span>
         <h3>${escapeHtml(ev.name)}</h3>
         <p style="font-size:12.5px; color:var(--text-muted); margin-bottom:8px;">
-          ⏰ <strong>${escapeHtml(ev.dateTime)}</strong> • 📍 ${escapeHtml(ev.location)}<br>
-          👤 ${t('eventRoleLabel')} <strong>${escapeHtml(ev.role)}</strong>
+          <strong>${escapeHtml(ev.dateTime)}</strong> • ${escapeHtml(ev.location)}<br>
+          ${t('eventRoleLabel')} <strong>${escapeHtml(ev.role)}</strong>
           ${ev.speakers ? ` • ${t('eventSpeakersLabel')} <em>${escapeHtml(ev.speakers)}</em>` : ''}
         </p>
       </div>
@@ -1999,7 +1970,8 @@ function setupSettingsAndPrint() {
       reader.onload = (evt) => {
         try {
           const parsed = JSON.parse(evt.target.result);
-          if (parsed && parsed.studentInfo) {
+          if (parsed && (parsed.worklogs || parsed.studentInfo)) {
+            parsed.studentInfo = JSON.parse(JSON.stringify(DEFAULT_BILINGUAL_DATA.studentInfo));
             app.data = parsed;
             app.saveData();
             app.applyLanguage();
