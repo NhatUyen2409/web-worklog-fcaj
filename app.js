@@ -56,7 +56,19 @@ const I18N_DICTIONARY = {
     // Student info section
     infoNotice: "Ghi chú quan trọng: Báo cáo thực tập tốt nghiệp này được xây dựng chuẩn theo khung cấu trúc yêu cầu của chương trình First Cloud AI Journey (FCAJ) thuộc Amazon Web Services (AWS) Việt Nam. Toàn bộ nội dung bên dưới có thể tự do chỉnh sửa và lưu trữ trực tiếp.",
     infoCardTitle: "Thông tin sinh viên thực tập",
+    infoCardSubtitle: "Hồ sơ thực tập chính thức tại AWS Vietnam - First Cloud AI Journey",
     officialBadge: "Chính thức • AWS FCAJ",
+    photoBoxTitle: "Ảnh thẻ / Cá nhân",
+    photoBoxHint: "Bấm để tải ảnh",
+    photoChangeText: "Thay đổi ảnh",
+    btnUploadPhoto: "Tải ảnh lên",
+    btnRemovePhoto: "Gỡ ảnh",
+    photoFormatNote: "PNG, JPG, WEBP (< 5MB)",
+    toastPhotoUpdated: "Đã cập nhật ảnh cá nhân thành công!",
+    toastPhotoRemoved: "Đã gỡ ảnh cá nhân!",
+    toastPhotoError: "Không thể lưu ảnh (dung lượng quá lớn hoặc lỗi tệp)!",
+    toastPhotoSizeLimit: "Dung lượng ảnh phải nhỏ hơn 5MB!",
+    toastPhotoInvalidType: "Vui lòng chọn tệp hình ảnh hợp lệ!",
     labelFullName: "Họ và tên",
     labelStudentId: "Mã số sinh viên",
     labelPhone: "Số điện thoại",
@@ -314,7 +326,19 @@ const I18N_DICTIONARY = {
     // Student info section
     infoNotice: "Important Note: This internship report is structured in accordance with the official First Cloud AI Journey (FCAJ) requirements by Amazon Web Services (AWS) Vietnam. All information below can be freely customized and saved directly.",
     infoCardTitle: "Student Information",
+    infoCardSubtitle: "Official internship profile at AWS Vietnam - First Cloud AI Journey",
     officialBadge: "Official • AWS FCAJ",
+    photoBoxTitle: "Portrait / Profile Photo",
+    photoBoxHint: "Click to upload photo",
+    photoChangeText: "Change Photo",
+    btnUploadPhoto: "Upload Photo",
+    btnRemovePhoto: "Remove Photo",
+    photoFormatNote: "PNG, JPG, WEBP (< 5MB)",
+    toastPhotoUpdated: "Personal photo updated successfully!",
+    toastPhotoRemoved: "Personal photo removed!",
+    toastPhotoError: "Could not save photo (file too large or error)!",
+    toastPhotoSizeLimit: "Photo file size must be under 5MB!",
+    toastPhotoInvalidType: "Please select a valid image file!",
     labelFullName: "Full Name",
     labelStudentId: "Student ID",
     labelPhone: "Phone Number",
@@ -1484,6 +1508,62 @@ function handleHashChange() {
 // ==========================================
 // 6. STUDENT INFO
 // ==========================================
+const AVATAR_STORAGE_KEY = 'fcaj_student_avatar';
+
+function updateStudentAvatarDisplay() {
+  const avatar = localStorage.getItem(AVATAR_STORAGE_KEY);
+  const imgEl = document.getElementById('student-photo-img');
+  const placeholderEl = document.getElementById('student-photo-placeholder');
+  const overlayEl = document.getElementById('photo-overlay');
+  const btnRemove = document.getElementById('btn-remove-photo');
+  const btnChooseLabel = document.querySelector('#btn-choose-photo span');
+
+  if (avatar) {
+    if (imgEl) {
+      imgEl.src = avatar;
+      imgEl.style.display = 'block';
+    }
+    if (placeholderEl) placeholderEl.style.display = 'none';
+    if (overlayEl) overlayEl.classList.add('active');
+    if (btnRemove) btnRemove.style.display = 'inline-flex';
+    if (btnChooseLabel) btnChooseLabel.textContent = t('photoChangeText') || 'Thay đổi ảnh';
+  } else {
+    if (imgEl) {
+      imgEl.src = '';
+      imgEl.style.display = 'none';
+    }
+    if (placeholderEl) placeholderEl.style.display = 'flex';
+    if (overlayEl) overlayEl.classList.remove('active');
+    if (btnRemove) btnRemove.style.display = 'none';
+    if (btnChooseLabel) btnChooseLabel.textContent = t('btnUploadPhoto') || 'Tải ảnh lên';
+  }
+
+  // Update sidebar and top header greeting avatar
+  const sidebarAvatar = document.getElementById('sidebar-avatar');
+  const headerAvatar = document.querySelector('.user-greeting-pill .avatar-sm');
+  const info = app.data.studentInfo || {};
+  const parts = (info.fullName || 'Phan Nhật Uyên').trim().split(' ');
+  const initial = (parts[parts.length - 1] || 'U')[0].toUpperCase();
+
+  if (avatar) {
+    if (sidebarAvatar) {
+      sidebarAvatar.innerHTML = `<img src="${avatar}" alt="Avatar">`;
+    }
+    if (headerAvatar) {
+      headerAvatar.innerHTML = `<img src="${avatar}" alt="Avatar">`;
+    }
+  } else {
+    if (sidebarAvatar) {
+      sidebarAvatar.innerHTML = '';
+      sidebarAvatar.textContent = initial;
+    }
+    if (headerAvatar) {
+      headerAvatar.innerHTML = '';
+      headerAvatar.textContent = initial;
+    }
+  }
+}
+
 function renderStudentInfoInputs() {
   const info = app.data.studentInfo;
   const lang = app.currentLang;
@@ -1504,16 +1584,14 @@ function renderStudentInfoInputs() {
   setVal('info-position', loc.position);
   setVal('info-duration', loc.duration);
 
-  // Update sidebar company label, name, and avatar
+  // Update sidebar company label and name
   const sidebarCompany = document.getElementById('sidebar-company');
   if (sidebarCompany) sidebarCompany.textContent = loc.company;
   const sidebarUser = document.getElementById('sidebar-username');
   if (sidebarUser && info.fullName) sidebarUser.textContent = info.fullName;
-  const sidebarAvatar = document.getElementById('sidebar-avatar');
-  if (sidebarAvatar && info.fullName) {
-    const parts = info.fullName.trim().split(' ');
-    sidebarAvatar.textContent = (parts[parts.length - 1] || 'U')[0].toUpperCase();
-  }
+
+  // Update student avatar
+  updateStudentAvatarDisplay();
   updateHeaderGreeting();
 }
 
@@ -1522,6 +1600,81 @@ function setupStudentInfo() {
   if (form) {
     form.addEventListener('submit', (e) => {
       e.preventDefault();
+    });
+  }
+
+  const fileInput = document.getElementById('student-photo-input');
+  const photoFrame = document.getElementById('student-photo-frame');
+  const btnRemove = document.getElementById('btn-remove-photo');
+
+  const handleFile = (file) => {
+    if (!file) return;
+    if (!file.type.startsWith('image/')) {
+      showToast(t('toastPhotoInvalidType'), 'error');
+      return;
+    }
+    if (file.size > 5 * 1024 * 1024) {
+      showToast(t('toastPhotoSizeLimit'), 'error');
+      return;
+    }
+
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      try {
+        const dataUrl = e.target.result;
+        localStorage.setItem(AVATAR_STORAGE_KEY, dataUrl);
+        updateStudentAvatarDisplay();
+        showToast(t('toastPhotoUpdated'));
+      } catch (err) {
+        console.error('Failed to save avatar:', err);
+        showToast(t('toastPhotoError'), 'error');
+      }
+    };
+    reader.onerror = () => {
+      showToast(t('toastPhotoError'), 'error');
+    };
+    reader.readAsDataURL(file);
+  };
+
+  if (fileInput) {
+    fileInput.addEventListener('change', (e) => {
+      if (e.target.files && e.target.files[0]) {
+        handleFile(e.target.files[0]);
+      }
+    });
+  }
+
+  if (photoFrame) {
+    photoFrame.addEventListener('click', () => {
+      if (fileInput) fileInput.click();
+    });
+
+    photoFrame.addEventListener('dragover', (e) => {
+      e.preventDefault();
+      photoFrame.classList.add('drag-over');
+    });
+
+    photoFrame.addEventListener('dragleave', (e) => {
+      e.preventDefault();
+      photoFrame.classList.remove('drag-over');
+    });
+
+    photoFrame.addEventListener('drop', (e) => {
+      e.preventDefault();
+      photoFrame.classList.remove('drag-over');
+      if (e.dataTransfer && e.dataTransfer.files && e.dataTransfer.files[0]) {
+        handleFile(e.dataTransfer.files[0]);
+      }
+    });
+  }
+
+  if (btnRemove) {
+    btnRemove.addEventListener('click', (e) => {
+      e.stopPropagation();
+      localStorage.removeItem(AVATAR_STORAGE_KEY);
+      if (fileInput) fileInput.value = '';
+      updateStudentAvatarDisplay();
+      showToast(t('toastPhotoRemoved'));
     });
   }
 }

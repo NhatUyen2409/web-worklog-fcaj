@@ -11,7 +11,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
   
-  <link rel="stylesheet" href="styles.css?v=20261014_v3">
+  <link rel="stylesheet" href="styles.css?v=20261014_v4">
 </head>
 <body>
   <div class="app-layout">
@@ -182,55 +182,107 @@
 
           <div class="card form-card" style="max-width:100%; margin-top: 0;">
             <div class="card-header-row">
-              <h2 class="card-title" data-i18n="infoCardTitle">Thông tin sinh viên thực tập</h2>
+              <div>
+                <h2 class="card-title" data-i18n="infoCardTitle">Thông tin sinh viên thực tập</h2>
+                <p class="text-muted" style="margin-top: 4px; font-size: 13px;" data-i18n="infoCardSubtitle">Hồ sơ thực tập chính thức tại AWS Vietnam - First Cloud AI Journey</p>
+              </div>
               <span class="badge badge-purple" data-i18n="officialBadge">Chính thức • AWS FCAJ</span>
             </div>
 
             <form id="student-info-form" onsubmit="return false;">
-              <div class="info-grid-container">
-                <div class="form-group">
-                  <label class="form-label" data-i18n="labelFullName">Họ và tên</label>
-                  <input type="text" id="info-fullname" class="form-control" value="Phan Nhật Uyên" readonly>
+              <div class="student-profile-layout">
+                <!-- Cột Ảnh Chân Dung / Ảnh Thẻ Cá Nhân -->
+                <div class="student-photo-col">
+                  <div class="student-photo-card">
+                    <div class="student-photo-frame" id="student-photo-frame" title="Bấm để tải ảnh cá nhân">
+                      <img id="student-photo-img" src="" alt="Ảnh sinh viên" class="student-photo-img" style="display: none;">
+                      <div id="student-photo-placeholder" class="student-photo-placeholder">
+                        <svg class="placeholder-icon" width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                          <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+                          <circle cx="12" cy="7" r="4"/>
+                        </svg>
+                        <span class="placeholder-label" data-i18n="photoBoxTitle">Ảnh thẻ / Cá nhân</span>
+                        <span class="placeholder-hint" data-i18n="photoBoxHint">Bấm để tải ảnh</span>
+                      </div>
+                      <div class="photo-overlay" id="photo-overlay">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2">
+                          <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/>
+                          <circle cx="12" cy="13" r="4"/>
+                        </svg>
+                        <span data-i18n="photoChangeText">Thay đổi ảnh</span>
+                      </div>
+                    </div>
+                    
+                    <div class="student-photo-controls">
+                      <label for="student-photo-input" class="btn btn-outline btn-sm" id="btn-choose-photo" style="cursor: pointer; width: 100%; justify-content: center;">
+                        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                          <polyline points="17 8 12 3 7 8"/>
+                          <line x1="12" y1="3" x2="12" y2="15"/>
+                        </svg>
+                        <span data-i18n="btnUploadPhoto">Tải ảnh lên</span>
+                      </label>
+                      <input type="file" id="student-photo-input" accept="image/*" style="display: none;">
+                      <button type="button" class="btn btn-outline-danger btn-sm" id="btn-remove-photo" style="display: none; width: 100%; margin-top: 6px; justify-content: center;">
+                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                          <polyline points="3 6 5 6 21 6"/>
+                          <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/>
+                        </svg>
+                        <span data-i18n="btnRemovePhoto">Gỡ ảnh</span>
+                      </button>
+                    </div>
+                    <p class="photo-format-note" data-i18n="photoFormatNote">PNG, JPG, WEBP (&lt; 5MB)</p>
+                  </div>
                 </div>
 
-                <div class="form-group">
-                  <label class="form-label" data-i18n="labelStudentId">Mã số sinh viên</label>
-                  <input type="text" id="info-student-id" class="form-control" value="SE196682" readonly>
-                </div>
+                <!-- Cột Chi Tiết Thông Tin -->
+                <div class="student-details-col">
+                  <div class="info-grid-container">
+                    <div class="form-group">
+                      <label class="form-label" data-i18n="labelFullName">Họ và tên</label>
+                      <input type="text" id="info-fullname" class="form-control" value="Phan Nhật Uyên" readonly>
+                    </div>
 
-                <div class="form-group">
-                  <label class="form-label" data-i18n="labelUniversity">Trường Đại học</label>
-                  <input type="text" id="info-university" class="form-control" value="Trường Đại học FPT" readonly>
-                </div>
+                    <div class="form-group">
+                      <label class="form-label" data-i18n="labelStudentId">Mã số sinh viên</label>
+                      <input type="text" id="info-student-id" class="form-control" value="SE196682" readonly>
+                    </div>
 
-                <div class="form-group">
-                  <label class="form-label" data-i18n="labelMajor">Chuyên ngành</label>
-                  <input type="text" id="info-major" class="form-control" value="An toàn thông tin" readonly>
-                </div>
+                    <div class="form-group">
+                      <label class="form-label" data-i18n="labelUniversity">Trường Đại học</label>
+                      <input type="text" id="info-university" class="form-control" value="Trường Đại học FPT" readonly>
+                    </div>
 
-                <div class="form-group">
-                  <label class="form-label" data-i18n="labelCompany">Đơn vị thực tập</label>
-                  <input type="text" id="info-company" class="form-control" value="Công ty TNHH Amazon Web Services (AWS) Việt Nam" readonly>
-                </div>
+                    <div class="form-group">
+                      <label class="form-label" data-i18n="labelMajor">Chuyên ngành</label>
+                      <input type="text" id="info-major" class="form-control" value="An toàn thông tin" readonly>
+                    </div>
 
-                <div class="form-group">
-                  <label class="form-label" data-i18n="labelPosition">Chương trình thực tập</label>
-                  <input type="text" id="info-position" class="form-control" value="Workforce Bootcamp - First Cloud AI Journey (FCAJ)" readonly>
-                </div>
+                    <div class="form-group">
+                      <label class="form-label" data-i18n="labelCompany">Đơn vị thực tập</label>
+                      <input type="text" id="info-company" class="form-control" value="Công ty TNHH Amazon Web Services (AWS) Việt Nam" readonly>
+                    </div>
 
-                <div class="form-group">
-                  <label class="form-label" data-i18n="labelPhone">Số điện thoại</label>
-                  <input type="text" id="info-phone" class="form-control" value="0394728982" readonly>
-                </div>
+                    <div class="form-group">
+                      <label class="form-label" data-i18n="labelPosition">Chương trình thực tập</label>
+                      <input type="text" id="info-position" class="form-control" value="Workforce Bootcamp - First Cloud AI Journey (FCAJ)" readonly>
+                    </div>
 
-                <div class="form-group">
-                  <label class="form-label" data-i18n="labelEmail">Email</label>
-                  <input type="email" id="info-email" class="form-control" value="nhatuien218@gmail.com" readonly>
-                </div>
+                    <div class="form-group">
+                      <label class="form-label" data-i18n="labelPhone">Số điện thoại</label>
+                      <input type="text" id="info-phone" class="form-control" value="0394728982" readonly>
+                    </div>
 
-                <div class="form-group full-span">
-                  <label class="form-label" data-i18n="labelDuration">Thời gian thực tập</label>
-                  <input type="text" id="info-duration" class="form-control" value="Từ 14/09/2026 đến 14/12/2026" readonly>
+                    <div class="form-group">
+                      <label class="form-label" data-i18n="labelEmail">Email</label>
+                      <input type="email" id="info-email" class="form-control" value="nhatuien218@gmail.com" readonly>
+                    </div>
+
+                    <div class="form-group full-span">
+                      <label class="form-label" data-i18n="labelDuration">Thời gian thực tập</label>
+                      <input type="text" id="info-duration" class="form-control" value="Từ 14/09/2026 đến 14/12/2026" readonly>
+                    </div>
+                  </div>
                 </div>
               </div>
             </form>
@@ -855,6 +907,6 @@ aws s3 cp test-file.bin s3://&lt;your-bucket-name&gt;/ --endpoint-url https://bu
   <!-- TOAST CONTAINER -->
   <div class="toast-container" id="toast-container"></div>
 
-  <script src="app.js?v=20261014_v5"></script>
+  <script src="app.js?v=20261014_v6"></script>
 </body>
 </html>
