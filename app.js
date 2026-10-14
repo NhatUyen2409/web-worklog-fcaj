@@ -551,13 +551,14 @@ const DEFAULT_BILINGUAL_DATA = {
       duration: "From 14/09/2026 to 14/12/2026"
     }
   },
-  currentWeek: 1,
+  currentWeek: 2,
   worklogs: Array.from({ length: 12 }, (_, i) => {
     const weekNum = i + 1;
-            if (weekNum === 1) {
+    if (weekNum === 1) {
       return {
         weekNum: 1,
         vi: {
+          topic: "Cloud Fundamentals & Amazon EC2 (14/09/2026 – 18/09/2026)",
           objectives: "- Get acquainted with FCAJ members and understand the internship working process.\n- Complete the AWS Free $100 Credit registration for hands-on practice.\n- Understand fundamental AWS services and AWS global infrastructure.\n- Become familiar with AWS Management Console and AWS CLI.\n- Learn basic Amazon EC2 concepts and perform the first EC2 hands-on lab.",
           achievements: "- Successfully completed the AWS Free $100 Credit registration for AWS hands-on activities.\n- Understood the basic concepts of Cloud Computing and AWS Global Infrastructure:\n  - Region\n  - Availability Zone\n  - Edge Location\n- Understood the major AWS service groups:\n  - Compute\n  - Storage\n  - Networking\n  - Database\n  - Security\n  - Monitoring\n- Became familiar with the AWS Management Console and learned how to:\n  - Search and access AWS services\n  - Switch AWS Regions\n  - View and manage AWS resources\n  - Check basic resource information\n- Successfully installed and configured AWS CLI, including:\n  - Access Key\n  - Secret Key\n  - Default Region\n  - Output Format\n- Used AWS CLI to:\n  - Verify AWS identity and account information\n  - Check CLI configuration\n  - Retrieve the list of AWS Regions\n  - View EC2 instances and instance states\n  - Manage/check EC2 Key Pairs\n  - Retrieve basic AWS resource information\n- Learned the fundamental components of Amazon EC2:\n  - AMI\n  - Instance Type\n  - EBS\n  - Key Pair\n  - Security Group\n  - Public/Private IP\n  - Elastic IP\n- Successfully launched and managed an EC2 instance.\n- Successfully connected to a Linux EC2 instance through SSH.\n- Created and attached an additional EBS volume to an EC2 instance.\n- Practiced managing EC2 using both AWS Console and AWS CLI.\n- Gained the ability to perform a complete basic workflow:\n  AWS Account → Console/CLI → EC2 → Security Group → SSH → EBS → Resource Management.",
           tasks: [
@@ -594,6 +595,7 @@ const DEFAULT_BILINGUAL_DATA = {
           ]
         },
         en: {
+          topic: "Cloud Fundamentals & Amazon EC2 (14/09/2026 – 18/09/2026)",
           objectives: "- Get acquainted with FCAJ members and understand the internship working process.\n- Complete the AWS Free $100 Credit registration for hands-on practice.\n- Understand fundamental AWS services and AWS global infrastructure.\n- Become familiar with AWS Management Console and AWS CLI.\n- Learn basic Amazon EC2 concepts and perform the first EC2 hands-on lab.",
           achievements: "- Successfully completed the AWS Free $100 Credit registration for AWS hands-on activities.\n- Understood the basic concepts of Cloud Computing and AWS Global Infrastructure:\n  - Region\n  - Availability Zone\n  - Edge Location\n- Understood the major AWS service groups:\n  - Compute\n  - Storage\n  - Networking\n  - Database\n  - Security\n  - Monitoring\n- Became familiar with the AWS Management Console and learned how to:\n  - Search and access AWS services\n  - Switch AWS Regions\n  - View and manage AWS resources\n  - Check basic resource information\n- Successfully installed and configured AWS CLI, including:\n  - Access Key\n  - Secret Key\n  - Default Region\n  - Output Format\n- Used AWS CLI to:\n  - Verify AWS identity and account information\n  - Check CLI configuration\n  - Retrieve the list of AWS Regions\n  - View EC2 instances and instance states\n  - Manage/check EC2 Key Pairs\n  - Retrieve basic AWS resource information\n- Learned the fundamental components of Amazon EC2:\n  - AMI\n  - Instance Type\n  - EBS\n  - Key Pair\n  - Security Group\n  - Public/Private IP\n  - Elastic IP\n- Successfully launched and managed an EC2 instance.\n- Successfully connected to a Linux EC2 instance through SSH.\n- Created and attached an additional EBS volume to an EC2 instance.\n- Practiced managing EC2 using both AWS Console and AWS CLI.\n- Gained the ability to perform a complete basic workflow:\n  AWS Account → Console/CLI → EC2 → Security Group → SSH → EBS → Resource Management.",
           tasks: [
@@ -632,30 +634,92 @@ const DEFAULT_BILINGUAL_DATA = {
       };
     } else if (weekNum === 2) {
       return {
-        weekNum: 2,
-        vi: {
-          objectives: "Nghiên cứu chuyên sâu về mạng Amazon VPC, phân chia Subnet, Route Table, NAT Gateway và Security Group.",
-          achievements: "- Thiết kế và triển khai kiến trúc VPC đa tầng gồm Public và Private Subnet.\n- Cấu hình Bastion Host và NAT Gateway giúp máy chủ nội bộ kết nối Internet an toàn.\n- Thiết lập và kiểm thử quy tắc tường lửa Security Group và Network ACL thành công.",
-          tasks: [
-            { day: "2", desc: "- Nghiên cứu quy hoạch dải mạng CIDR cho VPC\n- Phân chia Subnet và cấu hình Internet Gateway", start: "2026-09-21", end: "2026-09-21", ref: "AWS VPC User Guide" },
-            { day: "3", desc: "- Triển khai NAT Gateway\n- Cấu hình bảng định tuyến Private Route Table", start: "2026-09-22", end: "2026-09-22", ref: "https://docs.aws.amazon.com/vpc/" },
-            { day: "4", desc: "- Thực hành thiết lập Network ACL\n- So sánh NACL với Security Group theo nguyên tắc bảo mật tối thiểu", start: "2026-09-23", end: "2026-09-23", ref: "AWS Well-Architected Security" },
-            { day: "5", desc: "- Khởi tạo máy chủ EC2 trong Private Subnet\n- Kiểm tra kết nối Internet qua NAT Gateway", start: "2026-09-24", end: "2026-09-24", ref: "Internal Lab Guide" },
-            { day: "6", desc: "- Báo cáo tiến độ Sprint Review\n- Trao đổi 1-on-1 hàng tuần với Mentor Trần Anh Dũng", start: "2026-09-25", end: "2026-09-25", ref: "Weekly Assessment" }
-          ]
+        "weekNum": 2,
+        "vi": {
+                "topic": "AWS IAM, VPC & Network Security (21/09/2026 – 25/09/2026)",
+                "objectives": "- Understand the fundamental concepts of AWS Identity and Access Management (IAM).\n- Learn how to manage AWS users, user groups, policies, roles, and permissions.\n- Understand Amazon VPC and its core networking components.\n- Learn the differences between public and private subnets.\n- Practice configuring VPC networking and security settings.\n- Apply basic AWS security best practices to cloud resources.",
+                "achievements": "- Understood the basic concepts of AWS IAM and its role in managing access to AWS resources.\n- Learned the differences between IAM Users, User Groups, Roles, and Policies.\n- Practiced creating IAM users and groups and assigning permissions.\n- Understood the principle of least privilege and basic AWS access management practices.\n- Learned the fundamental components of Amazon VPC:\n  - VPC and CIDR Block\n  - Public and Private Subnets\n  - Internet Gateway\n  - Route Table\n  - Security Group\n  - Network ACL\n- Practiced creating a custom VPC and configuring its networking components.\n- Understood how route tables and Internet Gateways control network connectivity.\n- Practiced configuring Security Groups to control EC2 inbound and outbound traffic.\n- Learned how to deploy EC2 instances within a custom VPC.\n- Gained a better understanding of AWS networking architecture and resource security.",
+                "tasks": [
+                        {
+                                "day": "2",
+                                "desc": "- Learn the fundamentals of AWS Identity and Access Management (IAM).\n- Understand IAM Users, User Groups, Roles, and Policies.\n- Learn the principle of least privilege.\n- Explore the IAM Dashboard and its main features.\n- Understand basic AWS account security practices.",
+                                "start": "2026-09-21",
+                                "end": "2026-09-21",
+                                "ref": "AWS IAM: https://000002.awsstudygroup.com/"
+                        },
+                        {
+                                "day": "3",
+                                "desc": "- Practice creating IAM users and user groups.\n- Configure permissions using AWS managed policies.\n- Learn about IAM Roles and their use cases.\n- Understand the differences between authentication and authorization.\n- Practice checking IAM permissions and access restrictions.",
+                                "start": "2026-09-22",
+                                "end": "2026-09-22",
+                                "ref": "AWS IAM: https://000002.awsstudygroup.com/\nIAM Roles for EC2: https://000048.awsstudygroup.com/"
+                        },
+                        {
+                                "day": "4",
+                                "desc": "- Learn the fundamentals of Amazon Virtual Private Cloud (VPC).\n- Understand CIDR Blocks and private IP addressing.\n- Learn about public and private subnets.\n- Study Internet Gateway, Route Table, and NAT Gateway concepts.\n- Explore the VPC Dashboard and networking resources.",
+                                "start": "2026-09-23",
+                                "end": "2026-09-23",
+                                "ref": "Amazon VPC: https://000003.awsstudygroup.com/"
+                        },
+                        {
+                                "day": "5",
+                                "desc": "- Practice creating a custom Amazon VPC.\n- Create public and private subnets.\n- Configure an Internet Gateway.\n- Create and associate Route Tables with subnets.\n- Configure Security Groups for basic network access control.",
+                                "start": "2026-09-24",
+                                "end": "2026-09-24",
+                                "ref": "Amazon VPC: https://000003.awsstudygroup.com/"
+                        },
+                        {
+                                "day": "6",
+                                "desc": "- Review the networking architecture created during the week.\n- Practice launching an EC2 instance in a custom public subnet.\n- Configure SSH access through Security Group rules.\n- Test network connectivity to the EC2 instance.\n- Review IAM and VPC security best practices.\n- Clean up unnecessary lab resources to avoid additional charges.",
+                                "start": "2026-09-25",
+                                "end": "2026-09-25",
+                                "ref": "Amazon VPC: https://000003.awsstudygroup.com/\nAmazon EC2: https://000004.awsstudygroup.com/"
+                        }
+                ]
         },
-        en: {
-          objectives: "Deep dive into VPC Networking, Subnets, Routing, NAT Gateway and Security Groups.",
-          achievements: "- Designed and deployed a multi-tier VPC architecture with Public and Private Subnets.\n- Configured Bastion Host and NAT Gateway for secure outbound internet access.\n- Tested security group inbound and outbound firewall rules successfully.",
-          tasks: [
-            { day: "2", desc: "- Study VPC CIDR planning, IPv4 subnetting\n- Configure Internet Gateway routing", start: "2026-09-21", end: "2026-09-21", ref: "AWS VPC User Guide" },
-            { day: "3", desc: "- Deploy NAT Gateway\n- Configure Private Route Tables", start: "2026-09-22", end: "2026-09-22", ref: "https://docs.aws.amazon.com/vpc/" },
-            { day: "4", desc: "- Practice setting up Network Access Control Lists (NACLs) vs Security Groups\n- Apply principle of least privilege", start: "2026-09-23", end: "2026-09-23", ref: "AWS Well-Architected Security Pillar" },
-            { day: "5", desc: "- Setup EC2 inside Private Subnet\n- Verify internet connectivity via NAT Gateway", start: "2026-09-24", end: "2026-09-24", ref: "Internal Lab Guide" },
-            { day: "6", desc: "- Sprint Review & Weekly 1-on-1 with Mentor Trần Anh Dũng", start: "2026-09-25", end: "2026-09-25", ref: "Weekly Assessment" }
-          ]
+        "en": {
+                "topic": "AWS IAM, VPC & Network Security (21/09/2026 – 25/09/2026)",
+                "objectives": "- Understand the fundamental concepts of AWS Identity and Access Management (IAM).\n- Learn how to manage AWS users, user groups, policies, roles, and permissions.\n- Understand Amazon VPC and its core networking components.\n- Learn the differences between public and private subnets.\n- Practice configuring VPC networking and security settings.\n- Apply basic AWS security best practices to cloud resources.",
+                "achievements": "- Understood the basic concepts of AWS IAM and its role in managing access to AWS resources.\n- Learned the differences between IAM Users, User Groups, Roles, and Policies.\n- Practiced creating IAM users and groups and assigning permissions.\n- Understood the principle of least privilege and basic AWS access management practices.\n- Learned the fundamental components of Amazon VPC:\n  - VPC and CIDR Block\n  - Public and Private Subnets\n  - Internet Gateway\n  - Route Table\n  - Security Group\n  - Network ACL\n- Practiced creating a custom VPC and configuring its networking components.\n- Understood how route tables and Internet Gateways control network connectivity.\n- Practiced configuring Security Groups to control EC2 inbound and outbound traffic.\n- Learned how to deploy EC2 instances within a custom VPC.\n- Gained a better understanding of AWS networking architecture and resource security.",
+                "tasks": [
+                        {
+                                "day": "2",
+                                "desc": "- Learn the fundamentals of AWS Identity and Access Management (IAM).\n- Understand IAM Users, User Groups, Roles, and Policies.\n- Learn the principle of least privilege.\n- Explore the IAM Dashboard and its main features.\n- Understand basic AWS account security practices.",
+                                "start": "2026-09-21",
+                                "end": "2026-09-21",
+                                "ref": "AWS IAM: https://000002.awsstudygroup.com/"
+                        },
+                        {
+                                "day": "3",
+                                "desc": "- Practice creating IAM users and user groups.\n- Configure permissions using AWS managed policies.\n- Learn about IAM Roles and their use cases.\n- Understand the differences between authentication and authorization.\n- Practice checking IAM permissions and access restrictions.",
+                                "start": "2026-09-22",
+                                "end": "2026-09-22",
+                                "ref": "AWS IAM: https://000002.awsstudygroup.com/\nIAM Roles for EC2: https://000048.awsstudygroup.com/"
+                        },
+                        {
+                                "day": "4",
+                                "desc": "- Learn the fundamentals of Amazon Virtual Private Cloud (VPC).\n- Understand CIDR Blocks and private IP addressing.\n- Learn about public and private subnets.\n- Study Internet Gateway, Route Table, and NAT Gateway concepts.\n- Explore the VPC Dashboard and networking resources.",
+                                "start": "2026-09-23",
+                                "end": "2026-09-23",
+                                "ref": "Amazon VPC: https://000003.awsstudygroup.com/"
+                        },
+                        {
+                                "day": "5",
+                                "desc": "- Practice creating a custom Amazon VPC.\n- Create public and private subnets.\n- Configure an Internet Gateway.\n- Create and associate Route Tables with subnets.\n- Configure Security Groups for basic network access control.",
+                                "start": "2026-09-24",
+                                "end": "2026-09-24",
+                                "ref": "Amazon VPC: https://000003.awsstudygroup.com/"
+                        },
+                        {
+                                "day": "6",
+                                "desc": "- Review the networking architecture created during the week.\n- Practice launching an EC2 instance in a custom public subnet.\n- Configure SSH access through Security Group rules.\n- Test network connectivity to the EC2 instance.\n- Review IAM and VPC security best practices.\n- Clean up unnecessary lab resources to avoid additional charges.",
+                                "start": "2026-09-25",
+                                "end": "2026-09-25",
+                                "ref": "Amazon VPC: https://000003.awsstudygroup.com/\nAmazon EC2: https://000004.awsstudygroup.com/"
+                        }
+                ]
         }
-      };
+};
     } else {
       return {
         weekNum: weekNum,
@@ -837,8 +901,8 @@ const DEFAULT_BILINGUAL_DATA = {
 // ==========================================
 // 3. PERSISTENCE & STATE MANAGEMENT
 // ==========================================
-const STORAGE_KEY = 'fcaj_report_bilingual_v13';
-const PREV_STORAGE_KEY = 'fcaj_report_bilingual_v12';
+const STORAGE_KEY = 'fcaj_report_bilingual_v14';
+const PREV_STORAGE_KEY = 'fcaj_report_bilingual_v13';
 const LANG_KEY = 'fcaj_report_lang';
 
 class AppLanguageManager {
@@ -876,6 +940,13 @@ class AppLanguageManager {
         if (parsed && parsed.worklogs && parsed.worklogs.length > 0) {
           // Thông tin sinh viên chỉ có thể sửa từ code, luôn đồng bộ từ DEFAULT_BILINGUAL_DATA
           parsed.studentInfo = JSON.parse(JSON.stringify(DEFAULT_BILINGUAL_DATA.studentInfo));
+          // Luôn đồng bộ nội dung chuẩn của Tuần 1 và Tuần 2 từ code
+          const w1 = DEFAULT_BILINGUAL_DATA.worklogs.find(w => w.weekNum === 1);
+          const w2 = DEFAULT_BILINGUAL_DATA.worklogs.find(w => w.weekNum === 2);
+          const p1Idx = parsed.worklogs.findIndex(w => w.weekNum === 1);
+          const p2Idx = parsed.worklogs.findIndex(w => w.weekNum === 2);
+          if (w1 && p1Idx !== -1) parsed.worklogs[p1Idx] = JSON.parse(JSON.stringify(w1));
+          if (w2 && p2Idx !== -1) parsed.worklogs[p2Idx] = JSON.parse(JSON.stringify(w2));
           return parsed;
         }
       }
@@ -1228,12 +1299,25 @@ function selectWeek(num) {
 
 function renderRefLinks(refStr) {
   if (!refStr || !refStr.trim()) return '-';
-  const lines = refStr.split('\n').map(l => l.trim()).filter(Boolean);
+  // Normalize markdown links or slash separated links into individual lines
+  let normalized = refStr.replace(/\s*\/\s*(?=\[|https?:\/\/)/g, '\n');
+  const lines = normalized.split('\n').map(l => l.trim()).filter(Boolean);
   return lines.map(line => {
+    // Check for markdown link [Title](https://...)
+    const mdMatch = line.match(/^\[(.*?)\]\((https?:\/\/[^\s\)]+)\)$/);
+    if (mdMatch) {
+      const title = mdMatch[1];
+      const url = mdMatch[2];
+      return `<div style="margin-bottom: 5px; font-size: 13px; line-height: 1.45;">
+        <span style="font-weight:600; color:var(--text-main);">${escapeHtml(title)}:</span> 
+        <a href="${escapeHtml(url)}" target="_blank" rel="noopener" style="color:var(--primary); font-weight:600; text-decoration:underline; word-break:break-all;">${escapeHtml(url)} ↗</a>
+      </div>`;
+    }
     const match = line.match(/(https?:\/\/[^\s]+)/);
     if (match) {
-      const url = match[1];
-      const prefix = line.replace(url, '').trim();
+      let url = match[1];
+      url = url.replace(/\)+$/, '');
+      let prefix = line.replace(match[1], '').replace(/[\[\]\(\)]/g, '').trim();
       return `<div style="margin-bottom: 5px; font-size: 13px; line-height: 1.45;">
         ${prefix ? `<span style="font-weight:600; color:var(--text-main);">${escapeHtml(prefix)}</span> ` : ''}
         <a href="${escapeHtml(url)}" target="_blank" rel="noopener" style="color:var(--primary); font-weight:600; text-decoration:underline; word-break:break-all;">${escapeHtml(url)} ↗</a>
@@ -1263,6 +1347,14 @@ function renderWorklogView() {
   const tbody = document.getElementById('week-tasks-tbody');
 
   if (heading) heading.textContent = `${t('weekHeadingPrefix')} ${week.weekNum}`;
+  const subtitle = document.getElementById('current-week-subtitle');
+  if (subtitle) {
+    if (content.topic) {
+      subtitle.textContent = content.topic;
+    } else {
+      subtitle.textContent = t('bootcampSubtitle');
+    }
+  }
   
   if (objText) {
     if (content.objectives && content.objectives.trim()) {
