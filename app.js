@@ -97,7 +97,13 @@ const I18N_DICTIONARY = {
     toc2Title: "2. Đề xuất đồ án",
     toc2Desc: "Đề xuất đồ án: IoT Weather Platform - Giải pháp AWS Serverless Real-Time Monitoring.",
     toc3Title: "3. Bài viết kỹ thuật",
-    toc3Desc: "Các bài viết kỹ thuật đã đăng tải trên AWS Study Group (EKS Pod Identity Session Policies,...).",
+    toc3Desc: "Các bài viết kỹ thuật đã đăng tải trên AWS Study Group (EKS Pod Identity, S3 Express One Zone,...).",
+    zoomDiagramTooltip: "Nhấp để xem ảnh kiến trúc độ nét cao (HD)",
+    btnExpandSnippet: "Đọc tiếp nội dung đầy đủ ▼",
+    btnCollapseSnippet: "Thu gọn bài viết ▲",
+    diagModalTitle: "Sơ đồ kiến trúc (Độ nét cao)",
+    diagModalDesc: "Sơ đồ so sánh kiến trúc giữa Amazon S3 Standard và Amazon S3 Express One Zone trong luồng xử lý AI/ML.",
+    btnOpenTab: "Mở ảnh trong tab mới ↗",
     toc4Title: "4. Sự kiện tham gia",
     toc4Desc: "Báo cáo tham dự sự kiện thực tế: GenAI-powered App-DB Modernization Workshop tại Bitexco.",
     toc5Title: "5. Bài thực hành Workshop",
@@ -1090,6 +1096,63 @@ const DEFAULT_BILINGUAL_DATA = {
         url: "https://awsstudygroup.com",
         date: "10/10/2026",
         snippet: "Phân tích chuyên sâu về cơ chế chụp nhanh trạng thái bộ nhớ AWS Lambda SnapStart, tối ưu hóa thời gian khởi động nguội cho các microservices Serverless xuống mức dưới 100ms."
+      },
+      {
+        id: "blog-4",
+        title: "Blog 4 - AMAZON S3 EXPRESS ONE ZONE – NHANH HƠN TỚI 10 LẦN, NHƯNG HỆ THỐNG CÓ THỰC SỰ HIỆU QUẢ HƠN?",
+        url: "https://www.facebook.com/groups/awsstudygroupfcj",
+        date: "18/10/2026",
+        image: "assets/images/s3-express-one-zone-architecture.png",
+        snippet: `Trong các hệ thống AI/ML, việc xử lý hàng triệu hình ảnh hoặc tệp dữ liệu đòi hỏi ứng dụng liên tục truy xuất dữ liệu từ Amazon S3.
+Tuy nhiên, khi tốc độ đọc dữ liệu không theo kịp khả năng xử lý của CPU/GPU, hệ thống có thể gặp I/O Bottleneck – tài nguyên tính toán phải chờ dữ liệu, kéo dài thời gian thực thi và làm tăng chi phí.
+Để giải quyết bài toán này, AWS cung cấp Amazon S3 Express One Zone, một storage class được tối ưu cho các ứng dụng yêu cầu độ trễ truy cập thấp.
+
+1. AMAZON S3 EXPRESS ONE ZONE LÀ GÌ?
+Amazon S3 Express One Zone là storage class hiệu năng cao, sử dụng Directory Bucket và lưu trữ dữ liệu trong một Availability Zone (AZ).
+Khác với S3 Standard lưu trữ dự phòng trên nhiều AZ, S3 Express One Zone cho phép đặt tài nguyên tính toán và dữ liệu trong cùng AZ để tối ưu truy xuất.
+Theo AWS, dịch vụ có thể cung cấp độ trễ ở mức vài mili giây và tốc độ truy cập nhanh hơn tới 10 lần so với S3 Standard trong điều kiện phù hợp.
+
+2. ƯU ĐIỂM VÀ HẠN CHẾ
+Ưu điểm:
++ Giảm độ trễ truy cập dữ liệu, phù hợp với workload có tần suất đọc/ghi cao.
++ Có thể giảm thời gian chờ I/O, nâng cao hiệu quả sử dụng tài nguyên tính toán.
++ Có tiềm năng giảm chi phí compute nếu tác vụ hoàn thành nhanh hơn.
+Hạn chế:
++ Chỉ lưu trữ trong một AZ, không có khả năng dự phòng đa AZ như S3 Standard.
++ Chi phí lưu trữ và request vẫn phát sinh; hiệu quả kinh tế phụ thuộc vào workload.
++ Không hỗ trợ một số tính năng như S3 Versioning và S3 Replication.
++ Việc tăng tốc storage không đảm bảo toàn bộ hệ thống nhanh hơn tương ứng.
+
+3. PHÂN TÍCH HIỆU NĂNG QUA VÍ DỤ
+Giả sử một tác vụ AI xử lý hình ảnh mất 100 phút:
+• Đọc dữ liệu từ S3: 20 phút.
+• Tiền xử lý và tính toán bằng CPU/GPU: 80 phút.
+Nếu thời gian đọc dữ liệu giảm 10 lần, tổng thời gian xử lý còn:
+(20 ÷ 10) + 80 = 82 phút.
+Như vậy, dù phần đọc dữ liệu nhanh hơn 10 lần, tổng thời gian hoàn thành tác vụ chỉ giảm 18%.
+Đây là ví dụ giả định dựa trên nguyên lý Amdahl, cho thấy hiệu quả tối ưu phụ thuộc vào tỷ trọng thời gian của thành phần được cải thiện. Phép tính giả định các công đoạn diễn ra tuần tự và những yếu tố khác không thay đổi.
+Vì vậy, trước khi nâng cấp storage, cần xác định hệ thống thực sự bị giới hạn bởi I/O hay CPU/GPU.
+
+4. GÓC NHÌN VÀ ĐỀ XUẤT ỨNG DỤNG
+Thay vì chuyển toàn bộ dữ liệu sang S3 Express One Zone, mình đề xuất cân nhắc kiến trúc lưu trữ hai lớp:
+- S3 Standard: Lưu dữ liệu gốc, cần bảo vệ trên nhiều AZ.
+- S3 Express One Zone: Lưu tập dữ liệu làm việc được truy cập thường xuyên.
+- EC2/GPU: Đặt cùng AZ với S3 Express One Zone để tối ưu truy cập dữ liệu.
+Ví dụ: Một hệ thống AI lưu trữ 1 triệu hình ảnh nhưng mỗi ngày chỉ xử lý 100.000 ảnh. Thay vì chuyển toàn bộ dữ liệu, hệ thống có thể sao chép 100.000 ảnh cần xử lý sang S3 Express One Zone.
+Cách này tập trung storage hiệu năng cao vào dữ liệu thực sự cần thiết, đồng thời giữ bản gốc trên S3 Standard.
+Tuy nhiên, cần đánh giá một câu hỏi: Chi phí và thời gian sao chép dữ liệu có nhỏ hơn lợi ích tiết kiệm được từ việc xử lý nhanh hơn hay không? Nếu không, sử dụng S3 Standard có thể vẫn hiệu quả hơn.
+
+5. KẾT LUẬN
+S3 Express One Zone là lựa chọn đáng cân nhắc cho các ứng dụng AI/ML, Data Analytics và xử lý dữ liệu có tần suất truy cập cao.
+Tuy nhiên, thay vì chỉ đánh giá tốc độ truy cập, nên xác định tập dữ liệu cần tăng tốc, mức cải thiện thời gian xử lý và điểm hòa vốn chi phí.
+Theo mình, hiệu quả của kiến trúc Cloud không nằm ở việc sử dụng dịch vụ nhanh nhất, mà ở việc lựa chọn đúng giải pháp cho từng phần của workload.
+
+TÀI LIỆU THAM KHẢO
+• AWS – S3 Express One Zone Performance (https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-express-performance.html)
+• AWS – Amazon S3 Storage Classes (https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage-class-intro.html)
+• AWS – S3 Express One Zone Best Practices (https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-express-optimizing-performance-design-patterns.html)
+• AWS – Amazon S3 Pricing (https://aws.amazon.com/s3/pricing/)
+#AWS #AmazonS3 #S3ExpressOneZone #CloudComputing #CloudArchitecture #PerformanceOptimization #CostOptimization #AWSStudyGroup`
       }
     ],
     en: [
@@ -1113,6 +1176,62 @@ const DEFAULT_BILINGUAL_DATA = {
         url: "https://awsstudygroup.com",
         date: "10/10/2026",
         snippet: "An in-depth exploration of AWS Lambda SnapStart, tiered compilation, and memory provisioning best practices to optimize serverless API response times down to sub-100ms."
+      },
+      {
+        id: "blog-4",
+        title: "Blog 4 - AMAZON S3 EXPRESS ONE ZONE – UP TO 10X FASTER, BUT IS THE SYSTEM TRULY MORE EFFICIENT?",
+        url: "https://www.facebook.com/groups/awsstudygroupfcj",
+        date: "18/10/2026",
+        image: "assets/images/s3-express-one-zone-architecture.png",
+        snippet: `In AI/ML systems, processing millions of images or data files requires applications to continuously fetch data from Amazon S3.
+However, when data read speeds cannot keep pace with CPU/GPU processing capabilities, the system may encounter an I/O Bottleneck — compute resources sit idle waiting for data, prolonging execution time and escalating costs.
+To address this challenge, AWS offers Amazon S3 Express One Zone, a high-performance storage class purpose-built for applications demanding low-latency data access.
+
+1. WHAT IS AMAZON S3 EXPRESS ONE ZONE?
+Amazon S3 Express One Zone is a high-performance storage class that utilizes Directory Buckets and stores data within a single Availability Zone (AZ).
+Unlike S3 Standard, which redundantly replicates data across multiple AZs, S3 Express One Zone allows co-locating compute and storage resources within the same AZ to optimize throughput.
+According to AWS, the service can deliver single-digit millisecond data access latencies and speeds up to 10x faster than S3 Standard under optimal conditions.
+
+2. ADVANTAGES & LIMITATIONS
+Advantages:
++ Significantly reduces data access latency, ideal for high-throughput, read/write-intensive workloads.
++ Decreases I/O wait times, improving compute utilization and resource efficiency.
++ Potential to reduce overall compute costs if workloads complete faster.
+Limitations:
++ Stored within a single AZ without multi-AZ redundancy like S3 Standard.
++ Storage and request charges still apply; cost-effectiveness depends heavily on workload characteristics.
++ Lacks support for specific S3 features such as S3 Versioning and S3 Replication.
++ Accelerating storage performance does not necessarily translate to a proportional speedup of the end-to-end system.
+
+3. PERFORMANCE ANALYSIS VIA EXAMPLE (AMDAHL'S LAW)
+Suppose an AI image processing job takes 100 minutes:
+• Reading data from S3: 20 minutes.
+• Preprocessing and model computation on CPU/GPU: 80 minutes.
+If data read time is reduced by 10x, the new total execution time becomes:
+(20 ÷ 10) + 80 = 82 minutes.
+Thus, even with a 10x storage read acceleration, total completion time is only reduced by 18%.
+This hypothetical scenario based on Amdahl's Law demonstrates that overall optimization gains are bounded by the proportion of time spent in the accelerated component.
+Therefore, prior to upgrading storage tiers, it is vital to profile whether your system is genuinely I/O-bound or compute-bound.
+
+4. ARCHITECTURAL PERSPECTIVE & RECOMMENDED APPLICATION
+Instead of migrating an entire dataset to S3 Express One Zone, consider a two-tier storage architecture:
+- S3 Standard: Retain primary/source data with multi-AZ durability protection.
+- S3 Express One Zone: Store the active working set that is frequently accessed.
+- EC2 / GPU instances: Co-located in the same AZ as S3 Express One Zone for minimal latency.
+Example: An AI pipeline stores 1,000,000 images but processes only 100,000 images daily. Rather than moving all data, copy the 100,000 active images to S3 Express One Zone.
+However, evaluate this question: Are the data copy costs and transfer overhead smaller than the compute savings gained from faster processing? If not, remaining on S3 Standard may be more cost-effective.
+
+5. CONCLUSION
+S3 Express One Zone is a compelling choice for AI/ML, Big Data analytics, and latency-critical workloads.
+However, architects must identify the specific working set to accelerate, quantify execution time improvements, and calculate the cost break-even point.
+Cloud architectural excellence does not simply mean choosing the fastest service, but rather selecting the right tool for each phase of the workload.
+
+REFERENCES
+• AWS – S3 Express One Zone Performance (https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-express-performance.html)
+• AWS – Amazon S3 Storage Classes (https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage-class-intro.html)
+• AWS – S3 Express One Zone Best Practices (https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-express-optimizing-performance-design-patterns.html)
+• AWS – Amazon S3 Pricing (https://aws.amazon.com/s3/pricing/)
+#AWS #AmazonS3 #S3ExpressOneZone #CloudComputing #CloudArchitecture #PerformanceOptimization #CostOptimization #AWSStudyGroup`
       }
     ]
   },
@@ -1205,8 +1324,8 @@ const DEFAULT_BILINGUAL_DATA = {
 // ==========================================
 // 3. PERSISTENCE & STATE MANAGEMENT
 // ==========================================
-const STORAGE_KEY = 'fcaj_report_bilingual_v16';
-const PREV_STORAGE_KEY = 'fcaj_report_bilingual_v15';
+const STORAGE_KEY = 'fcaj_report_bilingual_v17';
+const PREV_STORAGE_KEY = 'fcaj_report_bilingual_v16';
 const LANG_KEY = 'fcaj_report_lang';
 
 class AppLanguageManager {
@@ -1252,6 +1371,25 @@ class AppLanguageManager {
               parsed.worklogs[pIdx] = JSON.parse(JSON.stringify(defWeek));
             }
           });
+          // Luôn đồng bộ các bài blog chuẩn (Blog 1-4) từ DEFAULT_BILINGUAL_DATA
+          if (!parsed.blogs) {
+            parsed.blogs = JSON.parse(JSON.stringify(DEFAULT_BILINGUAL_DATA.blogs));
+          } else {
+            ['vi', 'en'].forEach(l => {
+              if (!parsed.blogs[l]) {
+                parsed.blogs[l] = JSON.parse(JSON.stringify(DEFAULT_BILINGUAL_DATA.blogs[l]));
+              } else {
+                DEFAULT_BILINGUAL_DATA.blogs[l].forEach(defBlog => {
+                  const bIdx = parsed.blogs[l].findIndex(b => b.id === defBlog.id);
+                  if (bIdx === -1) {
+                    parsed.blogs[l].push(JSON.parse(JSON.stringify(defBlog)));
+                  } else {
+                    parsed.blogs[l][bIdx] = JSON.parse(JSON.stringify(defBlog));
+                  }
+                });
+              }
+            });
+          }
           return parsed;
         }
       }
@@ -2447,20 +2585,84 @@ function renderBlogsList() {
   const lang = app.currentLang;
   const blogs = app.data.blogs[lang] || app.data.blogs.vi;
 
-  container.innerHTML = blogs.map(b => `
-    <div class="blog-card">
-      <div class="blog-header">
-        <span class="badge badge-purple" style="margin-bottom:8px;">AWS Study Group</span>
-        <h3>${escapeHtml(b.title)}</h3>
-        <span style="font-size:12px; color:var(--text-subtle);">${t('publishedDateLabel')} ${escapeHtml(b.date || '-')}</span>
+  container.innerHTML = blogs.map(b => {
+    const isLongSnippet = (b.snippet || '').length > 360;
+    const imgHtml = b.image ? `
+      <div class="blog-img-box" onclick="openBlogImageModal('${escapeHtml(b.image)}', '${escapeHtml(b.title)}')" title="${t('zoomDiagramTooltip')}">
+        <img src="${escapeHtml(b.image)}" alt="${escapeHtml(b.title)}" loading="lazy">
+        <div class="blog-img-overlay">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>
+          <span>${t('zoomDiagramTooltip')}</span>
+        </div>
       </div>
-      <p class="blog-snippet">${escapeHtml(b.snippet)}</p>
-      <div style="display:flex; justify-content:space-between; align-items:center; border-top:1px solid #F1F5F9; padding-top:12px;">
-        <a href="${escapeHtml(b.url)}" target="_blank" rel="noopener" class="btn btn-outline" style="font-size:12px; padding:4px 12px;">${t('readArticleLink')}</a>
-        <button type="button" class="btn-text-subtle" style="color:#EF4444;" onclick="deleteBlog('${b.id}')">${t('btnDelete')}</button>
+    ` : '';
+
+    return `
+      <div class="blog-card" id="${escapeHtml(b.id)}">
+        <div class="blog-header">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+            <span class="badge badge-purple">AWS Study Group</span>
+            <span style="font-size:12px; color:var(--text-subtle);">${t('publishedDateLabel')} ${escapeHtml(b.date || '-')}</span>
+          </div>
+          <h3>${escapeHtml(b.title)}</h3>
+        </div>
+        ${imgHtml}
+        <div class="blog-snippet-wrap">
+          <div id="wrap-${escapeHtml(b.id)}" class="${isLongSnippet ? 'blog-snippet-collapsed' : ''}">
+            <p class="blog-snippet" id="snippet-${escapeHtml(b.id)}">${escapeHtml(b.snippet)}</p>
+          </div>
+          ${isLongSnippet ? `
+            <button type="button" class="blog-toggle-snippet-btn" id="btn-toggle-${escapeHtml(b.id)}" onclick="toggleBlogSnippet('${escapeHtml(b.id)}')">
+              <span>${t('btnExpandSnippet')}</span>
+            </button>
+          ` : ''}
+        </div>
+        <div style="display:flex; justify-content:space-between; align-items:center; border-top:1px solid #F1F5F9; padding-top:12px; margin-top:auto;">
+          <a href="${escapeHtml(b.url)}" target="_blank" rel="noopener" class="btn btn-outline" style="font-size:12px; padding:6px 14px; font-weight:600; display:inline-flex; align-items:center; gap:6px;">
+            <span>${t('readArticleLink')}</span>
+          </a>
+          <button type="button" class="btn-text-subtle" style="color:#EF4444; font-size:12px;" onclick="deleteBlog('${b.id}')">${t('btnDelete')}</button>
+        </div>
       </div>
-    </div>
-  `).join('');
+    `;
+  }).join('');
+}
+
+function toggleBlogSnippet(id) {
+  const wrap = document.getElementById('wrap-' + id);
+  const btn = document.getElementById('btn-toggle-' + id);
+  if (!wrap || !btn) return;
+  const isCollapsed = wrap.classList.contains('blog-snippet-collapsed');
+  if (isCollapsed) {
+    wrap.classList.remove('blog-snippet-collapsed');
+    btn.innerHTML = `<span>${t('btnCollapseSnippet')}</span>`;
+  } else {
+    wrap.classList.add('blog-snippet-collapsed');
+    btn.innerHTML = `<span>${t('btnExpandSnippet')}</span>`;
+  }
+}
+
+function openBlogImageModal(src, title) {
+  const modal = document.getElementById('blog-image-modal');
+  const preview = document.getElementById('blog-image-modal-preview');
+  const titleEl = document.getElementById('blog-image-modal-title');
+  const descEl = document.getElementById('blog-image-modal-desc');
+  const openTab = document.getElementById('btn-blog-img-open-tab');
+  if (!modal || !preview) return;
+
+  preview.src = src;
+  if (titleEl) titleEl.textContent = title || t('diagModalTitle');
+  if (descEl) descEl.textContent = t('diagModalDesc');
+  if (openTab) {
+    openTab.href = src;
+    openTab.textContent = t('btnOpenTab');
+  }
+  modal.classList.add('active');
+}
+
+function closeBlogImageModal() {
+  const modal = document.getElementById('blog-image-modal');
+  if (modal) modal.classList.remove('active');
 }
 
 function deleteBlog(id) {
@@ -2485,7 +2687,7 @@ function setupBlogs() {
       if (!title) return;
       const snippet = prompt(promptSnippet, '');
       if (!snippet) return;
-      const url = prompt(promptUrl, 'https://awsstudygroup.com');
+      const url = prompt(promptUrl, 'https://www.facebook.com/groups/awsstudygroupfcj');
 
       const lang = app.currentLang;
       if (!app.data.blogs[lang]) app.data.blogs[lang] = [];
@@ -2493,7 +2695,7 @@ function setupBlogs() {
         id: 'blog-' + Date.now(),
         title,
         snippet,
-        url: url || 'https://awsstudygroup.com',
+        url: url || 'https://www.facebook.com/groups/awsstudygroupfcj',
         date: new Date().toLocaleDateString(lang === 'vi' ? 'vi-VN' : 'en-US')
       });
 
@@ -2502,6 +2704,24 @@ function setupBlogs() {
       showToast(t('toastAddBlog'));
     });
   }
+
+  // Blog image modal event listeners
+  const btnCloseModal = document.getElementById('btn-close-blog-img-modal');
+  const btnCloseBtn = document.getElementById('btn-close-blog-img-btn');
+  const modal = document.getElementById('blog-image-modal');
+
+  if (btnCloseModal) btnCloseModal.addEventListener('click', closeBlogImageModal);
+  if (btnCloseBtn) btnCloseBtn.addEventListener('click', closeBlogImageModal);
+  if (modal) {
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) closeBlogImageModal();
+    });
+  }
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && modal && modal.classList.contains('active')) {
+      closeBlogImageModal();
+    }
+  });
 }
 
 // ==========================================
@@ -2795,7 +3015,7 @@ function setupSearchAndMobile() {
 
       if (q.includes('worklog') || q.includes('tuần') || q.includes('week') || q.includes('nhật ký')) navigateTo('worklog');
       else if (q.includes('proposal') || q.includes('đồ án') || q.includes('weather') || q.includes('đề xuất')) navigateTo('proposal');
-      else if (q.includes('blog') || q.includes('eks') || q.includes('bài viết')) navigateTo('blogs-posted');
+      else if (q.includes('blog') || q.includes('eks') || q.includes('bài viết') || q.includes('s3 express') || q.includes('one zone') || q.includes('amdahl')) navigateTo('blogs-posted');
       else if (q.includes('event') || q.includes('sự kiện') || q.includes('bitexco')) navigateTo('events');
       else if (q.includes('workshop') || q.includes('s3') || q.includes('endpoint') || q.includes('thực hành')) navigateTo('workshop');
       else if (q.includes('đánh giá') || q.includes('self') || q.includes('assessment')) navigateTo('self-evaluation');

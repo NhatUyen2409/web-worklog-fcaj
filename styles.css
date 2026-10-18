@@ -1383,3 +1383,93 @@ html, body {
   .card { box-shadow: none !important; border: 1px solid #CBD5E1 !important; padding: 20px !important; }
   textarea.form-control { border: none !important; resize: none !important; }
 }
+
+/* ==========================================================================
+   BLOG CARD ENHANCEMENTS (IMAGE & EXPANDABLE CONTENT)
+   ========================================================================== */
+.blog-img-box {
+  margin: 12px 0 14px 0;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  border: 1px solid var(--border-light);
+  background: #FFFFFF;
+  position: relative;
+  cursor: pointer;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.blog-img-box img {
+  width: 100%;
+  max-height: 240px;
+  object-fit: contain;
+  background: #FFFFFF;
+  display: block;
+  transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.blog-img-box:hover img {
+  transform: scale(1.025);
+}
+
+.blog-img-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(15, 23, 42, 0.78);
+  backdrop-filter: blur(4px);
+  color: #FFFFFF;
+  padding: 6px 12px;
+  font-size: 11.5px;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  transition: background 0.2s ease;
+}
+
+.blog-img-box:hover .blog-img-overlay {
+  background: rgba(15, 23, 42, 0.92);
+}
+
+.blog-snippet-wrap {
+  position: relative;
+  margin-bottom: 14px;
+}
+
+.blog-snippet-collapsed {
+  max-height: 180px;
+  overflow: hidden;
+  position: relative;
+}
+
+.blog-snippet-collapsed::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 60px;
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.98));
+  pointer-events: none;
+}
+
+.blog-toggle-snippet-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  background: transparent;
+  border: none;
+  color: var(--primary);
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 4px 0 8px 0;
+  transition: color 0.15s ease;
+}
+
+.blog-toggle-snippet-btn:hover {
+  color: var(--primary-hover);
+  text-decoration: underline;
+}

@@ -334,7 +334,7 @@
                 <div class="toc-badge">3</div>
                 <div>
                   <h4 data-i18n="toc3Title">3. Bài viết kỹ thuật</h4>
-                  <p data-i18n="toc3Desc">Các bài viết kỹ thuật đã đăng tải trên AWS Study Group (EKS Pod Identity Session Policies,...).</p>
+                  <p data-i18n="toc3Desc">Các bài viết kỹ thuật đã đăng tải trên AWS Study Group (EKS Pod Identity, S3 Express One Zone,...).</p>
                 </div>
               </div>
 
@@ -925,6 +925,33 @@ aws s3 cp test-file.bin s3://&lt;your-bucket-name&gt;/ --endpoint-url https://bu
   </div>
 
   <!-- ============================================== -->
+  <!-- MODAL: XEM ẢNH BLOG KIẾN TRÚC ĐỘ NÉT CAO (HD)  -->
+  <!-- ============================================== -->
+  <div class="modal-backdrop" id="blog-image-modal">
+    <div class="modal-dialog" style="max-width: 960px; width: 95%;">
+      <div class="modal-header">
+        <div style="display: flex; align-items: center; gap: 10px;">
+          <h3 class="modal-title" id="blog-image-modal-title">Sơ đồ kiến trúc (Độ nét cao)</h3>
+          <span class="badge badge-purple">AWS Architecture</span>
+        </div>
+        <button type="button" class="btn-close-modal" id="btn-close-blog-img-modal">&times;</button>
+      </div>
+      <div class="modal-body" style="padding: 16px; display: flex; flex-direction: column; align-items: center; justify-content: center; background: #0B0F19; min-height: 320px;">
+        <img id="blog-image-modal-preview" src="" alt="Sơ đồ kiến trúc HD" style="max-width: 100%; max-height: 75vh; border-radius: 8px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); object-fit: contain; background: #FFFFFF;">
+        <p id="blog-image-modal-desc" style="font-size: 12px; color: #94A3B8; margin-top: 14px; margin-bottom: 0;">
+          Sơ đồ so sánh kiến trúc giữa Amazon S3 Standard và Amazon S3 Express One Zone trong luồng xử lý AI/ML.
+        </p>
+      </div>
+      <div class="modal-footer" style="display: flex; justify-content: space-between; align-items: center;">
+        <a id="btn-blog-img-open-tab" href="#" target="_blank" rel="noopener" class="btn btn-outline" style="font-size: 12px; text-decoration: none;">
+          Mở ảnh trong tab mới ↗
+        </a>
+        <button type="button" class="btn btn-primary" id="btn-close-blog-img-btn">Đóng</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================================== -->
   <!-- MODAL: XEM ẢNH GỐC ĐỘ NÉT CAO (HD LIGHTBOX)    -->
   <!-- ============================================== -->
   <div class="modal-backdrop" id="photo-hd-modal">
@@ -951,6 +978,6 @@ aws s3 cp test-file.bin s3://&lt;your-bucket-name&gt;/ --endpoint-url https://bu
   <!-- TOAST CONTAINER -->
   <div class="toast-container" id="toast-container"></div>
 
-  <script src="app.js?v=20261014_v8"></script>
+  <script src="app.js?v=20261018_v9"></script>
 </body>
 </html>
