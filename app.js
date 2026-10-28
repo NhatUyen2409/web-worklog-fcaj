@@ -183,6 +183,12 @@ const I18N_DICTIONARY = {
     eventSpeakersLabel: "Diễn giả:",
     eventHighlightsLabel: "Nội dung trọng tâm & Bài học rút ra:",
     btnDeleteEvent: "Xóa sự kiện",
+    btnViewFullReport: "Xem báo cáo chi tiết →",
+    btnBackToEvents: "← Quay lại danh sách sự kiện",
+    eventsBreadcrumb: "4. Sự kiện thực tế đã tham gia",
+    eventReportBadge: "Báo cáo thu hoạch sự kiện",
+    eventReportSessionTag: "Session 1 • Voice AI & Contact Center",
+    toastEventReportLoaded: "Đã tải báo cáo Session 1 Voice AI",
     
     // 5. Workshop
     workshopSectionTitle: "5. Bài thực hành: Truy cập S3 an toàn qua VPC Endpoints",
@@ -461,6 +467,12 @@ const I18N_DICTIONARY = {
     eventSpeakersLabel: "Speakers:",
     eventHighlightsLabel: "Key Highlights & Takeaways:",
     btnDeleteEvent: "Delete Event",
+    btnViewFullReport: "View Full Report →",
+    btnBackToEvents: "← Back to Events",
+    eventsBreadcrumb: "4. Events Participated",
+    eventReportBadge: "Event Harvest Report",
+    eventReportSessionTag: "Session 1 • Voice AI & Contact Center",
+    toastEventReportLoaded: "Loaded Session 1 Voice AI Report",
     
     // 5. Workshop
     workshopSectionTitle: "5. Workshop: Secure Hybrid Access to S3 using VPC Endpoints",
@@ -1239,54 +1251,55 @@ REFERENCES
     vi: [
       {
         id: "event-1",
+        slug: "hoi-thao-hien-dai-hoa-ung-dung-csdl-genai",
         name: "Sự kiện 1 - Hội thảo Hiện đại hóa Ứng dụng & CSDL với GenAI",
         dateTime: "09:00, 12/08/2026",
         location: "Tầng 26, Bitexco Financial Tower, Số 02 Hải Triều, Q.1, TP.HCM",
         role: "Khách mời tham dự",
         speakers: "Jignesh Shah (Giám đốc CSDL Mã nguồn mở), Erica Liu (Chuyên gia AppMod), Fabrianne Effendi (Kiến trúc sư giải pháp Serverless)",
-        highlights: "• Những hạn chế của kiến trúc nguyên khối truyền thống (chu kỳ phát hành kéo dài, chi phí vận hành cao).\n• Chuyển đổi sang kiến trúc Microservices hiện đại dựa trên 3 trụ cột: Quản lý hàng đợi, Chiến lược bộ nhớ đệm và Xử lý thông điệp linh hoạt.\n• Phương pháp thiết kế hướng tên miền Domain-Driven Design (DDD) gồm 4 bước.\n• Kiến trúc hướng sự kiện Event-Driven Architecture (Pub/Sub, Point-to-Point, Streaming).\n• Ứng dụng trợ lý AI Amazon Q Developer tự động hóa chu trình nâng cấp mã nguồn."
+        shortDesc: "Chuyển đổi kiến trúc nguyên khối sang Microservices hiện đại (Queue, Cache, Messaging), phương pháp Domain-Driven Design (DDD) và ứng dụng trợ lý Amazon Q Developer.",
+        highlights: "• Những hạn chế của kiến trúc nguyên khối truyền thống (chu kỳ phát hành kéo dài, chi phí vận hành cao).\n• Chuyển đổi sang kiến trúc Microservices hiện đại dựa trên 3 trụ cột: Quản lý hàng đợi, Chiến lược bộ nhớ đệm và Xử lý thông điệp linh hoạt.\n• Phương pháp thiết kế hướng tên miền Domain-Driven Design (DDD) gồm 4 bước.\n• Kiến trúc hướng sự kiện Event-Driven Architecture (Pub/Sub, Point-to-Point, Streaming).\n• Ứng dụng trợ lý AI Amazon Q Developer tự động hóa chu trình nâng cấp mã nguồn.",
+        hasFullReport: false
       },
       {
         id: "event-2",
+        slug: "first-cloud-ai-journey-24-10-2026",
         name: "First Cloud AI Journey: Weekly Meet Up 24/10",
         dateTime: "08:30 – 12:00, 24/10/2026",
         location: "Chưa xác nhận",
-        role: "Attendee",
+        role: "Người tham dự (Attendee)",
         speakers: "Kiệt Trần (AI Engineer, Re AI – AWS Partner)",
-        highlights: "• Session 1 – Voice AI & Contact Center: Discuss low-latency two-way voice AI, architecture using Cascade (STT → LLM → TTS) with Guardrails, WebRTC over UDP, EC2 GPU for STT/TTS, AWS PrivateLink for LLM.\\n• Demonstrated cost-effective implementation and real-time interaction.",
-        photoUrl: "https://via.placeholder.com/150"
+        topic: "Session 1 – Tích hợp Voice AI vào Contact Center doanh nghiệp trên nền tảng AWS",
+        shortDesc: "Session 1 – Voice AI & Contact Center: Đàm thoại hai chiều thời gian thực với độ trễ thấp (<2s), kiến trúc Cascade (STT → LLM → Guardrails → TTS), WebRTC/UDP, EC2 GPU và tối ưu chi phí ~3.000đ/cuộc gọi.",
+        highlights: "• Session 1 – Voice AI & Contact Center: Đàm thoại hai chiều thời gian thực với độ trễ thấp (<2s) và chi phí tối ưu (~3.000đ/cuộc gọi).\n• Triển khai mô hình Cascade (STT → LLM → Guardrails → TTS), đảm bảo an toàn nội dung trước khi phát âm.\n• Hạ tầng AWS: WebRTC qua UDP, Amazon EC2 GPU cho suy luận STT/TTS, AWS PrivateLink kết nối bảo mật nội bộ.\n• Case study VPBank: 282 ứng viên phỏng vấn tự động, độ chính xác nhận diện ý định 90%, tỷ lệ hoàn thành hồ sơ 62%.",
+        hasFullReport: true
       }
-            ,
-        {
-          id: "event-3",
-          name: "Sự kiện 3 - Meetup AI Voice Interaction",
-          dateTime: "09:00, 24/10/2026",
-          location: "Online (WebRTC)",
-          role: "Diễn giả",
-          speakers: "Phan Nhat Uyen",
-          highlights: "• Giới thiệu kiến trúc Voice AI hai chiều với độ trễ <2s và chi phí ~3.000đ/cuộc gọi.\n• Triển khai mô hình Cascade (STT → LLM → TTS) và lớp Guardrails.\n• Kết quả VPBank: 282 ứng viên, nhận diện ý định 90%, tỉ lệ nộp đơn 62%, chi phí ~3.000đ/cuộc gọi."
-        }
-
-        ],
+    ],
     en: [
       {
         id: "event-1",
+        slug: "hoi-thao-hien-dai-hoa-ung-dung-csdl-genai",
         name: "Event 1 - GenAI-powered App-DB Modernization Workshop",
         dateTime: "09:00, August 12, 2026",
         location: "26th Floor, Bitexco Tower, 02 Hai Trieu Street, District 1, Ho Chi Minh City",
         role: "Attendee",
         speakers: "Jignesh Shah (Director, Open Source DBs), Erica Liu (Sr. GTM Specialist), Fabrianne Effendi (Assc. Specialist SA)",
-        highlights: "• Drawbacks of legacy monolithic architectures (long release cycles, higher costs).\n• Modern Microservices transition built on Queue Management, Caching Strategies, and Message Handling.\n• Domain-Driven Design (DDD): 4-step method (Identify domain events -> arrange timeline -> identify actors -> define bounded contexts).\n• Event-Driven Architecture (Pub/Sub, Point-to-point, Streaming).\n• Amazon Q Developer automated code transformation & modernization agents."
+        shortDesc: "Modernizing legacy monoliths into Microservices via Queue Management, Caching Strategies, Domain-Driven Design (DDD), and Amazon Q Developer transformation agents.",
+        highlights: "• Drawbacks of legacy monolithic architectures (long release cycles, higher costs).\n• Modern Microservices transition built on Queue Management, Caching Strategies, and Message Handling.\n• Domain-Driven Design (DDD): 4-step method (Identify domain events -> arrange timeline -> identify actors -> define bounded contexts).\n• Event-Driven Architecture (Pub/Sub, Point-to-point, Streaming).\n• Amazon Q Developer automated code transformation & modernization agents.",
+        hasFullReport: false
       },
       {
         id: "event-2",
+        slug: "first-cloud-ai-journey-24-10-2026",
         name: "First Cloud AI Journey: Weekly Meet Up 24/10",
         dateTime: "08:30 – 12:00, 24/10/2026",
-        location: "Chưa xác nhận",
+        location: "Unconfirmed",
         role: "Attendee",
         speakers: "Kiệt Trần (AI Engineer, Re AI – AWS Partner)",
-        highlights: "• Session 1 – Voice AI & Contact Center: Discuss low-latency two-way voice AI, architecture using Cascade (STT → LLM → TTS) with Guardrails, WebRTC over UDP, EC2 GPU for STT/TTS, AWS PrivateLink for LLM.\n• Demonstrated cost-effective implementation and real-time interaction.",
-        photoUrl: "https://via.placeholder.com/150"
+        topic: "Session 1 – Integrating Voice AI into Enterprise Contact Centers on AWS",
+        shortDesc: "Session 1 – Voice AI & Contact Center: Real-time low-latency (<2s) conversational AI on AWS, Cascade architecture (STT → LLM → Guardrails → TTS), WebRTC/UDP, EC2 GPU, and ~3,000 VND/call cost optimization.",
+        highlights: "• Session 1 – Voice AI & Contact Center: Real-time two-way voice interaction with <2s latency and ~3,000 VND/call cost optimization.\n• Cascade architecture deployment (STT → LLM → Guardrails → TTS) with content inspection prior to vocalization.\n• AWS Infrastructure: WebRTC over UDP, Amazon EC2 GPU instances for STT/TTS inference, and AWS PrivateLink for secure internal connectivity.\n• VPBank Case Study: 282 automated candidate screening interviews, 90% reported intent recognition accuracy, 62% application completion rate.",
+        hasFullReport: true
       }
     ]
   },
@@ -1403,7 +1416,7 @@ class AppLanguageManager {
               }
             });
           }
-          // Sync default events (including new Session 1) for both languages
+          // Sync default events (including Session 1 Voice AI) for both languages
           if (!parsed.events) {
             parsed.events = JSON.parse(JSON.stringify(DEFAULT_BILINGUAL_DATA.events));
           } else {
@@ -1411,12 +1424,19 @@ class AppLanguageManager {
               if (!parsed.events[l]) {
                 parsed.events[l] = JSON.parse(JSON.stringify(DEFAULT_BILINGUAL_DATA.events[l]));
               } else {
+                // Remove obsolete/duplicate test events (such as event-3, event-4)
+                parsed.events[l] = parsed.events[l].filter(e => {
+                  if (e.id === 'event-3' && (e.name.includes('Meetup AI') || e.name.includes('Voice') || (e.speakers && e.speakers.includes('Phan Nhat Uyen')))) return false;
+                  if (e.id === 'event-4' && e.name.includes('First Cloud AI')) return false;
+                  return true;
+                });
+
                 DEFAULT_BILINGUAL_DATA.events[l].forEach(defEvent => {
-                  const eIdx = parsed.events[l].findIndex(e => e.id === defEvent.id);
+                  const eIdx = parsed.events[l].findIndex(e => e.id === defEvent.id || e.slug === defEvent.slug);
                   if (eIdx === -1) {
                     parsed.events[l].push(JSON.parse(JSON.stringify(defEvent)));
                   } else {
-                    parsed.events[l][eIdx] = JSON.parse(JSON.stringify(defEvent));
+                    parsed.events[l][eIdx] = Object.assign({}, parsed.events[l][eIdx], JSON.parse(JSON.stringify(defEvent)));
                   }
                 });
               }
@@ -1579,6 +1599,7 @@ class AppLanguageManager {
     renderProposalInputs();
     renderBlogsList();
     renderEventsList();
+    renderEventDetail('first-cloud-ai-journey-24-10-2026');
     renderCriteriaTable();
     renderSelfAssessmentInputs();
     renderFeedbackInputs();
@@ -1623,9 +1644,16 @@ function t(key) {
 // 5. NAVIGATION & ROUTING
 // ==========================================
 function updateHeaderPageTitle() {
-  const currentHash = window.location.hash.replace('#/', '') || 'thong-tin';
+  const currentHash = window.location.hash.replace(/^#\/?/, '').replace(/\/$/, '') || 'thong-tin';
   const titleEl = document.getElementById('page-title');
   if (!titleEl) return;
+
+  if (currentHash.startsWith('events/')) {
+    titleEl.textContent = app.currentLang === 'vi'
+      ? '4. Sự kiện thực tế đã tham gia — Báo cáo thu hoạch'
+      : '4. Events Participated — Harvest Report';
+    return;
+  }
 
   const key = `title_${currentHash.replace(/-/g, '_')}`;
   titleEl.textContent = t(key);
@@ -1664,21 +1692,40 @@ function updateHeaderGreeting() {
 }
 
 function navigateTo(pageId) {
+  const cleanId = (pageId || '').replace(/^#\/?/, '').replace(/\/$/, '') || 'thong-tin';
+
+  // Highlight active nav link in sidebar
   document.querySelectorAll('.nav-link').forEach(link => {
-    link.classList.toggle('active', link.getAttribute('data-page') === pageId);
+    const linkPage = link.getAttribute('data-page');
+    const isMatching = linkPage === cleanId || 
+      (cleanId.startsWith('events') && linkPage === 'events');
+    link.classList.toggle('active', isMatching);
   });
 
+  // Deactivate all page views
   document.querySelectorAll('.page-view').forEach(view => {
     view.classList.remove('active');
   });
 
-  const target = document.getElementById(`view-${pageId}`);
+  // Determine target element
+  let viewId = `view-${cleanId.replace(/\//g, '-')}`;
+  let target = document.getElementById(viewId);
+  if (!target && cleanId.startsWith('events/')) {
+    target = document.getElementById('view-events-first-cloud-ai-journey-24-10-2026');
+  }
+
   if (target) {
     target.classList.add('active');
   }
 
-  if (window.location.hash !== `#/${pageId}`) {
-    window.location.hash = `#/${pageId}`;
+  // Update URL hash if needed
+  if (window.location.hash !== `#/${cleanId}`) {
+    window.location.hash = `#/${cleanId}`;
+  }
+
+  // If navigating to event report, render the detailed view
+  if (cleanId === 'events/first-cloud-ai-journey-24-10-2026' || cleanId.startsWith('events/')) {
+    renderEventDetail('first-cloud-ai-journey-24-10-2026');
   }
 
   updateHeaderPageTitle();
@@ -1687,8 +1734,8 @@ function navigateTo(pageId) {
 }
 
 function handleHashChange() {
-  const hash = window.location.hash.replace('#/', '') || 'thong-tin';
-  navigateTo(hash);
+  const rawHash = window.location.hash.replace(/^#\/?/, '').replace(/\/$/, '') || 'thong-tin';
+  navigateTo(rawHash);
 }
 
 // ==========================================
@@ -2759,6 +2806,259 @@ function setupBlogs() {
 // ==========================================
 // 10. 4. EVENTS PARTICIPATED MODULE
 // ==========================================
+const EVENT_REPORTS = {
+  'first-cloud-ai-journey-24-10-2026': {
+    vi: {
+      breadcrumb: "First Cloud AI Journey: Weekly Meet Up 24/10",
+      badgeText: "BÁO CÁO THU HOẠCH SỰ KIỆN",
+      sessionTag: "Session 1 • Voice AI & Contact Center trên AWS",
+      title: "BÁO CÁO THU HOẠCH – SESSION 1: VOICE AI & CONTACT CENTER",
+      subtitle: "First Cloud AI Journey: Weekly Meet Up 24/10",
+      metaHeader: "Thông tin sự kiện chính thức",
+      lblEventName: "Tên sự kiện",
+      eventName: "First Cloud AI Journey: Weekly Meet Up 24/10",
+      lblDateTime: "Ngày & Giờ tham gia",
+      dateTime: "08:30 – 12:00, 24/10/2026",
+      lblLocation: "Địa điểm",
+      location: "Chưa xác nhận",
+      lblRole: "Vai trò tham gia",
+      role: "Người tham dự (Attendee)",
+      lblSpeaker: "Diễn giả Session 1",
+      speaker: "Kiệt Trần – AI Engineer tại Re AI (AWS Partner)",
+      lblTopic: "Chủ đề Session 1",
+      topic: "Tích hợp Voice AI vào Contact Center doanh nghiệp trên nền tảng AWS",
+      metaNotice: "* Lưu ý: Thời gian 08:30 – 12:00 là khung giờ tham dự sự kiện tổng thể, không phản ánh riêng thời lượng Session 1. Địa điểm ghi nhận chính thức theo ban tổ chức (không suy đoán địa chỉ).",
+      complianceTitle: "Khung 7 Tiêu chí Báo cáo Sự kiện của Doanh nghiệp",
+      crit1: "Tên sự kiện: First Cloud AI Journey 24/10",
+      crit2: "Thời gian: 08:30 – 12:00, 24/10/2026",
+      crit3: "Địa điểm: Chưa xác nhận",
+      crit4: "Vai trò: Người tham dự (Attendee)",
+      crit5: "Nội dung tiếp thu: Session 1 Voice AI",
+      crit6: "Hình ảnh check-in rõ mặt (Đang chờ cập nhật)",
+      crit7: "Bài học rút ra & Đóng góp cá nhân",
+      
+      sec1Num: "01",
+      sec1Title: "Tổng quan phiên chia sẻ",
+      sec1Problem: "Session 1 tập trung giải quyết bài toán cốt lõi:",
+      sec1Quote: "“Làm thế nào để tích hợp Voice AI vào hệ thống Contact Center doanh nghiệp, đảm bảo khả năng đàm thoại hai chiều với độ trễ thấp, chi phí vận hành hợp lý và trải nghiệm tự nhiên?”",
+      sec1P1: "Theo nội dung diễn giả chia sẻ, con người có thể phản xạ tự nhiên trong khoảng <strong>200ms</strong> ở một số tình huống giao tiếp đời thực. Khi hệ thống Voice AI phản hồi chậm từ <strong>3–5 giây</strong>, trải nghiệm hội thoại có thể bị ảnh hưởng đáng kể: tạo ra những khoảng lặng ngắt quãng, làm gián đoạn nhịp đàm thoại (turn-taking) và gây cảm giác khó chịu cho khách hàng.",
+      sec1P2: "Do đó, việc giảm độ trễ phản hồi toàn trình (End-to-End Latency) xuống ngưỡng tự nhiên (< 2 giây) là một trong những mục tiêu kỹ thuật quan trọng hàng đầu khi thiết kế hệ thống Contact Center doanh nghiệp.",
+
+      sec2Num: "02",
+      sec2Title: "Kiến trúc Voice AI (Mô hình Cascade)",
+      sec2Desc: "Phiên chia sẻ trình bày kiến trúc xử lý tuần tự (Cascade Architecture) bao gồm các thành phần:",
+      sec2Pipeline: "Speech Input → STT → LLM → Guardrails → TTS → Voice Output",
+      sec2STT: "<strong>STT (Speech-to-Text):</strong> Chuyển đổi dòng âm thanh đầu vào của người dùng thành văn bản theo thời gian thực.",
+      sec2LLM: "<strong>LLM (Large Language Model):</strong> Đóng vai trò bộ não suy luận, hiểu ngữ cảnh hội thoại và sinh nội dung phản hồi logic.",
+      sec2Guardrails: "<strong>Guardrails:</strong> Lớp kiểm tra, kiểm soát nội dung phản hồi, rà soát ảo giác (hallucination), lọc bỏ thông tin định danh nhạy cảm (PII) và bảo đảm tuân thủ chính sách doanh nghiệp.",
+      sec2TTS: "<strong>TTS (Text-to-Speech):</strong> Chuyển văn bản phản hồi đã kiểm duyệt thành giọng nói tự nhiên trước khi phát lại cho người nghe.",
+      sec2Advantage: "<strong>Ưu điểm nổi bật:</strong> Trong bài toán được chia sẻ, ưu điểm then chốt của kiến trúc này là khả năng kiểm soát nội dung chặt chẽ qua lớp Guardrails trước khi phát âm, đảm bảo tính an toàn thương hiệu và tuân thủ các quy định bảo mật nghiệp vụ.",
+      sec2Nuance: "<strong>Đánh giá kiến trúc:</strong> Cần lưu ý rằng Cascade không phải là kiến trúc tối ưu tuyệt đối cho mọi bài toán do sự tích lũy độ trễ qua từng bước nối tiếp (STT + LLM + Guardrails + TTS). Mặc dù các mô hình Speech-to-Speech trực tiếp (End-to-End S2S) có thể giảm độ trễ, Cascade vẫn là lựa chọn thực tiễn hàng đầu trong môi trường doanh nghiệp nhờ tính mô-đun hóa cao, dễ dàng kiểm toán từng khâu và cho phép linh hoạt nâng cấp độc lập từng thành phần.",
+      diagramCaption: "Sơ đồ luồng xử lý Voice AI Cascade tích hợp lớp bảo vệ Guardrails trên hạ tầng AWS",
+
+      sec3Num: "03",
+      sec3Title: "Hạ tầng AWS & Kỹ thuật Mạng đám mây",
+      sec3Desc: "Các công nghệ hạ tầng cốt lõi được đề cập và phân tích trong session:",
+      sec3WebRTC: "<strong>WebRTC / UDP:</strong> Hỗ trợ truyền âm thanh thời gian thực hai chiều với độ trễ thấp. Giao thức UDP loại bỏ độ trễ do cơ chế retransmission và head-of-line blocking của TCP, duy trì luồng audio ổn định ngay cả trong điều kiện mạng biến động.",
+      sec3EC2: "<strong>Amazon EC2 GPU:</strong> Cung cấp hạ tầng tính toán tăng tốc phần cứng (GPU instances) để tối ưu hóa thời gian suy luận (inference latency) của các mô hình STT và TTS cục bộ.",
+      sec3PrivateLink: "<strong>AWS PrivateLink:</strong> Hỗ trợ kết nối riêng tư, an toàn giữa VPC và các dịch vụ tương thích trong AWS mà không cần định tuyến qua Internet công cộng, giúp giảm số lượng network hops và bảo vệ dữ liệu hội thoại nhạy cảm.",
+      sec3Networking: "<strong>Cloud Networking:</strong> Thiết kế VPC, Subnet, Route Table và vị trí Availability Zone ảnh hưởng trực tiếp đến độ trễ truyền gói tin (RTT), tính ổn định và khả năng vận hành liên tục của hệ thống.",
+      sec3Insight: "<strong>Nhận định kỹ thuật quan trọng:</strong> <em>Hiệu năng của mô hình LLM đơn thuần không thể quyết định toàn bộ hiệu năng của hệ thống Voice AI.</em> Độ trễ người dùng cảm nhận là tổng hòa của cả chuỗi truyền dẫn: từ việc stream gói tin qua UDP, xử lý Voice Activity Detection (VAD), thời gian nhận dạng STT, độ trễ sinh token đầu tiên của LLM (TTFT), quá trình duyệt qua Guardrails, cho đến việc tổng hợp TTS thành từng audio chunk để phát lại. Tối ưu hạ tầng mạng và pipeline streaming quan trọng không kém việc lựa chọn mô hình LLM.",
+
+      sec4Num: "04",
+      sec4Title: "Tối ưu hóa Hiệu năng & Chi phí vận hành",
+      sec4P1: "Theo số liệu trình bày từ diễn giả trong phiên chia sẻ, các chỉ số đo lường hiệu năng và chi phí được cân đối cụ thể:",
+      sec4Metric1Val: "~200ms",
+      sec4Metric1Lbl: "Mốc phản xạ tự nhiên",
+      sec4Metric1Sub: "Được đề cập làm chuẩn tham chiếu",
+      sec4Metric2Val: "< 2 giây",
+      sec4Metric2Lbl: "Độ trễ toàn trình",
+      sec4Metric2Sub: "Mục tiêu phản hồi của hệ thống",
+      sec4Metric3Val: "~3.000 VNĐ",
+      sec4Metric3Lbl: "Chi phí / cuộc gọi",
+      sec4Metric3Sub: "Mức chi phí bình quân chia sẻ",
+      sec4Attribution: "* Các chỉ số trên được trích dẫn trực tiếp từ bài thuyết trình của diễn giả tại phiên chia sẻ.",
+      sec4LessonQuote: "“Một giải pháp AI triển khai thực tế không chỉ cần khả năng phản hồi thông minh, mà còn phải tối ưu độ trễ, chi phí và độ ổn định.”",
+
+      sec5Num: "05",
+      sec5Title: "Nghiên cứu điển hình tại VPBank (VPBank Case Study)",
+      sec5Desc: "Theo số liệu diễn giả chia sẻ trong bài trình bày, dự án triển khai Voice AI thực tế tại VPBank đạt được các kết quả ban đầu:",
+      sec5Metric1Val: "282",
+      sec5Metric1Lbl: "Ứng viên",
+      sec5Metric1Sub: "Được phỏng vấn tự động hoàn toàn",
+      sec5Metric2Val: "90%",
+      sec5Metric2Lbl: "Độ chính xác",
+      sec5Metric2Sub: "Nhận diện ý định được báo cáo",
+      sec5Metric3Val: "62%",
+      sec5Metric3Lbl: "Tỷ lệ nộp đơn",
+      sec5Metric3Sub: "Tỷ lệ ứng viên hoàn thành hồ sơ",
+      sec5Disclaimer: "* Lưu ý: Các chỉ số trên do diễn giả chia sẻ trong phiên trình bày nhằm minh họa cho bài toán thực tế, chưa qua kiểm chứng độc lập.",
+
+      sec6Num: "06",
+      sec6Title: "Trực quan Live Demo tại Hội trường",
+      sec6Desc: "Hệ thống Voice AI được demo trực tiếp thông qua cuộc gọi điện thoại phỏng vấn ứng viên tuyển dụng vị trí Cloud Architect:",
+      sec6Item1: "<strong>Kiến trúc VPC ba tầng:</strong> Voice AI đặt câu hỏi kiểm tra kiến thức thiết kế 3-tier VPC (Public Subnet cho ALB, Private Subnet cho App/EKS, Isolated Subnet cho Database).",
+      sec6Item2: "<strong>Đánh giá năng lực Cloud Architecture:</strong> Thẩm định tư duy phân tầng bảo mật, Route Table, NAT Gateway và tính sẵn sàng cao (High Availability).",
+      sec6Item3: "<strong>Thương lượng kỳ vọng thu nhập:</strong> Trao đổi linh hoạt về mức lương mong muốn khoảng 20 triệu đồng và ghi nhận phản hồi một cách tự nhiên.",
+      sec6Item4: "<strong>Cuộc gọi ngẫu hứng:</strong> Diễn giả thực hiện gọi trực tiếp với một người tham dự tại khán phòng để chứng minh khả năng phản hồi linh hoạt với các biến số âm thanh bất ngờ.",
+      sec6Summary: "Buổi demo cho thấy rõ khả năng ứng dụng thực tế của Voice AI trong việc tự động hóa sàng lọc sơ bộ nhân sự, giảm tải cho bộ phận tuyển dụng và chuẩn hóa chất lượng đánh giá ứng viên trong quy trình doanh nghiệp.",
+
+      sec7Num: "07",
+      sec7Title: "Những bài học thu hoạch chuyên sâu",
+      takeaway1Num: "01",
+      takeaway1Title: "Engineering Meets Business",
+      takeaway1Body: "Một giải pháp AI thành công cần cân bằng hiệu quả kỹ thuật và hiệu quả kinh tế. Không phải mô hình có số lượng tham số lớn nhất luôn là phương án phù hợp nhất; mô hình có kích thước vừa phải, tối ưu hóa theo domain cụ thể sẽ mang lại chi phí vận hành và độ trễ vượt trội.",
+      takeaway2Num: "02",
+      takeaway2Title: "Cloud & Networking Matter",
+      takeaway2Body: "LLM chỉ là một mắt xích trong toàn bộ hệ thống. Kiến thức nền tảng về WebRTC, giao thức UDP, năng lực tính toán GPU và hạ tầng Cloud Networking đóng vai trò sống còn đối với hiệu suất xử lý đàm thoại thời gian thực.",
+      takeaway3Num: "03",
+      takeaway3Title: "Vietnamese Speech Processing",
+      takeaway3Body: "Quá trình xử lý tiếng Việt thực tế đối mặt với nhiều bài toán kỹ thuật đặc thù: chuẩn hóa từ viết tắt và định dạng tiền tệ (ví dụ: '500k' trong ngữ cảnh số tiền cần được chuẩn hóa thành 'năm trăm nghìn đồng' trước khi chuyển sang TTS), tinh chỉnh độ nhạy Voice Activity Detection (VAD), xử lý tiếng ồn môi trường và kiểm soát ngắt lời (turn-taking) để tránh cướp lời khi người dùng chỉ đang tạm ngắt câu.",
+      takeaway4Num: "04",
+      takeaway4Title: "AI Safety & Auditing",
+      takeaway4Body: "Lớp Guardrails giữ vai trò quyết định trong việc kiểm soát nội dung phản hồi an toàn. Bên cạnh đó, việc lưu trữ call recordings và transcripts hỗ trợ kiểm toán, phân tích lỗi và cải tiến hệ thống, đồng thời bắt buộc phải đáp ứng các tiêu chuẩn bảo mật dữ liệu và quyền riêng tư cá nhân.",
+
+      sec8Num: "08",
+      sec8Title: "Bài học rút ra và Đóng góp cá nhân",
+      lessonHeading: "Bài học rút ra:",
+      lessonQuote: "“Session 1 giúp làm rõ cách một giải pháp AI được triển khai thành hệ thống thực tế phục vụ doanh nghiệp.\n\nViệc xây dựng Voice AI không chỉ phụ thuộc vào LLM mà cần sự kết hợp giữa Cloud Infrastructure, Networking, Real-time Processing, AI Safety và Cost Optimization.\n\nNhững kiến thức này là nền tảng hữu ích cho quá trình học tập, nghiên cứu và thực hành AWS Cloud Engineering.”",
+      contribHeading: "Đóng góp cá nhân:",
+      contribQuote: "“Tổng hợp và hệ thống hóa nội dung của Session 1, phân tích các thành phần của kiến trúc Voice AI và ghi nhận những kinh nghiệm có thể áp dụng vào quá trình học tập và thực hành.”",
+
+      sec9Num: "09",
+      sec9Title: "Hình ảnh Check-in & Hoạt động sự kiện",
+      photoPendingBadge: "⏳ Đang chờ cập nhật ảnh chính thức",
+      photoPendingTitle: "Hình ảnh Check-in tham gia sự kiện",
+      photoPendingDesc: "Theo tiêu chí báo cáo số 6 của công ty (Hình ảnh check-in rõ mặt), khu vực này sẽ hiển thị ảnh check-in thực tế của sinh viên tại sự kiện sau khi có ảnh chính thức. Hệ thống tuân thủ nguyên tắc không sử dụng ảnh giả lập hoặc ảnh không chính chủ nhằm bảo đảm tính minh bạch và trung thực.",
+      photoPendingNote: "Khu vực hiển thị ảnh đã sẵn sàng hỗ trợ định dạng độ phân giải cao và tính năng phóng to (lightbox) ngay khi ảnh thực tế được tải lên."
+    },
+    en: {
+      breadcrumb: "First Cloud AI Journey: Weekly Meet Up 24/10",
+      badgeText: "EVENT HARVEST REPORT",
+      sessionTag: "Session 1 • Voice AI & Contact Center on AWS",
+      title: "HARVEST REPORT – SESSION 1: VOICE AI & CONTACT CENTER",
+      subtitle: "First Cloud AI Journey: Weekly Meet Up 24/10",
+      metaHeader: "Official Event Record",
+      lblEventName: "Event Name",
+      eventName: "First Cloud AI Journey: Weekly Meet Up 24/10",
+      lblDateTime: "Date & Time",
+      dateTime: "08:30 – 12:00, 24/10/2026",
+      lblLocation: "Location",
+      location: "Unconfirmed",
+      lblRole: "Participation Role",
+      role: "Attendee",
+      lblSpeaker: "Session 1 Speaker",
+      speaker: "Kiệt Trần – AI Engineer at Re AI (AWS Partner)",
+      lblTopic: "Session 1 Topic",
+      topic: "Integrating Voice AI into Enterprise Contact Centers on AWS",
+      metaNotice: "* Note: 08:30 – 12:00 is the overall event attendance window and does not solely reflect Session 1 duration. Location is recorded per official organizer details (no address invented).",
+      complianceTitle: "Company 7 Reporting Criteria Verification Framework",
+      crit1: "Event Name: First Cloud AI Journey 24/10",
+      crit2: "Time: 08:30 – 12:00, 24/10/2026",
+      crit3: "Location: Unconfirmed",
+      crit4: "Role: Attendee",
+      crit5: "Key Content: Session 1 Voice AI",
+      crit6: "Clear Check-in Photo (Pending Upload)",
+      crit7: "Lessons Learned & Personal Contribution",
+      
+      sec1Num: "01",
+      sec1Title: "Session Overview",
+      sec1Problem: "Session 1 focused on solving a core enterprise engineering challenge:",
+      sec1Quote: "“How can enterprises integrate Voice AI into contact center systems, ensuring low-latency two-way voice conversations, reasonable operational costs, and natural user experience?”",
+      sec1P1: "According to the speaker, humans exhibit a natural conversational reflex latency of around <strong>200ms</strong> in certain real-life conversational contexts. When a Voice AI system responds with a <strong>3–5 second</strong> delay, the conversational experience deteriorates substantially: awkward pauses appear, conversational turn-taking breaks down, and caller frustration rises quickly.",
+      sec1P2: "Consequently, driving down end-to-end response latency to a natural conversational threshold (< 2 seconds) is one of the highest priority technical objectives when architecting modern enterprise contact centers.",
+
+      sec2Num: "02",
+      sec2Title: "Voice AI Architecture (Cascade Model)",
+      sec2Desc: "The session presented a sequential processing pipeline known as the Cascade Architecture:",
+      sec2Pipeline: "Speech Input → STT → LLM → Guardrails → TTS → Voice Output",
+      sec2STT: "<strong>STT (Speech-to-Text):</strong> Converts the incoming real-time audio stream from the user into text transcripts.",
+      sec2LLM: "<strong>LLM (Large Language Model):</strong> Serves as the cognitive reasoning engine, understanding context, retrieving business knowledge, and synthesizing logical responses.",
+      sec2Guardrails: "<strong>Guardrails:</strong> A safety and policy enforcement layer that verifies responses, catches hallucinations, redacts PII, and enforces corporate compliance.",
+      sec2TTS: "<strong>TTS (Text-to-Speech):</strong> Synthesizes verified text responses back into natural-sounding speech audio before streaming to the listener.",
+      sec2Advantage: "<strong>Key Advantage:</strong> In this enterprise problem setting, the paramount strength of Cascade is the capability to strictly inspect and govern responses via Guardrails prior to vocalization, ensuring brand safety and regulatory compliance.",
+      sec2Nuance: "<strong>Architectural Assessment:</strong> Cascade should not be viewed as universally superior for every scenario due to cumulative latency across sequential hops (STT + LLM + Guardrails + TTS). While direct Speech-to-Speech (End-to-End S2S) models reduce latency, Cascade remains the pragmatic enterprise choice thanks to modularity, auditability, and the ability to independently upgrade each pipeline stage.",
+      diagramCaption: "Voice AI Cascade pipeline flow with pre-vocalization Guardrails on AWS Cloud Infrastructure",
+
+      sec3Num: "03",
+      sec3Title: "AWS Infrastructure & Cloud Networking",
+      sec3Desc: "Core infrastructure technologies highlighted and analyzed during the session:",
+      sec3WebRTC: "<strong>WebRTC / UDP:</strong> Powers low-latency bidirectional real-time audio streaming. UDP avoids TCP retransmission and head-of-line blocking delays, keeping the audio stream smooth and continuous.",
+      sec3EC2: "<strong>Amazon EC2 GPU:</strong> Delivers hardware-accelerated computing (GPU instances) to minimize inference latency for locally hosted STT and TTS models.",
+      sec3PrivateLink: "<strong>AWS PrivateLink:</strong> Establishes private, secure connectivity between VPCs and AWS managed services without routing traffic over the public internet, eliminating unnecessary hops and protecting sensitive voice data.",
+      sec3Networking: "<strong>Cloud Networking:</strong> VPC subnet architecture, routing tables, and Availability Zone placement directly determine round-trip time (RTT), jitter, and enterprise system SLA.",
+      sec3Insight: "<strong>Critical Engineering Insight:</strong> <em>LLM inference performance alone does not determine the overall performance of a Voice AI system.</em> End-to-end user perceived latency is governed by the entire chain: UDP audio packet streaming, jitter buffering, VAD processing, STT transcription, LLM Time-to-First-Token (TTFT), Guardrails inspection, TTS audio chunk generation, and playback. Network and streaming optimization is just as decisive as model selection.",
+
+      sec4Num: "04",
+      sec4Title: "Performance & Cost Optimization",
+      sec4P1: "According to figures presented by the speaker during the session, performance and cost parameters were balanced as follows:",
+      sec4Metric1Val: "~200ms",
+      sec4Metric1Lbl: "Natural Reflex Benchmark",
+      sec4Metric1Sub: "Human reflex reference cited",
+      sec4Metric2Val: "< 2 seconds",
+      sec4Metric2Lbl: "End-to-End Latency",
+      sec4Metric2Sub: "Target system response time",
+      sec4Metric3Val: "~3,000 VND",
+      sec4Metric3Lbl: "Cost per Call",
+      sec4Metric3Sub: "Average operational cost shared",
+      sec4Attribution: "* All numbers above are attributed directly to the speaker's presentation during the session.",
+      sec4LessonQuote: "“A real-world production AI solution requires not just intelligent responses, but relentless optimization of latency, operating cost, and systemic stability.”",
+
+      sec5Num: "05",
+      sec5Title: "VPBank Case Study",
+      sec5Desc: "According to metrics shared by the speaker during the presentation, an initial enterprise Voice AI deployment at VPBank yielded:",
+      sec5Metric1Val: "282",
+      sec5Metric1Lbl: "Candidates",
+      sec5Metric1Sub: "Automatically interviewed end-to-end",
+      sec5Metric2Val: "90%",
+      sec5Metric2Lbl: "Intent Accuracy",
+      sec5Metric2Sub: "Reported intent recognition rate",
+      sec5Metric3Val: "62%",
+      sec5Metric3Lbl: "Submission Rate",
+      sec5Metric3Sub: "Reported application completion rate",
+      sec5Disclaimer: "* Note: Metrics were reported by the speaker during the session as an illustrative case study and are not independently verified.",
+
+      sec6Num: "06",
+      sec6Title: "Live Demonstration Walkthrough",
+      sec6Desc: "The Voice AI system was demonstrated live through an automated screening interview call for a Cloud Architect position:",
+      sec6Item1: "<strong>3-Tier VPC Architecture:</strong> Voice AI probed candidate knowledge on multi-tier network isolation (Public Subnets for ALB, Private Subnets for App/EKS, Isolated Subnets for Database).",
+      sec6Item2: "<strong>Cloud Architecture Depth:</strong> Evaluated understanding of high availability, Route Tables, NAT Gateways, and security boundaries.",
+      sec6Item3: "<strong>Salary Expectation Negotiation:</strong> Seamlessly discussed salary expectations around 20 million VND, recording candidate responses naturally.",
+      sec6Item4: "<strong>Spontaneous Test Call:</strong> The speaker placed a live, unscripted call directly to an audience member to test real-time handling of unexpected acoustics and responses.",
+      sec6Summary: "The live demonstration vividly highlighted Voice AI's value in automating repetitive preliminary talent screening, easing HR workloads, and standardizing assessment consistency in enterprise hiring workflows.",
+
+      sec7Num: "07",
+      sec7Title: "Key Technical Takeaways",
+      takeaway1Num: "01",
+      takeaway1Title: "Engineering Meets Business",
+      takeaway1Body: "A successful AI solution must strike a balance between technical sophistication and economic viability. The largest parameter model is rarely the most suitable; right-sized models tuned for specific domains deliver vastly superior latency and operational costs.",
+      takeaway2Num: "02",
+      takeaway2Title: "Cloud & Networking Matter",
+      takeaway2Body: "The LLM is only one cog in the machine. Solid foundations in WebRTC, UDP protocols, GPU hardware computing, and Cloud Infrastructure are decisive for real-time conversational responsiveness.",
+      takeaway3Num: "03",
+      takeaway3Title: "Vietnamese Speech Processing",
+      takeaway3Body: "Production Vietnamese speech processing involves crucial technical nuances: normalizing abbreviations and currency figures (e.g. '500k' in a financial context must normalize to 'năm trăm nghìn đồng' before TTS), tuning Voice Activity Detection (VAD) thresholds, ambient noise suppression, and managing turn-taking to avoid interrupting speakers during natural pauses.",
+      takeaway4Num: "04",
+      takeaway4Title: "AI Safety & Auditing",
+      takeaway4Body: "Guardrails play an indispensable role in governing safe and compliant responses. Furthermore, call recordings and transcripts support auditing, error analysis, and continuous model improvement while strictly complying with enterprise security and privacy regulations.",
+
+      sec8Num: "08",
+      sec8Title: "Lessons Learned & Personal Contribution",
+      lessonHeading: "Lessons Learned:",
+      lessonQuote: "“Session 1 helped clarify how an AI solution is deployed into a real-world enterprise system.\n\nBuilding Voice AI relies not solely on LLMs, but requires the synthesis of Cloud Infrastructure, Networking, Real-time Processing, AI Safety, and Cost Optimization.\n\nThis knowledge forms a valuable foundation for my ongoing study, research, and hands-on practice in AWS Cloud Engineering.”",
+      contribHeading: "Personal Contribution:",
+      contribQuote: "“Synthesized and structured the key technical takeaways of Session 1, analyzed the components of the Voice AI architecture, and documented engineering practices applicable to my AWS Cloud learning and hands-on projects.”",
+
+      sec9Num: "09",
+      sec9Title: "Event Check-in Photos & Activity",
+      photoPendingBadge: "⏳ Pending Authentic Upload",
+      photoPendingTitle: "Event Participant Check-in Photo",
+      photoPendingDesc: "In accordance with Company Reporting Criterion 6 (Clear participant check-in photo), this section is reserved for the authentic check-in photo of the student attending the event. In adherence to transparency and integrity standards, no artificial or unverified images are used.",
+      photoPendingNote: "The display container is configured to support high-fidelity aspect ratio rendering and click-to-enlarge lightbox zoom as soon as the authentic photograph is supplied."
+    }
+  }
+};
+
 function renderEventsList() {
   const container = document.getElementById('events-report-container');
   if (!container) return;
@@ -2766,26 +3066,476 @@ function renderEventsList() {
   const lang = app.currentLang;
   const events = app.data.events[lang] || app.data.events.vi;
 
-  container.innerHTML = events.map(ev => `
-    <div class="event-card">
-      <div class="event-header">
-        <span class="badge badge-blue" style="margin-bottom:8px;">${t('eventBadge')}</span>
-        <h3>${escapeHtml(ev.name)}</h3>
-        <p style="font-size:12.5px; color:var(--text-muted); margin-bottom:8px;">
-          <strong>${escapeHtml(ev.dateTime)}</strong> • ${escapeHtml(ev.location)}<br>
-          ${t('eventRoleLabel')} <strong>${escapeHtml(ev.role)}</strong>
-          ${ev.speakers ? ` • ${t('eventSpeakersLabel')} <em>${escapeHtml(ev.speakers)}</em>` : ''}
-        </p>
+  container.innerHTML = events.map(ev => {
+    const isVoiceAI = ev.slug === 'first-cloud-ai-journey-24-10-2026' || ev.hasFullReport || ev.id === 'event-2';
+    const detailRoute = isVoiceAI ? 'events/first-cloud-ai-journey-24-10-2026' : null;
+    const descText = ev.shortDesc || (ev.highlights ? ev.highlights.split('\n')[0].replace(/^•\s*/, '') : '');
+    const badgeText = isVoiceAI 
+      ? (lang === 'vi' ? 'Báo cáo chuyên sâu' : 'Full Report Available')
+      : t('eventBadge');
+
+    return `
+      <div class="event-card ${isVoiceAI ? 'event-card-featured' : ''}" 
+           ${detailRoute ? `onclick="navigateTo('${detailRoute}')" style="cursor:pointer;"` : ''}>
+        <div class="event-header">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px; gap:8px;">
+            <span class="badge ${isVoiceAI ? 'badge-purple' : 'badge-blue'}">${badgeText}</span>
+            <span style="font-size:12px; font-weight:600; color:var(--text-subtle);">${escapeHtml(ev.dateTime?.split(',')[0] || '')}</span>
+          </div>
+          <h3 class="event-title">${escapeHtml(ev.name)}</h3>
+          <div class="event-meta-compact">
+            <div class="event-meta-row">
+              <span class="meta-label">📅 ${lang === 'vi' ? 'Thời gian:' : 'Date & Time:'}</span>
+              <span class="meta-value">${escapeHtml(ev.dateTime)}</span>
+            </div>
+            <div class="event-meta-row">
+              <span class="meta-label">📍 ${lang === 'vi' ? 'Địa điểm:' : 'Location:'}</span>
+              <span class="meta-value">${escapeHtml(ev.location)}</span>
+            </div>
+            <div class="event-meta-row">
+              <span class="meta-label">👤 ${t('eventRoleLabel')}</span>
+              <span class="meta-value"><strong>${escapeHtml(ev.role)}</strong></span>
+            </div>
+            ${ev.speakers ? `
+              <div class="event-meta-row">
+                <span class="meta-label">🎙️ ${t('eventSpeakersLabel')}</span>
+                <span class="meta-value">${escapeHtml(ev.speakers)}</span>
+              </div>
+            ` : ''}
+          </div>
+        </div>
+
+        <div class="event-short-desc">
+          <p>${escapeHtml(descText)}</p>
+        </div>
+
+        <div class="event-card-footer">
+          ${detailRoute ? `
+            <button type="button" class="btn btn-primary btn-sm event-view-report-btn" onclick="event.stopPropagation(); navigateTo('${detailRoute}')">
+              <span>${lang === 'vi' ? 'Xem báo cáo chi tiết →' : 'View Full Report →'}</span>
+            </button>
+          ` : `
+            <div></div>
+          `}
+          <button type="button" class="btn-text-subtle" style="color:#EF4444; font-size:12px;" onclick="event.stopPropagation(); deleteEvent('${ev.id}')">
+            ${t('btnDeleteEvent')}
+          </button>
+        </div>
       </div>
-      <div class="event-snippet">
-        <strong>${t('eventHighlightsLabel')}</strong><br>
-        ${escapeHtml(ev.highlights)}
-      </div>
-      <div style="display:flex; justify-content:flex-end; border-top:1px solid #F1F5F9; padding-top:10px;">
-        <button type="button" class="btn-text-subtle" style="color:#EF4444;" onclick="deleteEvent('${ev.id}')">${t('btnDeleteEvent')}</button>
-      </div>
+    `;
+  }).join('');
+}
+
+function renderEventDetail(slug = 'first-cloud-ai-journey-24-10-2026') {
+  const container = document.getElementById('event-detail-content-container');
+  if (!container) return;
+
+  const lang = app.currentLang || 'vi';
+  const reportData = (EVENT_REPORTS[slug] && EVENT_REPORTS[slug][lang]) 
+    ? EVENT_REPORTS[slug][lang] 
+    : (EVENT_REPORTS['first-cloud-ai-journey-24-10-2026'] ? EVENT_REPORTS['first-cloud-ai-journey-24-10-2026'].vi : null);
+
+  if (!reportData) {
+    container.innerHTML = `<div class="card" style="padding:40px; text-align:center;"><h3>Báo cáo chưa khả dụng</h3><button class="btn btn-outline" onclick="navigateTo('events')">Quay lại sự kiện</button></div>`;
+    return;
+  }
+
+  const r = reportData;
+
+  // Responsive SVG Architecture Diagram
+  const svgDiagram = `
+    <div class="arch-diagram-wrapper">
+      <svg class="arch-svg-container" viewBox="0 0 940 260" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <filter id="cardShadow" x="-5%" y="-5%" width="110%" height="115%">
+            <feDropShadow dx="0" dy="2" stdDeviation="3" flood-opacity="0.08"/>
+          </filter>
+          <linearGradient id="primaryGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#0F172A"/>
+            <stop offset="100%" stop-color="#1E293B"/>
+          </linearGradient>
+          <linearGradient id="guardGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#1E3A8A"/>
+            <stop offset="100%" stop-color="#2563EB"/>
+          </linearGradient>
+          <marker id="arrow" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M 0 1 L 8 5 L 0 9 z" fill="#64748B"/>
+          </marker>
+        </defs>
+
+        <!-- AWS Cloud Boundary Box -->
+        <rect x="180" y="20" width="580" height="215" rx="14" fill="#FFFFFF" stroke="#CBD5E1" stroke-dasharray="4 4" stroke-width="1.5" />
+        <text x="200" y="44" font-family="'Plus Jakarta Sans', sans-serif" font-size="11.5" font-weight="700" fill="#475569" letter-spacing="0.5">AWS CLOUD INFRASTRUCTURE &amp; SECURE VPC</text>
+        <text x="610" y="44" font-family="'Plus Jakarta Sans', sans-serif" font-size="11" font-weight="600" fill="#2563EB">WebRTC / UDP • AWS PrivateLink</text>
+
+        <!-- Node 1: User Audio In -->
+        <g transform="translate(15, 80)" filter="url(#cardShadow)">
+          <rect width="135" height="95" rx="10" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1.5"/>
+          <circle cx="67" cy="30" r="14" fill="#F1F5F9"/>
+          <path d="M67 22 v10 M62 27 a5 5 0 0 0 10 0" stroke="#0F172A" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+          <text x="67" y="56" text-anchor="middle" font-family="'Plus Jakarta Sans', sans-serif" font-size="12" font-weight="700" fill="#0F172A">Speech Input</text>
+          <text x="67" y="70" text-anchor="middle" font-family="'Plus Jakarta Sans', sans-serif" font-size="10" fill="#64748B">User Voice (SIP/Mic)</text>
+          <text x="67" y="83" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="9" font-weight="600" fill="#2563EB">WebRTC / UDP</text>
+        </g>
+
+        <!-- Connector 1 -> 2 -->
+        <line x1="150" y1="127" x2="195" y2="127" stroke="#64748B" stroke-width="2" marker-end="url(#arrow)"/>
+
+        <!-- Node 2: STT (EC2 GPU) -->
+        <g transform="translate(200, 75)" filter="url(#cardShadow)">
+          <rect width="125" height="105" rx="10" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1.5"/>
+          <rect x="0" y="0" width="125" height="6" rx="3" fill="#0F172A"/>
+          <text x="62" y="32" text-anchor="middle" font-family="'Plus Jakarta Sans', sans-serif" font-size="13" font-weight="800" fill="#0F172A">STT Engine</text>
+          <text x="62" y="48" text-anchor="middle" font-family="'Plus Jakarta Sans', sans-serif" font-size="10.5" fill="#475569">Speech-to-Text</text>
+          <rect x="15" y="60" width="95" height="20" rx="4" fill="#F8FAFC" stroke="#E2E8F0"/>
+          <text x="62" y="74" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="9.5" font-weight="600" fill="#0F172A">Amazon EC2 GPU</text>
+          <text x="62" y="94" text-anchor="middle" font-family="'Plus Jakarta Sans', sans-serif" font-size="9.5" fill="#16A34A">⚡ Low Latency</text>
+        </g>
+
+        <!-- Connector 2 -> 3 -->
+        <line x1="325" y1="127" x2="355" y2="127" stroke="#64748B" stroke-width="2" marker-end="url(#arrow)"/>
+        <text x="340" y="120" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="9" fill="#64748B">Text</text>
+
+        <!-- Node 3: LLM Reasoning -->
+        <g transform="translate(360, 75)" filter="url(#cardShadow)">
+          <rect width="125" height="105" rx="10" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1.5"/>
+          <rect x="0" y="0" width="125" height="6" rx="3" fill="#0F172A"/>
+          <text x="62" y="32" text-anchor="middle" font-family="'Plus Jakarta Sans', sans-serif" font-size="13" font-weight="800" fill="#0F172A">LLM Core</text>
+          <text x="62" y="48" text-anchor="middle" font-family="'Plus Jakarta Sans', sans-serif" font-size="10.5" fill="#475569">Context &amp; Logic</text>
+          <rect x="12" y="60" width="101" height="20" rx="4" fill="#F8FAFC" stroke="#E2E8F0"/>
+          <text x="62" y="74" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="9.5" font-weight="600" fill="#0F172A">AWS PrivateLink</text>
+          <text x="62" y="94" text-anchor="middle" font-family="'Plus Jakarta Sans', sans-serif" font-size="9.5" fill="#2563EB">Stream Tokens</text>
+        </g>
+
+        <!-- Connector 3 -> 4 -->
+        <line x1="485" y1="127" x2="515" y2="127" stroke="#64748B" stroke-width="2" marker-end="url(#arrow)"/>
+        <text x="500" y="120" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="9" fill="#64748B">Draft</text>
+
+        <!-- Node 4: Guardrails (Highlighted) -->
+        <g transform="translate(520, 68)" filter="url(#cardShadow)">
+          <rect width="130" height="118" rx="10" fill="#EFF6FF" stroke="#3B82F6" stroke-width="2"/>
+          <rect x="0" y="0" width="130" height="6" rx="3" fill="#2563EB"/>
+          <text x="65" y="28" text-anchor="middle" font-family="'Plus Jakarta Sans', sans-serif" font-size="13" font-weight="800" fill="#1E40AF">🛡️ Guardrails</text>
+          <text x="65" y="44" text-anchor="middle" font-family="'Plus Jakarta Sans', sans-serif" font-size="10" font-weight="700" fill="#1D4ED8">Safety &amp; Compliance</text>
+          <text x="65" y="62" text-anchor="middle" font-family="'Plus Jakarta Sans', sans-serif" font-size="9.5" fill="#334155">• Anti-Hallucination</text>
+          <text x="65" y="76" text-anchor="middle" font-family="'Plus Jakarta Sans', sans-serif" font-size="9.5" fill="#334155">• PII &amp; Policy Shield</text>
+          <rect x="15" y="86" width="100" height="20" rx="4" fill="#DBEAFE"/>
+          <text x="65" y="100" text-anchor="middle" font-family="'Plus Jakarta Sans', sans-serif" font-size="9" font-weight="700" fill="#1E40AF">Pre-Speech Check</text>
+        </g>
+
+        <!-- Connector 4 -> 5 -->
+        <line x1="650" y1="127" x2="675" y2="127" stroke="#64748B" stroke-width="2" marker-end="url(#arrow)"/>
+        <text x="662" y="120" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="9" fill="#16A34A">Safe</text>
+
+        <!-- Node 5: TTS (EC2 GPU) -->
+        <g transform="translate(680, 75)" filter="url(#cardShadow)">
+          <rect width="125" height="105" rx="10" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1.5"/>
+          <rect x="0" y="0" width="125" height="6" rx="3" fill="#0F172A"/>
+          <text x="62" y="32" text-anchor="middle" font-family="'Plus Jakarta Sans', sans-serif" font-size="13" font-weight="800" fill="#0F172A">TTS Engine</text>
+          <text x="62" y="48" text-anchor="middle" font-family="'Plus Jakarta Sans', sans-serif" font-size="10.5" fill="#475569">Text-to-Speech</text>
+          <rect x="15" y="60" width="95" height="20" rx="4" fill="#F8FAFC" stroke="#E2E8F0"/>
+          <text x="62" y="74" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="9.5" font-weight="600" fill="#0F172A">Amazon EC2 GPU</text>
+          <text x="62" y="94" text-anchor="middle" font-family="'Plus Jakarta Sans', sans-serif" font-size="9.5" fill="#16A34A">Natural Voice</text>
+        </g>
+
+        <!-- Connector 5 -> 6 -->
+        <line x1="805" y1="127" x2="840" y2="127" stroke="#64748B" stroke-width="2" marker-end="url(#arrow)"/>
+
+        <!-- Node 6: Voice Output -->
+        <g transform="translate(845, 80)" filter="url(#cardShadow)">
+          <rect width="80" height="95" rx="10" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1.5"/>
+          <circle cx="40" cy="30" r="14" fill="#F1F5F9"/>
+          <path d="M35 30 l5 -4 v8 z M43 27 a4 4 0 0 1 0 6" stroke="#0F172A" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+          <text x="40" y="56" text-anchor="middle" font-family="'Plus Jakarta Sans', sans-serif" font-size="11.5" font-weight="700" fill="#0F172A">Voice Out</text>
+          <text x="40" y="70" text-anchor="middle" font-family="'Plus Jakarta Sans', sans-serif" font-size="9.5" fill="#64748B">WebRTC</text>
+          <text x="40" y="83" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="9" font-weight="600" fill="#16A34A">&lt;2s Total</text>
+        </g>
+      </svg>
+      <div class="arch-caption">${escapeHtml(r.diagramCaption)}</div>
     </div>
-  `).join('');
+  `;
+
+  container.innerHTML = `
+    <article class="event-report-article">
+      <!-- Breadcrumb & Back Navigation Bar -->
+      <nav class="report-nav-bar" aria-label="Breadcrumb">
+        <div class="report-breadcrumbs">
+          <a href="#/events" onclick="event.preventDefault(); navigateTo('events');">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+            <span>${t('eventsBreadcrumb')}</span>
+          </a>
+          <span class="sep">/</span>
+          <span class="current">${escapeHtml(r.breadcrumb)}</span>
+        </div>
+        <button type="button" class="btn btn-outline btn-sm" onclick="navigateTo('events')">
+          <span>${t('btnBackToEvents')}</span>
+        </button>
+      </nav>
+
+      <!-- Hero Header -->
+      <header class="report-hero">
+        <div class="report-hero-badge-row">
+          <span class="badge badge-purple">${escapeHtml(r.badgeText)}</span>
+          <span class="badge badge-blue">${escapeHtml(r.sessionTag)}</span>
+          <span class="badge badge-gray">📅 24/10/2026</span>
+        </div>
+        <h1 class="report-main-title">${escapeHtml(r.title)}</h1>
+        <p class="report-main-subtitle">${escapeHtml(r.subtitle)}</p>
+      </header>
+
+      <!-- Official Event Metadata Box -->
+      <section class="report-meta-box">
+        <div class="report-meta-box-header">
+          <h4>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+            ${escapeHtml(r.metaHeader)}
+          </h4>
+          <span class="badge badge-blue">Official FCAJ Record</span>
+        </div>
+        <div class="report-meta-grid">
+          <div class="report-meta-item"><strong>${escapeHtml(r.lblEventName)}:</strong> ${escapeHtml(r.eventName)}</div>
+          <div class="report-meta-item"><strong>${escapeHtml(r.lblDateTime)}:</strong> ${escapeHtml(r.dateTime)}</div>
+          <div class="report-meta-item"><strong>${escapeHtml(r.lblLocation)}:</strong> ${escapeHtml(r.location)}</div>
+          <div class="report-meta-item"><strong>${escapeHtml(r.lblRole)}:</strong> ${escapeHtml(r.role)}</div>
+          <div class="report-meta-item"><strong>${escapeHtml(r.lblSpeaker)}:</strong> ${escapeHtml(r.speaker)}</div>
+          <div class="report-meta-item"><strong>${escapeHtml(r.lblTopic)}:</strong> ${escapeHtml(r.topic)}</div>
+        </div>
+        <div class="report-meta-notice">${escapeHtml(r.metaNotice)}</div>
+      </section>
+
+      <!-- Company 7 Reporting Criteria Verification Framework -->
+      <section class="report-compliance-card">
+        <div class="report-compliance-title">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+          <span>${escapeHtml(r.complianceTitle)}</span>
+        </div>
+        <div class="compliance-pills">
+          <span class="compliance-pill pill-pass">✓ 1. ${escapeHtml(r.crit1)}</span>
+          <span class="compliance-pill pill-pass">✓ 2. ${escapeHtml(r.crit2)}</span>
+          <span class="compliance-pill pill-pass">✓ 3. ${escapeHtml(r.crit3)}</span>
+          <span class="compliance-pill pill-pass">✓ 4. ${escapeHtml(r.crit4)}</span>
+          <span class="compliance-pill pill-pass">✓ 5. ${escapeHtml(r.crit5)}</span>
+          <span class="compliance-pill pill-pending">⏳ 6. ${escapeHtml(r.crit6)}</span>
+          <span class="compliance-pill pill-pass">✓ 7. ${escapeHtml(r.crit7)}</span>
+        </div>
+      </section>
+
+      <!-- SECTION 1 – TỔNG QUAN PHIÊN CHIA SẺ -->
+      <section class="report-section-block">
+        <div class="report-section-header">
+          <span class="report-section-num">${escapeHtml(r.sec1Num)}</span>
+          <h2 class="report-section-title">${escapeHtml(r.sec1Title)}</h2>
+        </div>
+        <div class="report-prose">
+          <p>${escapeHtml(r.sec1Problem)}</p>
+          <div class="report-quote-box">${escapeHtml(r.sec1Quote)}</div>
+          <p>${r.sec1P1}</p>
+          <p>${r.sec1P2}</p>
+        </div>
+      </section>
+
+      <!-- SECTION 2 – KIẾN TRÚC VOICE AI -->
+      <section class="report-section-block">
+        <div class="report-section-header">
+          <span class="report-section-num">${escapeHtml(r.sec2Num)}</span>
+          <h2 class="report-section-title">${escapeHtml(r.sec2Title)}</h2>
+        </div>
+        <div class="report-prose">
+          <p>${escapeHtml(r.sec2Desc)}</p>
+          <div style="background:#F1F5F9; padding:10px 16px; border-radius:8px; font-family:var(--font-mono); font-size:13px; font-weight:700; color:#0F172A; margin-bottom:16px;">
+            ${escapeHtml(r.sec2Pipeline)}
+          </div>
+          <ul>
+            <li>${r.sec2STT}</li>
+            <li>${r.sec2LLM}</li>
+            <li>${r.sec2Guardrails}</li>
+            <li>${r.sec2TTS}</li>
+          </ul>
+          <p>${r.sec2Advantage}</p>
+          ${svgDiagram}
+          <p>${r.sec2Nuance}</p>
+        </div>
+      </section>
+
+      <!-- SECTION 3 – AWS INFRASTRUCTURE & NETWORKING -->
+      <section class="report-section-block">
+        <div class="report-section-header">
+          <span class="report-section-num">${escapeHtml(r.sec3Num)}</span>
+          <h2 class="report-section-title">${escapeHtml(r.sec3Title)}</h2>
+        </div>
+        <div class="report-prose">
+          <p>${escapeHtml(r.sec3Desc)}</p>
+          <ul>
+            <li>${r.sec3WebRTC}</li>
+            <li>${r.sec3EC2}</li>
+            <li>${r.sec3PrivateLink}</li>
+            <li>${r.sec3Networking}</li>
+          </ul>
+          <div class="report-quote-box" style="border-left-color:#2563EB; font-style:normal;">
+            ${r.sec3Insight}
+          </div>
+        </div>
+      </section>
+
+      <!-- SECTION 4 – PERFORMANCE & COST OPTIMIZATION -->
+      <section class="report-section-block">
+        <div class="report-section-header">
+          <span class="report-section-num">${escapeHtml(r.sec4Num)}</span>
+          <h2 class="report-section-title">${escapeHtml(r.sec4Title)}</h2>
+        </div>
+        <div class="report-prose">
+          <p>${escapeHtml(r.sec4P1)}</p>
+          <div class="metric-cards-grid">
+            <div class="metric-stat-card">
+              <div class="metric-val" style="color:#0F172A;">${escapeHtml(r.sec4Metric1Val)}</div>
+              <div class="metric-lbl">${escapeHtml(r.sec4Metric1Lbl)}</div>
+              <div class="metric-sub">${escapeHtml(r.sec4Metric1Sub)}</div>
+            </div>
+            <div class="metric-stat-card">
+              <div class="metric-val" style="color:#2563EB;">${escapeHtml(r.sec4Metric2Val)}</div>
+              <div class="metric-lbl">${escapeHtml(r.sec4Metric2Lbl)}</div>
+              <div class="metric-sub">${escapeHtml(r.sec4Metric2Sub)}</div>
+            </div>
+            <div class="metric-stat-card">
+              <div class="metric-val" style="color:#16A34A;">${escapeHtml(r.sec4Metric3Val)}</div>
+              <div class="metric-lbl">${escapeHtml(r.sec4Metric3Lbl)}</div>
+              <div class="metric-sub">${escapeHtml(r.sec4Metric3Sub)}</div>
+            </div>
+          </div>
+          <div class="metric-disclaimer">${escapeHtml(r.sec4Attribution)}</div>
+          <div class="report-quote-box" style="margin-top:20px;">
+            ${escapeHtml(r.sec4LessonQuote)}
+          </div>
+        </div>
+      </section>
+
+      <!-- SECTION 5 – VPBANK CASE STUDY -->
+      <section class="report-section-block">
+        <div class="report-section-header">
+          <span class="report-section-num">${escapeHtml(r.sec5Num)}</span>
+          <h2 class="report-section-title">${escapeHtml(r.sec5Title)}</h2>
+        </div>
+        <div class="report-prose">
+          <p>${escapeHtml(r.sec5Desc)}</p>
+          <div class="metric-cards-grid">
+            <div class="metric-stat-card">
+              <div class="metric-val" style="color:#0F172A;">${escapeHtml(r.sec5Metric1Val)}</div>
+              <div class="metric-lbl">${escapeHtml(r.sec5Metric1Lbl)}</div>
+              <div class="metric-sub">${escapeHtml(r.sec5Metric1Sub)}</div>
+            </div>
+            <div class="metric-stat-card">
+              <div class="metric-val" style="color:#2563EB;">${escapeHtml(r.sec5Metric2Val)}</div>
+              <div class="metric-lbl">${escapeHtml(r.sec5Metric2Lbl)}</div>
+              <div class="metric-sub">${escapeHtml(r.sec5Metric2Sub)}</div>
+            </div>
+            <div class="metric-stat-card">
+              <div class="metric-val" style="color:#16A34A;">${escapeHtml(r.sec5Metric3Val)}</div>
+              <div class="metric-lbl">${escapeHtml(r.sec5Metric3Lbl)}</div>
+              <div class="metric-sub">${escapeHtml(r.sec5Metric3Sub)}</div>
+            </div>
+          </div>
+          <div class="metric-disclaimer">${escapeHtml(r.sec5Disclaimer)}</div>
+        </div>
+      </section>
+
+      <!-- SECTION 6 – LIVE DEMO -->
+      <section class="report-section-block">
+        <div class="report-section-header">
+          <span class="report-section-num">${escapeHtml(r.sec6Num)}</span>
+          <h2 class="report-section-title">${escapeHtml(r.sec6Title)}</h2>
+        </div>
+        <div class="report-prose">
+          <p>${escapeHtml(r.sec6Desc)}</p>
+          <ul>
+            <li>${r.sec6Item1}</li>
+            <li>${r.sec6Item2}</li>
+            <li>${r.sec6Item3}</li>
+            <li>${r.sec6Item4}</li>
+          </ul>
+          <p>${escapeHtml(r.sec6Summary)}</p>
+        </div>
+      </section>
+
+      <!-- SECTION 7 – NHỮNG BÀI HỌC THU HOẠCH -->
+      <section class="report-section-block">
+        <div class="report-section-header">
+          <span class="report-section-num">${escapeHtml(r.sec7Num)}</span>
+          <h2 class="report-section-title">${escapeHtml(r.sec7Title)}</h2>
+        </div>
+        <div class="takeaways-grid">
+          <div class="takeaway-card">
+            <div class="takeaway-card-num">${escapeHtml(r.takeaway1Num)}</div>
+            <div class="takeaway-card-title">${escapeHtml(r.takeaway1Title)}</div>
+            <div class="takeaway-card-body">${escapeHtml(r.takeaway1Body)}</div>
+          </div>
+          <div class="takeaway-card">
+            <div class="takeaway-card-num">${escapeHtml(r.takeaway2Num)}</div>
+            <div class="takeaway-card-title">${escapeHtml(r.takeaway2Title)}</div>
+            <div class="takeaway-card-body">${escapeHtml(r.takeaway2Body)}</div>
+          </div>
+          <div class="takeaway-card">
+            <div class="takeaway-card-num">${escapeHtml(r.takeaway3Num)}</div>
+            <div class="takeaway-card-title">${escapeHtml(r.takeaway3Title)}</div>
+            <div class="takeaway-card-body">${escapeHtml(r.takeaway3Body)}</div>
+          </div>
+          <div class="takeaway-card">
+            <div class="takeaway-card-num">${escapeHtml(r.takeaway4Num)}</div>
+            <div class="takeaway-card-title">${escapeHtml(r.takeaway4Title)}</div>
+            <div class="takeaway-card-body">${escapeHtml(r.takeaway4Body)}</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SECTION 8 – BÀI HỌC RÚT RA VÀ ĐÓNG GÓP CÁ NHÂN -->
+      <section class="report-section-block">
+        <div class="report-section-header">
+          <span class="report-section-num">${escapeHtml(r.sec8Num)}</span>
+          <h2 class="report-section-title">${escapeHtml(r.sec8Title)}</h2>
+        </div>
+        <div class="report-prose">
+          <h4 style="font-size:15px; font-weight:700; color:#0F172A; margin:14px 0 8px 0;">${escapeHtml(r.lessonHeading)}</h4>
+          <div class="report-quote-box" style="white-space:pre-line; font-style:normal; margin-bottom:20px;">
+            ${escapeHtml(r.lessonQuote)}
+          </div>
+
+          <h4 style="font-size:15px; font-weight:700; color:#0F172A; margin:20px 0 8px 0;">${escapeHtml(r.contribHeading)}</h4>
+          <div class="report-quote-box" style="font-style:normal; border-left-color:#2563EB;">
+            ${escapeHtml(r.contribQuote)}
+          </div>
+        </div>
+      </section>
+
+      <!-- SECTION 9 – EVENT CHECK-IN & PHOTOS -->
+      <section class="report-section-block">
+        <div class="report-section-header">
+          <span class="report-section-num">${escapeHtml(r.sec9Num)}</span>
+          <h2 class="report-section-title">${escapeHtml(r.sec9Title)}</h2>
+        </div>
+        <div class="photo-pending-box">
+          <div class="photo-pending-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+              <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/>
+              <circle cx="12" cy="13" r="4"/>
+            </svg>
+          </div>
+          <span class="photo-pending-badge">${escapeHtml(r.photoPendingBadge)}</span>
+          <h3 class="photo-pending-title" style="margin-top:12px;">${escapeHtml(r.photoPendingTitle)}</h3>
+          <p class="photo-pending-desc">${escapeHtml(r.photoPendingDesc)}</p>
+          <p style="font-size:12px; color:#92400E; margin:0; font-style:italic;">${escapeHtml(r.photoPendingNote)}</p>
+        </div>
+      </section>
+
+      <!-- Bottom Navigation Actions -->
+      <div class="report-bottom-actions">
+        <button type="button" class="btn btn-outline" onclick="navigateTo('events')">
+          <span>${t('btnBackToEvents')}</span>
+        </button>
+        <button type="button" class="btn btn-primary" onclick="window.scrollTo({top:0, behavior:'smooth'})">
+          <span>↑ ${lang === 'vi' ? 'Lên đầu trang' : 'Back to top'}</span>
+        </button>
+      </div>
+    </article>
+  `;
 }
 
 function deleteEvent(id) {
@@ -3048,6 +3798,7 @@ function setupSearchAndMobile() {
       if (q.includes('worklog') || q.includes('tuần') || q.includes('week') || q.includes('nhật ký')) navigateTo('worklog');
       else if (q.includes('proposal') || q.includes('đồ án') || q.includes('weather') || q.includes('đề xuất')) navigateTo('proposal');
       else if (q.includes('blog') || q.includes('eks') || q.includes('bài viết') || q.includes('s3 express') || q.includes('one zone') || q.includes('amdahl')) navigateTo('blogs-posted');
+      else if (q.includes('voice ai') || q.includes('contact center') || q.includes('kiệt trần') || q.includes('meet up') || q.includes('cascade') || q.includes('vpbank')) navigateTo('events/first-cloud-ai-journey-24-10-2026');
       else if (q.includes('event') || q.includes('sự kiện') || q.includes('bitexco')) navigateTo('events');
       else if (q.includes('workshop') || q.includes('s3') || q.includes('endpoint') || q.includes('thực hành')) navigateTo('workshop');
       else if (q.includes('đánh giá') || q.includes('self') || q.includes('assessment')) navigateTo('self-evaluation');
@@ -3099,13 +3850,14 @@ document.addEventListener('DOMContentLoaded', () => {
   app.applyLanguage();
 
   // Navigate to current hash
-  const currentHash = window.location.hash.replace('#/', '') || 'thong-tin';
+  const currentHash = window.location.hash.replace(/^#\/?/, '').replace(/\/$/, '') || 'thong-tin';
   navigateTo(currentHash);
 });
 
 // Expose functions globally for HTML onclick and event listeners
 window.app = app;
 window.navigateTo = navigateTo;
+window.renderEventDetail = renderEventDetail;
 window.selectWeek = selectWeek;
 window.deleteWeekTask = deleteWeekTask;
 window.openEditTaskModal = openEditTaskModal;
