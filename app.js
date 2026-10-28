@@ -1248,12 +1248,13 @@ REFERENCES
       },
       {
         id: "event-2",
-        name: "Sự kiện 2 - Đại hội Cộng đồng AWS Community Day Vietnam 2026",
-        dateTime: "08:30, 19/09/2026",
-        location: "Trung tâm Hội nghị GEM Center, Quận 1, TP.HCM",
-        role: "Thành viên tham dự & Tình nguyện viên hỗ trợ",
-        speakers: "Các chuyên gia AWS Community Heroes và Kiến trúc sư giải pháp AWS Việt Nam",
-        highlights: "• Trải nghiệm thực hành xây dựng ứng dụng Generative AI với Amazon Bedrock và mô hình Claude 3.5 Sonnet.\n• Giao lưu và kết nối với các kỹ sư Cloud cấp cao từ các đối tác công nghệ hàng đầu khu vực."
+        name: "First Cloud AI Journey: Weekly Meet Up 24/10",
+        dateTime: "08:30 – 12:00, 24/10/2026",
+        location: "Chưa xác nhận",
+        role: "Attendee",
+        speakers: "Kiệt Trần (AI Engineer, Re AI – AWS Partner)",
+        highlights: "• Session 1 – Voice AI & Contact Center: Discuss low-latency two-way voice AI, architecture using Cascade (STT → LLM → TTS) with Guardrails, WebRTC over UDP, EC2 GPU for STT/TTS, AWS PrivateLink for LLM.\\n• Demonstrated cost-effective implementation and real-time interaction.",
+        photoUrl: "https://via.placeholder.com/150"
       }
             ,
         {
@@ -1288,12 +1289,13 @@ REFERENCES
       },
       {
         id: "event-2",
-        name: "Event 2 - AWS Community Day Vietnam 2026",
-        dateTime: "08:30, September 19, 2026",
-        location: "GEM Center, District 1, Ho Chi Minh City",
-        role: "Attendee & Volunteer Support",
-        speakers: "AWS Community Heroes & AWS Solution Architects",
-        highlights: "• Hands-on immersion with Amazon Bedrock, Claude 3.5 Sonnet, and Retrieval-Augmented Generation (RAG).\n• Networking with senior cloud engineers, AWS User Group leaders, and tech partners across Southeast Asia."
+        name: "First Cloud AI Journey: Weekly Meet Up 24/10",
+        dateTime: "08:30 – 12:00, 24/10/2026",
+        location: "Chưa xác nhận",
+        role: "Attendee",
+        speakers: "Kiệt Trần (AI Engineer, Re AI – AWS Partner)",
+        highlights: "• Session 1 – Voice AI & Contact Center: Discuss low-latency two-way voice AI, architecture using Cascade (STT → LLM → TTS) with Guardrails, WebRTC over UDP, EC2 GPU for STT/TTS, AWS PrivateLink for LLM.\n• Demonstrated cost-effective implementation and real-time interaction.",
+        photoUrl: "https://via.placeholder.com/150"
       }
     ]
   },
