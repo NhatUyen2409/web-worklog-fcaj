@@ -1255,7 +1255,27 @@ REFERENCES
         speakers: "Các chuyên gia AWS Community Heroes và Kiến trúc sư giải pháp AWS Việt Nam",
         highlights: "• Trải nghiệm thực hành xây dựng ứng dụng Generative AI với Amazon Bedrock và mô hình Claude 3.5 Sonnet.\n• Giao lưu và kết nối với các kỹ sư Cloud cấp cao từ các đối tác công nghệ hàng đầu khu vực."
       }
-    ],
+            ,
+        {
+          id: "event-3",
+          name: "Sự kiện 3 - Meetup AI Voice Interaction",
+          dateTime: "09:00, 24/10/2026",
+          location: "Online (WebRTC)",
+          role: "Diễn giả",
+          speakers: "Phan Nhat Uyen",
+          highlights: "• Giới thiệu kiến trúc Voice AI hai chiều với độ trễ <2s và chi phí ~3.000đ/cuộc gọi.\n• Triển khai mô hình Cascade (STT → LLM → TTS) và lớp Guardrails.\n• Kết quả VPBank: 282 ứng viên, nhận diện ý định 90%, tỉ lệ nộp đơn 62%, chi phí ~3.000đ/cuộc gọi."
+        }
+        ,{
+          id: "event-4",
+          name: "First Cloud AI Journey: Weekly Meet Up 24/10",
+          dateTime: "08:30 – 12:00, 24/10/2026",
+          location: "Chưa xác nhận",
+          role: "Attendee",
+          speakers: "Kiệt Trần (AI Engineer, Re AI – AWS Partner)",
+          highlights: "• Session 1 – Voice AI & Contact Center: Discuss low-latency two-way voice AI, architecture using Cascade (STT → LLM → TTS) with Guardrails, WebRTC over UDP, EC2 GPU for STT/TTS, AWS PrivateLink for LLM.\n• Demonstrated cost-effective implementation and real-time interaction.",
+          photoUrl: "https://via.placeholder.com/150"
+        },
+        ],
     en: [
       {
         id: "event-1",
@@ -1385,6 +1405,25 @@ class AppLanguageManager {
                     parsed.blogs[l].push(JSON.parse(JSON.stringify(defBlog)));
                   } else {
                     parsed.blogs[l][bIdx] = JSON.parse(JSON.stringify(defBlog));
+                  }
+                });
+              }
+            });
+          }
+          // Sync default events (including new Session 1) for both languages
+          if (!parsed.events) {
+            parsed.events = JSON.parse(JSON.stringify(DEFAULT_BILINGUAL_DATA.events));
+          } else {
+            ['vi', 'en'].forEach(l => {
+              if (!parsed.events[l]) {
+                parsed.events[l] = JSON.parse(JSON.stringify(DEFAULT_BILINGUAL_DATA.events[l]));
+              } else {
+                DEFAULT_BILINGUAL_DATA.events[l].forEach(defEvent => {
+                  const eIdx = parsed.events[l].findIndex(e => e.id === defEvent.id);
+                  if (eIdx === -1) {
+                    parsed.events[l].push(JSON.parse(JSON.stringify(defEvent)));
+                  } else {
+                    parsed.events[l][eIdx] = JSON.parse(JSON.stringify(defEvent));
                   }
                 });
               }
