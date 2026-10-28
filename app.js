@@ -1266,16 +1266,7 @@ REFERENCES
           speakers: "Phan Nhat Uyen",
           highlights: "• Giới thiệu kiến trúc Voice AI hai chiều với độ trễ <2s và chi phí ~3.000đ/cuộc gọi.\n• Triển khai mô hình Cascade (STT → LLM → TTS) và lớp Guardrails.\n• Kết quả VPBank: 282 ứng viên, nhận diện ý định 90%, tỉ lệ nộp đơn 62%, chi phí ~3.000đ/cuộc gọi."
         }
-        ,{
-          id: "event-4",
-          name: "First Cloud AI Journey: Weekly Meet Up 24/10",
-          dateTime: "08:30 – 12:00, 24/10/2026",
-          location: "Chưa xác nhận",
-          role: "Attendee",
-          speakers: "Kiệt Trần (AI Engineer, Re AI – AWS Partner)",
-          highlights: "• Session 1 – Voice AI & Contact Center: Discuss low-latency two-way voice AI, architecture using Cascade (STT → LLM → TTS) with Guardrails, WebRTC over UDP, EC2 GPU for STT/TTS, AWS PrivateLink for LLM.\n• Demonstrated cost-effective implementation and real-time interaction.",
-          photoUrl: "https://via.placeholder.com/150"
-        },
+
         ],
     en: [
       {
