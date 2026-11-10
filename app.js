@@ -1716,6 +1716,16 @@ const DEFAULT_BILINGUAL_DATA = {
         date: "18/10/2026",
         image: "assets/images/s3-express-one-zone-architecture.png",
         snippet: "Trong các hệ thống AI/ML, việc xử lý hàng triệu hình ảnh hoặc tệp dữ liệu đòi hỏi ứng dụng liên tục truy xuất dữ liệu từ Amazon S3. Khi tốc độ đọc không theo kịp CPU/GPU, hệ thống gặp I/O Bottleneck làm lãng phí compute. Amazon S3 Express One Zone cung cấp độ trễ sub-10ms với Directory Bucket trong cùng 1 AZ. Tuy nhiên, theo định luật Amdahl, tối ưu 10x I/O chỉ giúp tổng thời gian hoàn thành tác vụ giảm 18% nếu tác vụ bị nghẽn ở compute."
+      },
+      {
+        id: "blog-5",
+        slug: "aws-event-driven-architecture",
+        category: "AWS Cloud / Distributed Systems / Architecture",
+        title: "AWS EVENT-DRIVEN ARCHITECTURE – KHI MỌI DỊCH VỤ ĐỀU HOẠT ĐỘNG ĐÚNG, TẠI SAO DỮ LIỆU VẪN CÓ THỂ SAI?",
+        url: "#/blogs/aws-event-driven-architecture",
+        date: "04/11/2026",
+        image: "assets/images/aws-event-driven-architecture.png",
+        snippet: "Trong quá trình nghiên cứu kiến trúc Event-Driven trên AWS kết hợp Amazon S3, EventBridge, SQS, Lambda và DynamoDB: Một hệ thống có thể xử lý tất cả sự kiện thành công 100% nhưng vẫn tạo ra kết quả sai do Race Condition. Phân tích nguyên nhân tại sao Idempotency và SQS FIFO chưa đủ, và đề xuất mô hình giải pháp kết hợp S3 Versioning, S3 Sequencer, Immutable Output, DynamoDB Conditional Write và Reconciliation worker."
       }
     ],
     en: [
@@ -1749,6 +1759,16 @@ const DEFAULT_BILINGUAL_DATA = {
         date: "18/10/2026",
         image: "assets/images/s3-express-one-zone-architecture.png",
         snippet: "In modern AI/ML systems, continuously fetching millions of images from S3 often creates I/O bottlenecks where compute sits idle. Amazon S3 Express One Zone delivers single-digit millisecond latency with Directory Buckets in a single AZ. However, according to Amdahl's Law, a 10x I/O speedup only reduces total execution time by 18% if the workload is compute-heavy."
+      },
+      {
+        id: "blog-5",
+        slug: "aws-event-driven-architecture",
+        category: "AWS Cloud / Distributed Systems / Architecture",
+        title: "AWS EVENT-DRIVEN ARCHITECTURE – WHEN ALL SERVICES SUCCEED, WHY CAN DATA STILL BE WRONG?",
+        url: "#/blogs/aws-event-driven-architecture",
+        date: "04/11/2026",
+        image: "assets/images/aws-event-driven-architecture.png",
+        snippet: "In AWS Event-Driven Architectures combining Amazon S3, EventBridge, SQS, Lambda, and DynamoDB: a system can process all events with 100% success yet produce incorrect business state due to Race Conditions. An investigation into why Idempotency and SQS FIFO are not enough, proposing S3 Versioning, S3 Sequencer, Immutable Output, DynamoDB Conditional Writes, and Reconciliation."
       }
     ]
   },
@@ -2201,9 +2221,20 @@ function updateHeaderPageTitle() {
     return;
   }
   if (currentHash.startsWith('blogs/')) {
-    titleEl.textContent = app.currentLang === 'vi'
-      ? '3. Bài viết kỹ thuật — Amazon S3 Express One Zone'
-      : '3. Technical Blog — Amazon S3 Express One Zone';
+    const slug = currentHash.replace('blogs/', '');
+    if (slug === 'aws-event-driven-architecture') {
+      titleEl.textContent = app.currentLang === 'vi'
+        ? '3. Bài viết kỹ thuật — AWS Event-Driven Architecture'
+        : '3. Technical Blog — AWS Event-Driven Architecture';
+    } else if (slug === 's3-express-one-zone') {
+      titleEl.textContent = app.currentLang === 'vi'
+        ? '3. Bài viết kỹ thuật — Amazon S3 Express One Zone'
+        : '3. Technical Blog — Amazon S3 Express One Zone';
+    } else {
+      titleEl.textContent = app.currentLang === 'vi'
+        ? '3. Các bài viết kỹ thuật đã đăng'
+        : '3. Published Technical Blogs';
+    }
     return;
   }
 
@@ -3274,6 +3305,50 @@ function renderBlogsList() {
       `;
     }
 
+    const isEventDriven = b.id === 'blog-5' || b.slug === 'aws-event-driven-architecture';
+
+    if (isEventDriven) {
+      const excerpt = lang === 'vi'
+        ? "Trong quá trình nghiên cứu kiến trúc Event-Driven trên AWS kết hợp Amazon S3, EventBridge, SQS, Lambda và DynamoDB: Một hệ thống có thể xử lý tất cả sự kiện thành công 100% nhưng vẫn tạo ra kết quả sai do Race Condition. Phân tích nguyên nhân tại sao Idempotency và SQS FIFO chưa đủ, và đề xuất mô hình giải pháp kết hợp S3 Versioning, S3 Sequencer, Immutable Output, DynamoDB Conditional Write và Reconciliation worker."
+        : "In AWS Event-Driven Architectures combining Amazon S3, EventBridge, SQS, Lambda, and DynamoDB: a system can process all events with 100% success yet produce incorrect business state due to Race Conditions. An investigation into why Idempotency and SQS FIFO are not enough, proposing S3 Versioning, S3 Sequencer, Immutable Output, DynamoDB Conditional Writes, and Reconciliation.";
+
+      return `
+        <div class="blog-card-featured" id="${escapeHtml(b.id)}">
+          <div class="blog-card-featured-meta">
+            <span>AWS / Distributed Systems / Architecture</span>
+            <span>•</span>
+            <span>${escapeHtml(b.date || '04/11/2026')}</span>
+          </div>
+
+          <h3 class="blog-featured-title" onclick="navigateTo('blogs/aws-event-driven-architecture')">
+            ${escapeHtml(b.title)}
+          </h3>
+
+          <div class="blog-featured-grid-preview">
+            <div class="blog-featured-img-preview" onclick="openBlogImageModal('${escapeHtml(b.image || 'assets/images/aws-event-driven-architecture.png')}', '${escapeHtml(b.title)}')" title="${t('zoomDiagramTooltip')}">
+              <img src="${escapeHtml(b.image || 'assets/images/aws-event-driven-architecture.png')}" alt="${escapeHtml(b.title)}" loading="lazy">
+            </div>
+
+            <div>
+              <p class="blog-featured-excerpt">${escapeHtml(excerpt)}</p>
+              <ul class="blog-featured-bullets">
+                <li>${lang === 'vi' ? '<strong>Race Condition trong At-Least-Once:</strong> Thời gian thực thi Lambda không đồng đều khiến sự kiện cũ ghi đè dữ liệu mới.' : '<strong>Race Condition in At-Least-Once:</strong> Varying Lambda runtimes cause stale events to overwrite newer data.'}</li>
+                <li>${lang === 'vi' ? '<strong>Hạn chế của Idempotency & SQS:</strong> Không thể đảo ngược thứ tự nếu sự kiện đã bị đảo lộn trước khi vào hàng đợi (vấn đề TOCTOU).' : '<strong>Limits of Idempotency & SQS:</strong> Cannot restore ordering once events arrive out-of-sequence (TOCTOU hazard).'}</li>
+                <li>${lang === 'vi' ? '<strong>Kiến trúc bảo toàn tính đúng đắn:</strong> Kết hợp S3 Versioning, S3 Sequencer, Immutable Output và DynamoDB Conditional Write.' : '<strong>Correctness-First Architecture:</strong> S3 Versioning, S3 Sequencer, Immutable Output, and DynamoDB Conditional Writes.'}</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="blog-featured-actions">
+            <button type="button" class="btn-minimal-read" onclick="navigateTo('blogs/aws-event-driven-architecture')">
+              <span>${lang === 'vi' ? 'Đọc bài viết →' : 'Read Article →'}</span>
+            </button>
+            <button type="button" class="btn-text-subtle" style="color:#737373; font-size:12px;" onclick="deleteBlog('${b.id}')">${t('btnDelete')}</button>
+          </div>
+        </div>
+      `;
+    }
+
     const isLongSnippet = (b.snippet || '').length > 360;
     const imgHtml = b.image ? `
       <div class="blog-img-box" onclick="openBlogImageModal('${escapeHtml(b.image)}', '${escapeHtml(b.title)}')" title="${t('zoomDiagramTooltip')}">
@@ -3669,6 +3744,250 @@ const BLOG_ARTICLES = {
       btnBackToBlogs: "← Back to Articles",
       btnScrollTop: "Scroll to Top ↑"
     }
+  },
+  'aws-event-driven-architecture': {
+    vi: {
+      category: "AWS / Distributed Systems / Architecture",
+      date: "04/11/2026",
+      title: "AWS EVENT-DRIVEN ARCHITECTURE – KHI MỌI DỊCH VỤ ĐỀU HOẠT ĐỘNG ĐÚNG, TẠI SAO DỮ LIỆU VẪN CÓ THỂ SAI?",
+      leadSummary: "Trong quá trình nghiên cứu kiến trúc Event-Driven trên AWS, mình nhận thấy một vấn đề: Một hệ thống có thể xử lý tất cả sự kiện thành công nhưng vẫn tạo ra kết quả sai do Race Condition. Điều này xuất phát từ đặc điểm xử lý bất đồng bộ, đặc biệt khi kết hợp Amazon S3, EventBridge, SQS, Lambda và DynamoDB.",
+      coverImage: "assets/images/aws-event-driven-architecture.png",
+      coverCaption: "AWS Event-Driven Architecture – Event Processing, Ordering and Atomic Publishing",
+      sections: [
+        {
+          id: "eda-sec-1",
+          num: "1",
+          title: "1. VẤN ĐỀ Ở ĐÂY LÀ GÌ?",
+          paragraphs: [
+            "Amazon S3 Event Notifications sử dụng cơ chế At-Least-Once Delivery, không bảo đảm sự kiện được gửi duy nhất một lần hoặc theo đúng thứ tự.",
+            "Giả sử một hệ thống AI xử lý tài liệu được cập nhật từ phiên bản A sang B:",
+            "Cả hai Lambda đều thực thi thành công (HTTP 200), nhưng kết quả cuối cùng lại sai."
+          ],
+          scenarioItems: [
+            "<strong>Lambda A:</strong> Xử lý phiên bản gốc A trong 15 giây.",
+            "<strong>Lambda B:</strong> Xử lý phiên bản cập nhật B chỉ trong 4 giây.",
+            "<strong>Hậu quả:</strong> B hoàn thành trước, nhưng A hoàn thành sau và ghi đè kết quả cũ lên kết quả mới."
+          ],
+          table: {
+            headers: ["Luồng xử lý", "Phiên bản tài liệu", "Thời điểm bắt đầu", "Thời gian xử lý", "Thời điểm ghi kết quả", "Hậu quả thực tế"],
+            rows: [
+              ["<strong>Worker A</strong>", "Phiên bản A (v1)", "T0", "15 giây", "T0 + 15s", "<strong>Ghi đè sai kết quả của B</strong>"],
+              ["<strong>Worker B</strong>", "Phiên bản B (v2 - Mới nhất)", "T0 + 2s", "4 giây", "T0 + 6s", "Bị kết quả cũ của A ghi đè mất"]
+            ]
+          },
+          keyInsight: "Mấu chốt vấn đề: Không có bất kỳ lỗi ứng dụng nào xảy ra và 100% lời gọi hàm Lambda đều thành công, nhưng kết quả nghiệp vụ cuối cùng vẫn bị sai lệch do sự chênh lệch thời gian xử lý trong môi trường bất đồng bộ."
+        },
+        {
+          id: "eda-sec-2",
+          num: "2",
+          title: "2. VẬY TẠI SAO IDEMPOTENCY VÀ SQS CHƯA ĐỦ?",
+          paragraphs: [
+            "Nhiều kỹ sư thường mặc định rằng việc áp dụng Idempotency và Message Queuing sẽ giải quyết được bài toán Race Condition. Tuy nhiên trên thực tế, các cơ chế này có những giới hạn cốt lõi:"
+          ],
+          points: [
+            "<strong>Idempotency:</strong> Giúp ngăn tác động xử lý trùng lặp của cùng một sự kiện, nhưng không tự động ngăn sự kiện cũ ghi đè kết quả mới.",
+            "<strong>Amazon SQS FIFO:</strong> Duy trì thứ tự theo Message Group, nhưng không thể khôi phục thứ tự gốc nếu các sự kiện đã đến sai trước khi vào hàng đợi.",
+            "<strong>Vấn đề TOCTOU (Time-of-Check to Time-of-Use):</strong> Ngay cả khi Lambda kiểm tra phiên bản trước khi xử lý, dữ liệu vẫn có thể thay đổi trong lúc thực thi."
+          ]
+        },
+        {
+          id: "eda-sec-3",
+          num: "3",
+          title: "3. ĐỀ XUẤT",
+          introText: "Thay vì để Lambda ghi đè trực tiếp kết quả vào vị trí lưu trữ dùng chung, mình đề xuất mô hình kiến trúc kết hợp 5 cơ chế cốt lõi:",
+          solutions: [
+            "<strong>S3 Versioning:</strong> Truy xuất đúng phiên bản dữ liệu đầu vào. Đảm bảo worker đọc đúng phiên bản tương ứng với sự kiện, tránh đọc nhầm dữ liệu đang bị thay đổi.",
+            "<strong>S3 Sequencer:</strong> Xác định thứ tự các thao tác được hỗ trợ trên cùng object key. Chuỗi ký tự thập lục phân trong payload sự kiện cung cấp thứ tự vật lý tin cậy tuyệt đối.",
+            "<strong>Immutable Output:</strong> Mỗi Lambda ghi kết quả vào đường dẫn riêng (ví dụ: output/{key}/{version_id}/result.json), tuyệt đối không ghi đè trực tiếp.",
+            "<strong>DynamoDB Conditional Write:</strong> Kiểm soát việc công bố kết quả bằng điều kiện cập nhật nguyên tử. Chỉ cho phép cập nhật con trỏ trạng thái nếu sequencer mới hơn.",
+            "<strong>Reconciliation:</strong> Phục hồi tác vụ bị gián đoạn và đối chiếu trạng thái khi cần."
+          ],
+          table: {
+            headers: ["Thành phần", "Vai trò trong giải pháp", "Cơ chế bảo đảm tính đúng đắn"],
+            rows: [
+              ["<strong>Amazon S3 Versioning</strong>", "Bảo toàn dữ liệu nguồn đầu vào", "Version ID bất biến cho từng lần tải lên đối tượng"],
+              ["<strong>S3 Object Sequencer</strong>", "Xác định thứ tự nghiệp vụ gốc", "So sánh chuỗi thập lục phân biểu diễn timestamp vật lý từ S3"],
+              ["<strong>Immutable Output</strong>", "Lưu trữ trung gian độc lập", "Mỗi worker ghi vào prefix riêng, triệt tiêu xung đột ghi đè"],
+              ["<strong>DynamoDB Conditional Write</strong>", "Công bố kết quả nguyên tử", "Compare-and-Swap: chỉ cập nhật nếu s3_sequencer mới hơn"],
+              ["<strong>Reconciliation Worker</strong>", "Xử lý lỗi cục bộ (Partial Failure)", "Đối chiếu trạng thái giữa S3 và con trỏ DynamoDB"]
+            ]
+          },
+          conditionTitle: "Cơ chế cập nhật nguyên tử DynamoDB Conditional Write (Compare-and-Swap):",
+          conditionCode: `UpdateItem(
+  Key = { "object_key": "document-123.pdf" },
+  UpdateExpression = "SET latest_version = :v, result_uri = :uri, s3_sequencer = :seq, updated_at = :ts",
+  ConditionExpression = "attribute_not_exists(object_key) OR s3_sequencer < :seq",
+  ExpressionAttributeValues = {
+    ":seq": event.s3.object.sequencer,
+    ":v": event.s3.object.versionId,
+    ":uri": "s3://bucket/output/doc-123/v2/result.json",
+    ":ts": "2026-11-04T10:30:00Z"
+  }
+)`,
+          postText: "Với kiến trúc này, Lambda A có thể hoàn thành sau B nhưng không được ghi đè kết quả B đã công bố.",
+          partialFailureNote: "Tuy nhiên, S3 và DynamoDB không hỗ trợ một transaction nguyên tử chung. Vì vậy, hệ thống vẫn cần cơ chế Retry và Recovery để xử lý Partial Failure khi ghi S3 thành công nhưng cập nhật DynamoDB bị gián đoạn."
+        },
+        {
+          id: "eda-sec-4",
+          num: "4",
+          title: "4. KẾT LUẬN",
+          paragraphs: [
+            "Theo mình, một vấn đề đáng quan tâm trong Cloud Architecture là: 100% Lambda Invocations thành công không đồng nghĩa với 100% kết quả nghiệp vụ chính xác.",
+            "Thay vì cố gắng buộc mọi sự kiện xử lý đúng thứ tự, kiến trúc nên kiểm soát phiên bản nào được phép thay đổi kết quả chính thức."
+          ],
+          goldenQuote: "100% Lambda Invocations thành công không đồng nghĩa với 100% kết quả nghiệp vụ chính xác.",
+          checklistTitle: "Đúc kết nguyên tắc thiết kế phân tán:",
+          checklistItems: [
+            "1. <strong>Tách biệt tính toán và công bố:</strong> Sử dụng Immutable Output cho lưu trữ trung gian và DynamoDB làm con trỏ công bố trạng thái chính thức.",
+            "2. <strong>Kiểm soát thứ tự tại đích:</strong> Sử dụng S3 Sequencer và DynamoDB ConditionExpression thay vì dựa vào thứ tự đến của hàng đợi.",
+            "3. <strong>Thiết kế sẵn sàng cho Partial Failure:</strong> Luôn xây dựng Reconciliation Worker để tự động đối chiếu và khôi phục trạng thái nhất quán."
+          ]
+        }
+      ],
+      tags: ["#AWS", "#EventDrivenArchitecture", "#AWSLambda", "#DynamoDB", "#DistributedSystems", "#CloudArchitecture"],
+      referencesTitle: "Tài liệu tham khảo chính thức từ AWS",
+      references: [
+        {
+          title: "AWS Documentation – Amazon S3 Event Notifications & Object Sequencer",
+          url: "https://docs.aws.amazon.com/AmazonS3/latest/userguide/notification-content-structure.html"
+        },
+        {
+          title: "AWS Documentation – Working with Queries and Conditional Writes in DynamoDB",
+          url: "https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/WorkingWithItems.html#WorkingWithItems.ConditionalUpdate"
+        },
+        {
+          title: "AWS Architecture Center – Event-Driven Architecture Patterns and Best Practices",
+          url: "https://aws.amazon.com/event-driven-architecture/"
+        },
+        {
+          title: "AWS Compute Blog – Designing for Idempotency and Race Conditions in Serverless",
+          url: "https://aws.amazon.com/blogs/compute/handling-duplicate-records-in-amazon-sqs-fifo-queues/"
+        }
+      ],
+      btnBackToBlogs: "← Quay lại danh sách bài viết",
+      btnScrollTop: "Lên đầu trang ↑"
+    },
+    en: {
+      category: "AWS / Distributed Systems / Architecture",
+      date: "04/11/2026",
+      title: "AWS EVENT-DRIVEN ARCHITECTURE – WHEN ALL SERVICES SUCCEED, WHY CAN DATA STILL BE WRONG?",
+      leadSummary: "While researching Event-Driven Architecture on AWS, I identified a critical paradox: A system can process all events with 100% success yet still generate incorrect business data due to Race Conditions. This stems directly from the asynchronous nature of decoupled services, particularly when orchestrating Amazon S3, EventBridge, SQS, AWS Lambda, and DynamoDB.",
+      coverImage: "assets/images/aws-event-driven-architecture.png",
+      coverCaption: "AWS Event-Driven Architecture – Event Processing, Ordering and Atomic Publishing",
+      sections: [
+        {
+          id: "eda-sec-1",
+          num: "1",
+          title: "1. WHAT IS THE PROBLEM HERE?",
+          paragraphs: [
+            "Amazon S3 Event Notifications operate on an At-Least-Once Delivery model, providing no inherent guarantee that events arrive exactly once or in chronological order.",
+            "Suppose an AI document processing pipeline updates a file from Version A to Version B:",
+            "Both Lambda invocations succeed with HTTP 200, yet the final persisted business outcome is completely corrupted."
+          ],
+          scenarioItems: [
+            "<strong>Lambda A:</strong> Processes baseline Version A in 15 seconds.",
+            "<strong>Lambda B:</strong> Processes updated Version B in only 4 seconds.",
+            "<strong>Outcome:</strong> B completes first, but Lambda A finishes later and overwrites the newer result with stale data."
+          ],
+          table: {
+            headers: ["Worker / Invocation", "Document Version", "Start Time", "Duration", "Write Time", "Actual Outcome"],
+            rows: [
+              ["<strong>Worker A</strong>", "Version A (v1)", "T0", "15 seconds", "T0 + 15s", "<strong>Overwrites newer result of B</strong>"],
+              ["<strong>Worker B</strong>", "Version B (v2 - Latest)", "T0 + 2s", "4 seconds", "T0 + 6s", "Overwritten by stale output from A"]
+            ]
+          },
+          keyInsight: "Core reality: Every individual AWS service worked as designed, yet the business result became corrupted due to uneven invocation latency across distributed workers."
+        },
+        {
+          id: "eda-sec-2",
+          num: "2",
+          title: "2. WHY ARE IDEMPOTENCY AND SQS NOT ENOUGH?",
+          paragraphs: [
+            "Engineers commonly assume that applying Idempotency and SQS FIFO queues will eliminate race conditions in event-driven systems. In practice, both exhibit fundamental boundaries:"
+          ],
+          points: [
+            "<strong>Idempotency:</strong> Prevents duplicate side-effects from identical event retries, but cannot prevent an older stale event from overwriting a newer result.",
+            "<strong>Amazon SQS FIFO:</strong> Enforces strict ordering within Message Groups, but cannot restore chronological order if events were already delivered out-of-order prior to entering the queue.",
+            "<strong>TOCTOU (Time-of-Check to Time-of-Use):</strong> Even when a Lambda inspects object versions before processing, underlying data can change during execution."
+          ]
+        },
+        {
+          id: "eda-sec-3",
+          num: "3",
+          title: "3. PROPOSED ARCHITECTURAL SOLUTION",
+          introText: "Rather than allowing Lambda functions to directly overwrite shared storage, the recommended pattern blends five core mechanisms:",
+          solutions: [
+            "<strong>S3 Versioning:</strong> Retrieve the exact input data version. Guarantees workers read the specific object version tied to the event.",
+            "<strong>S3 Sequencer:</strong> Determine event sequence order on the same object key using the physical hexadecimal timestamp in S3 event payloads.",
+            "<strong>Immutable Output:</strong> Each Lambda writes results to a dedicated immutable path (e.g., output/{key}/{version_id}/result.json), preventing direct overwrite conflicts.",
+            "<strong>DynamoDB Conditional Write:</strong> Control result publishing using atomic Compare-and-Swap conditional updates. Only updates state if the sequencer is newer.",
+            "<strong>Reconciliation:</strong> Recover interrupted tasks and reconcile state inconsistencies when partial failures occur."
+          ],
+          table: {
+            headers: ["Component", "Role in Architecture", "Correctness Guarantee Mechanism"],
+            rows: [
+              ["<strong>Amazon S3 Versioning</strong>", "Input source data preservation", "Immutable Version ID per PutObject invocation"],
+              ["<strong>S3 Object Sequencer</strong>", "Original event ordering authority", "Hexadecimal string reflecting physical S3 commit order"],
+              ["<strong>Immutable Output</strong>", "Isolated intermediate storage", "Dedicated prefix per worker, zero direct overwrite"],
+              ["<strong>DynamoDB Conditional Write</strong>", "Atomic result pointer publishing", "Compare-and-Swap: updates state only if s3_sequencer is newer"],
+              ["<strong>Reconciliation Worker</strong>", "Partial failure recovery", "Audits state discrepancies between S3 and DynamoDB pointer"]
+            ]
+          },
+          conditionTitle: "DynamoDB Atomic Conditional Update Pattern (Compare-and-Swap):",
+          conditionCode: `UpdateItem(
+  Key = { "object_key": "document-123.pdf" },
+  UpdateExpression = "SET latest_version = :v, result_uri = :uri, s3_sequencer = :seq, updated_at = :ts",
+  ConditionExpression = "attribute_not_exists(object_key) OR s3_sequencer < :seq",
+  ExpressionAttributeValues = {
+    ":seq": event.s3.object.sequencer,
+    ":v": event.s3.object.versionId,
+    ":uri": "s3://bucket/output/doc-123/v2/result.json",
+    ":ts": "2026-11-04T10:30:00Z"
+  }
+)`,
+          postText: "Under this architecture, Lambda A can finish after B without ever overwriting B's published result.",
+          partialFailureNote: "However, Amazon S3 and DynamoDB do not share an atomic two-phase commit transaction. Systems must incorporate Retry and Recovery mechanisms to handle partial failures when S3 writes succeed but DynamoDB updates are interrupted."
+        },
+        {
+          id: "eda-sec-4",
+          num: "4",
+          title: "4. CONCLUSION & PRINCIPLES",
+          paragraphs: [
+            "In cloud architecture: 100% successful Lambda invocations do not equate to 100% correct business state.",
+            "Instead of attempting to force every distributed event to process in strict serial order, architectures should control which version is permitted to publish the authoritative result."
+          ],
+          goldenQuote: "100% Lambda Invocations successful does not equal 100% business correctness.",
+          checklistTitle: "Core Distributed Design Principles:",
+          checklistItems: [
+            "1. <strong>Decouple Processing from Publishing:</strong> Leverage Immutable Output for processing and atomic pointers for publishing.",
+            "2. <strong>Enforce Ordering at the Destination:</strong> Use S3 Sequencers and DynamoDB ConditionExpression instead of fragile queue arrival order.",
+            "3. <strong>Design for Partial Failure:</strong> Build Reconciliation Workers to automatically heal cross-service inconsistencies."
+          ]
+        }
+      ],
+      tags: ["#AWS", "#EventDrivenArchitecture", "#AWSLambda", "#DynamoDB", "#DistributedSystems", "#CloudArchitecture"],
+      referencesTitle: "Official AWS Documentation & Resources",
+      references: [
+        {
+          title: "AWS Documentation – Amazon S3 Event Notifications & Object Sequencer",
+          url: "https://docs.aws.amazon.com/AmazonS3/latest/userguide/notification-content-structure.html"
+        },
+        {
+          title: "AWS Documentation – Working with Queries and Conditional Writes in DynamoDB",
+          url: "https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/WorkingWithItems.html#WorkingWithItems.ConditionalUpdate"
+        },
+        {
+          title: "AWS Architecture Center – Event-Driven Architecture Patterns and Best Practices",
+          url: "https://aws.amazon.com/event-driven-architecture/"
+        },
+        {
+          title: "AWS Compute Blog – Designing for Idempotency and Race Conditions in Serverless",
+          url: "https://aws.amazon.com/blogs/compute/handling-duplicate-records-in-amazon-sqs-fifo-queues/"
+        }
+      ],
+      btnBackToBlogs: "← Back to Articles",
+      btnScrollTop: "Scroll to Top ↑"
+    }
   }
 };
 
@@ -3693,6 +4012,11 @@ function renderBlogDetail(slug = 's3-express-one-zone') {
         </button>
       </article>
     `;
+    return;
+  }
+
+  if (targetSlug === 'aws-event-driven-architecture') {
+    renderEventDrivenBlogDetail(container, article, lang);
     return;
   }
 
@@ -3952,6 +4276,177 @@ function renderBlogDetail(slug = 's3-express-one-zone') {
           </h3>
           <ul class="minimal-list">
             ${a.sections[4].checklistItems.map(item => `<li>${item}</li>`).join('')}
+          </ul>
+        </div>
+      </section>
+
+      <hr class="minimal-divider">
+
+      <!-- Official AWS References -->
+      <section class="minimal-section">
+        <h2 class="minimal-section-title">${escapeHtml(a.referencesTitle)}</h2>
+        <ol class="minimal-ref-list">
+          ${a.references.map(ref => `
+            <li>
+              <a href="${escapeHtml(ref.url)}" target="_blank" rel="noopener" class="minimal-ref-link">
+                ${escapeHtml(ref.title)}
+              </a>
+            </li>
+          `).join('')}
+        </ol>
+      </section>
+
+      <!-- Bottom Navigation Footer -->
+      <footer class="minimal-footer-nav">
+        <button type="button" class="btn-minimal-outline" onclick="navigateTo('blogs-posted')">
+          <span>${escapeHtml(a.btnBackToBlogs)}</span>
+        </button>
+        <button type="button" class="btn-minimal-outline" onclick="window.scrollTo({top:0, behavior:'smooth'})">
+          <span>${escapeHtml(a.btnScrollTop)}</span>
+        </button>
+      </footer>
+    </article>
+  `;
+}
+
+function renderEventDrivenBlogDetail(container, a, lang) {
+  container.innerHTML = `
+    <article class="minimal-article-container">
+      <!-- Top Back Navigation -->
+      <nav class="minimal-article-nav">
+        <a href="#/blogs-posted" onclick="event.preventDefault(); navigateTo('blogs-posted');" class="minimal-back-link">
+          <span>${escapeHtml(a.btnBackToBlogs)}</span>
+        </a>
+      </nav>
+
+      <!-- Minimalist Article Header -->
+      <header class="minimal-article-header">
+        <div class="minimal-category-tag">${escapeHtml(a.category)}</div>
+        <h1 class="minimal-article-title">${escapeHtml(a.title)}</h1>
+        <div class="minimal-article-date">${escapeHtml(a.date)}</div>
+
+        <!-- Architecture Cover Image -->
+        <div class="minimal-cover-box">
+          <img src="${escapeHtml(a.coverImage)}" alt="${escapeHtml(a.title)}" 
+               onclick="openBlogImageModal('${escapeHtml(a.coverImage)}', '${escapeHtml(a.title)}')" 
+               title="${lang === 'vi' ? 'Nhấn để xem sơ đồ phóng to' : 'Click to enlarge diagram'}" loading="lazy">
+          <div class="minimal-cover-caption">
+            ${escapeHtml(a.coverCaption)}
+          </div>
+        </div>
+
+        <!-- Introductory Summary Lead -->
+        <p class="minimal-article-lead">${escapeHtml(a.leadSummary)}</p>
+      </header>
+
+      <hr class="minimal-divider">
+
+      <!-- Section 1: VẤN ĐỀ Ở ĐÂY LÀ GÌ? -->
+      <section class="minimal-section" id="eda-sec-1">
+        <h2 class="minimal-section-title">${escapeHtml(a.sections[0].title)}</h2>
+        <p class="minimal-p">${escapeHtml(a.sections[0].paragraphs[0])}</p>
+        <p class="minimal-p">${escapeHtml(a.sections[0].paragraphs[1])}</p>
+
+        <ul class="minimal-list">
+          ${a.sections[0].scenarioItems.map(item => `<li>${item}</li>`).join('')}
+        </ul>
+
+        <p class="minimal-p">${escapeHtml(a.sections[0].paragraphs[2])}</p>
+
+        <!-- Race Condition Timeline Table -->
+        <div class="minimal-table-wrap">
+          <table class="minimal-table">
+            <thead>
+              <tr>
+                ${a.sections[0].table.headers.map(h => `<th>${escapeHtml(h)}</th>`).join('')}
+              </tr>
+            </thead>
+            <tbody>
+              ${a.sections[0].table.rows.map(r => `
+                <tr>
+                  ${r.map(cell => `<td>${cell}</td>`).join('')}
+                </tr>
+              `).join('')}
+            </tbody>
+          </table>
+        </div>
+
+        <div class="minimal-callout">
+          ${escapeHtml(a.sections[0].keyInsight)}
+        </div>
+      </section>
+
+      <hr class="minimal-divider">
+
+      <!-- Section 2: VẬY TẠI SAO IDEMPOTENCY VÀ SQS CHƯA ĐỦ? -->
+      <section class="minimal-section" id="eda-sec-2">
+        <h2 class="minimal-section-title">${escapeHtml(a.sections[1].title)}</h2>
+        <p class="minimal-p">${escapeHtml(a.sections[1].paragraphs[0])}</p>
+
+        <ul class="minimal-list">
+          ${a.sections[1].points.map(pt => `<li>${pt}</li>`).join('')}
+        </ul>
+      </section>
+
+      <hr class="minimal-divider">
+
+      <!-- Section 3: ĐỀ XUẤT -->
+      <section class="minimal-section" id="eda-sec-3">
+        <h2 class="minimal-section-title">${escapeHtml(a.sections[2].title)}</h2>
+        <p class="minimal-p">${escapeHtml(a.sections[2].introText)}</p>
+
+        <ul class="minimal-list">
+          ${a.sections[2].solutions.map(sol => `<li>${sol}</li>`).join('')}
+        </ul>
+
+        <!-- Solution Component Role Table -->
+        <div class="minimal-table-wrap">
+          <table class="minimal-table">
+            <thead>
+              <tr>
+                ${a.sections[2].table.headers.map(h => `<th>${escapeHtml(h)}</th>`).join('')}
+              </tr>
+            </thead>
+            <tbody>
+              ${a.sections[2].table.rows.map(r => `
+                <tr>
+                  ${r.map(cell => `<td>${cell}</td>`).join('')}
+                </tr>
+              `).join('')}
+            </tbody>
+          </table>
+        </div>
+
+        <!-- DynamoDB Conditional Write Code Box -->
+        <div class="minimal-formula-box">
+          <strong>${escapeHtml(a.sections[2].conditionTitle)}</strong><br><br>
+          <pre style="margin:0; font-family:inherit; font-size:inherit; white-space:pre-wrap;">${escapeHtml(a.sections[2].conditionCode)}</pre>
+        </div>
+
+        <p class="minimal-p">${escapeHtml(a.sections[2].postText)}</p>
+
+        <div class="minimal-callout">
+          ${escapeHtml(a.sections[2].partialFailureNote)}
+        </div>
+      </section>
+
+      <hr class="minimal-divider">
+
+      <!-- Section 4: KẾT LUẬN -->
+      <section class="minimal-section" id="eda-sec-4">
+        <h2 class="minimal-section-title">${escapeHtml(a.sections[3].title)}</h2>
+        ${a.sections[3].paragraphs.map(p => `<p class="minimal-p">${escapeHtml(p)}</p>`).join('')}
+
+        <div class="minimal-callout">
+          “${escapeHtml(a.sections[3].goldenQuote)}”
+        </div>
+
+        <div style="margin-top:24px;">
+          <h3 style="font-size:16.5px; font-weight:700; color:#171717; margin:0 0 12px 0;">
+            ${escapeHtml(a.sections[3].checklistTitle)}
+          </h3>
+          <ul class="minimal-list">
+            ${a.sections[3].checklistItems.map(item => `<li>${item}</li>`).join('')}
           </ul>
         </div>
       </section>
@@ -5515,6 +6010,7 @@ window.exportWorklogJson = exportWorklogJson;
 window.showExportCodeModal = showExportCodeModal;
 window.deleteBlog = deleteBlog;
 window.renderBlogDetail = renderBlogDetail;
+window.renderEventDrivenBlogDetail = renderEventDrivenBlogDetail;
 window.renderBlogsList = renderBlogsList;
 window.deleteEvent = deleteEvent;
 window.setCriteriaRating = setCriteriaRating;
