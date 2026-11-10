@@ -47,6 +47,7 @@ const I18N_DICTIONARY = {
     title_worklog: "1. Nhật ký công việc (12 Tuần)",
     title_proposal: "2. Đề xuất đồ án thực tập",
     title_blogs_posted: "3. Bài viết kỹ thuật đã đăng",
+    title_blogs_s3_express_one_zone: "3. Bài viết kỹ thuật – Amazon S3 Express One Zone",
     title_events: "4. Sự kiện đã tham gia",
     title_workshop: "5. Bài thực hành kỹ thuật",
     title_self_evaluation: "6. Tự đánh giá kết quả thực tập",
@@ -337,6 +338,7 @@ const I18N_DICTIONARY = {
     title_worklog: "1. Worklog (12 Weeks)",
     title_proposal: "2. Internship Proposal",
     title_blogs_posted: "3. Blogs Posted",
+    title_blogs_s3_express_one_zone: "3. Technical Blog – Amazon S3 Express One Zone",
     title_events: "4. Events Participated",
     title_workshop: "5. Technical Workshop",
     title_self_evaluation: "6. Internship Self-Assessment",
@@ -1707,60 +1709,13 @@ const DEFAULT_BILINGUAL_DATA = {
       },
       {
         id: "blog-4",
+        slug: "s3-express-one-zone",
+        category: "AWS CLOUD / STORAGE / PERFORMANCE",
         title: "Blog 4 - AMAZON S3 EXPRESS ONE ZONE – NHANH HƠN TỚI 10 LẦN, NHƯNG HỆ THỐNG CÓ THỰC SỰ HIỆU QUẢ HƠN?",
         url: "https://www.facebook.com/groups/awsstudygroupfcj",
         date: "18/10/2026",
         image: "assets/images/s3-express-one-zone-architecture.png",
-        snippet: `Trong các hệ thống AI/ML, việc xử lý hàng triệu hình ảnh hoặc tệp dữ liệu đòi hỏi ứng dụng liên tục truy xuất dữ liệu từ Amazon S3.
-Tuy nhiên, khi tốc độ đọc dữ liệu không theo kịp khả năng xử lý của CPU/GPU, hệ thống có thể gặp I/O Bottleneck – tài nguyên tính toán phải chờ dữ liệu, kéo dài thời gian thực thi và làm tăng chi phí.
-Để giải quyết bài toán này, AWS cung cấp Amazon S3 Express One Zone, một storage class được tối ưu cho các ứng dụng yêu cầu độ trễ truy cập thấp.
-
-1. AMAZON S3 EXPRESS ONE ZONE LÀ GÌ?
-Amazon S3 Express One Zone là storage class hiệu năng cao, sử dụng Directory Bucket và lưu trữ dữ liệu trong một Availability Zone (AZ).
-Khác với S3 Standard lưu trữ dự phòng trên nhiều AZ, S3 Express One Zone cho phép đặt tài nguyên tính toán và dữ liệu trong cùng AZ để tối ưu truy xuất.
-Theo AWS, dịch vụ có thể cung cấp độ trễ ở mức vài mili giây và tốc độ truy cập nhanh hơn tới 10 lần so với S3 Standard trong điều kiện phù hợp.
-
-2. ƯU ĐIỂM VÀ HẠN CHẾ
-Ưu điểm:
-+ Giảm độ trễ truy cập dữ liệu, phù hợp với workload có tần suất đọc/ghi cao.
-+ Có thể giảm thời gian chờ I/O, nâng cao hiệu quả sử dụng tài nguyên tính toán.
-+ Có tiềm năng giảm chi phí compute nếu tác vụ hoàn thành nhanh hơn.
-Hạn chế:
-+ Chỉ lưu trữ trong một AZ, không có khả năng dự phòng đa AZ như S3 Standard.
-+ Chi phí lưu trữ và request vẫn phát sinh; hiệu quả kinh tế phụ thuộc vào workload.
-+ Không hỗ trợ một số tính năng như S3 Versioning và S3 Replication.
-+ Việc tăng tốc storage không đảm bảo toàn bộ hệ thống nhanh hơn tương ứng.
-
-3. PHÂN TÍCH HIỆU NĂNG QUA VÍ DỤ
-Giả sử một tác vụ AI xử lý hình ảnh mất 100 phút:
-• Đọc dữ liệu từ S3: 20 phút.
-• Tiền xử lý và tính toán bằng CPU/GPU: 80 phút.
-Nếu thời gian đọc dữ liệu giảm 10 lần, tổng thời gian xử lý còn:
-(20 ÷ 10) + 80 = 82 phút.
-Như vậy, dù phần đọc dữ liệu nhanh hơn 10 lần, tổng thời gian hoàn thành tác vụ chỉ giảm 18%.
-Đây là ví dụ giả định dựa trên nguyên lý Amdahl, cho thấy hiệu quả tối ưu phụ thuộc vào tỷ trọng thời gian của thành phần được cải thiện. Phép tính giả định các công đoạn diễn ra tuần tự và những yếu tố khác không thay đổi.
-Vì vậy, trước khi nâng cấp storage, cần xác định hệ thống thực sự bị giới hạn bởi I/O hay CPU/GPU.
-
-4. GÓC NHÌN VÀ ĐỀ XUẤT ỨNG DỤNG
-Thay vì chuyển toàn bộ dữ liệu sang S3 Express One Zone, mình đề xuất cân nhắc kiến trúc lưu trữ hai lớp:
-- S3 Standard: Lưu dữ liệu gốc, cần bảo vệ trên nhiều AZ.
-- S3 Express One Zone: Lưu tập dữ liệu làm việc được truy cập thường xuyên.
-- EC2/GPU: Đặt cùng AZ với S3 Express One Zone để tối ưu truy cập dữ liệu.
-Ví dụ: Một hệ thống AI lưu trữ 1 triệu hình ảnh nhưng mỗi ngày chỉ xử lý 100.000 ảnh. Thay vì chuyển toàn bộ dữ liệu, hệ thống có thể sao chép 100.000 ảnh cần xử lý sang S3 Express One Zone.
-Cách này tập trung storage hiệu năng cao vào dữ liệu thực sự cần thiết, đồng thời giữ bản gốc trên S3 Standard.
-Tuy nhiên, cần đánh giá một câu hỏi: Chi phí và thời gian sao chép dữ liệu có nhỏ hơn lợi ích tiết kiệm được từ việc xử lý nhanh hơn hay không? Nếu không, sử dụng S3 Standard có thể vẫn hiệu quả hơn.
-
-5. KẾT LUẬN
-S3 Express One Zone là lựa chọn đáng cân nhắc cho các ứng dụng AI/ML, Data Analytics và xử lý dữ liệu có tần suất truy cập cao.
-Tuy nhiên, thay vì chỉ đánh giá tốc độ truy cập, nên xác định tập dữ liệu cần tăng tốc, mức cải thiện thời gian xử lý và điểm hòa vốn chi phí.
-Theo mình, hiệu quả của kiến trúc Cloud không nằm ở việc sử dụng dịch vụ nhanh nhất, mà ở việc lựa chọn đúng giải pháp cho từng phần của workload.
-
-TÀI LIỆU THAM KHẢO
-• AWS – S3 Express One Zone Performance (https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-express-performance.html)
-• AWS – Amazon S3 Storage Classes (https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage-class-intro.html)
-• AWS – S3 Express One Zone Best Practices (https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-express-optimizing-performance-design-patterns.html)
-• AWS – Amazon S3 Pricing (https://aws.amazon.com/s3/pricing/)
-#AWS #AmazonS3 #S3ExpressOneZone #CloudComputing #CloudArchitecture #PerformanceOptimization #CostOptimization #AWSStudyGroup`
+        snippet: "Trong các hệ thống AI/ML, việc xử lý hàng triệu hình ảnh hoặc tệp dữ liệu đòi hỏi ứng dụng liên tục truy xuất dữ liệu từ Amazon S3. Khi tốc độ đọc không theo kịp CPU/GPU, hệ thống gặp I/O Bottleneck làm lãng phí compute. Amazon S3 Express One Zone cung cấp độ trễ sub-10ms với Directory Bucket trong cùng 1 AZ. Tuy nhiên, theo định luật Amdahl, tối ưu 10x I/O chỉ giúp tổng thời gian hoàn thành tác vụ giảm 18% nếu tác vụ bị nghẽn ở compute."
       }
     ],
     en: [
@@ -1787,59 +1742,13 @@ TÀI LIỆU THAM KHẢO
       },
       {
         id: "blog-4",
+        slug: "s3-express-one-zone",
+        category: "AWS CLOUD / STORAGE / PERFORMANCE",
         title: "Blog 4 - AMAZON S3 EXPRESS ONE ZONE – UP TO 10X FASTER, BUT IS THE SYSTEM TRULY MORE EFFICIENT?",
         url: "https://www.facebook.com/groups/awsstudygroupfcj",
         date: "18/10/2026",
         image: "assets/images/s3-express-one-zone-architecture.png",
-        snippet: `In AI/ML systems, processing millions of images or data files requires applications to continuously fetch data from Amazon S3.
-However, when data read speeds cannot keep pace with CPU/GPU processing capabilities, the system may encounter an I/O Bottleneck — compute resources sit idle waiting for data, prolonging execution time and escalating costs.
-To address this challenge, AWS offers Amazon S3 Express One Zone, a high-performance storage class purpose-built for applications demanding low-latency data access.
-
-1. WHAT IS AMAZON S3 EXPRESS ONE ZONE?
-Amazon S3 Express One Zone is a high-performance storage class that utilizes Directory Buckets and stores data within a single Availability Zone (AZ).
-Unlike S3 Standard, which redundantly replicates data across multiple AZs, S3 Express One Zone allows co-locating compute and storage resources within the same AZ to optimize throughput.
-According to AWS, the service can deliver single-digit millisecond data access latencies and speeds up to 10x faster than S3 Standard under optimal conditions.
-
-2. ADVANTAGES & LIMITATIONS
-Advantages:
-+ Significantly reduces data access latency, ideal for high-throughput, read/write-intensive workloads.
-+ Decreases I/O wait times, improving compute utilization and resource efficiency.
-+ Potential to reduce overall compute costs if workloads complete faster.
-Limitations:
-+ Stored within a single AZ without multi-AZ redundancy like S3 Standard.
-+ Storage and request charges still apply; cost-effectiveness depends heavily on workload characteristics.
-+ Lacks support for specific S3 features such as S3 Versioning and S3 Replication.
-+ Accelerating storage performance does not necessarily translate to a proportional speedup of the end-to-end system.
-
-3. PERFORMANCE ANALYSIS VIA EXAMPLE (AMDAHL'S LAW)
-Suppose an AI image processing job takes 100 minutes:
-• Reading data from S3: 20 minutes.
-• Preprocessing and model computation on CPU/GPU: 80 minutes.
-If data read time is reduced by 10x, the new total execution time becomes:
-(20 ÷ 10) + 80 = 82 minutes.
-Thus, even with a 10x storage read acceleration, total completion time is only reduced by 18%.
-This hypothetical scenario based on Amdahl's Law demonstrates that overall optimization gains are bounded by the proportion of time spent in the accelerated component.
-Therefore, prior to upgrading storage tiers, it is vital to profile whether your system is genuinely I/O-bound or compute-bound.
-
-4. ARCHITECTURAL PERSPECTIVE & RECOMMENDED APPLICATION
-Instead of migrating an entire dataset to S3 Express One Zone, consider a two-tier storage architecture:
-- S3 Standard: Retain primary/source data with multi-AZ durability protection.
-- S3 Express One Zone: Store the active working set that is frequently accessed.
-- EC2 / GPU instances: Co-located in the same AZ as S3 Express One Zone for minimal latency.
-Example: An AI pipeline stores 1,000,000 images but processes only 100,000 images daily. Rather than moving all data, copy the 100,000 active images to S3 Express One Zone.
-However, evaluate this question: Are the data copy costs and transfer overhead smaller than the compute savings gained from faster processing? If not, remaining on S3 Standard may be more cost-effective.
-
-5. CONCLUSION
-S3 Express One Zone is a compelling choice for AI/ML, Big Data analytics, and latency-critical workloads.
-However, architects must identify the specific working set to accelerate, quantify execution time improvements, and calculate the cost break-even point.
-Cloud architectural excellence does not simply mean choosing the fastest service, but rather selecting the right tool for each phase of the workload.
-
-REFERENCES
-• AWS – S3 Express One Zone Performance (https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-express-performance.html)
-• AWS – Amazon S3 Storage Classes (https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage-class-intro.html)
-• AWS – S3 Express One Zone Best Practices (https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-express-optimizing-performance-design-patterns.html)
-• AWS – Amazon S3 Pricing (https://aws.amazon.com/s3/pricing/)
-#AWS #AmazonS3 #S3ExpressOneZone #CloudComputing #CloudArchitecture #PerformanceOptimization #CostOptimization #AWSStudyGroup`
+        snippet: "In modern AI/ML systems, continuously fetching millions of images from S3 often creates I/O bottlenecks where compute sits idle. Amazon S3 Express One Zone delivers single-digit millisecond latency with Directory Buckets in a single AZ. However, according to Amdahl's Law, a 10x I/O speedup only reduces total execution time by 18% if the workload is compute-heavy."
       }
     ]
   },
@@ -2231,6 +2140,12 @@ class AppLanguageManager {
       renderEventDetail('first-cloud-ai-journey-24-10-2026');
       renderEventDetail('hoi-thao-hien-dai-hoa-ung-dung-csdl-genai');
     }
+    if (currentHash.startsWith('blogs/')) {
+      const slug = currentHash.replace('blogs/', '');
+      renderBlogDetail(slug);
+    } else {
+      renderBlogDetail('s3-express-one-zone');
+    }
     renderCriteriaTable();
     renderSelfAssessmentInputs();
     renderFeedbackInputs();
@@ -2285,6 +2200,12 @@ function updateHeaderPageTitle() {
       : '4. Events Participated — Harvest Report';
     return;
   }
+  if (currentHash.startsWith('blogs/')) {
+    titleEl.textContent = app.currentLang === 'vi'
+      ? '3. Bài viết kỹ thuật — Amazon S3 Express One Zone'
+      : '3. Technical Blog — Amazon S3 Express One Zone';
+    return;
+  }
 
   const key = `title_${currentHash.replace(/-/g, '_')}`;
   titleEl.textContent = t(key);
@@ -2329,7 +2250,8 @@ function navigateTo(pageId) {
   document.querySelectorAll('.nav-link').forEach(link => {
     const linkPage = link.getAttribute('data-page');
     const isMatching = linkPage === cleanId || 
-      (cleanId.startsWith('events') && linkPage === 'events');
+      (cleanId.startsWith('events') && linkPage === 'events') ||
+      (cleanId.startsWith('blogs') && linkPage === 'blogs-posted');
     link.classList.toggle('active', isMatching);
   });
 
@@ -2345,6 +2267,9 @@ function navigateTo(pageId) {
     target = document.getElementById('view-events-hoi-thao-hien-dai-hoa-ung-dung-csdl-genai') || 
              document.getElementById('view-events-first-cloud-ai-journey-24-10-2026');
   }
+  if (!target && cleanId.startsWith('blogs/')) {
+    target = document.getElementById('view-blogs-s3-express-one-zone');
+  }
 
   if (target) {
     target.classList.add('active');
@@ -2355,12 +2280,17 @@ function navigateTo(pageId) {
     window.location.hash = `#/${cleanId}`;
   }
 
-  // If navigating to event report, render the detailed view
+  // If navigating to event report or blog detail, render the detailed view
   if (cleanId.startsWith('events/')) {
     const slug = cleanId.replace('events/', '') || 'first-cloud-ai-journey-24-10-2026';
     renderEventDetail(slug);
   } else if (cleanId === 'events') {
     renderEventsList();
+  } else if (cleanId.startsWith('blogs/')) {
+    const slug = cleanId.replace('blogs/', '') || 's3-express-one-zone';
+    renderBlogDetail(slug);
+  } else if (cleanId === 'blogs-posted') {
+    renderBlogsList();
   }
 
   updateHeaderPageTitle();
@@ -3300,6 +3230,82 @@ function renderBlogsList() {
   const blogs = app.data.blogs[lang] || app.data.blogs.vi;
 
   container.innerHTML = blogs.map(b => {
+    const isS3Express = b.id === 'blog-4' || b.slug === 's3-express-one-zone';
+
+    if (isS3Express) {
+      const excerpt = lang === 'vi'
+        ? "Trong các hệ thống AI/ML, việc xử lý hàng triệu hình ảnh hoặc tệp dữ liệu từ Amazon S3 thường gặp I/O Bottleneck khiến CPU/GPU phải nhàn rỗi chờ dữ liệu. Amazon S3 Express One Zone mang lại độ trễ sub-10ms với Directory Bucket trong cùng 1 AZ. Tuy nhiên, theo định luật Amdahl, tối ưu 10x I/O chỉ giúp tổng thời gian hoàn thành tác vụ giảm 18% nếu hệ thống bị nghẽn ở compute."
+        : "In modern AI/ML systems, continuously fetching millions of images from S3 often creates I/O bottlenecks where expensive compute sits idle. Amazon S3 Express One Zone delivers single-digit millisecond latency with Directory Buckets in a single AZ. However, according to Amdahl's Law, a 10x I/O speedup only reduces total execution time by 18% if the workload is compute-heavy.";
+
+      return `
+        <div class="blog-card-featured" id="${escapeHtml(b.id)}">
+          <div class="blog-card-featured-header">
+            <div class="blog-badge-row">
+              <span class="badge-aws-category">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>
+                AWS CLOUD / STORAGE / PERFORMANCE
+              </span>
+              <span class="badge-featured">★ ${lang === 'vi' ? 'BÀI VIẾT NỔI BẬT' : 'FEATURED ARTICLE'}</span>
+              <span class="badge badge-purple">AWS Study Group</span>
+            </div>
+            <span style="font-size:12px; color:var(--text-subtle);">
+              ${t('publishedDateLabel')} ${escapeHtml(b.date || '18/10/2026')} • ${lang === 'vi' ? '6 phút đọc' : '6 min read'}
+            </span>
+          </div>
+
+          <h3 class="blog-featured-title" onclick="navigateTo('blogs/s3-express-one-zone')">
+            ${escapeHtml(b.title)}
+          </h3>
+
+          <div class="blog-featured-meta-row">
+            <span>👤 ${lang === 'vi' ? 'Tác giả:' : 'Author:'} <strong>Phan Nhật Uyên</strong> (AWS FCAJ Intern)</span>
+            <span>📍 ${lang === 'vi' ? 'Cộng đồng:' : 'Target:'} <strong>AWS Study Group</strong></span>
+          </div>
+
+          <div class="blog-featured-grid-preview">
+            <div class="blog-featured-img-preview" onclick="openBlogImageModal('${escapeHtml(b.image || 'assets/images/s3-express-one-zone-architecture.png')}', '${escapeHtml(b.title)}')" title="${t('zoomDiagramTooltip')}">
+              <img src="${escapeHtml(b.image || 'assets/images/s3-express-one-zone-architecture.png')}" alt="${escapeHtml(b.title)}" loading="lazy">
+              <div class="blog-img-overlay">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>
+                <span>${t('zoomDiagramTooltip')}</span>
+              </div>
+            </div>
+
+            <div>
+              <p class="blog-featured-excerpt">${escapeHtml(excerpt)}</p>
+              <ul class="blog-featured-key-points">
+                <li>
+                  <span style="color:#D97706; font-weight:700;">⚡</span>
+                  <span>${lang === 'vi' ? '<strong>Hiệu năng Sub-10ms:</strong> Directory Bucket trong cùng 1 AZ với EC2/GPU.' : '<strong>Sub-10ms Latency:</strong> Single-AZ Directory Bucket co-located with compute.'}</span>
+                </li>
+                <li>
+                  <span style="color:#2563EB; font-weight:700;">📊</span>
+                  <span>${lang === 'vi' ? '<strong>Phân tích Định luật Amdahl:</strong> Tối ưu 10x I/O chỉ rút ngắn 18% thời gian nếu compute chiếm 80%.' : '<strong>Amdahl\'s Law Analysis:</strong> 10x storage speedup yields only 18% total system gain.'}</span>
+                </li>
+                <li>
+                  <span style="color:#16A34A; font-weight:700;">🏛️</span>
+                  <span>${lang === 'vi' ? '<strong>Kiến trúc lưu trữ 2 lớp:</strong> Kết hợp S3 Standard (Data Lake) và S3 Express One Zone (Active Batch).' : '<strong>Two-Tier Architecture:</strong> Blending S3 Standard (Data Lake) with S3 Express (Active Batch).'}</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="blog-featured-actions">
+            <div style="display:flex; align-items:center; gap:10px;">
+              <button type="button" class="btn btn-primary" onclick="navigateTo('blogs/s3-express-one-zone')" style="display:inline-flex; align-items:center; gap:6px;">
+                <span>${lang === 'vi' ? 'Đọc bài viết chi tiết →' : 'Read Full Article →'}</span>
+              </button>
+              <a href="${escapeHtml(b.url)}" target="_blank" rel="noopener" class="btn btn-outline" style="font-size:12.5px; padding:7px 14px; font-weight:600; display:inline-flex; align-items:center; gap:6px;">
+                <span>${t('readArticleLink')}</span>
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+              </a>
+            </div>
+            <button type="button" class="btn-text-subtle" style="color:#EF4444; font-size:12px;" onclick="deleteBlog('${b.id}')">${t('btnDelete')}</button>
+          </div>
+        </div>
+      `;
+    }
+
     const isLongSnippet = (b.snippet || '').length > 360;
     const imgHtml = b.image ? `
       <div class="blog-img-box" onclick="openBlogImageModal('${escapeHtml(b.image)}', '${escapeHtml(b.title)}')" title="${t('zoomDiagramTooltip')}">
@@ -3436,6 +3442,656 @@ function setupBlogs() {
       closeBlogImageModal();
     }
   });
+}
+
+// ==========================================
+// 9.1 DEDICATED TECHNICAL BLOG ARTICLES
+// ==========================================
+const BLOG_ARTICLES = {
+  's3-express-one-zone': {
+    vi: {
+      category: "AWS CLOUD / STORAGE / PERFORMANCE",
+      featuredBadge: "BÀI VIẾT KỸ THUẬT NỔI BẬT",
+      readTime: "6 phút đọc",
+      date: "18/10/2026",
+      authorName: "Phan Nhật Uyên",
+      authorTitle: "Sinh viên thực tập • AWS First Cloud AI Journey (FCAJ)",
+      communityName: "AWS Study Group",
+      communityUrl: "https://www.facebook.com/groups/awsstudygroupfcj",
+      title: "AMAZON S3 EXPRESS ONE ZONE – NHANH HƠN TỚI 10 LẦN, NHƯNG HỆ THỐNG CÓ THỰC SỰ HIỆU QUẢ HƠN?",
+      leadSummary: "Trong các hệ thống AI/ML và Data Analytics hiện đại, việc xử lý hàng triệu hình ảnh hoặc tệp dữ liệu đòi hỏi ứng dụng liên tục truy xuất dữ liệu từ Amazon S3. Tuy nhiên, khi tốc độ đọc dữ liệu không theo kịp khả năng xử lý của CPU/GPU, hệ thống dễ rơi vào tình trạng I/O Bottleneck – tài nguyên tính toán đắt đỏ phải nhàn rỗi chờ dữ liệu, kéo dài thời gian thực thi và làm tăng chi phí hạ tầng. Để giải quyết bài toán này, AWS cung cấp Amazon S3 Express One Zone – một storage class được tối ưu hóa chuyên biệt cho các ứng dụng đòi hỏi độ trễ truy cập cực thấp.",
+      coverImage: "assets/images/s3-express-one-zone-architecture.png",
+      coverCaption: "Hình 1: Mô hình kiến trúc Amazon S3 Express One Zone tích hợp Directory Bucket trong cùng Availability Zone với cụm máy chủ điện toán EC2 / GPU.",
+      sections: [
+        {
+          id: "section-1",
+          num: "1",
+          title: "Amazon S3 Express One Zone là gì?",
+          paragraphs: [
+            "Amazon S3 Express One Zone là storage class hiệu năng cao nhất của dịch vụ lưu trữ đối tượng Amazon S3, được thiết kế chuyên biệt để phục vụ các ứng dụng phân tích dữ liệu chuyên sâu và huấn luyện mô hình học máy (Machine Learning). Thay vì sử dụng General Purpose Bucket như thông thường, S3 Express One Zone hoạt động dựa trên cấu trúc Directory Bucket hoàn toàn mới.",
+            "Điểm khác biệt cốt lõi nằm ở vị trí địa lý của dữ liệu: Thay vì phân tán và nhân bản dữ liệu qua tối thiểu 3 Availability Zones (AZ) như S3 Standard, S3 Express One Zone lưu trữ dữ liệu tập trung trong một Availability Zone (Single-AZ) duy nhất do người dùng chỉ định. Điều này cho phép bạn đặt tài nguyên tính toán (chẳng hạn như Amazon EC2, Amazon EKS, hay AWS SageMaker GPU instances) trong cùng AZ với dữ liệu lưu trữ, loại bỏ hoàn toàn độ trễ truyền tải qua mạng liên vùng và phí inter-AZ data transfer.",
+            "Theo công bố chính thức từ AWS, S3 Express One Zone có khả năng cung cấp độ trễ truy xuất dữ liệu ở mức một chữ số mili-giây (single-digit millisecond latency – thông thường dao động từ 1ms đến 3ms) và tốc độ truy cập nhanh hơn tới 10 lần so với S3 Standard trong điều kiện tải cao và tần suất I/O liên tục."
+          ],
+          callout: {
+            title: "Khái niệm kỹ thuật trọng tâm:",
+            items: [
+              "<strong>Directory Bucket:</strong> Kiến trúc bucket mới tối ưu cho tổ chức dạng cây phân cấp, tăng tốc độ tra cứu metadata gấp nhiều lần so với bucket truyền thống.",
+              "<strong>Single Availability Zone (Single-AZ):</strong> Giới hạn dữ liệu trong 1 AZ để đạt độ trễ tiệm cận phần cứng mạng nội bộ của trung tâm dữ liệu.",
+              "<strong>Fast Session-Based Authentication:</strong> Cơ chế xác thực thông qua phiên ngắn hạn giúp giảm thiểu độ trễ handshake của từng lệnh đọc/ghi đối tượng."
+            ]
+          }
+        },
+        {
+          id: "section-2",
+          num: "2",
+          title: "Ưu điểm và Hạn chế",
+          introText: "Bất kỳ quyết định kiến trúc nào trên nền tảng đám mây cũng là sự đánh đổi (Trade-off). Để ứng dụng hiệu quả S3 Express One Zone, kiến trúc sư giải pháp cần nhìn nhận đa chiều giữa lợi thế hiệu năng và những ranh giới kỹ thuật:",
+          advantages: [
+            "<strong>Giảm độ trễ truy cập dữ liệu cực thấp (Sub-10ms Latency):</strong> Cung cấp tốc độ đọc/ghi dữ liệu liên tục ở mức một chữ số mili-giây, giải phóng băng thông cho các workload có tần suất I/O dày đặc.",
+            "<strong>Tối đa hóa hiệu năng CPU/GPU (Triệt tiêu I/O Bottleneck):</strong> Giảm thiểu tối đa thời gian vi xử lý và card đồ họa GPU đắt tiền phải nhàn rỗi chờ đợi nạp dữ liệu (I/O Wait), nâng cao hiệu suất tính toán thực tế.",
+            "<strong>Tiềm năng tiết kiệm chi phí Compute:</strong> Bằng cách rút ngắn thời gian xử lý các tác vụ batch hoặc huấn luyện mô hình, doanh nghiệp có thể tắt sớm các máy ảo EC2/GPU đắt đỏ, từ đó giảm chi phí tổng thể.",
+            "<strong>Tương thích liền mạch với AWS Ecosystem:</strong> Hỗ trợ đầy đủ Amazon S3 API tiêu chuẩn, dễ dàng tích hợp với Apache Spark, PyTorch, TensorFlow và AWS SDK mà không cần viết lại mã nguồn ứng dụng."
+          ],
+          limitations: [
+            "<strong>Lưu trữ đơn vùng (Single-AZ Durability):</strong> Dữ liệu chỉ nằm trong một Availability Zone duy nhất. Khi xảy ra sự cố cấp trung tâm dữ liệu hoặc mất điện diện rộng tại AZ đó, dữ liệu có thể tạm thời không khả dụng hoặc bị ảnh hưởng, không có tính năng tự động chuyển vùng như S3 Standard.",
+            "<strong>Chi phí lưu trữ và request đặc thù:</strong> Chi phí lưu trữ mỗi GB/tháng và chi phí yêu cầu (PUT/GET requests) cao hơn so với S3 Standard. Nếu workload không tận dụng hết tốc độ I/O, chi phí hóa đơn AWS sẽ tăng lên đáng kể.",
+            "<strong>Chưa hỗ trợ một số tính năng mở rộng của S3:</strong> Không hỗ trợ S3 Versioning (quản lý phiên bản đối tượng), S3 Replication (sao chép liên vùng CRR/SRR), và các quy tắc S3 Lifecycle chuyển tầng tự động.",
+            "<strong>Định luật Amdahl – Giới hạn tăng tốc toàn trình:</strong> Tốc độ truy xuất dữ liệu tăng 10 lần hoàn toàn không đồng nghĩa với việc toàn bộ pipeline hệ thống của bạn sẽ chạy nhanh gấp 10 lần."
+          ]
+        },
+        {
+          id: "section-3",
+          num: "3",
+          title: "Phân tích hiệu năng qua ví dụ (Định luật Amdahl)",
+          introText: "Để làm rõ câu hỏi 'Hệ thống có thực sự hiệu quả hơn?', hãy cùng phân tích định lượng một bài toán huấn luyện AI xử lý dữ liệu hình ảnh thực tế dựa trên Định luật Amdahl (Amdahl's Law):",
+          baselineDesc: "Giả sử một pipeline AI hoàn tất việc xử lý một đợt hình ảnh trong tổng thời gian <strong>100 phút</strong> với tỷ trọng các giai đoạn như sau:",
+          baselineIo: "20 phút (Đọc nạp dữ liệu từ S3 – chiếm 20% tổng thời gian)",
+          baselineCompute: "80 phút (Tiền xử lý, trích xuất đặc trưng & tính toán trên CPU/GPU – chiếm 80% tổng thời gian)",
+          expressDesc: "Khi chuyển đổi tầng lưu trữ sang <strong>Amazon S3 Express One Zone</strong> (giả định tốc độ đọc dữ liệu được tăng tốc <strong>10 lần</strong> trong điều kiện tối ưu):",
+          expressIo: "20 phút ÷ 10 = 2 phút",
+          expressCompute: "80 phút (không đổi vì năng lực tính toán CPU/GPU giữ nguyên)",
+          expressTotal: "2 phút + 80 phút = 82 phút",
+          speedupSummary: "Mặc dù thời gian đọc I/O đã được rút ngắn tới 10 lần (giảm từ 20 phút xuống chỉ còn 2 phút), tổng thời gian hoàn thành toàn bộ tác vụ chỉ giảm từ 100 phút xuống 82 phút – tức là toàn hệ thống chỉ nhanh hơn vỏn vẹn 18%!",
+          stats: [
+            { num: "10x", label: "Tốc độ I/O nhanh hơn", cls: "orange" },
+            { num: "100 → 82", label: "Tổng thời gian (phút)", cls: "" },
+            { num: "18%", label: "Mức cải thiện toàn hệ thống", cls: "blue" },
+            { num: "80 phút", label: "Thời gian Compute giữ nguyên", cls: "" }
+          ],
+          amdahlQuote: "Định luật Amdahl (Amdahl's Law) khẳng định: Tốc độ tăng tốc tối đa của toàn bộ hệ thống bị giới hạn bởi tỷ lệ thời gian của thành phần được cải thiện. Do đó, trước khi đầu tư nâng cấp lên storage class đắt tiền, kỹ sư Cloud bắt buộc phải tiến hành profiling để xác định chính xác nút thắt cổ chai (bottleneck) của hệ thống đang nằm ở I/O hay ở Compute/GPU."
+        },
+        {
+          id: "section-4",
+          num: "4",
+          title: "Góc nhìn và Đề xuất ứng dụng (Kiến trúc lưu trữ 2 lớp)",
+          introText: "Từ thực tế phân tích trên, thay vì di chuyển toàn bộ Data Lake hoặc cơ sở dữ liệu sang S3 Express One Zone (gây lãng phí ngân sách và mất đi khả năng bảo vệ Multi-AZ), kiến trúc tối ưu nhất chính là áp dụng <strong>Kiến trúc lưu trữ hai lớp (Two-Tier Storage Architecture)</strong>:",
+          tiers: [
+            {
+              title: "Lớp 1: Amazon S3 Standard",
+              sub: "Data Lake & Master Storage",
+              desc: "Lưu trữ toàn bộ tập dữ liệu gốc (Golden Dataset) với độ bền 99.999999999% (11 số 9) trên nhiều Availability Zones. Đảm bảo an toàn dữ liệu tuyệt đối trước mọi sự cố thiên tai với chi phí lưu trữ theo GB rẻ nhất.",
+              cls: "tier-primary"
+            },
+            {
+              title: "Lớp 2: S3 Express One Zone",
+              sub: "Hot Working Set / Cache",
+              desc: "Chỉ lưu trữ tạm thời tập dữ liệu đang trực tiếp tham gia tính toán (Active Batch). Được đặt trong Directory Bucket cùng AZ với máy chủ EC2/GPU để cung cấp độ trễ dưới 10ms.",
+              cls: "tier-fast"
+            },
+            {
+              title: "Tầng Điện toán: EC2 / GPU",
+              sub: "Co-located Compute Nodes",
+              desc: "Cụm máy tính huấn luyện mô hình được khởi chạy trong cùng Availability Zone với S3 Express One Zone, xóa bỏ chi phí truyền tải liên vùng và khai thác tối đa băng thông mạng nội bộ.",
+              cls: "tier-compute"
+            }
+          ],
+          caseStudy: "<strong>Ví dụ bài toán thực tế:</strong> Một hệ thống AI quản lý một kho dữ liệu gồm 1.000.000 hình ảnh, nhưng mỗi ngày chu trình phân tích chỉ cần xử lý một tập dữ liệu làm việc (Active Working Set) gồm 100.000 hình ảnh. Thay vì chuyển đổi toàn bộ 1 triệu ảnh, hệ thống chỉ sao chép 100.000 ảnh cần xử lý sang Directory Bucket của S3 Express One Zone trước khi bắt đầu job tính toán, và dọn dẹp sau khi hoàn thành.",
+          roiQuestion: "Công thức đánh giá điểm hòa vốn đầu tư (ROI Break-even):",
+          roiMath: "Chi phí Copy dữ liệu + Thời gian Transfer < Lợi ích tiết kiệm chi phí thuê Compute (GPU/EC2)?",
+          roiExplanation: "Nếu chi phí sao chép dữ liệu và thời gian chờ chuyển tập tin lớn hơn số tiền tiết kiệm được từ việc xử lý nhanh hơn trên máy chủ GPU, việc giữ nguyên dữ liệu tại S3 Standard kết hợp kỹ thuật multi-part read hoặc bộ đệm RAM cục bộ vẫn sẽ là phương án kinh tế và hiệu quả hơn nhiều."
+        },
+        {
+          id: "section-5",
+          num: "5",
+          title: "Kết luận & Đúc kết kiến trúc",
+          paragraphs: [
+            "Amazon S3 Express One Zone thực sự là một vũ khí công nghệ mạnh mẽ dành cho các ứng dụng trí tuệ nhân tạo (AI/ML), phân tích dữ liệu lớn (Big Data) và các hệ thống tài chính yêu cầu tần suất đọc/ghi cao cùng độ trễ cực thấp.",
+            "Tuy nhiên, giá trị của một công nghệ không thể chỉ được đo bằng những con số marketing ấn tượng như 'nhanh gấp 10 lần'. Một kiến trúc sư điện toán đám mây chuyên nghiệp cần xác định rõ ràng: tập dữ liệu nào thực sự cần tăng tốc, mức độ cải thiện thời gian toàn trình của hệ thống sau khi áp dụng định luật Amdahl, và điểm hòa vốn kinh tế giữa chi phí lưu trữ với chi phí điện toán."
+          ],
+          goldenQuote: "Hiệu quả của kiến trúc Cloud không nằm ở việc sử dụng dịch vụ nhanh nhất, mà ở việc lựa chọn đúng giải pháp cho từng phần của workload.",
+          checklistTitle: "Checklist 4 bước trước khi triển khai S3 Express One Zone:",
+          checklistItems: [
+            "1. <strong>System Profiling:</strong> Đo đạc thời gian I/O Wait so với Compute Time. Chỉ triển khai khi I/O thực sự là điểm nghẽn chính.",
+            "2. <strong>Isolate Working Set:</strong> Chỉ chuyển tập dữ liệu nóng (Hot working data) vào S3 Express One Zone, giữ nguyên Master Data trên S3 Standard.",
+            "3. <strong>AZ Co-location:</strong> Đảm bảo toàn bộ máy tính ảo EC2 / EKS Pods / GPU đặt trong cùng Availability Zone với Directory Bucket.",
+            "4. <strong>Financial ROI Check:</strong> Đảm bảo chi phí lưu trữ và request phát sinh thấp hơn ngân sách GPU/Compute tiết kiệm được."
+          ]
+        }
+      ],
+      referencesTitle: "Tài liệu tham khảo chính thức từ AWS",
+      references: [
+        {
+          title: "AWS Documentation – S3 Express One Zone Performance",
+          url: "https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-express-performance.html"
+        },
+        {
+          title: "AWS Documentation – Amazon S3 Storage Classes",
+          url: "https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage-class-intro.html"
+        },
+        {
+          title: "AWS Documentation – S3 Express One Zone Best Practices",
+          url: "https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-express-optimizing-performance-design-patterns.html"
+        },
+        {
+          title: "AWS Documentation – Amazon S3 Pricing & Cost Calculator",
+          url: "https://aws.amazon.com/s3/pricing/"
+        }
+      ],
+      tags: ["#AWS", "#AmazonS3", "#S3ExpressOneZone", "#CloudComputing", "#CloudArchitecture", "#PerformanceOptimization", "#CostOptimization", "#AWSStudyGroup"],
+      btnBackToBlogs: "← Quay lại danh sách bài viết",
+      btnDiscussCommunity: "Thảo luận trên AWS Study Group ↗",
+      btnScrollTop: "Lên đầu trang ↑",
+      breadcrumbHome: "Bài viết Blog",
+      breadcrumbArticle: "Amazon S3 Express One Zone"
+    },
+    en: {
+      category: "AWS CLOUD / STORAGE / PERFORMANCE",
+      featuredBadge: "FEATURED TECHNICAL ARTICLE",
+      readTime: "6 min read",
+      date: "18/10/2026",
+      authorName: "Phan Nhat Uyen",
+      authorTitle: "Intern Engineer • AWS First Cloud AI Journey (FCAJ)",
+      communityName: "AWS Study Group",
+      communityUrl: "https://www.facebook.com/groups/awsstudygroupfcj",
+      title: "AMAZON S3 EXPRESS ONE ZONE – UP TO 10X FASTER, BUT IS THE SYSTEM TRULY MORE EFFICIENT?",
+      leadSummary: "In modern AI/ML and Data Analytics architectures, ingesting and processing millions of images or unstructured files requires continuous high-frequency access to Amazon S3. When data read speeds cannot keep pace with CPU/GPU processing capabilities, the system encounters an I/O Bottleneck — expensive compute clusters sit idle waiting for bytes, inflating execution time and infrastructure costs. To eliminate this friction, AWS introduced Amazon S3 Express One Zone, a specialized high-performance storage class engineered for ultra-low latency workloads.",
+      coverImage: "assets/images/s3-express-one-zone-architecture.png",
+      coverCaption: "Figure 1: Architectural model of Amazon S3 Express One Zone utilizing Directory Buckets co-located within the identical Availability Zone as EC2 / GPU compute clusters.",
+      sections: [
+        {
+          id: "section-1",
+          num: "1",
+          title: "What is Amazon S3 Express One Zone?",
+          paragraphs: [
+            "Amazon S3 Express One Zone is the highest-performing storage class within Amazon S3, purpose-built to accelerate data-intensive analytics and machine learning model training workloads. Instead of standard general-purpose buckets, S3 Express One Zone operates on a newly re-architected Directory Bucket model.",
+            "The pivotal architectural distinction lies in data locality: Rather than replicating and dispersing objects across a minimum of three Availability Zones (Multi-AZ) like S3 Standard, S3 Express One Zone co-locates data within a single, dedicated Availability Zone (Single-AZ) of your choice. This enables architects to place high-throughput compute instances (such as Amazon EC2, Amazon EKS, or SageMaker GPU workers) inside the identical AZ as your storage, completely eliminating cross-AZ network transit latency and inter-AZ data transfer fees.",
+            "According to official AWS benchmarks, S3 Express One Zone consistently achieves single-digit millisecond access latencies (typically ranging between 1ms and 3ms) and throughput up to 10x faster than S3 Standard under sustained, concurrent request workloads."
+          ],
+          callout: {
+            title: "Core Technical Concepts:",
+            items: [
+              "<strong>Directory Bucket:</strong> A re-engineered hierarchical bucket architecture designed for ultra-low latency metadata lookups and high request rates.",
+              "<strong>Single Availability Zone (Single-AZ):</strong> Localized storage placement delivering sub-10ms latency comparable to high-performance local network storage.",
+              "<strong>Fast Session-Based Authentication:</strong> Lightweight, session-based security credentials that remove signature verification overhead on high-frequency API calls."
+            ]
+          }
+        },
+        {
+          id: "section-2",
+          num: "2",
+          title: "Advantages & Limitations",
+          introText: "Every cloud architectural decision represents a deliberate trade-off. To effectively leverage S3 Express One Zone, engineers must evaluate both its raw performance gains and its operational boundaries:",
+          advantages: [
+            "<strong>Sub-10ms Access Latency:</strong> Delivers single-digit millisecond read/write latencies, dramatically reducing turnaround time for high-frequency I/O workloads.",
+            "<strong>Eliminates I/O Wait on Expensive Compute:</strong> Drastically reduces CPU/GPU idle wait cycles, ensuring costly machine learning accelerators operate at maximum utilization.",
+            "<strong>Potential to Lower Compute Bills:</strong> Accelerating batch processing times allows organizations to shut down pricey EC2/GPU compute clusters earlier, generating net cost savings.",
+            "<strong>Seamless AWS API Compatibility:</strong> Retains standard S3 API compatibility, enabling frictionless integration with PyTorch, TensorFlow, Apache Spark, and AWS SDKs without code refactoring."
+          ],
+          limitations: [
+            "<strong>Single-AZ Durability Model:</strong> Data is restricted to a single Availability Zone. In the rare event of a datacenter-level outage within that specific AZ, data is not redundantly available elsewhere like S3 Standard.",
+            "<strong>Higher Unit Cost Structure:</strong> Storage capacity fees per GB/month and API request charges (PUT/GET) are significantly higher than S3 Standard. Viability hinges on workload access density.",
+            "<strong>Lack of Certain S3 Enterprise Features:</strong> Does not currently support S3 Versioning, S3 Cross-Region Replication (CRR/SRR), or automated S3 Lifecycle tiering.",
+            "<strong>Amdahl's Law Reality:</strong> A 10x acceleration in storage I/O does not equate to a 10x acceleration of the end-to-end processing pipeline."
+          ]
+        },
+        {
+          id: "section-3",
+          num: "3",
+          title: "Performance Analysis via Example (Amdahl's Law)",
+          introText: "To definitively answer whether the system is truly more efficient, let us examine a quantitative scenario modeling an AI image processing pipeline based on Amdahl's Law:",
+          baselineDesc: "Suppose an end-to-end AI batch processing task currently takes <strong>100 minutes</strong> to complete, broken down as follows:",
+          baselineIo: "20 minutes (Fetching raw images from S3 — 20% of total runtime)",
+          baselineCompute: "80 minutes (Preprocessing, feature extraction, GPU inference — 80% of total runtime)",
+          expressDesc: "When migrating the storage layer to <strong>Amazon S3 Express One Zone</strong> (assuming a theoretical <strong>10x speedup</strong> in data read time under optimal conditions):",
+          expressIo: "20 minutes ÷ 10 = 2 minutes",
+          expressCompute: "80 minutes (remains unchanged as CPU/GPU processing capability is unchanged)",
+          expressTotal: "2 minutes + 80 minutes = 82 minutes",
+          speedupSummary: "Even though storage I/O was accelerated by a massive 10x (shrinking from 20 minutes down to 2 minutes), the total end-to-end runtime only dropped from 100 minutes to 82 minutes — representing an overall system gain of just 18%!",
+          stats: [
+            { num: "10x", label: "Faster I/O Access", cls: "orange" },
+            { num: "100 → 82", label: "Total Runtime (min)", cls: "" },
+            { num: "18%", label: "Net System Speedup", cls: "blue" },
+            { num: "80 min", label: "Compute Time Unchanged", cls: "" }
+          ],
+          amdahlQuote: "Amdahl's Law states: The overall performance speedup of a system is strictly bounded by the proportion of time spent in the component being improved. Cloud architects must perform rigorous profiling before committing to premium storage tiers to determine whether the bottleneck is genuinely I/O-bound or compute-bound."
+        },
+        {
+          id: "section-4",
+          num: "4",
+          title: "Architectural Perspective & Recommendations (Two-Tier Storage)",
+          introText: "Based on these empirical insights, rather than prematurely migrating an entire Data Lake to S3 Express One Zone (incurring unnecessary storage expenses and losing Multi-AZ disaster durability), the recommended pattern is a <strong>Two-Tier Storage Architecture</strong>:",
+          tiers: [
+            {
+              title: "Layer 1: Amazon S3 Standard",
+              sub: "Master Data Lake",
+              desc: "Houses the persistent, authoritative master dataset with 99.999999999% (11 9s) durability across multiple Availability Zones. Provides disaster resilience and lowest cost per GB.",
+              cls: "tier-primary"
+            },
+            {
+              title: "Layer 2: S3 Express One Zone",
+              sub: "Active Working Set / Scratchpad",
+              desc: "Temporarily stages only the active working set needed for the current batch training epoch. Co-located in the same AZ Directory Bucket for sub-10ms access speeds.",
+              cls: "tier-fast"
+            },
+            {
+              title: "Compute Layer: EC2 / GPU Nodes",
+              sub: "Co-located Compute Clusters",
+              desc: "Training workers are spun up inside the identical AZ as the S3 Express One Zone Directory Bucket, achieving maximum network throughput and zero cross-AZ data fees.",
+              cls: "tier-compute"
+            }
+          ],
+          caseStudy: "<strong>Real-world Case Study:</strong> An AI vision pipeline maintains 1,000,000 reference images, but daily training iterations only require an active working set of 100,000 images. Instead of migrating all 1 million files, the orchestration layer syncs only the 100,000 active images to S3 Express One Zone before the run, wiping the scratchpad after completion.",
+          roiQuestion: "Investment Break-Even Formula (ROI Equation):",
+          roiMath: "Data Staging Cost + Transfer Overhead < Compute (GPU/EC2) Cost Savings?",
+          roiExplanation: "If data staging costs and time overhead exceed the financial savings gained from reduced GPU instance hours, keeping the files in S3 Standard with tuned multi-part reads or local RAM caching may remain the superior, cost-effective architecture."
+        },
+        {
+          id: "section-5",
+          num: "5",
+          title: "Conclusion & Architectural Principles",
+          paragraphs: [
+            "Amazon S3 Express One Zone represents a transformative leap for machine learning, real-time analytics, and latency-critical cloud workflows requiring sustained, high-frequency object access.",
+            "However, true architectural excellence is never defined by headline speeds like '10x faster'. Seasoned cloud architects must isolate which working set genuinely requires acceleration, project end-to-end system speedup through Amdahl's Law, and calculate the cost break-even threshold between storage and compute."
+          ],
+          goldenQuote: "Cloud architectural excellence does not lie in adopting the fastest individual service, but in selecting the right tool for each distinct phase of the workload.",
+          checklistTitle: "4-Step Pre-Flight Migration Checklist:",
+          checklistItems: [
+            "1. <strong>System Profiling:</strong> Profile I/O Wait vs. Compute time. Migrate only when I/O represents the primary execution bottleneck.",
+            "2. <strong>Isolate Working Set:</strong> Stage hot working data into S3 Express One Zone while maintaining master datasets on S3 Standard.",
+            "3. <strong>AZ Co-location:</strong> Ensure compute instances (EC2 / EKS / SageMaker) reside in the exact same AZ as the Directory Bucket.",
+            "4. <strong>Financial ROI Check:</strong> Verify that incremental storage and API costs remain strictly lower than the compute savings achieved."
+          ]
+        }
+      ],
+      referencesTitle: "Official AWS Documentation & Resources",
+      references: [
+        {
+          title: "AWS Documentation – S3 Express One Zone Performance",
+          url: "https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-express-performance.html"
+        },
+        {
+          title: "AWS Documentation – Amazon S3 Storage Classes",
+          url: "https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage-class-intro.html"
+        },
+        {
+          title: "AWS Documentation – S3 Express One Zone Best Practices",
+          url: "https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-express-optimizing-performance-design-patterns.html"
+        },
+        {
+          title: "AWS Documentation – Amazon S3 Pricing & Cost Calculator",
+          url: "https://aws.amazon.com/s3/pricing/"
+        }
+      ],
+      tags: ["#AWS", "#AmazonS3", "#S3ExpressOneZone", "#CloudComputing", "#CloudArchitecture", "#PerformanceOptimization", "#CostOptimization", "#AWSStudyGroup"],
+      btnBackToBlogs: "← Back to Articles",
+      btnDiscussCommunity: "Discuss on AWS Study Group ↗",
+      btnScrollTop: "Scroll to Top ↑",
+      breadcrumbHome: "Blogs Posted",
+      breadcrumbArticle: "Amazon S3 Express One Zone"
+    }
+  }
+};
+
+function renderBlogDetail(slug = 's3-express-one-zone') {
+  const container = document.getElementById('blog-detail-s3-express-container');
+  if (!container) return;
+
+  const lang = app.currentLang || 'vi';
+  const targetSlug = slug || 's3-express-one-zone';
+  const article = (BLOG_ARTICLES[targetSlug] && BLOG_ARTICLES[targetSlug][lang]) 
+    ? BLOG_ARTICLES[targetSlug][lang] 
+    : (BLOG_ARTICLES['s3-express-one-zone'] ? BLOG_ARTICLES['s3-express-one-zone'].vi : null);
+
+  if (!article) {
+    container.innerHTML = `<div class="card" style="padding:40px; text-align:center;"><h3>Bài viết chưa khả dụng</h3><button class="btn btn-outline" onclick="navigateTo('blogs-posted')">Quay lại danh sách blog</button></div>`;
+    return;
+  }
+
+  const a = article;
+
+  container.innerHTML = `
+    <article class="blog-editorial-article">
+      <!-- Navigation Bar & Breadcrumbs -->
+      <nav class="report-nav-bar">
+        <div class="report-breadcrumbs">
+          <a href="#/blogs-posted" onclick="event.preventDefault(); navigateTo('blogs-posted');">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+            <span>${escapeHtml(a.breadcrumbHome)}</span>
+          </a>
+          <span class="sep">/</span>
+          <span class="current">${escapeHtml(a.breadcrumbArticle)}</span>
+        </div>
+        <div style="display:flex; align-items:center; gap:10px;">
+          <a href="${escapeHtml(a.communityUrl)}" target="_blank" rel="noopener" class="btn btn-outline btn-sm">
+            <span>${escapeHtml(a.btnDiscussCommunity)}</span>
+          </a>
+          <button type="button" class="btn btn-primary btn-sm" onclick="navigateTo('blogs-posted')">
+            <span>${escapeHtml(a.btnBackToBlogs)}</span>
+          </button>
+        </div>
+      </nav>
+
+      <!-- Editorial Header -->
+      <header class="blog-editorial-hero">
+        <div class="blog-badge-row">
+          <span class="badge-aws-category">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>
+            ${escapeHtml(a.category)}
+          </span>
+          <span class="badge-featured">★ ${escapeHtml(a.featuredBadge)}</span>
+          <span class="badge badge-purple">${escapeHtml(a.communityName)}</span>
+          <span class="badge" style="background:#F1F5F9; color:#475569; font-weight:600;">⏱ ${escapeHtml(a.readTime)}</span>
+        </div>
+
+        <h1 class="blog-editorial-title">${escapeHtml(a.title)}</h1>
+
+        <!-- Author & Publication Metadata Box -->
+        <div class="blog-author-meta-box">
+          <div class="blog-author-info">
+            <div class="blog-author-avatar">U</div>
+            <div>
+              <div class="blog-author-name">${escapeHtml(a.authorName)}</div>
+              <div class="blog-author-sub">
+                <span>${escapeHtml(a.authorTitle)}</span>
+                <span>•</span>
+                <span>${escapeHtml(a.date)}</span>
+              </div>
+            </div>
+          </div>
+          <div style="display:flex; gap:8px;">
+            <button type="button" class="btn btn-outline btn-sm" onclick="navigator.clipboard.writeText(window.location.href); showToast('${lang === 'vi' ? 'Đã sao chép liên kết bài viết!' : 'Article link copied!'}');" title="Copy link">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+              <span>${lang === 'vi' ? 'Sao chép link' : 'Share Link'}</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Introductory Summary Lead -->
+        <div class="blog-editorial-lead">
+          <p style="margin:0; font-weight:500;">${escapeHtml(a.leadSummary)}</p>
+        </div>
+
+        <!-- Professional Architecture Cover Image -->
+        <div class="blog-cover-frame">
+          <img src="${escapeHtml(a.coverImage)}" alt="${escapeHtml(a.title)}" 
+               onclick="openBlogImageModal('${escapeHtml(a.coverImage)}', '${escapeHtml(a.title)}')" 
+               title="${lang === 'vi' ? 'Nhấn để xem sơ đồ phóng to' : 'Click to enlarge diagram'}" loading="lazy">
+          <div class="blog-cover-caption">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+            <span>${escapeHtml(a.coverCaption)}</span>
+          </div>
+        </div>
+      </header>
+
+      <!-- Section 1: What is S3 Express One Zone -->
+      <section class="blog-content-section" id="s3-sec-1">
+        <h2 class="blog-section-heading">
+          <span class="blog-section-num">1</span>
+          <span>${escapeHtml(a.sections[0].title)}</span>
+        </h2>
+        ${a.sections[0].paragraphs.map(p => `<p class="blog-body-text">${escapeHtml(p)}</p>`).join('')}
+        
+        <div style="background:#EFF6FF; border:1px solid #BFDBFE; border-radius:var(--radius-md); padding:18px 20px; margin-top:20px;">
+          <h4 style="color:#1E40AF; font-size:13.5px; font-weight:750; margin:0 0 10px 0;">${escapeHtml(a.sections[0].callout.title)}</h4>
+          <ul style="margin:0; padding-left:18px; display:flex; flex-direction:column; gap:8px;">
+            ${a.sections[0].callout.items.map(item => `<li style="font-size:13.5px; line-height:1.55; color:#1E3A8A;">${item}</li>`).join('')}
+          </ul>
+        </div>
+      </section>
+
+      <!-- Section 2: Advantages and Limitations -->
+      <section class="blog-content-section" id="s3-sec-2">
+        <h2 class="blog-section-heading">
+          <span class="blog-section-num">2</span>
+          <span>${escapeHtml(a.sections[1].title)}</span>
+        </h2>
+        <p class="blog-body-text">${escapeHtml(a.sections[1].introText)}</p>
+
+        <div class="comparison-grid">
+          <!-- Advantages Box -->
+          <div class="adv-box">
+            <div class="adv-header">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#16A34A" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+              <span>${lang === 'vi' ? 'Ưu điểm vượt trội (Advantages)' : 'Core Advantages'}</span>
+            </div>
+            <ul class="adv-list">
+              ${a.sections[1].advantages.map(adv => `<li><span>✓</span><div>${adv}</div></li>`).join('')}
+            </ul>
+          </div>
+
+          <!-- Limitations Box -->
+          <div class="lim-box">
+            <div class="lim-header">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#D97706" stroke-width="2.5"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+              <span>${lang === 'vi' ? 'Hạn chế & Ranh giới (Limitations)' : 'Limitations & Caveats'}</span>
+            </div>
+            <ul class="lim-list">
+              ${a.sections[1].limitations.map(lim => `<li><span>⚠️</span><div>${lim}</div></li>`).join('')}
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section 3: Performance Analysis via Example (Amdahl's Law) -->
+      <section class="blog-content-section" id="s3-sec-3">
+        <h2 class="blog-section-heading">
+          <span class="blog-section-num">3</span>
+          <span>${escapeHtml(a.sections[2].title)}</span>
+        </h2>
+        <p class="blog-body-text">${escapeHtml(a.sections[2].introText)}</p>
+
+        <!-- KPI Stats Grid -->
+        <div class="calc-stats-grid">
+          ${a.sections[2].stats.map(s => `
+            <div class="calc-stat-box ${s.cls ? 'highlight' : ''}">
+              <div class="calc-stat-num ${s.cls || ''}">${escapeHtml(s.num)}</div>
+              <div class="calc-stat-label">${escapeHtml(s.label)}</div>
+            </div>
+          `).join('')}
+        </div>
+
+        <!-- Performance Calculation Details Card -->
+        <div class="perf-calc-card">
+          <h4 style="font-size:14.5px; font-weight:800; color:#0F172A; margin:0 0 12px 0;">
+            ${lang === 'vi' ? 'Bài toán giả định 100 phút theo nguyên lý Amdahl:' : '100-Minute Benchmark Scenario under Amdahl\'s Law:'}
+          </h4>
+          
+          <div style="background:#FFFFFF; border:1px solid #E2E8F0; border-radius:var(--radius-md); padding:16px; margin-bottom:16px;">
+            <div style="font-size:13px; font-weight:700; color:#334155; margin-bottom:6px;">
+              ${lang === 'vi' ? '1. Hệ thống cơ sở (Sử dụng Amazon S3 Standard):' : '1. Baseline System (Using Amazon S3 Standard):'}
+            </div>
+            <div style="font-size:13px; color:#475569; line-height:1.6; margin-left:12px;">
+              • ${a.sections[2].baselineIo}<br>
+              • ${a.sections[2].baselineCompute}<br>
+              • <strong>${lang === 'vi' ? 'Tổng thời gian' : 'Total Baseline Time'}: 20 + 80 = 100 phút</strong>
+            </div>
+          </div>
+
+          <div style="background:#FFFFFF; border:1px solid #E2E8F0; border-radius:var(--radius-md); padding:16px; margin-bottom:16px;">
+            <div style="font-size:13px; font-weight:700; color:#0F172A; margin-bottom:6px;">
+              ${lang === 'vi' ? '2. Nâng cấp sang Amazon S3 Express One Zone (I/O nhanh gấp 10 lần):' : '2. Upgraded to Amazon S3 Express One Zone (10x Faster I/O):'}
+            </div>
+            <div style="font-size:13px; color:#475569; line-height:1.6; margin-left:12px;">
+              • ${lang === 'vi' ? 'Thời gian đọc dữ liệu mới' : 'New Storage Read Time'}: <code>${escapeHtml(a.sections[2].expressIo)}</code><br>
+              • ${lang === 'vi' ? 'Thời gian tính toán CPU/GPU' : 'Compute Processing Time'}: <code>${escapeHtml(a.sections[2].expressCompute)}</code><br>
+              • <strong>${lang === 'vi' ? 'Tổng thời gian mới' : 'New Total Time'}: <code>${escapeHtml(a.sections[2].expressTotal)}</code></strong>
+            </div>
+          </div>
+
+          <!-- Timeline Comparison Visual -->
+          <div class="calc-bars-wrapper">
+            <div class="calc-bar-row">
+              <div class="calc-bar-label">
+                <span>${lang === 'vi' ? 'Baseline: S3 Standard (100 phút)' : 'Baseline: S3 Standard (100 min)'}</span>
+                <span style="color:#64748B;">100% thời gian</span>
+              </div>
+              <div class="calc-bar-track">
+                <div class="calc-bar-segment-io" style="width:20%;" title="I/O Read: 20 min">20% I/O (20m)</div>
+                <div class="calc-bar-segment-compute" style="width:80%;" title="Compute: 80 min">80% Compute & ML (80m)</div>
+              </div>
+            </div>
+
+            <div class="calc-bar-row">
+              <div class="calc-bar-label">
+                <span>${lang === 'vi' ? 'Optimized: S3 Express One Zone (82 phút)' : 'Optimized: S3 Express One Zone (82 min)'}</span>
+                <span style="color:#16A34A; font-weight:800;">⚡ Giảm 18% tổng thời gian (18% Speedup)</span>
+              </div>
+              <div class="calc-bar-track" style="max-width:82%;">
+                <div class="calc-bar-segment-io" style="width:2.4%; min-width:40px; background:#16A34A;" title="I/O Read: 2 min">2m</div>
+                <div class="calc-bar-segment-compute" style="width:97.6%;" title="Compute: 80 min">Compute (80m)</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="amdahl-formula-box">
+            <strong>Amdahl's Law Speedup Formula:</strong><br>
+            Speedup(overall) = 1 / [ (1 - Fraction_enhanced) + (Fraction_enhanced / Speedup_component) ]<br>
+            Speedup = 1 / [ (1 - 0.20) + (0.20 / 10) ] = 1 / [ 0.80 + 0.02 ] = 1 / 0.82 ≈ <strong>1.22x (Tương đương cải thiện 18-22%)</strong>
+          </div>
+
+          <div class="amdahl-callout">
+            <strong>💡 ${lang === 'vi' ? 'Đúc kết kỹ thuật quan trọng:' : 'Crucial Technical Insight:'}</strong>
+            <p style="margin:4px 0 0 0;">${escapeHtml(a.sections[2].amdahlQuote)}</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section 4: Architectural Perspective & Recommendations -->
+      <section class="blog-content-section" id="s3-sec-4">
+        <h2 class="blog-section-heading">
+          <span class="blog-section-num">4</span>
+          <span>${escapeHtml(a.sections[3].title)}</span>
+        </h2>
+        <p class="blog-body-text">${a.sections[3].introText}</p>
+
+        <!-- Two-Tier Storage Layout Box -->
+        <div class="two-tier-arch-box">
+          <h4 style="font-size:14.5px; font-weight:800; color:#0F172A; margin:0 0 14px 0;">
+            ${lang === 'vi' ? 'Mô hình Kiến trúc Lưu trữ 2 Lớp tối ưu chi phí & hiệu năng:' : 'Optimized Two-Tier Storage Architecture Model:'}
+          </h4>
+
+          <div class="tier-flow-cards">
+            <!-- Tier 1 -->
+            <div class="tier-card ${a.sections[3].tiers[0].cls}">
+              <div style="font-size:18px; margin-bottom:4px;">🗄️</div>
+              <div class="tier-card-title">${escapeHtml(a.sections[3].tiers[0].title)}</div>
+              <div style="font-size:11px; font-weight:700; color:#2563EB; margin-bottom:6px;">${escapeHtml(a.sections[3].tiers[0].sub)}</div>
+              <div class="tier-card-desc">${escapeHtml(a.sections[3].tiers[0].desc)}</div>
+            </div>
+
+            <!-- Arrow 1 -> 2 -->
+            <div class="tier-arrow">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+            </div>
+
+            <!-- Tier 2 -->
+            <div class="tier-card ${a.sections[3].tiers[1].cls}">
+              <div style="font-size:18px; margin-bottom:4px;">⚡</div>
+              <div class="tier-card-title">${escapeHtml(a.sections[3].tiers[1].title)}</div>
+              <div style="font-size:11px; font-weight:700; color:#D97706; margin-bottom:6px;">${escapeHtml(a.sections[3].tiers[1].sub)}</div>
+              <div class="tier-card-desc">${escapeHtml(a.sections[3].tiers[1].desc)}</div>
+            </div>
+
+            <!-- Arrow 2 -> Compute -->
+            <div class="tier-arrow">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+            </div>
+
+            <!-- Tier 3: Compute -->
+            <div class="tier-card ${a.sections[3].tiers[2].cls}">
+              <div style="font-size:18px; margin-bottom:4px;">🧠</div>
+              <div class="tier-card-title">${escapeHtml(a.sections[3].tiers[2].title)}</div>
+              <div style="font-size:11px; font-weight:700; color:#059669; margin-bottom:6px;">${escapeHtml(a.sections[3].tiers[2].sub)}</div>
+              <div class="tier-card-desc">${escapeHtml(a.sections[3].tiers[2].desc)}</div>
+            </div>
+          </div>
+
+          <div style="background:#F8FAFC; border:1px solid #E2E8F0; border-radius:var(--radius-md); padding:16px; margin:16px 0;">
+            <p style="margin:0; font-size:13.5px; line-height:1.6; color:#334155;">
+              ${a.sections[3].caseStudy}
+            </p>
+          </div>
+
+          <!-- ROI Break-even Formula Card -->
+          <div class="roi-formula-card">
+            <h5>${escapeHtml(a.sections[3].roiQuestion)}</h5>
+            <div class="roi-formula-math">${escapeHtml(a.sections[3].roiMath)}</div>
+            <p style="margin:8px 0 0 0; font-size:13px; line-height:1.55; color:#1E3A8A;">
+              ${escapeHtml(a.sections[3].roiExplanation)}
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section 5: Conclusion -->
+      <section class="blog-content-section" id="s3-sec-5">
+        <h2 class="blog-section-heading">
+          <span class="blog-section-num">5</span>
+          <span>${escapeHtml(a.sections[4].title)}</span>
+        </h2>
+        ${a.sections[4].paragraphs.map(p => `<p class="blog-body-text">${escapeHtml(p)}</p>`).join('')}
+
+        <div class="conclusion-quote">
+          “${escapeHtml(a.sections[4].goldenQuote)}”
+        </div>
+
+        <div style="background:#FFFFFF; border:1px solid #E2E8F0; border-radius:var(--radius-md); padding:20px; margin-top:20px;">
+          <h4 style="font-size:14px; font-weight:750; color:#0F172A; margin:0 0 12px 0;">
+            📋 ${escapeHtml(a.sections[4].checklistTitle)}
+          </h4>
+          <ul style="margin:0; padding-left:18px; display:flex; flex-direction:column; gap:8px;">
+            ${a.sections[4].checklistItems.map(item => `<li style="font-size:13.5px; line-height:1.55; color:#334155;">${item}</li>`).join('')}
+          </ul>
+        </div>
+      </section>
+
+      <!-- Official References & Tags -->
+      <div class="blog-references-box">
+        <h3 style="font-size:15px; font-weight:800; color:#0F172A; margin:0 0 12px 0; display:flex; align-items:center; gap:8px;">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+          <span>${escapeHtml(a.referencesTitle)}</span>
+        </h3>
+        
+        <div class="blog-ref-links-grid">
+          ${a.references.map(ref => `
+            <a href="${escapeHtml(ref.url)}" target="_blank" rel="noopener" class="blog-ref-link-item">
+              <span>${escapeHtml(ref.title)}</span>
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+            </a>
+          `).join('')}
+        </div>
+
+        <div class="blog-tags-row">
+          ${a.tags.map(t => `<span class="blog-tag-pill">${escapeHtml(t)}</span>`).join('')}
+        </div>
+      </div>
+
+      <!-- Bottom Action Bar -->
+      <div class="report-bottom-actions">
+        <button type="button" class="btn btn-outline" onclick="navigateTo('blogs-posted')">
+          <span>${escapeHtml(a.btnBackToBlogs)}</span>
+        </button>
+        <div style="display:flex; gap:10px;">
+          <a href="${escapeHtml(a.communityUrl)}" target="_blank" rel="noopener" class="btn btn-outline">
+            <span>${escapeHtml(a.btnDiscussCommunity)}</span>
+          </a>
+          <button type="button" class="btn btn-primary" onclick="window.scrollTo({top:0, behavior:'smooth'})">
+            <span>${escapeHtml(a.btnScrollTop)}</span>
+          </button>
+        </div>
+      </div>
+    </article>
+  `;
 }
 
 // ==========================================
@@ -4893,7 +5549,8 @@ function setupSearchAndMobile() {
 
       if (q.includes('worklog') || q.includes('tuần') || q.includes('week') || q.includes('nhật ký')) navigateTo('worklog');
       else if (q.includes('proposal') || q.includes('đồ án') || q.includes('weather') || q.includes('đề xuất')) navigateTo('proposal');
-      else if (q.includes('blog') || q.includes('eks') || q.includes('bài viết') || q.includes('s3 express') || q.includes('one zone') || q.includes('amdahl')) navigateTo('blogs-posted');
+      else if (q.includes('s3 express') || q.includes('one zone') || q.includes('amdahl') || q.includes('storage')) navigateTo('blogs/s3-express-one-zone');
+      else if (q.includes('blog') || q.includes('eks') || q.includes('bài viết')) navigateTo('blogs-posted');
       else if (q.includes('voice ai') || q.includes('contact center') || q.includes('kiệt trần') || q.includes('meet up') || q.includes('cascade') || q.includes('vpbank')) navigateTo('events/first-cloud-ai-journey-24-10-2026');
       else if (q.includes('event') || q.includes('sự kiện') || q.includes('bitexco')) navigateTo('events');
       else if (q.includes('workshop') || q.includes('s3') || q.includes('endpoint') || q.includes('thực hành')) navigateTo('workshop');
@@ -4966,5 +5623,7 @@ window.clearCurrentWeek = clearCurrentWeek;
 window.exportWorklogJson = exportWorklogJson;
 window.showExportCodeModal = showExportCodeModal;
 window.deleteBlog = deleteBlog;
+window.renderBlogDetail = renderBlogDetail;
+window.renderBlogsList = renderBlogsList;
 window.deleteEvent = deleteEvent;
 window.setCriteriaRating = setCriteriaRating;
