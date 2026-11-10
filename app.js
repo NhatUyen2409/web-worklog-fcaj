@@ -1259,7 +1259,7 @@ REFERENCES
         speakers: "Jignesh Shah (Giám đốc CSDL Mã nguồn mở), Erica Liu (Chuyên gia AppMod), Fabrianne Effendi (Kiến trúc sư giải pháp Serverless)",
         shortDesc: "Chuyển đổi kiến trúc nguyên khối sang Microservices hiện đại (Queue, Cache, Messaging), phương pháp Domain-Driven Design (DDD) và ứng dụng trợ lý Amazon Q Developer.",
         highlights: "• Những hạn chế của kiến trúc nguyên khối truyền thống (chu kỳ phát hành kéo dài, chi phí vận hành cao).\n• Chuyển đổi sang kiến trúc Microservices hiện đại dựa trên 3 trụ cột: Quản lý hàng đợi, Chiến lược bộ nhớ đệm và Xử lý thông điệp linh hoạt.\n• Phương pháp thiết kế hướng tên miền Domain-Driven Design (DDD) gồm 4 bước.\n• Kiến trúc hướng sự kiện Event-Driven Architecture (Pub/Sub, Point-to-Point, Streaming).\n• Ứng dụng trợ lý AI Amazon Q Developer tự động hóa chu trình nâng cấp mã nguồn.",
-        hasFullReport: false
+        hasFullReport: true
       },
       {
         id: "event-2",
@@ -1286,7 +1286,7 @@ REFERENCES
         speakers: "Jignesh Shah (Director, Open Source DBs), Erica Liu (Sr. GTM Specialist), Fabrianne Effendi (Assc. Specialist SA)",
         shortDesc: "Modernizing legacy monoliths into Microservices via Queue Management, Caching Strategies, Domain-Driven Design (DDD), and Amazon Q Developer transformation agents.",
         highlights: "• Drawbacks of legacy monolithic architectures (long release cycles, higher costs).\n• Modern Microservices transition built on Queue Management, Caching Strategies, and Message Handling.\n• Domain-Driven Design (DDD): 4-step method (Identify domain events -> arrange timeline -> identify actors -> define bounded contexts).\n• Event-Driven Architecture (Pub/Sub, Point-to-point, Streaming).\n• Amazon Q Developer automated code transformation & modernization agents.",
-        hasFullReport: false
+        hasFullReport: true
       },
       {
         id: "event-2",
@@ -1350,8 +1350,8 @@ REFERENCES
 // ==========================================
 // 3. PERSISTENCE & STATE MANAGEMENT
 // ==========================================
-const STORAGE_KEY = 'fcaj_report_bilingual_v17';
-const PREV_STORAGE_KEY = 'fcaj_report_bilingual_v16';
+const STORAGE_KEY = 'fcaj_report_bilingual_v18';
+const PREV_STORAGE_KEY = 'fcaj_report_bilingual_v17';
 const LANG_KEY = 'fcaj_report_lang';
 
 class AppLanguageManager {
@@ -1373,6 +1373,12 @@ class AppLanguageManager {
       'fcaj_report_bilingual_v10',
       'fcaj_report_bilingual_v9',
       'fcaj_report_bilingual_v8',
+      'fcaj_report_bilingual_v11',
+      'fcaj_report_bilingual_v12',
+      'fcaj_report_bilingual_v13',
+      'fcaj_report_bilingual_v14',
+      'fcaj_report_bilingual_v15',
+      'fcaj_report_bilingual_v16',
       'fcaj_internship_report_v2',
       'fcaj_internship_report_v1'
     ];
@@ -1416,7 +1422,7 @@ class AppLanguageManager {
               }
             });
           }
-          // Sync default events (including Session 1 Voice AI) for both languages
+          // Sync default events (Event 1 Modernization & Event 2 Session 1 Voice AI) for both languages
           if (!parsed.events) {
             parsed.events = JSON.parse(JSON.stringify(DEFAULT_BILINGUAL_DATA.events));
           } else {
@@ -1446,7 +1452,7 @@ class AppLanguageManager {
         }
       }
       // Migrate student personal details while using fresh 2026 calendar & report content
-      const prev = localStorage.getItem(PREV_STORAGE_KEY) || localStorage.getItem('fcaj_report_bilingual_v11') || localStorage.getItem('fcaj_report_bilingual_v10');
+      const prev = localStorage.getItem(PREV_STORAGE_KEY) || localStorage.getItem('fcaj_report_bilingual_v16');
       const fresh = JSON.parse(JSON.stringify(DEFAULT_BILINGUAL_DATA));
       if (prev) {
         const prevParsed = JSON.parse(prev);
@@ -1468,6 +1474,23 @@ class AppLanguageManager {
             fresh.studentInfo.phone = prevParsed.studentInfo.phone;
           }
           if (prevParsed.studentInfo.email) fresh.studentInfo.email = prevParsed.studentInfo.email;
+        }
+        if (prevParsed.proposal) fresh.proposal = prevParsed.proposal;
+        if (prevParsed.selfNarrative) fresh.selfNarrative = prevParsed.selfNarrative;
+        if (prevParsed.needsImprovement) fresh.needsImprovement = prevParsed.needsImprovement;
+        if (prevParsed.feedback) fresh.feedback = prevParsed.feedback;
+        if (prevParsed.criteria) fresh.criteria = prevParsed.criteria;
+        // Preserve user custom events
+        if (prevParsed.events) {
+          ['vi', 'en'].forEach(l => {
+            if (Array.isArray(prevParsed.events[l])) {
+              prevParsed.events[l].forEach(pe => {
+                if (!fresh.events[l].some(fe => fe.id === pe.id || fe.slug === pe.slug)) {
+                  fresh.events[l].push(pe);
+                }
+              });
+            }
+          });
         }
         try { localStorage.removeItem(PREV_STORAGE_KEY); } catch (e) {}
       }
@@ -1599,7 +1622,14 @@ class AppLanguageManager {
     renderProposalInputs();
     renderBlogsList();
     renderEventsList();
-    renderEventDetail('first-cloud-ai-journey-24-10-2026');
+    const currentHash = window.location.hash.replace(/^#\/?/, '').replace(/\/$/, '');
+    if (currentHash.startsWith('events/')) {
+      const slug = currentHash.replace('events/', '');
+      renderEventDetail(slug);
+    } else {
+      renderEventDetail('first-cloud-ai-journey-24-10-2026');
+      renderEventDetail('hoi-thao-hien-dai-hoa-ung-dung-csdl-genai');
+    }
     renderCriteriaTable();
     renderSelfAssessmentInputs();
     renderFeedbackInputs();
@@ -1711,7 +1741,8 @@ function navigateTo(pageId) {
   let viewId = `view-${cleanId.replace(/\//g, '-')}`;
   let target = document.getElementById(viewId);
   if (!target && cleanId.startsWith('events/')) {
-    target = document.getElementById('view-events-first-cloud-ai-journey-24-10-2026');
+    target = document.getElementById('view-events-hoi-thao-hien-dai-hoa-ung-dung-csdl-genai') || 
+             document.getElementById('view-events-first-cloud-ai-journey-24-10-2026');
   }
 
   if (target) {
@@ -1724,8 +1755,11 @@ function navigateTo(pageId) {
   }
 
   // If navigating to event report, render the detailed view
-  if (cleanId === 'events/first-cloud-ai-journey-24-10-2026' || cleanId.startsWith('events/')) {
-    renderEventDetail('first-cloud-ai-journey-24-10-2026');
+  if (cleanId.startsWith('events/')) {
+    const slug = cleanId.replace('events/', '') || 'first-cloud-ai-journey-24-10-2026';
+    renderEventDetail(slug);
+  } else if (cleanId === 'events') {
+    renderEventsList();
   }
 
   updateHeaderPageTitle();
@@ -3056,6 +3090,254 @@ const EVENT_REPORTS = {
       photoPendingDesc: "In accordance with Company Reporting Criterion 6 (Clear participant check-in photo), this section is reserved for the authentic check-in photo of the student attending the event. In adherence to transparency and integrity standards, no artificial or unverified images are used.",
       photoPendingNote: "The display container is configured to support high-fidelity aspect ratio rendering and click-to-enlarge lightbox zoom as soon as the authentic photograph is supplied."
     }
+  },
+  'hoi-thao-hien-dai-hoa-ung-dung-csdl-genai': {
+    vi: {
+      breadcrumb: "Sự kiện 1 - Hội thảo Hiện đại hóa Ứng dụng & CSDL với GenAI",
+      badgeText: "BÁO CÁO THU HOẠCH SỰ KIỆN",
+      sessionTag: "GenAI & Microservices Modernization",
+      title: "BÁO CÁO THU HOẠCH – HIỆN ĐẠI HÓA ỨNG DỤNG & CSDL VỚI GENAI",
+      subtitle: "Hội thảo chuyên sâu AWS tại Bitexco Financial Tower, TP.HCM",
+      metaHeader: "Thông tin sự kiện chính thức",
+      lblEventName: "Tên sự kiện",
+      eventName: "Sự kiện 1 - Hội thảo Hiện đại hóa Ứng dụng & CSDL với GenAI",
+      lblDateTime: "Ngày & Giờ tham gia",
+      dateTime: "09:00, 12/08/2026",
+      lblLocation: "Địa điểm",
+      location: "Tầng 26, Bitexco Financial Tower, Số 02 Hải Triều, Q.1, TP.HCM",
+      lblRole: "Vai trò tham gia",
+      role: "Khách mời tham dự (Attendee)",
+      lblSpeaker: "Diễn giả sự kiện",
+      speaker: "Jignesh Shah (Giám đốc CSDL Mã nguồn mở), Erica Liu (Chuyên gia AppMod), Fabrianne Effendi (Kiến trúc sư giải pháp Serverless)",
+      lblTopic: "Chủ đề hội thảo",
+      topic: "Hiện đại hóa ứng dụng nguyên khối sang Microservices & Tự động hóa nâng cấp mã nguồn với GenAI",
+      metaNotice: "* Báo cáo thu hoạch kỹ thuật ghi nhận tại buổi hội thảo công nghệ AWS chuyên sâu.",
+      complianceTitle: "Khung 7 Tiêu chí Báo cáo Sự kiện của Doanh nghiệp",
+      crit1: "Tên sự kiện: Hội thảo Hiện đại hóa Ứng dụng & CSDL",
+      crit2: "Thời gian: 09:00, 12/08/2026",
+      crit3: "Địa điểm: Bitexco Tower, Q.1, TP.HCM",
+      crit4: "Vai trò: Khách mời tham dự",
+      crit5: "Nội dung tiếp thu: Monolith to Microservices, DDD, Amazon Q",
+      crit6: "Hình ảnh check-in rõ mặt (Đang chờ cập nhật)",
+      crit7: "Bài học rút ra & Đóng góp cá nhân",
+
+      sec1Num: "01",
+      sec1Title: "Hạn chế của Kiến trúc Nguyên khối truyền thống",
+      sec1Problem: "Thực trạng kiến trúc Monolith trong doanh nghiệp hiện nay:",
+      sec1Quote: "“Các hệ thống nguyên khối truyền thống đối mặt với chu kỳ phát hành kéo dài, chi phí vận hành tăng vọt và rủi ro gián đoạn toàn bộ khi chỉ một module gặp lỗi.”",
+      sec1P1: "Trong buổi chia sẻ, các chuyên gia AWS đã chỉ ra những nút thắt cố hữu của Monolith: mã nguồn phức tạp (tight coupling), khó mở rộng theo chiều ngang (horizontal scaling), và rủi ro triển khai cao khiến việc phát hành tính năng mới mất nhiều tháng thay vì vài ngày.",
+      sec1P2: "Doanh nghiệp cần một lộ trình chuyển đổi kiến trúc có phương pháp, chuyển dịch dần dần sang Microservices mà không làm gián đoạn các luồng kinh doanh đang hoạt động.",
+
+      sec2Num: "02",
+      sec2Title: "3 Trụ cột Chuyển đổi Microservices Hiện đại",
+      sec2Desc: "Để giải quyết bài toán phân tách hệ thống, chuyên gia AWS đã trình bày 3 trụ cột kỹ thuật trọng tâm:",
+      sec2Pipeline: "Queue Management → Caching Strategies → Flexible Message Handling",
+      sec2STT: "<strong>1. Quản lý hàng đợi (Queue Management):</strong> Sử dụng Amazon SQS để đệm và tách rời các tiến trình xử lý, đảm bảo khả năng chịu tải và không làm mất thông điệp khi lưu lượng tăng đột biến.",
+      sec2LLM: "<strong>2. Chiến lược bộ nhớ đệm (Caching Strategies):</strong> Tận dụng Amazon ElastiCache (Redis/Memcached) để giảm áp lực đọc trực tiếp lên cơ sở dữ liệu quan hệ, đưa độ trễ phản hồi xuống mức dưới một mili-giây.",
+      sec2Guardrails: "<strong>3. Xử lý thông điệp linh hoạt (Flexible Messaging):</strong> Áp dụng Amazon SNS và Amazon EventBridge để định tuyến sự kiện và phân tán dữ liệu không đồng bộ giữa các dịch vụ độc lập.",
+      sec2Advantage: "<strong>Lợi ích then chốt:</strong> Hệ thống đạt được tính sẵn sàng cao (High Availability), khả năng co giãn độc lập từng dịch vụ và cô lập lỗi hoàn toàn giữa các thành phần.",
+      sec2Nuance: "<strong>Lưu ý kiến trúc:</strong> Việc phân rã sang Microservices đòi hỏi quản lý tính nhất quán dữ liệu (eventual consistency) và cơ chế distributed tracing (AWS X-Ray) để giám sát các luồng gọi xuyên suốt.",
+      diagramCaption: "Kiến trúc Microservices hiện đại dựa trên Queue, Caching và Event-Driven trên AWS",
+
+      sec3Num: "03",
+      sec3Title: "Phương pháp Thiết kế Hướng tên miền (Domain-Driven Design)",
+      sec3Desc: "Quy trình thiết kế DDD gồm 4 bước có cấu trúc để phân định ranh giới nghiệp vụ chuẩn xác:",
+      sec3WebRTC: "<strong>Bước 1 - Xác định sự kiện nghiệp vụ (Identify Domain Events):</strong> Liệt kê tất cả các sự kiện cốt lõi diễn ra trong quy trình nghiệp vụ của doanh nghiệp (ví dụ: Đơn hàng đã tạo, Thanh toán hoàn tất, Giao hàng bắt đầu).",
+      sec3EC2: "<strong>Bước 2 - Sắp xếp dòng thời gian (Arrange Timeline):</strong> Phác thảo chuỗi sự kiện theo trục thời gian tuyến tính để làm rõ luồng phụ thuộc và nguyên nhân - kết quả.",
+      sec3PrivateLink: "<strong>Bước 3 - Xác định các tác nhân (Identify Actors):</strong> Xác định các bên kích hoạt hoặc tiếp nhận sự kiện (người dùng, hệ thống bên ngoài, tiến trình chạy ngầm).",
+      sec3Networking: "<strong>Bước 4 - Xác định ngữ cảnh bị giới hạn (Define Bounded Contexts):</strong> Gom nhóm các sự kiện và mô hình dữ liệu có tính gắn kết cao vào từng Bounded Context riêng biệt, tạo tiền đề để ánh xạ trực tiếp thành các Microservices độc lập.",
+      sec3Insight: "<strong>Nhận định phương pháp luận:</strong> <em>Thiết kế đúng ranh giới Bounded Context ngay từ đầu giúp tránh tình trạng tạo ra 'Distributed Monolith' (nguyên khối phân tán) – một trong những lỗi phổ biến nhất khi chuyển dịch Cloud.</em>",
+
+      sec4Num: "04",
+      sec4Title: "Kiến trúc Hướng sự kiện (Event-Driven Architecture)",
+      sec4P1: "Hội thảo phân tích sâu 3 mô hình luồng thông điệp chính trong kiến trúc hiện đại:",
+      sec4Metric1Val: "Pub/Sub",
+      sec4Metric1Lbl: "Mô hình Phát tán",
+      sec4Metric1Sub: "Amazon SNS & EventBridge",
+      sec4Metric2Val: "P2P",
+      sec4Metric2Lbl: "Point-to-Point Queue",
+      sec4Metric2Sub: "Amazon SQS Buffer",
+      sec4Metric3Val: "Streaming",
+      sec4Metric3Lbl: "Luồng Dữ liệu",
+      sec4Metric3Sub: "Amazon Kinesis Data Streams",
+      sec4Attribution: "* Phân loại dựa trên tài liệu kiến trúc chính thức từ AWS Application Modernization Workshop.",
+      sec4LessonQuote: "“Kiến trúc Event-Driven giúp các microservices giao tiếp hoàn toàn phi tập trung, dễ mở rộng và phản ứng linh hoạt với các thay đổi nghiệp vụ theo thời gian thực.”",
+
+      sec5Num: "05",
+      sec5Title: "Ứng dụng Trợ lý AI Amazon Q Developer",
+      sec5Desc: "Trợ lý AI chuyên biệt của AWS giúp tự động hóa và tăng tốc chu trình hiện đại hóa mã nguồn:",
+      sec5Metric1Val: "AppMod",
+      sec5Metric1Lbl: "Tự động hóa di chuyển",
+      sec5Metric1Sub: "Chuyển đổi Java/Legacy lên Cloud",
+      sec5Metric2Val: "Database",
+      sec5Metric2Lbl: "Chuyển dịch CSDL",
+      sec5Metric2Sub: "Tự động hóa Schema & Code Migration",
+      sec5Metric3Val: "Review",
+      sec5Metric3Lbl: "Đánh giá An ninh mã nguồn",
+      sec5Metric3Sub: "Tích hợp trực tiếp trong IDE",
+      sec5Disclaimer: "* Trải nghiệm demo thực tế trong phần chia sẻ của chuyên gia Erica Liu và Fabrianne Effendi.",
+
+      sec6Num: "06",
+      sec6Title: "Trực quan Hướng dẫn Demo & Thực hành",
+      sec6Desc: "Các nội dung minh họa kỹ thuật nổi bật được diễn giả trình diễn tại Bitexco Financial Tower:",
+      sec6Item1: "<strong>Tự động phân tích mã nguồn:</strong> Amazon Q Developer quét kho mã nguồn ứng dụng Java cũ, phát hiện các thư viện lỗi thời và đề xuất phương án refactor lên Java 17/21.",
+      sec6Item2: "<strong>Chuyển đổi CSDL thương mại sang mã nguồn mở:</strong> Mô phỏng quy trình dịch chuyển từ Microsoft SQL Server / Oracle sang Amazon Aurora PostgreSQL.",
+      sec6Item3: "<strong>Thiết lập hàng đợi bất đồng bộ:</strong> Demo kết nối SQS với Lambda Function và cấu hình Dead-Letter Queue (DLQ) để xử lý thông điệp lỗi.",
+      sec6Item4: "<strong>Q&A Chuyên gia:</strong> Phiên giải đáp kỹ thuật chuyên sâu cùng Giám đốc CSDL Mã nguồn mở Jignesh Shah.",
+      sec6Summary: "Buổi hội thảo cung cấp bức tranh toàn cảnh và các công cụ thực tế giúp doanh nghiệp và kỹ sư rút ngắn thời gian hiện đại hóa hệ thống từ nhiều năm xuống chỉ còn vài tháng.",
+
+      sec7Num: "07",
+      sec7Title: "Những bài học thu hoạch chuyên sâu",
+      takeaway1Num: "01",
+      takeaway1Title: "Modernization Requires Strategy",
+      takeaway1Body: "Hiện đại hóa không chỉ là việc chuyển mã nguồn lên đám mây (Lift and Shift), mà cần tái cấu trúc kiến trúc theo hướng phi tập trung, áp dụng triệt để Domain-Driven Design để chia nhỏ bài toán phức tạp.",
+      takeaway2Num: "02",
+      takeaway2Title: "Asynchronous Decoupling",
+      takeaway2Body: "Sử dụng hàng đợi (SQS) và cơ chế Publish/Subscribe (SNS/EventBridge) là chìa khóa để bảo vệ hệ thống trước sự cố lan chuyền (cascading failures) và hấp thụ lưu lượng tải đột biến.",
+      takeaway3Num: "03",
+      takeaway3Title: "Database Freedom",
+      takeaway3Body: "Chuyển dịch từ các cơ sở dữ liệu thương mại độc quyền sang cơ sở dữ liệu mã nguồn mở tương thích (như PostgreSQL trên Aurora) giúp tối ưu hóa chi phí bản quyền khổng lồ mà vẫn đảm bảo hiệu năng và độ ổn định cấp doanh nghiệp.",
+      takeaway4Num: "04",
+      takeaway4Title: "AI-Assisted Engineering",
+      takeaway4Body: "Trợ lý AI như Amazon Q Developer đang định hình lại phương thức phát triển phần mềm: từ nâng cấp runtime, viết test cases, đến tối ưu hóa truy vấn CSDL, giúp kỹ sư tập trung vào tư duy kiến trúc và logic nghiệp vụ cốt lõi.",
+
+      sec8Num: "08",
+      sec8Title: "Bài học rút ra và Đóng góp cá nhân",
+      lessonHeading: "Bài học rút ra:",
+      lessonQuote: "“Hội thảo giúp em nắm vững tư duy chuyển đổi kiến trúc hệ thống quy mô lớn, từ việc phân tích nghiệp vụ với DDD đến triển khai hạ tầng Serverless và Event-Driven.\n\nĐây là kiến thức nền tảng vô cùng giá trị để em ứng dụng vào quá trình xây dựng đồ án thực tập và định hướng nghề nghiệp Cloud Solutions Architect.”",
+      contribHeading: "Đóng góp cá nhân:",
+      contribQuote: "“Tham dự đầy đủ buổi hội thảo, ghi chép và hệ thống hóa 4 bước thiết kế DDD, phân tích các trụ cột Microservices và chia sẻ các đúc kết này trong báo cáo thực tập tại AWS.”",
+
+      sec9Num: "09",
+      sec9Title: "Hình ảnh tham dự & Hoạt động sự kiện",
+      photoPendingBadge: "⏳ Đang chờ cập nhật ảnh chính thức",
+      photoPendingTitle: "Hình ảnh tham dự tại Bitexco Financial Tower",
+      photoPendingDesc: "Khu vực hiển thị ảnh lưu niệm và check-in tham gia sự kiện của người tham dự. Hệ thống tuân thủ tiêu chuẩn minh bạch và không sử dụng ảnh giả lập.",
+      photoPendingNote: "Hỗ trợ tải lên hình ảnh thực tế với chất lượng cao và tính năng phóng to (lightbox) trực tiếp."
+    },
+    en: {
+      breadcrumb: "Event 1 - GenAI App & DB Modernization Workshop",
+      badgeText: "EVENT HARVEST REPORT",
+      sessionTag: "GenAI & Microservices Modernization",
+      title: "HARVEST REPORT – APP & DATABASE MODERNIZATION WITH GENAI",
+      subtitle: "In-depth AWS Workshop at Bitexco Financial Tower, HCMC",
+      metaHeader: "Official Event Record",
+      lblEventName: "Event Name",
+      eventName: "Event 1 - GenAI-powered App-DB Modernization Workshop",
+      lblDateTime: "Date & Time",
+      dateTime: "09:00, August 12, 2026",
+      lblLocation: "Location",
+      location: "26th Floor, Bitexco Tower, 02 Hai Trieu Street, District 1, Ho Chi Minh City",
+      lblRole: "Role",
+      role: "Attendee",
+      lblSpeaker: "Speakers",
+      speaker: "Jignesh Shah (Director, Open Source DBs), Erica Liu (Sr. GTM Specialist), Fabrianne Effendi (Assc. Specialist SA)",
+      lblTopic: "Topic",
+      topic: "Monolith to Microservices Transformation & AI-Automated Code Migration",
+      metaNotice: "* Technical harvest report recorded from the deep-dive AWS architecture workshop.",
+      complianceTitle: "Company 7 Reporting Criteria Verification Framework",
+      crit1: "Event Name: App & DB Modernization Workshop",
+      crit2: "Time: 09:00, August 12, 2026",
+      crit3: "Location: Bitexco Tower, District 1, HCMC",
+      crit4: "Role: Attendee",
+      crit5: "Key Takeaways: Microservices, DDD & Amazon Q Developer",
+      crit6: "Check-in Photo (Pending Official Upload)",
+      crit7: "Lessons Learned & Personal Contribution",
+
+      sec1Num: "01",
+      sec1Title: "Limitations of Legacy Monolithic Architectures",
+      sec1Problem: "The challenges of legacy monoliths in modern enterprise environments:",
+      sec1Quote: "“Legacy monolithic architectures suffer from protracted release cycles, mounting infrastructure expenses, and high risk of widespread outages caused by a single failing component.”",
+      sec1P1: "AWS experts outlined the core bottlenecks of monoliths: tight coupling, inability to scale targeted sub-components horizontally, and high deployment risk leading to feature rollouts taking months instead of days.",
+      sec1P2: "Enterprises require a disciplined, phased migration strategy to decouple systems into independent microservices without interrupting ongoing business operations.",
+
+      sec2Num: "02",
+      sec2Title: "3 Pillars of Modern Microservices Transition",
+      sec2Desc: "To decouple monolithic dependencies, AWS specialists presented three technical pillars:",
+      sec2Pipeline: "Queue Management → Caching Strategies → Flexible Message Handling",
+      sec2STT: "<strong>1. Queue Management:</strong> Utilizing Amazon SQS to buffer and decouple processes, ensuring resilience and zero message loss during peak traffic bursts.",
+      sec2LLM: "<strong>2. Caching Strategies:</strong> Leveraging Amazon ElastiCache (Redis/Memcached) to alleviate database read pressure, delivering sub-millisecond response latencies.",
+      sec2Guardrails: "<strong>3. Flexible Message Handling:</strong> Adopting Amazon SNS and EventBridge for asynchronous event routing and publish/subscribe fan-out across independent services.",
+      sec2Advantage: "<strong>Core Benefits:</strong> High availability, independent autoscaling per service domain, and complete fault isolation.",
+      sec2Nuance: "<strong>Architectural Caution:</strong> Microservices introduce eventual consistency and require distributed tracing (AWS X-Ray) to monitor cross-service request flows.",
+      diagramCaption: "Modern Microservices architecture based on Queues, Caching, and Event-Driven workflows on AWS",
+
+      sec3Num: "03",
+      sec3Title: "Domain-Driven Design (DDD) 4-Step Methodology",
+      sec3Desc: "A structured 4-step framework for establishing clean bounded contexts:",
+      sec3WebRTC: "<strong>Step 1 - Identify Domain Events:</strong> Inventory all core events that occur within the business lifecycle (e.g. Order Placed, Payment Authorized, Shipment Dispatched).",
+      sec3EC2: "<strong>Step 2 - Arrange Timeline:</strong> Map events chronologically to clarify dependencies, triggers, and cause-and-effect relationships.",
+      sec3PrivateLink: "<strong>Step 3 - Identify Actors:</strong> Determine the initiators and recipients of each event (end users, external systems, automated workers).",
+      sec3Networking: "<strong>Step 4 - Define Bounded Contexts:</strong> Cluster related events and data models into discrete Bounded Contexts, mapping directly to microservice boundaries.",
+      sec3Insight: "<strong>Methodological Insight:</strong> <em>Defining accurate Bounded Contexts prevents creating a 'Distributed Monolith' — the most frequent pitfall in cloud migration.</em>",
+
+      sec4Num: "04",
+      sec4Title: "Event-Driven Architecture Patterns",
+      sec4P1: "The workshop examined three core asynchronous messaging patterns:",
+      sec4Metric1Val: "Pub/Sub",
+      sec4Metric1Lbl: "Publish / Subscribe",
+      sec4Metric1Sub: "Amazon SNS & EventBridge",
+      sec4Metric2Val: "P2P",
+      sec4Metric2Lbl: "Point-to-Point Queue",
+      sec4Metric2Sub: "Amazon SQS Buffer",
+      sec4Metric3Val: "Streaming",
+      sec4Metric3Lbl: "High-Throughput Streams",
+      sec4Metric3Sub: "Amazon Kinesis Streams",
+      sec4Attribution: "* Categorized from AWS Application Modernization technical blueprints.",
+      sec4LessonQuote: "“Event-Driven Architecture empowers microservices to communicate asynchronously, achieving elastic scalability and real-time agility.”",
+
+      sec5Num: "05",
+      sec5Title: "Amazon Q Developer AI Acceleration",
+      sec5Desc: "Specialized generative AI assistant accelerating cloud transformation:",
+      sec5Metric1Val: "AppMod",
+      sec5Metric1Lbl: "Automated Migration",
+      sec5Metric1Sub: "Legacy Java Runtime Upgrades",
+      sec5Metric2Val: "Database",
+      sec5Metric2Lbl: "DB Transformation",
+      sec5Metric2Sub: "Automated Schema & Query Translation",
+      sec5Metric3Val: "Review",
+      sec5Metric3Lbl: "Code Security Scanning",
+      sec5Metric3Sub: "Integrated within IDE",
+      sec5Disclaimer: "* Live demonstration conducted by Erica Liu and Fabrianne Effendi.",
+
+      sec6Num: "06",
+      sec6Title: "Live Demonstrations & Highlights",
+      sec6Desc: "Key architectural demonstrations conducted at Bitexco Financial Tower:",
+      sec6Item1: "<strong>Automated Code Transformation:</strong> Amazon Q Developer scanned legacy Java repositories, identified deprecated dependencies, and generated refactored Java 17/21 code.",
+      sec6Item2: "<strong>Commercial to Open-Source DB Migration:</strong> Simulated schema conversion from Microsoft SQL Server/Oracle to Amazon Aurora PostgreSQL.",
+      sec6Item3: "<strong>Asynchronous Queue Decoupling:</strong> Configured SQS integrations with Lambda and set up Dead-Letter Queues (DLQ) for error handling.",
+      sec6Item4: "<strong>Expert Roundtable:</strong> Deep technical Q&A session with Jignesh Shah, Director of Open Source Databases.",
+      sec6Summary: "The workshop provided actionable architectural blueprints and cutting-edge GenAI tooling to accelerate enterprise modernization roadmaps.",
+
+      sec7Num: "07",
+      sec7Title: "Key Technical Takeaways",
+      takeaway1Num: "01",
+      takeaway1Title: "Modernization Requires Strategy",
+      takeaway1Body: "Cloud modernization goes far beyond lift-and-shift migration; it requires structural architectural refactoring and rigorous Domain-Driven Design.",
+      takeaway2Num: "02",
+      takeaway2Title: "Asynchronous Decoupling",
+      takeaway2Body: "Decoupling workloads via queues (SQS) and event routers (EventBridge/SNS) prevents cascading failures and absorbs sudden traffic spikes.",
+      takeaway3Num: "03",
+      takeaway3Title: "Database Freedom",
+      takeaway3Body: "Migrating from proprietary engines to cloud-native open-source databases (Amazon Aurora) yields massive licensing savings alongside enterprise-grade scalability.",
+      takeaway4Num: "04",
+      takeaway4Title: "AI-Assisted Engineering",
+      takeaway4Body: "Generative AI tools such as Amazon Q Developer streamline tedious refactoring and testing, allowing cloud engineers to focus on architectural problem solving.",
+
+      sec8Num: "08",
+      sec8Title: "Lessons Learned & Personal Contribution",
+      lessonHeading: "Lessons Learned:",
+      lessonQuote: "“The workshop provided valuable insights into enterprise-scale modernization, from DDD domain modeling to resilient serverless event-driven design.\n\nThese principles directly enrich my AWS internship project and career roadmap as a Cloud Solutions Architect.”",
+      contribHeading: "Personal Contribution:",
+      contribQuote: "“Attended the full workshop, synthesized the 4-step DDD methodology, evaluated microservices queuing patterns, and documented key findings in my AWS internship report.”",
+
+      sec9Num: "09",
+      sec9Title: "Event Check-in Photos & Activity",
+      photoPendingBadge: "⏳ Pending Authentic Upload",
+      photoPendingTitle: "Event Attendance Photo at Bitexco Tower",
+      photoPendingDesc: "Reserved for the authentic check-in photo of the student at the Bitexco Financial Tower event. In accordance with transparency standards, no unverified images are used.",
+      photoPendingNote: "Supports high-resolution preview and click-to-enlarge lightbox view as soon as authentic evidence is uploaded."
+    }
   }
 };
 
@@ -3067,20 +3349,54 @@ function renderEventsList() {
   const events = app.data.events[lang] || app.data.events.vi;
 
   container.innerHTML = events.map(ev => {
-    const isVoiceAI = ev.slug === 'first-cloud-ai-journey-24-10-2026' || ev.hasFullReport || ev.id === 'event-2';
-    const detailRoute = isVoiceAI ? 'events/first-cloud-ai-journey-24-10-2026' : null;
+    let detailRoute = null;
+    if (ev.slug) {
+      detailRoute = `events/${ev.slug}`;
+    } else if (ev.id === 'event-2') {
+      detailRoute = 'events/first-cloud-ai-journey-24-10-2026';
+    } else if (ev.id === 'event-1') {
+      detailRoute = 'events/hoi-thao-hien-dai-hoa-ung-dung-csdl-genai';
+    } else if (ev.hasFullReport) {
+      detailRoute = 'events/first-cloud-ai-journey-24-10-2026';
+    }
+
+    const isVoiceAI = ev.slug === 'first-cloud-ai-journey-24-10-2026' || ev.id === 'event-2';
     const descText = ev.shortDesc || (ev.highlights ? ev.highlights.split('\n')[0].replace(/^•\s*/, '') : '');
+    
+    // Check if authentic check-in photo exists for thumbnail
+    const targetSlug = ev.slug || (ev.id === 'event-2' ? 'first-cloud-ai-journey-24-10-2026' : (ev.id === 'event-1' ? 'hoi-thao-hien-dai-hoa-ung-dung-csdl-genai' : ev.id));
+    const savedPhoto = localStorage.getItem('fcaj_event_checkin_photo_' + targetSlug);
+
+    // Extract clean date badge from dateTime string (e.g. "24/10/2026" or "12/08/2026")
+    let dateBadge = '';
+    if (ev.dateTime) {
+      const parts = ev.dateTime.split(',');
+      if (parts.length > 1) {
+        if (/\d{1,2}\/\d{1,2}\/\d{4}/.test(parts[0])) {
+          dateBadge = parts[0].trim();
+        } else if (/\d{1,2}\/\d{1,2}\/\d{4}/.test(parts[1])) {
+          dateBadge = parts[1].trim();
+        } else {
+          dateBadge = parts[1].trim();
+        }
+      } else {
+        dateBadge = ev.dateTime.trim();
+      }
+    }
+
     const badgeText = isVoiceAI 
-      ? (lang === 'vi' ? 'Báo cáo chuyên sâu' : 'Full Report Available')
-      : t('eventBadge');
+      ? (lang === 'vi' ? 'Báo cáo Session 1' : 'Session 1 Report')
+      : (ev.hasFullReport ? (lang === 'vi' ? 'Báo cáo chuyên sâu' : 'Full Report Available') : t('eventBadge'));
+
+    const badgeClass = isVoiceAI ? 'badge-purple' : (ev.hasFullReport ? 'badge-blue' : 'badge-gray');
 
     return `
       <div class="event-card ${isVoiceAI ? 'event-card-featured' : ''}" 
            ${detailRoute ? `onclick="navigateTo('${detailRoute}')" style="cursor:pointer;"` : ''}>
         <div class="event-header">
           <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px; gap:8px;">
-            <span class="badge ${isVoiceAI ? 'badge-purple' : 'badge-blue'}">${badgeText}</span>
-            <span style="font-size:12px; font-weight:600; color:var(--text-subtle);">${escapeHtml(ev.dateTime?.split(',')[0] || '')}</span>
+            <span class="badge ${badgeClass}">${badgeText}</span>
+            <span style="font-size:12px; font-weight:600; color:var(--text-subtle);">${escapeHtml(dateBadge)}</span>
           </div>
           <h3 class="event-title">${escapeHtml(ev.name)}</h3>
           <div class="event-meta-compact">
@@ -3105,6 +3421,12 @@ function renderEventsList() {
           </div>
         </div>
 
+        ${savedPhoto ? `
+          <div style="margin: 10px 0; border-radius: var(--radius-sm); overflow: hidden; max-height: 140px; border: 1px solid var(--border-card);">
+            <img src="${savedPhoto}" alt="${escapeHtml(ev.name)}" style="width: 100%; height: 140px; object-fit: cover;" />
+          </div>
+        ` : ''}
+
         <div class="event-short-desc">
           <p>${escapeHtml(descText)}</p>
         </div>
@@ -3127,12 +3449,16 @@ function renderEventsList() {
 }
 
 function renderEventDetail(slug = 'first-cloud-ai-journey-24-10-2026') {
-  const container = document.getElementById('event-detail-content-container');
+  const containerId = slug === 'hoi-thao-hien-dai-hoa-ung-dung-csdl-genai'
+    ? 'event-detail-modernization-container'
+    : 'event-detail-content-container';
+  const container = document.getElementById(containerId);
   if (!container) return;
 
   const lang = app.currentLang || 'vi';
-  const reportData = (EVENT_REPORTS[slug] && EVENT_REPORTS[slug][lang]) 
-    ? EVENT_REPORTS[slug][lang] 
+  const targetSlug = slug || 'first-cloud-ai-journey-24-10-2026';
+  const reportData = (EVENT_REPORTS[targetSlug] && EVENT_REPORTS[targetSlug][lang]) 
+    ? EVENT_REPORTS[targetSlug][lang] 
     : (EVENT_REPORTS['first-cloud-ai-journey-24-10-2026'] ? EVENT_REPORTS['first-cloud-ai-journey-24-10-2026'].vi : null);
 
   if (!reportData) {
@@ -3141,117 +3467,241 @@ function renderEventDetail(slug = 'first-cloud-ai-journey-24-10-2026') {
   }
 
   const r = reportData;
+  const isVoiceAI = targetSlug === 'first-cloud-ai-journey-24-10-2026';
+  const savedPhoto = localStorage.getItem('fcaj_event_checkin_photo_' + targetSlug);
+  const hasAuthenticPhoto = Boolean(savedPhoto);
 
   // Responsive SVG Architecture Diagram
-  const svgDiagram = `
-    <div class="arch-diagram-wrapper">
-      <svg class="arch-svg-container" viewBox="0 0 940 260" xmlns="http://www.w3.org/2000/svg">
-        <defs>
-          <filter id="cardShadow" x="-5%" y="-5%" width="110%" height="115%">
-            <feDropShadow dx="0" dy="2" stdDeviation="3" flood-opacity="0.08"/>
-          </filter>
-          <linearGradient id="primaryGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stop-color="#0F172A"/>
-            <stop offset="100%" stop-color="#1E293B"/>
-          </linearGradient>
-          <linearGradient id="guardGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stop-color="#1E3A8A"/>
-            <stop offset="100%" stop-color="#2563EB"/>
-          </linearGradient>
-          <marker id="arrow" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-            <path d="M 0 1 L 8 5 L 0 9 z" fill="#64748B"/>
-          </marker>
-        </defs>
+  let svgDiagram = '';
+  if (isVoiceAI) {
+    svgDiagram = `
+      <div class="arch-diagram-wrapper">
+        <svg class="arch-svg-container" viewBox="0 0 940 260" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <filter id="cardShadow" x="-5%" y="-5%" width="110%" height="115%">
+              <feDropShadow dx="0" dy="2" stdDeviation="3" flood-opacity="0.08"/>
+            </filter>
+            <linearGradient id="primaryGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#0F172A"/>
+              <stop offset="100%" stop-color="#1E293B"/>
+            </linearGradient>
+            <linearGradient id="guardGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#1E3A8A"/>
+              <stop offset="100%" stop-color="#2563EB"/>
+            </linearGradient>
+            <marker id="arrow" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+              <path d="M 0 1 L 8 5 L 0 9 z" fill="#64748B"/>
+            </marker>
+          </defs>
 
-        <!-- AWS Cloud Boundary Box -->
-        <rect x="180" y="20" width="580" height="215" rx="14" fill="#FFFFFF" stroke="#CBD5E1" stroke-dasharray="4 4" stroke-width="1.5" />
-        <text x="200" y="44" font-family="'Plus Jakarta Sans', sans-serif" font-size="11.5" font-weight="700" fill="#475569" letter-spacing="0.5">AWS CLOUD INFRASTRUCTURE &amp; SECURE VPC</text>
-        <text x="610" y="44" font-family="'Plus Jakarta Sans', sans-serif" font-size="11" font-weight="600" fill="#2563EB">WebRTC / UDP • AWS PrivateLink</text>
+          <!-- AWS Cloud Boundary Box -->
+          <rect x="180" y="20" width="580" height="215" rx="14" fill="#FFFFFF" stroke="#CBD5E1" stroke-dasharray="4 4" stroke-width="1.5" />
+          <text x="200" y="44" font-family="'Plus Jakarta Sans', sans-serif" font-size="11.5" font-weight="700" fill="#475569" letter-spacing="0.5">AWS CLOUD INFRASTRUCTURE &amp; SECURE VPC</text>
+          <text x="610" y="44" font-family="'Plus Jakarta Sans', sans-serif" font-size="11" font-weight="600" fill="#2563EB">WebRTC / UDP • AWS PrivateLink</text>
 
-        <!-- Node 1: User Audio In -->
-        <g transform="translate(15, 80)" filter="url(#cardShadow)">
-          <rect width="135" height="95" rx="10" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1.5"/>
-          <circle cx="67" cy="30" r="14" fill="#F1F5F9"/>
-          <path d="M67 22 v10 M62 27 a5 5 0 0 0 10 0" stroke="#0F172A" stroke-width="1.8" fill="none" stroke-linecap="round"/>
-          <text x="67" y="56" text-anchor="middle" font-family="'Plus Jakarta Sans', sans-serif" font-size="12" font-weight="700" fill="#0F172A">Speech Input</text>
-          <text x="67" y="70" text-anchor="middle" font-family="'Plus Jakarta Sans', sans-serif" font-size="10" fill="#64748B">User Voice (SIP/Mic)</text>
-          <text x="67" y="83" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="9" font-weight="600" fill="#2563EB">WebRTC / UDP</text>
-        </g>
+          <!-- Node 1: User Audio In -->
+          <g transform="translate(15, 80)" filter="url(#cardShadow)">
+            <rect width="135" height="95" rx="10" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1.5"/>
+            <circle cx="67" cy="30" r="14" fill="#F1F5F9"/>
+            <path d="M67 22 v10 M62 27 a5 5 0 0 0 10 0" stroke="#0F172A" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+            <text x="67" y="56" text-anchor="middle" font-family="'Plus Jakarta Sans', sans-serif" font-size="12" font-weight="700" fill="#0F172A">Speech Input</text>
+            <text x="67" y="70" text-anchor="middle" font-family="'Plus Jakarta Sans', sans-serif" font-size="10" fill="#64748B">User Voice (SIP/Mic)</text>
+            <text x="67" y="83" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="9" font-weight="600" fill="#2563EB">WebRTC / UDP</text>
+          </g>
 
-        <!-- Connector 1 -> 2 -->
-        <line x1="150" y1="127" x2="195" y2="127" stroke="#64748B" stroke-width="2" marker-end="url(#arrow)"/>
+          <!-- Connector 1 -> 2 -->
+          <line x1="150" y1="127" x2="195" y2="127" stroke="#64748B" stroke-width="2" marker-end="url(#arrow)"/>
 
-        <!-- Node 2: STT (EC2 GPU) -->
-        <g transform="translate(200, 75)" filter="url(#cardShadow)">
-          <rect width="125" height="105" rx="10" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1.5"/>
-          <rect x="0" y="0" width="125" height="6" rx="3" fill="#0F172A"/>
-          <text x="62" y="32" text-anchor="middle" font-family="'Plus Jakarta Sans', sans-serif" font-size="13" font-weight="800" fill="#0F172A">STT Engine</text>
-          <text x="62" y="48" text-anchor="middle" font-family="'Plus Jakarta Sans', sans-serif" font-size="10.5" fill="#475569">Speech-to-Text</text>
-          <rect x="15" y="60" width="95" height="20" rx="4" fill="#F8FAFC" stroke="#E2E8F0"/>
-          <text x="62" y="74" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="9.5" font-weight="600" fill="#0F172A">Amazon EC2 GPU</text>
-          <text x="62" y="94" text-anchor="middle" font-family="'Plus Jakarta Sans', sans-serif" font-size="9.5" fill="#16A34A">⚡ Low Latency</text>
-        </g>
+          <!-- Node 2: STT (EC2 GPU) -->
+          <g transform="translate(200, 75)" filter="url(#cardShadow)">
+            <rect width="125" height="105" rx="10" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1.5"/>
+            <rect x="0" y="0" width="125" height="6" rx="3" fill="#0F172A"/>
+            <text x="62" y="32" text-anchor="middle" font-family="'Plus Jakarta Sans', sans-serif" font-size="13" font-weight="800" fill="#0F172A">STT Engine</text>
+            <text x="62" y="48" text-anchor="middle" font-family="'Plus Jakarta Sans', sans-serif" font-size="10.5" fill="#475569">Speech-to-Text</text>
+            <rect x="15" y="60" width="95" height="20" rx="4" fill="#F8FAFC" stroke="#E2E8F0"/>
+            <text x="62" y="74" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="9.5" font-weight="600" fill="#0F172A">Amazon EC2 GPU</text>
+            <text x="62" y="94" text-anchor="middle" font-family="'Plus Jakarta Sans', sans-serif" font-size="9.5" fill="#16A34A">⚡ Low Latency</text>
+          </g>
 
-        <!-- Connector 2 -> 3 -->
-        <line x1="325" y1="127" x2="355" y2="127" stroke="#64748B" stroke-width="2" marker-end="url(#arrow)"/>
-        <text x="340" y="120" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="9" fill="#64748B">Text</text>
+          <!-- Connector 2 -> 3 -->
+          <line x1="325" y1="127" x2="355" y2="127" stroke="#64748B" stroke-width="2" marker-end="url(#arrow)"/>
+          <text x="340" y="120" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="9" fill="#64748B">Text</text>
 
-        <!-- Node 3: LLM Reasoning -->
-        <g transform="translate(360, 75)" filter="url(#cardShadow)">
-          <rect width="125" height="105" rx="10" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1.5"/>
-          <rect x="0" y="0" width="125" height="6" rx="3" fill="#0F172A"/>
-          <text x="62" y="32" text-anchor="middle" font-family="'Plus Jakarta Sans', sans-serif" font-size="13" font-weight="800" fill="#0F172A">LLM Core</text>
-          <text x="62" y="48" text-anchor="middle" font-family="'Plus Jakarta Sans', sans-serif" font-size="10.5" fill="#475569">Context &amp; Logic</text>
-          <rect x="12" y="60" width="101" height="20" rx="4" fill="#F8FAFC" stroke="#E2E8F0"/>
-          <text x="62" y="74" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="9.5" font-weight="600" fill="#0F172A">AWS PrivateLink</text>
-          <text x="62" y="94" text-anchor="middle" font-family="'Plus Jakarta Sans', sans-serif" font-size="9.5" fill="#2563EB">Stream Tokens</text>
-        </g>
+          <!-- Node 3: LLM Reasoning -->
+          <g transform="translate(360, 75)" filter="url(#cardShadow)">
+            <rect width="125" height="105" rx="10" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1.5"/>
+            <rect x="0" y="0" width="125" height="6" rx="3" fill="#0F172A"/>
+            <text x="62" y="32" text-anchor="middle" font-family="'Plus Jakarta Sans', sans-serif" font-size="13" font-weight="800" fill="#0F172A">LLM Core</text>
+            <text x="62" y="48" text-anchor="middle" font-family="'Plus Jakarta Sans', sans-serif" font-size="10.5" fill="#475569">Context &amp; Logic</text>
+            <rect x="12" y="60" width="101" height="20" rx="4" fill="#F8FAFC" stroke="#E2E8F0"/>
+            <text x="62" y="74" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="9.5" font-weight="600" fill="#0F172A">AWS PrivateLink</text>
+            <text x="62" y="94" text-anchor="middle" font-family="'Plus Jakarta Sans', sans-serif" font-size="9.5" fill="#2563EB">Stream Tokens</text>
+          </g>
 
-        <!-- Connector 3 -> 4 -->
-        <line x1="485" y1="127" x2="515" y2="127" stroke="#64748B" stroke-width="2" marker-end="url(#arrow)"/>
-        <text x="500" y="120" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="9" fill="#64748B">Draft</text>
+          <!-- Connector 3 -> 4 -->
+          <line x1="485" y1="127" x2="515" y2="127" stroke="#64748B" stroke-width="2" marker-end="url(#arrow)"/>
+          <text x="500" y="120" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="9" fill="#64748B">Draft</text>
 
-        <!-- Node 4: Guardrails (Highlighted) -->
-        <g transform="translate(520, 68)" filter="url(#cardShadow)">
-          <rect width="130" height="118" rx="10" fill="#EFF6FF" stroke="#3B82F6" stroke-width="2"/>
-          <rect x="0" y="0" width="130" height="6" rx="3" fill="#2563EB"/>
-          <text x="65" y="28" text-anchor="middle" font-family="'Plus Jakarta Sans', sans-serif" font-size="13" font-weight="800" fill="#1E40AF">🛡️ Guardrails</text>
-          <text x="65" y="44" text-anchor="middle" font-family="'Plus Jakarta Sans', sans-serif" font-size="10" font-weight="700" fill="#1D4ED8">Safety &amp; Compliance</text>
-          <text x="65" y="62" text-anchor="middle" font-family="'Plus Jakarta Sans', sans-serif" font-size="9.5" fill="#334155">• Anti-Hallucination</text>
-          <text x="65" y="76" text-anchor="middle" font-family="'Plus Jakarta Sans', sans-serif" font-size="9.5" fill="#334155">• PII &amp; Policy Shield</text>
-          <rect x="15" y="86" width="100" height="20" rx="4" fill="#DBEAFE"/>
-          <text x="65" y="100" text-anchor="middle" font-family="'Plus Jakarta Sans', sans-serif" font-size="9" font-weight="700" fill="#1E40AF">Pre-Speech Check</text>
-        </g>
+          <!-- Node 4: Guardrails (Highlighted) -->
+          <g transform="translate(520, 68)" filter="url(#cardShadow)">
+            <rect width="130" height="118" rx="10" fill="#EFF6FF" stroke="#3B82F6" stroke-width="2"/>
+            <rect x="0" y="0" width="130" height="6" rx="3" fill="#2563EB"/>
+            <text x="65" y="28" text-anchor="middle" font-family="'Plus Jakarta Sans', sans-serif" font-size="13" font-weight="800" fill="#1E40AF">🛡️ Guardrails</text>
+            <text x="65" y="44" text-anchor="middle" font-family="'Plus Jakarta Sans', sans-serif" font-size="10" font-weight="700" fill="#1D4ED8">Safety &amp; Compliance</text>
+            <text x="65" y="62" text-anchor="middle" font-family="'Plus Jakarta Sans', sans-serif" font-size="9.5" fill="#334155">• Anti-Hallucination</text>
+            <text x="65" y="76" text-anchor="middle" font-family="'Plus Jakarta Sans', sans-serif" font-size="9.5" fill="#334155">• PII &amp; Policy Shield</text>
+            <rect x="15" y="86" width="100" height="20" rx="4" fill="#DBEAFE"/>
+            <text x="65" y="100" text-anchor="middle" font-family="'Plus Jakarta Sans', sans-serif" font-size="9" font-weight="700" fill="#1E40AF">Pre-Speech Check</text>
+          </g>
 
-        <!-- Connector 4 -> 5 -->
-        <line x1="650" y1="127" x2="675" y2="127" stroke="#64748B" stroke-width="2" marker-end="url(#arrow)"/>
-        <text x="662" y="120" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="9" fill="#16A34A">Safe</text>
+          <!-- Connector 4 -> 5 -->
+          <line x1="650" y1="127" x2="675" y2="127" stroke="#64748B" stroke-width="2" marker-end="url(#arrow)"/>
+          <text x="662" y="120" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="9" fill="#16A34A">Safe</text>
 
-        <!-- Node 5: TTS (EC2 GPU) -->
-        <g transform="translate(680, 75)" filter="url(#cardShadow)">
-          <rect width="125" height="105" rx="10" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1.5"/>
-          <rect x="0" y="0" width="125" height="6" rx="3" fill="#0F172A"/>
-          <text x="62" y="32" text-anchor="middle" font-family="'Plus Jakarta Sans', sans-serif" font-size="13" font-weight="800" fill="#0F172A">TTS Engine</text>
-          <text x="62" y="48" text-anchor="middle" font-family="'Plus Jakarta Sans', sans-serif" font-size="10.5" fill="#475569">Text-to-Speech</text>
-          <rect x="15" y="60" width="95" height="20" rx="4" fill="#F8FAFC" stroke="#E2E8F0"/>
-          <text x="62" y="74" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="9.5" font-weight="600" fill="#0F172A">Amazon EC2 GPU</text>
-          <text x="62" y="94" text-anchor="middle" font-family="'Plus Jakarta Sans', sans-serif" font-size="9.5" fill="#16A34A">Natural Voice</text>
-        </g>
+          <!-- Node 5: TTS (EC2 GPU) -->
+          <g transform="translate(680, 75)" filter="url(#cardShadow)">
+            <rect width="125" height="105" rx="10" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1.5"/>
+            <rect x="0" y="0" width="125" height="6" rx="3" fill="#0F172A"/>
+            <text x="62" y="32" text-anchor="middle" font-family="'Plus Jakarta Sans', sans-serif" font-size="13" font-weight="800" fill="#0F172A">TTS Engine</text>
+            <text x="62" y="48" text-anchor="middle" font-family="'Plus Jakarta Sans', sans-serif" font-size="10.5" fill="#475569">Text-to-Speech</text>
+            <rect x="15" y="60" width="95" height="20" rx="4" fill="#F8FAFC" stroke="#E2E8F0"/>
+            <text x="62" y="74" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="9.5" font-weight="600" fill="#0F172A">Amazon EC2 GPU</text>
+            <text x="62" y="94" text-anchor="middle" font-family="'Plus Jakarta Sans', sans-serif" font-size="9.5" fill="#16A34A">Natural Voice</text>
+          </g>
 
-        <!-- Connector 5 -> 6 -->
-        <line x1="805" y1="127" x2="840" y2="127" stroke="#64748B" stroke-width="2" marker-end="url(#arrow)"/>
+          <!-- Connector 5 -> 6 -->
+          <line x1="805" y1="127" x2="840" y2="127" stroke="#64748B" stroke-width="2" marker-end="url(#arrow)"/>
 
-        <!-- Node 6: Voice Output -->
-        <g transform="translate(845, 80)" filter="url(#cardShadow)">
-          <rect width="80" height="95" rx="10" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1.5"/>
-          <circle cx="40" cy="30" r="14" fill="#F1F5F9"/>
-          <path d="M35 30 l5 -4 v8 z M43 27 a4 4 0 0 1 0 6" stroke="#0F172A" stroke-width="1.8" fill="none" stroke-linecap="round"/>
-          <text x="40" y="56" text-anchor="middle" font-family="'Plus Jakarta Sans', sans-serif" font-size="11.5" font-weight="700" fill="#0F172A">Voice Out</text>
-          <text x="40" y="70" text-anchor="middle" font-family="'Plus Jakarta Sans', sans-serif" font-size="9.5" fill="#64748B">WebRTC</text>
-          <text x="40" y="83" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="9" font-weight="600" fill="#16A34A">&lt;2s Total</text>
-        </g>
-      </svg>
-      <div class="arch-caption">${escapeHtml(r.diagramCaption)}</div>
+          <!-- Node 6: Voice Output -->
+          <g transform="translate(845, 80)" filter="url(#cardShadow)">
+            <rect width="80" height="95" rx="10" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1.5"/>
+            <circle cx="40" cy="30" r="14" fill="#F1F5F9"/>
+            <path d="M35 30 l5 -4 v8 z M43 27 a4 4 0 0 1 0 6" stroke="#0F172A" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+            <text x="40" y="56" text-anchor="middle" font-family="'Plus Jakarta Sans', sans-serif" font-size="11.5" font-weight="700" fill="#0F172A">Voice Out</text>
+            <text x="40" y="70" text-anchor="middle" font-family="'Plus Jakarta Sans', sans-serif" font-size="9.5" fill="#64748B">WebRTC</text>
+            <text x="40" y="83" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="9" font-weight="600" fill="#16A34A">&lt;2s Total</text>
+          </g>
+        </svg>
+        <div class="arch-caption">${escapeHtml(r.diagramCaption || '')}</div>
+      </div>
+    `;
+  } else {
+    // Microservices Modernization Diagram for Event 1
+    svgDiagram = `
+      <div class="arch-diagram-wrapper">
+        <svg class="arch-svg-container" viewBox="0 0 940 260" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <filter id="cardShadow1" x="-5%" y="-5%" width="110%" height="115%">
+              <feDropShadow dx="0" dy="2" stdDeviation="3" flood-opacity="0.08"/>
+            </filter>
+            <marker id="arrow1" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+              <path d="M 0 1 L 8 5 L 0 9 z" fill="#64748B"/>
+            </marker>
+          </defs>
+
+          <!-- AWS Cloud Boundary Box -->
+          <rect x="230" y="20" width="690" height="215" rx="14" fill="#FFFFFF" stroke="#CBD5E1" stroke-dasharray="4 4" stroke-width="1.5" />
+          <text x="250" y="44" font-family="'Plus Jakarta Sans', sans-serif" font-size="11.5" font-weight="700" fill="#475569" letter-spacing="0.5">AWS EVENT-DRIVEN MICROSERVICES INFRASTRUCTURE</text>
+          <text x="730" y="44" font-family="'Plus Jakarta Sans', sans-serif" font-size="11" font-weight="600" fill="#2563EB">Amazon Q Developer AppMod</text>
+
+          <!-- Node 1: Legacy Monolith -->
+          <g transform="translate(15, 65)" filter="url(#cardShadow1)">
+            <rect width="180" height="125" rx="10" fill="#FEF2F2" stroke="#F87171" stroke-width="1.5"/>
+            <rect x="0" y="0" width="180" height="6" rx="3" fill="#DC2626"/>
+            <text x="90" y="28" text-anchor="middle" font-family="'Plus Jakarta Sans', sans-serif" font-size="12" font-weight="800" fill="#991B1B">Legacy Monolith</text>
+            <text x="90" y="45" text-anchor="middle" font-family="'Plus Jakarta Sans', sans-serif" font-size="10" fill="#7F1D1D">Tightly Coupled Code</text>
+            <rect x="15" y="55" width="150" height="22" rx="4" fill="#FFFFFF" stroke="#FECACA"/>
+            <text x="90" y="70" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="9" font-weight="600" fill="#DC2626">Single SQL DB Bottleneck</text>
+            <text x="90" y="94" text-anchor="middle" font-family="'Plus Jakarta Sans', sans-serif" font-size="9" fill="#B91C1C">⚠️ Long Release Cycles</text>
+            <text x="90" y="108" text-anchor="middle" font-family="'Plus Jakarta Sans', sans-serif" font-size="9" fill="#B91C1C">⚠️ Cascading Failures</text>
+          </g>
+
+          <!-- Connector 1 -> 2 -->
+          <line x1="195" y1="127" x2="245" y2="127" stroke="#64748B" stroke-width="2" marker-end="url(#arrow1)"/>
+          <text x="220" y="118" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="8.5" font-weight="700" fill="#2563EB">DDD</text>
+
+          <!-- Node 2: Domain-Driven Bounded Contexts -->
+          <g transform="translate(250, 65)" filter="url(#cardShadow1)">
+            <rect width="180" height="125" rx="10" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1.5"/>
+            <rect x="0" y="0" width="180" height="6" rx="3" fill="#0F172A"/>
+            <text x="90" y="28" text-anchor="middle" font-family="'Plus Jakarta Sans', sans-serif" font-size="12" font-weight="800" fill="#0F172A">Bounded Contexts</text>
+            <text x="90" y="45" text-anchor="middle" font-family="'Plus Jakarta Sans', sans-serif" font-size="10" fill="#475569">Domain-Driven Design</text>
+            <rect x="15" y="55" width="150" height="22" rx="4" fill="#F8FAFC" stroke="#E2E8F0"/>
+            <text x="90" y="70" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="9" font-weight="600" fill="#0F172A">4-Step Domain Modeling</text>
+            <text x="90" y="94" text-anchor="middle" font-family="'Plus Jakarta Sans', sans-serif" font-size="9" fill="#16A34A">✓ High Cohesion</text>
+            <text x="90" y="108" text-anchor="middle" font-family="'Plus Jakarta Sans', sans-serif" font-size="9" fill="#16A34A">✓ Loose Coupling</text>
+          </g>
+
+          <!-- Connector 2 -> 3 -->
+          <line x1="430" y1="127" x2="475" y2="127" stroke="#64748B" stroke-width="2" marker-end="url(#arrow1)"/>
+          <text x="452" y="118" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="8.5" font-weight="700" fill="#64748B">Events</text>
+
+          <!-- Node 3: Asynchronous Queues & Messaging -->
+          <g transform="translate(480, 60)" filter="url(#cardShadow1)">
+            <rect width="195" height="135" rx="10" fill="#EFF6FF" stroke="#3B82F6" stroke-width="2"/>
+            <rect x="0" y="0" width="195" height="6" rx="3" fill="#2563EB"/>
+            <text x="97" y="26" text-anchor="middle" font-family="'Plus Jakarta Sans', sans-serif" font-size="12.5" font-weight="800" fill="#1E40AF">Asynchronous Layer</text>
+            <text x="97" y="42" text-anchor="middle" font-family="'Plus Jakarta Sans', sans-serif" font-size="10" font-weight="700" fill="#1D4ED8">Queue • Cache • Messaging</text>
+            <rect x="12" y="52" width="171" height="20" rx="4" fill="#DBEAFE"/>
+            <text x="97" y="66" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="9" font-weight="700" fill="#1E40AF">Amazon SQS + SNS + EventBridge</text>
+            <text x="97" y="88" text-anchor="middle" font-family="'Plus Jakarta Sans', sans-serif" font-size="9" fill="#334155">• Elastic Spike Buffering</text>
+            <text x="97" y="102" text-anchor="middle" font-family="'Plus Jakarta Sans', sans-serif" font-size="9" fill="#334155">• ElastiCache Redis Fast Read</text>
+            <text x="97" y="118" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="8.5" font-weight="600" fill="#16A34A">Fault-Tolerant DLQ</text>
+          </g>
+
+          <!-- Connector 3 -> 4 -->
+          <line x1="675" y1="127" x2="715" y2="127" stroke="#64748B" stroke-width="2" marker-end="url(#arrow1)"/>
+
+          <!-- Node 4: Cloud-Native Microservices & Modern DB -->
+          <g transform="translate(720, 65)" filter="url(#cardShadow1)">
+            <rect width="185" height="125" rx="10" fill="#F0FDF4" stroke="#86EFAC" stroke-width="1.5"/>
+            <rect x="0" y="0" width="185" height="6" rx="3" fill="#16A34A"/>
+            <text x="92" y="28" text-anchor="middle" font-family="'Plus Jakarta Sans', sans-serif" font-size="12" font-weight="800" fill="#15803D">Modern Services &amp; DB</text>
+            <text x="92" y="45" text-anchor="middle" font-family="'Plus Jakarta Sans', sans-serif" font-size="10" fill="#166534">Serverless &amp; Cloud-Native</text>
+            <rect x="12" y="55" width="161" height="22" rx="4" fill="#FFFFFF" stroke="#BBF7D0"/>
+            <text x="92" y="70" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="9" font-weight="600" fill="#15803D">Amazon Aurora &amp; DynamoDB</text>
+            <text x="92" y="94" text-anchor="middle" font-family="'Plus Jakarta Sans', sans-serif" font-size="9" fill="#166534">⚡ Sub-second Scalability</text>
+            <text x="92" y="108" text-anchor="middle" font-family="'Plus Jakarta Sans', sans-serif" font-size="9" fill="#166534">⚡ Zero Licensing Overhead</text>
+          </g>
+        </svg>
+        <div class="arch-caption">${escapeHtml(r.diagramCaption || '')}</div>
+      </div>
+    `;
+  }
+
+  const photoSectionHtml = hasAuthenticPhoto ? `
+    <div class="event-uploaded-photo-box">
+      <div class="event-uploaded-img-wrap" onclick="window.open('${savedPhoto}', '_blank')">
+        <img src="${savedPhoto}" alt="${escapeHtml(r.title)}" class="event-uploaded-img" />
+      </div>
+      <div class="event-photo-actions">
+        <label class="btn-upload-checkin">
+          <span>📷 ${lang === 'vi' ? 'Thay đổi ảnh check-in' : 'Change check-in photo'}</span>
+          <input type="file" accept="image/*" style="display:none;" onchange="uploadEventCheckinPhoto('${targetSlug}', this)" />
+        </label>
+        <button type="button" class="btn btn-outline btn-sm" style="color:#EF4444; border-color:#FCA5A5;" onclick="deleteEventCheckinPhoto('${targetSlug}')">
+          <span>🗑️ ${lang === 'vi' ? 'Xóa ảnh' : 'Remove photo'}</span>
+        </button>
+      </div>
+    </div>
+  ` : `
+    <div class="photo-pending-box">
+      <div class="photo-pending-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+          <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/>
+          <circle cx="12" cy="13" r="4"/>
+        </svg>
+      </div>
+      <span class="photo-pending-badge">${escapeHtml(r.photoPendingBadge)}</span>
+      <h3 class="photo-pending-title" style="margin-top:12px;">${escapeHtml(r.photoPendingTitle)}</h3>
+      <p class="photo-pending-desc">${escapeHtml(r.photoPendingDesc)}</p>
+      <p style="font-size:12px; color:#92400E; margin:0 0 16px 0; font-style:italic;">${escapeHtml(r.photoPendingNote)}</p>
+      <div style="display:flex; justify-content:center; gap:10px;">
+        <label class="btn btn-primary btn-sm btn-upload-checkin">
+          <span>📷 ${lang === 'vi' ? 'Tải ảnh check-in thực tế của bạn lên' : 'Upload Authentic Check-in Photo'}</span>
+          <input type="file" accept="image/*" style="display:none;" onchange="uploadEventCheckinPhoto('${targetSlug}', this)" />
+        </label>
+      </div>
     </div>
   `;
 
@@ -3277,7 +3727,7 @@ function renderEventDetail(slug = 'first-cloud-ai-journey-24-10-2026') {
         <div class="report-hero-badge-row">
           <span class="badge badge-purple">${escapeHtml(r.badgeText)}</span>
           <span class="badge badge-blue">${escapeHtml(r.sessionTag)}</span>
-          <span class="badge badge-gray">📅 24/10/2026</span>
+          <span class="badge badge-gray">📅 ${escapeHtml(r.dateTime.split(',')[0])}</span>
         </div>
         <h1 class="report-main-title">${escapeHtml(r.title)}</h1>
         <p class="report-main-subtitle">${escapeHtml(r.subtitle)}</p>
@@ -3315,7 +3765,7 @@ function renderEventDetail(slug = 'first-cloud-ai-journey-24-10-2026') {
           <span class="compliance-pill pill-pass">✓ 3. ${escapeHtml(r.crit3)}</span>
           <span class="compliance-pill pill-pass">✓ 4. ${escapeHtml(r.crit4)}</span>
           <span class="compliance-pill pill-pass">✓ 5. ${escapeHtml(r.crit5)}</span>
-          <span class="compliance-pill pill-pending">⏳ 6. ${escapeHtml(r.crit6)}</span>
+          <span class="compliance-pill ${hasAuthenticPhoto ? 'pill-pass' : 'pill-pending'}">${hasAuthenticPhoto ? '✓' : '⏳'} 6. ${escapeHtml(r.crit6)}</span>
           <span class="compliance-pill pill-pass">✓ 7. ${escapeHtml(r.crit7)}</span>
         </div>
       </section>
@@ -3334,7 +3784,7 @@ function renderEventDetail(slug = 'first-cloud-ai-journey-24-10-2026') {
         </div>
       </section>
 
-      <!-- SECTION 2 – KIẾN TRÚC VOICE AI -->
+      <!-- SECTION 2 – KIẾN TRÚC -->
       <section class="report-section-block">
         <div class="report-section-header">
           <span class="report-section-num">${escapeHtml(r.sec2Num)}</span>
@@ -3409,7 +3859,7 @@ function renderEventDetail(slug = 'first-cloud-ai-journey-24-10-2026') {
         </div>
       </section>
 
-      <!-- SECTION 5 – VPBANK CASE STUDY -->
+      <!-- SECTION 5 – CASE STUDY / BENCHMARK -->
       <section class="report-section-block">
         <div class="report-section-header">
           <span class="report-section-num">${escapeHtml(r.sec5Num)}</span>
@@ -3511,18 +3961,7 @@ function renderEventDetail(slug = 'first-cloud-ai-journey-24-10-2026') {
           <span class="report-section-num">${escapeHtml(r.sec9Num)}</span>
           <h2 class="report-section-title">${escapeHtml(r.sec9Title)}</h2>
         </div>
-        <div class="photo-pending-box">
-          <div class="photo-pending-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
-              <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/>
-              <circle cx="12" cy="13" r="4"/>
-            </svg>
-          </div>
-          <span class="photo-pending-badge">${escapeHtml(r.photoPendingBadge)}</span>
-          <h3 class="photo-pending-title" style="margin-top:12px;">${escapeHtml(r.photoPendingTitle)}</h3>
-          <p class="photo-pending-desc">${escapeHtml(r.photoPendingDesc)}</p>
-          <p style="font-size:12px; color:#92400E; margin:0; font-style:italic;">${escapeHtml(r.photoPendingNote)}</p>
-        </div>
+        ${photoSectionHtml}
       </section>
 
       <!-- Bottom Navigation Actions -->
@@ -3536,6 +3975,62 @@ function renderEventDetail(slug = 'first-cloud-ai-journey-24-10-2026') {
       </div>
     </article>
   `;
+}
+
+function uploadEventCheckinPhoto(slug, input) {
+  if (!input.files || !input.files[0]) return;
+  const file = input.files[0];
+  if (!file.type.startsWith('image/')) {
+    alert(app.currentLang === 'vi' ? 'Vui lòng chọn tệp hình ảnh hợp lệ (PNG, JPG, WebP).' : 'Please select a valid image file (PNG, JPG, WebP).');
+    return;
+  }
+  
+  const reader = new FileReader();
+  reader.onload = function(e) {
+    const rawDataUrl = e.target.result;
+    const img = new Image();
+    img.onload = function() {
+      const maxDim = 1400;
+      let width = img.width;
+      let height = img.height;
+      if (width > maxDim || height > maxDim) {
+        if (width > height) {
+          height = Math.round((height * maxDim) / width);
+          width = maxDim;
+        } else {
+          width = Math.round((width * maxDim) / height);
+          height = maxDim;
+        }
+      }
+      const canvas = document.createElement('canvas');
+      canvas.width = width;
+      canvas.height = height;
+      const ctx = canvas.getContext('2d');
+      ctx.drawImage(img, 0, 0, width, height);
+      const optimizedDataUrl = canvas.toDataURL('image/jpeg', 0.88);
+      try {
+        localStorage.setItem('fcaj_event_checkin_photo_' + slug, optimizedDataUrl);
+        showToast(app.currentLang === 'vi' ? 'Đã lưu ảnh check-in thực tế thành công!' : 'Authentic check-in photo saved successfully!');
+        renderEventDetail(slug);
+        renderEventsList();
+      } catch (err) {
+        console.error('Storage error', err);
+        showToast(app.currentLang === 'vi' ? 'Dung lượng ảnh quá lớn cho bộ nhớ trình duyệt.' : 'Image file is too large for storage.', 'error');
+      }
+    };
+    img.src = rawDataUrl;
+  };
+  reader.readAsDataURL(file);
+}
+
+function deleteEventCheckinPhoto(slug) {
+  const confirmMsg = app.currentLang === 'vi' ? 'Bạn có chắc chắn muốn xóa ảnh check-in này không?' : 'Are you sure you want to remove this check-in photo?';
+  if (confirm(confirmMsg)) {
+    localStorage.removeItem('fcaj_event_checkin_photo_' + slug);
+    showToast(app.currentLang === 'vi' ? 'Đã xóa ảnh check-in' : 'Check-in photo removed');
+    renderEventDetail(slug);
+    renderEventsList();
+  }
 }
 
 function deleteEvent(id) {
@@ -3857,7 +4352,10 @@ document.addEventListener('DOMContentLoaded', () => {
 // Expose functions globally for HTML onclick and event listeners
 window.app = app;
 window.navigateTo = navigateTo;
+window.renderEventsList = renderEventsList;
 window.renderEventDetail = renderEventDetail;
+window.uploadEventCheckinPhoto = uploadEventCheckinPhoto;
+window.deleteEventCheckinPhoto = deleteEventCheckinPhoto;
 window.selectWeek = selectWeek;
 window.deleteWeekTask = deleteWeekTask;
 window.openEditTaskModal = openEditTaskModal;
