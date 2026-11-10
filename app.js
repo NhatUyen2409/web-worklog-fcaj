@@ -609,7 +609,7 @@ const DEFAULT_BILINGUAL_DATA = {
       duration: "From 14/09/2026 to 14/12/2026"
     }
   },
-  currentWeek: 5,
+  currentWeek: 9,
   worklogs: Array.from({ length: 12 }, (_, i) => {
     const weekNum = i + 1;
     if (weekNum === 1) {
@@ -1042,31 +1042,627 @@ const DEFAULT_BILINGUAL_DATA = {
           ]
         }
       };
-    } else {
+    } else if (weekNum === 6) {
       return {
-        weekNum: weekNum,
+        weekNum: 6,
         vi: {
-          objectives: `Mục tiêu đào tạo và nghiên cứu kỹ thuật của Tuần ${weekNum}.`,
-          achievements: `- Hoàn thành xuất sắc các mục tiêu nghiên cứu và bài tập lab thực hành của Tuần ${weekNum}:\n  + Nghiên cứu kiến trúc giải pháp AWS\n  + Thực hành cấu hình dịch vụ theo kịch bản\n  + Ghi chép tài liệu kỹ thuật chi tiết\n- Trao đổi tiến độ định kỳ và nhận đánh giá từ mentor.`,
+          topic: "AWS Lambda & Serverless Computing (19/10/2026 – 23/10/2026)",
+          objectives: "- Understand Serverless Computing and AWS Lambda.\n- Learn Lambda Functions, Triggers, Events, and Execution Roles.\n- Practice creating and deploying Lambda Functions.\n- Explore integration between Lambda and Amazon S3.\n- Learn basic monitoring using CloudWatch.",
+          achievements: "- Understood the fundamentals of Serverless Computing.\n- Learned Lambda Functions, Runtimes, Handlers, and Triggers.\n- Practiced creating and testing Lambda Functions using Python.\n- Explored S3 event notifications and Lambda integration.\n- Learned to monitor function execution using CloudWatch Logs.\n- Understood basic serverless application workflows.",
           tasks: [
-            { day: "2", desc: `- Khởi động Tuần ${weekNum}\n- Lập kế hoạch phân công nhiệm vụ kỹ thuật`, start: "", end: "", ref: "https://cloudjourney.awsstudygroup.com/" },
-            { day: "3", desc: `- Nghiên cứu lý thuyết dịch vụ AWS theo lộ trình Tuần ${weekNum}`, start: "", end: "", ref: "AWS Documentation" },
-            { day: "4", desc: `- Thực hành cấu hình Hands-on Lab trên AWS Console & CLI`, start: "", end: "", ref: "AWS Hands-on Guide" },
-            { day: "5", desc: `- Xây dựng tài liệu kỹ thuật và hoàn thiện bài lab`, start: "", end: "", ref: "Internal Lab Guide" },
-            { day: "6", desc: `- Tổng kết kết quả Tuần ${weekNum}\n- Báo cáo tiến độ Sprint Review với Mentor`, start: "", end: "", ref: "FCAJ Tracker" }
+            {
+              day: "Monday",
+              desc: "- Learn Serverless Computing fundamentals.\n- Explore AWS Lambda and its architecture.\n- Understand Functions, Runtimes, and Handlers.",
+              start: "2026-10-19",
+              end: "2026-10-19",
+              ref: "https://000022.awsstudygroup.com/"
+            },
+            {
+              day: "Tuesday",
+              desc: "- Create and configure Lambda Functions.\n- Write basic Python code.\n- Test functions using sample events.",
+              start: "2026-10-20",
+              end: "2026-10-20",
+              ref: "https://000022.awsstudygroup.com/"
+            },
+            {
+              day: "Wednesday",
+              desc: "- Learn Lambda Triggers and Event Sources.\n- Integrate Lambda with Amazon S3.\n- Practice processing uploaded files.",
+              start: "2026-10-21",
+              end: "2026-10-21",
+              ref: "https://000022.awsstudygroup.com/"
+            },
+            {
+              day: "Thursday",
+              desc: "- Monitor Lambda using CloudWatch.\n- Review execution logs and metrics.\n- Practice troubleshooting basic errors.",
+              start: "2026-10-22",
+              end: "2026-10-22",
+              ref: "https://000008.awsstudygroup.com/"
+            },
+            {
+              day: "Friday",
+              desc: "- Test the serverless workflow.\n- Review permissions and configurations.\n- Document the practical results.",
+              start: "2026-10-23",
+              end: "2026-10-23",
+              ref: "https://000022.awsstudygroup/"
+            }
           ]
         },
         en: {
-          objectives: `Technical training and research objectives for Week ${weekNum}.`,
-          achievements: `- Successfully accomplished technical research objectives and hands-on lab exercises for Week ${weekNum}:\n  + Studied AWS solution architecture\n  + Configured hands-on labs per scenarios\n  + Maintained comprehensive technical documentation\n- Conducted weekly sprint review and progress alignment with mentor.`,
+          topic: "AWS Lambda & Serverless Computing (19/10/2026 – 23/10/2026)",
+          objectives: "- Understand Serverless Computing and AWS Lambda.\n- Learn Lambda Functions, Triggers, Events, and Execution Roles.\n- Practice creating and deploying Lambda Functions.\n- Explore integration between Lambda and Amazon S3.\n- Learn basic monitoring using CloudWatch.",
+          achievements: "- Understood the fundamentals of Serverless Computing.\n- Learned Lambda Functions, Runtimes, Handlers, and Triggers.\n- Practiced creating and testing Lambda Functions using Python.\n- Explored S3 event notifications and Lambda integration.\n- Learned to monitor function execution using CloudWatch Logs.\n- Understood basic serverless application workflows.",
           tasks: [
-            { day: "2", desc: `- Kickoff Week ${weekNum}\n- Establish technical milestones and tasks`, start: "", end: "", ref: "https://cloudjourney.awsstudygroup.com/" },
-            { day: "3", desc: `- Study foundational AWS documentation for Week ${weekNum}`, start: "", end: "", ref: "AWS Documentation" },
-            { day: "4", desc: `- Hands-on configuration of AWS services via Console & CLI`, start: "", end: "", ref: "AWS Hands-on Guide" },
-            { day: "5", desc: `- Author technical guide and finalize hands-on exercises`, start: "", end: "", ref: "Internal Lab Guide" },
-            { day: "6", desc: `- Weekly summary for Week ${weekNum}\n- Sprint review and 1-on-1 with mentor`, start: "", end: "", ref: "FCAJ Tracker" }
+            {
+              day: "Monday",
+              desc: "- Learn Serverless Computing fundamentals.\n- Explore AWS Lambda and its architecture.\n- Understand Functions, Runtimes, and Handlers.",
+              start: "2026-10-19",
+              end: "2026-10-19",
+              ref: "https://000022.awsstudygroup.com/"
+            },
+            {
+              day: "Tuesday",
+              desc: "- Create and configure Lambda Functions.\n- Write basic Python code.\n- Test functions using sample events.",
+              start: "2026-10-20",
+              end: "2026-10-20",
+              ref: "https://000022.awsstudygroup.com/"
+            },
+            {
+              day: "Wednesday",
+              desc: "- Learn Lambda Triggers and Event Sources.\n- Integrate Lambda with Amazon S3.\n- Practice processing uploaded files.",
+              start: "2026-10-21",
+              end: "2026-10-21",
+              ref: "https://000022.awsstudygroup.com/"
+            },
+            {
+              day: "Thursday",
+              desc: "- Monitor Lambda using CloudWatch.\n- Review execution logs and metrics.\n- Practice troubleshooting basic errors.",
+              start: "2026-10-22",
+              end: "2026-10-22",
+              ref: "https://000008.awsstudygroup.com/"
+            },
+            {
+              day: "Friday",
+              desc: "- Test the serverless workflow.\n- Review permissions and configurations.\n- Document the practical results.",
+              start: "2026-10-23",
+              end: "2026-10-23",
+              ref: "https://000022.awsstudygroup/"
+            }
           ]
         }
+      };
+    } else if (weekNum === 7) {
+      return {
+        weekNum: 7,
+        vi: {
+          topic: "AWS CloudFormation & Infrastructure as Code (26/10/2026 – 30/10/2026)",
+          objectives: "- Understand Infrastructure as Code (IaC).\n- Learn AWS CloudFormation Templates and Stacks.\n- Practice writing YAML and JSON templates.\n- Deploy and manage AWS resources using CloudFormation.\n- Explore AWS Systems Manager.",
+          achievements: "- Understood the fundamentals of Infrastructure as Code.\n- Learned CloudFormation Templates, Stacks, and Resources.\n- Practiced writing basic YAML templates.\n- Deployed AWS resources using CloudFormation.\n- Learned to update and delete CloudFormation Stacks.\n- Explored AWS Systems Manager and Session Manager.",
+          tasks: [
+            {
+              day: "Monday",
+              desc: "- Learn Infrastructure as Code concepts.\n- Explore AWS CloudFormation.\n- Understand Templates and Stacks.",
+              start: "2026-10-26",
+              end: "2026-10-26",
+              ref: "https://000037.awsstudygroup.com/"
+            },
+            {
+              day: "Tuesday",
+              desc: "- Learn YAML and JSON template structures.\n- Understand Parameters, Resources, and Outputs.\n- Review sample templates.",
+              start: "2026-10-27",
+              end: "2026-10-27",
+              ref: "https://000037.awsstudygroup.com/"
+            },
+            {
+              day: "Wednesday",
+              desc: "- Create a basic CloudFormation Template.\n- Define EC2 and Security Group resources.\n- Deploy and verify a Stack.",
+              start: "2026-10-28",
+              end: "2026-10-28",
+              ref: "https://000037.awsstudygroup.com/"
+            },
+            {
+              day: "Thursday",
+              desc: "- Practice updating CloudFormation Stacks.\n- Learn rollback and error handling.\n- Manage and delete deployed resources.",
+              start: "2026-10-29",
+              end: "2026-10-29",
+              ref: "https://000037.awsstudygroup/"
+            },
+            {
+              day: "Friday",
+              desc: "- Explore AWS Systems Manager.\n- Learn Parameter Store and Session Manager.\n- Review infrastructure management workflows.",
+              start: "2026-10-30",
+              end: "2026-10-30",
+              ref: "https://000031.awsstudygroup.com/"
+            }
+          ]
+        },
+        en: {
+          topic: "AWS CloudFormation & Infrastructure as Code (26/10/2026 – 30/10/2026)",
+          objectives: "- Understand Infrastructure as Code (IaC).\n- Learn AWS CloudFormation Templates and Stacks.\n- Practice writing YAML and JSON templates.\n- Deploy and manage AWS resources using CloudFormation.\n- Explore AWS Systems Manager.",
+          achievements: "- Understood the fundamentals of Infrastructure as Code.\n- Learned CloudFormation Templates, Stacks, and Resources.\n- Practiced writing basic YAML templates.\n- Deployed AWS resources using CloudFormation.\n- Learned to update and delete CloudFormation Stacks.\n- Explored AWS Systems Manager and Session Manager.",
+          tasks: [
+            {
+              day: "Monday",
+              desc: "- Learn Infrastructure as Code concepts.\n- Explore AWS CloudFormation.\n- Understand Templates and Stacks.",
+              start: "2026-10-26",
+              end: "2026-10-26",
+              ref: "https://000037.awsstudygroup.com/"
+            },
+            {
+              day: "Tuesday",
+              desc: "- Learn YAML and JSON template structures.\n- Understand Parameters, Resources, and Outputs.\n- Review sample templates.",
+              start: "2026-10-27",
+              end: "2026-10-27",
+              ref: "https://000037.awsstudygroup.com/"
+            },
+            {
+              day: "Wednesday",
+              desc: "- Create a basic CloudFormation Template.\n- Define EC2 and Security Group resources.\n- Deploy and verify a Stack.",
+              start: "2026-10-28",
+              end: "2026-10-28",
+              ref: "https://000037.awsstudygroup.com/"
+            },
+            {
+              day: "Thursday",
+              desc: "- Practice updating CloudFormation Stacks.\n- Learn rollback and error handling.\n- Manage and delete deployed resources.",
+              start: "2026-10-29",
+              end: "2026-10-29",
+              ref: "https://000037.awsstudygroup/"
+            },
+            {
+              day: "Friday",
+              desc: "- Explore AWS Systems Manager.\n- Learn Parameter Store and Session Manager.\n- Review infrastructure management workflows.",
+              start: "2026-10-30",
+              end: "2026-10-30",
+              ref: "https://000031.awsstudygroup.com/"
+            }
+          ]
+        }
+      };
+    } else if (weekNum === 8) {
+      return {
+        weekNum: 8,
+        vi: {
+          topic: "AWS Migration Services (02/11/2026 – 06/11/2026)",
+          objectives: "- Understand cloud migration concepts and strategies.\n- Explore AWS VM Import/Export.\n- Learn AWS Database Migration Service (DMS).\n- Understand database schema conversion.\n- Explore AWS Elastic Disaster Recovery.",
+          achievements: "- Understood basic cloud migration strategies.\n- Learned the VM Import/Export process.\n- Explored DMS Replication Instances, Endpoints, and Tasks.\n- Understood full load and ongoing data replication.\n- Learned the purpose of AWS Schema Conversion Tool.\n- Understood basic disaster recovery concepts, RPO, and RTO.",
+          tasks: [
+            {
+              day: "Monday",
+              desc: "- Learn cloud migration fundamentals.\n- Explore migration strategies.\n- Review AWS migration services.",
+              start: "2026-11-02",
+              end: "2026-11-02",
+              ref: "https://cloudjourney.awsstudygroup.com/2-migrate/"
+            },
+            {
+              day: "Tuesday",
+              desc: "- Explore AWS VM Import/Export.\n- Learn virtual machine image migration.\n- Review migration requirements.",
+              start: "2026-11-03",
+              end: "2026-11-03",
+              ref: "https://000014.awsstudygroup.com/"
+            },
+            {
+              day: "Wednesday",
+              desc: "- Learn AWS Database Migration Service.\n- Explore Source and Target Endpoints.\n- Understand Replication Tasks.",
+              start: "2026-11-04",
+              end: "2026-11-04",
+              ref: "https://000043.awsstudygroup.com/"
+            },
+            {
+              day: "Thursday",
+              desc: "- Explore AWS Schema Conversion Tool.\n- Learn database schema conversion.\n- Review database migration compatibility.",
+              start: "2026-11-05",
+              end: "2026-11-05",
+              ref: "https://000043.awsstudygroup.com/"
+            },
+            {
+              day: "Friday",
+              desc: "- Learn AWS Elastic Disaster Recovery.\n- Understand RPO and RTO.\n- Review backup and recovery strategies.",
+              start: "2026-11-06",
+              end: "2026-11-06",
+              ref: "https://000100.awsstudygroup/"
+            }
+          ]
+        },
+        en: {
+          topic: "AWS Migration Services (02/11/2026 – 06/11/2026)",
+          objectives: "- Understand cloud migration concepts and strategies.\n- Explore AWS VM Import/Export.\n- Learn AWS Database Migration Service (DMS).\n- Understand database schema conversion.\n- Explore AWS Elastic Disaster Recovery.",
+          achievements: "- Understood basic cloud migration strategies.\n- Learned the VM Import/Export process.\n- Explored DMS Replication Instances, Endpoints, and Tasks.\n- Understood full load and ongoing data replication.\n- Learned the purpose of AWS Schema Conversion Tool.\n- Understood basic disaster recovery concepts, RPO, and RTO.",
+          tasks: [
+            {
+              day: "Monday",
+              desc: "- Learn cloud migration fundamentals.\n- Explore migration strategies.\n- Review AWS migration services.",
+              start: "2026-11-02",
+              end: "2026-11-02",
+              ref: "https://cloudjourney.awsstudygroup.com/2-migrate/"
+            },
+            {
+              day: "Tuesday",
+              desc: "- Explore AWS VM Import/Export.\n- Learn virtual machine image migration.\n- Review migration requirements.",
+              start: "2026-11-03",
+              end: "2026-11-03",
+              ref: "https://000014.awsstudygroup.com/"
+            },
+            {
+              day: "Wednesday",
+              desc: "- Learn AWS Database Migration Service.\n- Explore Source and Target Endpoints.\n- Understand Replication Tasks.",
+              start: "2026-11-04",
+              end: "2026-11-04",
+              ref: "https://000043.awsstudygroup.com/"
+            },
+            {
+              day: "Thursday",
+              desc: "- Explore AWS Schema Conversion Tool.\n- Learn database schema conversion.\n- Review database migration compatibility.",
+              start: "2026-11-05",
+              end: "2026-11-05",
+              ref: "https://000043.awsstudygroup.com/"
+            },
+            {
+              day: "Friday",
+              desc: "- Learn AWS Elastic Disaster Recovery.\n- Understand RPO and RTO.\n- Review backup and recovery strategies.",
+              start: "2026-11-06",
+              end: "2026-11-06",
+              ref: "https://000100.awsstudygroup/"
+            }
+          ]
+        }
+      };
+    } else if (weekNum === 9) {
+      return {
+        weekNum: 9,
+        vi: {
+          topic: "Docker & Containerization (09/11/2026 – 13/11/2026)",
+          objectives: "- Understand containerization and Docker architecture.\n- Learn Docker Images, Containers, and Dockerfiles.\n- Practice building and running Docker Containers.\n- Learn container networking and persistent storage.\n- Explore Docker applications on AWS.",
+          achievements: "- Understood the differences between Virtual Machines and Containers.\n- Learned Docker Engine, Images, Containers, and Dockerfiles.\n- Practiced installing and configuring Docker.\n- Learned basic Docker CLI commands.\n- Practiced building and running custom containers.\n- Understood Docker Volumes and Networks.\n- Explored container deployment using Amazon ECS.",
+          tasks: [
+            {
+              day: "Monday",
+              desc: "- Learn containerization fundamentals.\n- Explore Docker architecture.\n- Compare Containers and Virtual Machines.",
+              start: "2026-11-09",
+              end: "2026-11-09",
+              ref: "https://000015.awsstudygroup.com/"
+            },
+            {
+              day: "Tuesday",
+              desc: "- Install and configure Docker.\n- Practice basic Docker CLI commands.\n- Download and run Docker Images.",
+              start: "2026-11-10",
+              end: "2026-11-10",
+              ref: "https://000015.awsstudygroup/"
+            },
+            {
+              day: "Wednesday",
+              desc: "- Learn Dockerfile instructions.\n- Build custom Docker Images.\n- Deploy a basic application in a container.",
+              start: "2026-11-11",
+              end: "2026-11-11",
+              ref: "https://000015.awsstudygroup/"
+            },
+            {
+              day: "Thursday",
+              desc: "- Learn Docker Volumes and Networks.\n- Manage container lifecycle.\n- Review container logs and configurations.",
+              start: "2026-11-12",
+              end: "2026-11-12",
+              ref: "https://000015.awsstudygroup/"
+            },
+            {
+              day: "Friday",
+              desc: "- Test a containerized application.\n- Troubleshoot basic errors.\n- Explore Docker integration with Amazon ECS.",
+              start: "2026-11-13",
+              end: "2026-11-13",
+              ref: "https://000015.awsstudygroup/\nhttps://000067.awsstudygroup/"
+            }
+          ]
+        },
+        en: {
+          topic: "Docker & Containerization (09/11/2026 – 13/11/2026)",
+          objectives: "- Understand containerization and Docker architecture.\n- Learn Docker Images, Containers, and Dockerfiles.\n- Practice building and running Docker Containers.\n- Learn container networking and persistent storage.\n- Explore Docker applications on AWS.",
+          achievements: "- Understood the differences between Virtual Machines and Containers.\n- Learned Docker Engine, Images, Containers, and Dockerfiles.\n- Practiced installing and configuring Docker.\n- Learned basic Docker CLI commands.\n- Practiced building and running custom containers.\n- Understood Docker Volumes and Networks.\n- Explored container deployment using Amazon ECS.",
+          tasks: [
+            {
+              day: "Monday",
+              desc: "- Learn containerization fundamentals.\n- Explore Docker architecture.\n- Compare Containers and Virtual Machines.",
+              start: "2026-11-09",
+              end: "2026-11-09",
+              ref: "https://000015.awsstudygroup.com/"
+            },
+            {
+              day: "Tuesday",
+              desc: "- Install and configure Docker.\n- Practice basic Docker CLI commands.\n- Download and run Docker Images.",
+              start: "2026-11-10",
+              end: "2026-11-10",
+              ref: "https://000015.awsstudygroup/"
+            },
+            {
+              day: "Wednesday",
+              desc: "- Learn Dockerfile instructions.\n- Build custom Docker Images.\n- Deploy a basic application in a container.",
+              start: "2026-11-11",
+              end: "2026-11-11",
+              ref: "https://000015.awsstudygroup/"
+            },
+            {
+              day: "Thursday",
+              desc: "- Learn Docker Volumes and Networks.\n- Manage container lifecycle.\n- Review container logs and configurations.",
+              start: "2026-11-12",
+              end: "2026-11-12",
+              ref: "https://000015.awsstudygroup/"
+            },
+            {
+              day: "Friday",
+              desc: "- Test a containerized application.\n- Troubleshoot basic errors.\n- Explore Docker integration with Amazon ECS.",
+              start: "2026-11-13",
+              end: "2026-11-13",
+              ref: "https://000015.awsstudygroup/\nhttps://000067.awsstudygroup/"
+            }
+          ]
+        }
+      };
+    } else if (weekNum === 10) {
+      return {
+        weekNum: 10,
+        vi: {
+          topic: "Amazon ECS, Fargate & CI/CD (16/11/2026 – 20/11/2026)",
+          objectives: "- Understand container orchestration with Amazon ECS.\n- Learn ECS Clusters, Tasks, Services, and Task Definitions.\n- Explore AWS Fargate.\n- Practice deploying containerized applications.\n- Understand CI/CD and AWS CodePipeline.",
+          achievements: "[Kế hoạch học tập / Planned Learning Outcomes]\n- Understood the architecture of Amazon ECS.\n- Learned ECS Clusters, Services, and Task Definitions.\n- Understood the differences between ECS EC2 and Fargate.\n- Practiced deploying containers using ECS.\n- Learned basic CI/CD pipeline concepts.\n- Explored AWS CodePipeline and automated deployment workflows.",
+          tasks: [
+            {
+              day: "Monday",
+              desc: "- Learn Amazon ECS fundamentals.\n- Explore Clusters, Tasks, and Services.\n- Understand Task Definitions.",
+              start: "2026-11-16",
+              end: "2026-11-16",
+              ref: "https://000067.awsstudygroup.com/"
+            },
+            {
+              day: "Tuesday",
+              desc: "- Learn AWS Fargate.\n- Compare EC2 and Fargate launch types.\n- Explore container configurations.",
+              start: "2026-11-17",
+              end: "2026-11-17",
+              ref: "https://000067.awsstudygroup/"
+            },
+            {
+              day: "Wednesday",
+              desc: "- Create an ECS Cluster.\n- Configure Task Definitions.\n- Deploy a container using Fargate.",
+              start: "2026-11-18",
+              end: "2026-11-18",
+              ref: "https://000067.awsstudygroup/"
+            },
+            {
+              day: "Thursday",
+              desc: "- Learn CI/CD fundamentals.\n- Explore AWS CodePipeline.\n- Understand Source, Build, and Deploy stages.",
+              start: "2026-11-19",
+              end: "2026-11-19",
+              ref: "https://000017.awsstudygroup.com/"
+            },
+            {
+              day: "Friday",
+              desc: "- Review the container deployment workflow.\n- Test application deployment.\n- Document the CI/CD process.",
+              start: "2026-11-20",
+              end: "2026-11-20",
+              ref: "https://000017.awsstudygroup/\nhttps://000067.awsstudygroup/"
+            }
+          ]
+        },
+        en: {
+          topic: "Amazon ECS, Fargate & CI/CD (16/11/2026 – 20/11/2026)",
+          objectives: "- Understand container orchestration with Amazon ECS.\n- Learn ECS Clusters, Tasks, Services, and Task Definitions.\n- Explore AWS Fargate.\n- Practice deploying containerized applications.\n- Understand CI/CD and AWS CodePipeline.",
+          achievements: "[Planned Outcomes / Scheduled Activity]\n- Understood the architecture of Amazon ECS.\n- Learned ECS Clusters, Services, and Task Definitions.\n- Understood the differences between ECS EC2 and Fargate.\n- Practiced deploying containers using ECS.\n- Learned basic CI/CD pipeline concepts.\n- Explored AWS CodePipeline and automated deployment workflows.",
+          tasks: [
+            {
+              day: "Monday",
+              desc: "- Learn Amazon ECS fundamentals.\n- Explore Clusters, Tasks, and Services.\n- Understand Task Definitions.",
+              start: "2026-11-16",
+              end: "2026-11-16",
+              ref: "https://000067.awsstudygroup.com/"
+            },
+            {
+              day: "Tuesday",
+              desc: "- Learn AWS Fargate.\n- Compare EC2 and Fargate launch types.\n- Explore container configurations.",
+              start: "2026-11-17",
+              end: "2026-11-17",
+              ref: "https://000067.awsstudygroup/"
+            },
+            {
+              day: "Wednesday",
+              desc: "- Create an ECS Cluster.\n- Configure Task Definitions.\n- Deploy a container using Fargate.",
+              start: "2026-11-18",
+              end: "2026-11-18",
+              ref: "https://000067.awsstudygroup/"
+            },
+            {
+              day: "Thursday",
+              desc: "- Learn CI/CD fundamentals.\n- Explore AWS CodePipeline.\n- Understand Source, Build, and Deploy stages.",
+              start: "2026-11-19",
+              end: "2026-11-19",
+              ref: "https://000017.awsstudygroup.com/"
+            },
+            {
+              day: "Friday",
+              desc: "- Review the container deployment workflow.\n- Test application deployment.\n- Document the CI/CD process.",
+              start: "2026-11-20",
+              end: "2026-11-20",
+              ref: "https://000017.awsstudygroup/\nhttps://000067.awsstudygroup/"
+            }
+          ]
+        }
+      };
+    } else if (weekNum === 11) {
+      return {
+        weekNum: 11,
+        vi: {
+          topic: "AWS Data Analytics & Business Intelligence (23/11/2026 – 27/11/2026)",
+          objectives: "- Understand Data Analytics and Data Lake concepts.\n- Explore AWS data storage and processing services.\n- Learn Amazon Athena and SQL queries.\n- Understand Amazon QuickSight and Business Intelligence.\n- Practice creating basic data visualizations.",
+          achievements: "[Kế hoạch học tập / Planned Learning Outcomes]\n- Understood Data Lake architecture and data storage concepts.\n- Learned structured, semi-structured, and unstructured data.\n- Explored AWS Glue and data processing workflows.\n- Practiced querying data using Amazon Athena.\n- Learned basic SQL operations for data analysis.\n- Explored Amazon QuickSight dashboards and visualizations.\n- Practiced creating basic charts and reports.",
+          tasks: [
+            {
+              day: "Monday",
+              desc: "- Learn Data Analytics fundamentals.\n- Understand Data Lakes and Data Warehouses.\n- Explore Amazon S3 for data storage.",
+              start: "2026-11-23",
+              end: "2026-11-23",
+              ref: "https://000035.awsstudygroup.com/"
+            },
+            {
+              day: "Tuesday",
+              desc: "- Explore AWS data analytics services.\n- Learn about AWS Glue.\n- Understand basic data processing workflows.",
+              start: "2026-11-24",
+              end: "2026-11-24",
+              ref: "https://000040.awsstudygroup.com/"
+            },
+            {
+              day: "Wednesday",
+              desc: "- Learn Amazon Athena.\n- Practice basic SQL queries.\n- Analyze datasets stored in Amazon S3.",
+              start: "2026-11-25",
+              end: "2026-11-25",
+              ref: "https://000106.awsstudygroup/"
+            },
+            {
+              day: "Thursday",
+              desc: "- Learn Business Intelligence fundamentals.\n- Explore Amazon QuickSight.\n- Understand Datasets and Dashboards.",
+              start: "2026-11-26",
+              end: "2026-11-26",
+              ref: "https://000073.awsstudygroup/"
+            },
+            {
+              day: "Friday",
+              desc: "- Create basic data visualizations.\n- Build a sample dashboard.\n- Review the AWS analytics workflow.",
+              start: "2026-11-27",
+              end: "2026-11-27",
+              ref: "https://000073.awsstudygroup/"
+            }
+          ]
+        },
+        en: {
+          topic: "AWS Data Analytics & Business Intelligence (23/11/2026 – 27/11/2026)",
+          objectives: "- Understand Data Analytics and Data Lake concepts.\n- Explore AWS data storage and processing services.\n- Learn Amazon Athena and SQL queries.\n- Understand Amazon QuickSight and Business Intelligence.\n- Practice creating basic data visualizations.",
+          achievements: "[Planned Outcomes / Scheduled Activity]\n- Understood Data Lake architecture and data storage concepts.\n- Learned structured, semi-structured, and unstructured data.\n- Explored AWS Glue and data processing workflows.\n- Practiced querying data using Amazon Athena.\n- Learned basic SQL operations for data analysis.\n- Explored Amazon QuickSight dashboards and visualizations.\n- Practiced creating basic charts and reports.",
+          tasks: [
+            {
+              day: "Monday",
+              desc: "- Learn Data Analytics fundamentals.\n- Understand Data Lakes and Data Warehouses.\n- Explore Amazon S3 for data storage.",
+              start: "2026-11-23",
+              end: "2026-11-23",
+              ref: "https://000035.awsstudygroup.com/"
+            },
+            {
+              day: "Tuesday",
+              desc: "- Explore AWS data analytics services.\n- Learn about AWS Glue.\n- Understand basic data processing workflows.",
+              start: "2026-11-24",
+              end: "2026-11-24",
+              ref: "https://000040.awsstudygroup.com/"
+            },
+            {
+              day: "Wednesday",
+              desc: "- Learn Amazon Athena.\n- Practice basic SQL queries.\n- Analyze datasets stored in Amazon S3.",
+              start: "2026-11-25",
+              end: "2026-11-25",
+              ref: "https://000106.awsstudygroup/"
+            },
+            {
+              day: "Thursday",
+              desc: "- Learn Business Intelligence fundamentals.\n- Explore Amazon QuickSight.\n- Understand Datasets and Dashboards.",
+              start: "2026-11-26",
+              end: "2026-11-26",
+              ref: "https://000073.awsstudygroup/"
+            },
+            {
+              day: "Friday",
+              desc: "- Create basic data visualizations.\n- Build a sample dashboard.\n- Review the AWS analytics workflow.",
+              start: "2026-11-27",
+              end: "2026-11-27",
+              ref: "https://000073.awsstudygroup/"
+            }
+          ]
+        }
+      };
+    } else if (weekNum === 12) {
+      return {
+        weekNum: 12,
+        vi: {
+          topic: "Machine Learning with Amazon SageMaker (30/11/2026 – 04/12/2026)",
+          objectives: "- Understand AI, Machine Learning, and Deep Learning fundamentals.\n- Explore Amazon SageMaker and its main features.\n- Learn basic data preparation and model training.\n- Understand model evaluation and deployment.\n- Review and summarize the First Cloud AI Journey program.",
+          achievements: "[Kế hoạch học tập / Planned Learning Outcomes]\n- Understood the differences between AI, ML, and Deep Learning.\n- Learned supervised and unsupervised learning concepts.\n- Explored Amazon SageMaker and its development environment.\n- Understood basic dataset preparation.\n- Learned the machine learning model training workflow.\n- Explored model evaluation and inference concepts.\n- Reviewed AWS services and consolidated internship knowledge.\n- Prepared technical documentation and a final learning summary.",
+          tasks: [
+            {
+              day: "Monday",
+              desc: "- Learn AI and Machine Learning fundamentals.\n- Understand supervised and unsupervised learning.\n- Explore the ML lifecycle.",
+              start: "2026-11-30",
+              end: "2026-11-30",
+              ref: "https://000200.awsstudygroup.com/"
+            },
+            {
+              day: "Tuesday",
+              desc: "- Explore Amazon SageMaker.\n- Learn about development environments and notebooks.\n- Review dataset preparation.",
+              start: "2026-12-01",
+              end: "2026-12-01",
+              ref: "https://000200.awsstudygroup/"
+            },
+            {
+              day: "Wednesday",
+              desc: "- Learn machine learning model training.\n- Explore training datasets and configurations.\n- Understand model evaluation.",
+              start: "2026-12-02",
+              end: "2026-12-02",
+              ref: "https://000200.awsstudygroup/"
+            },
+            {
+              day: "Thursday",
+              desc: "- Learn model deployment and inference.\n- Explore SageMaker Endpoints.\n- Review model monitoring concepts.",
+              start: "2026-12-03",
+              end: "2026-12-03",
+              ref: "https://000200.awsstudygroup/"
+            },
+            {
+              day: "Friday",
+              desc: "- Review major AWS services studied.\n- Summarize hands-on lab results.\n- Prepare final internship documentation.",
+              start: "2026-12-04",
+              end: "2026-12-04",
+              ref: "https://cloudjourney.awsstudygroup.com/"
+            }
+          ]
+        },
+        en: {
+          topic: "Machine Learning with Amazon SageMaker (30/11/2026 – 04/12/2026)",
+          objectives: "- Understand AI, Machine Learning, and Deep Learning fundamentals.\n- Explore Amazon SageMaker and its main features.\n- Learn basic data preparation and model training.\n- Understand model evaluation and deployment.\n- Review and summarize the First Cloud AI Journey program.",
+          achievements: "[Planned Outcomes / Scheduled Activity]\n- Understood the differences between AI, ML, and Deep Learning.\n- Learned supervised and unsupervised learning concepts.\n- Explored Amazon SageMaker and its development environment.\n- Understood basic dataset preparation.\n- Learned the machine learning model training workflow.\n- Explored model evaluation and inference concepts.\n- Reviewed AWS services and consolidated internship knowledge.\n- Prepared technical documentation and a final learning summary.",
+          tasks: [
+            {
+              day: "Monday",
+              desc: "- Learn AI and Machine Learning fundamentals.\n- Understand supervised and unsupervised learning.\n- Explore the ML lifecycle.",
+              start: "2026-11-30",
+              end: "2026-11-30",
+              ref: "https://000200.awsstudygroup.com/"
+            },
+            {
+              day: "Tuesday",
+              desc: "- Explore Amazon SageMaker.\n- Learn about development environments and notebooks.\n- Review dataset preparation.",
+              start: "2026-12-01",
+              end: "2026-12-01",
+              ref: "https://000200.awsstudygroup/"
+            },
+            {
+              day: "Wednesday",
+              desc: "- Learn machine learning model training.\n- Explore training datasets and configurations.\n- Understand model evaluation.",
+              start: "2026-12-02",
+              end: "2026-12-02",
+              ref: "https://000200.awsstudygroup/"
+            },
+            {
+              day: "Thursday",
+              desc: "- Learn model deployment and inference.\n- Explore SageMaker Endpoints.\n- Review model monitoring concepts.",
+              start: "2026-12-03",
+              end: "2026-12-03",
+              ref: "https://000200.awsstudygroup/"
+            },
+            {
+              day: "Friday",
+              desc: "- Review major AWS services studied.\n- Summarize hands-on lab results.\n- Prepare final internship documentation.",
+              start: "2026-12-04",
+              end: "2026-12-04",
+              ref: "https://cloudjourney.awsstudygroup.com/"
+            }
+          ]
+        }
+      };
+    } else {
+      return {
+        weekNum: weekNum,
+        vi: { objectives: '', achievements: '', tasks: [] },
+        en: { objectives: '', achievements: '', tasks: [] }
       };
     }
   }),
@@ -1350,8 +1946,8 @@ REFERENCES
 // ==========================================
 // 3. PERSISTENCE & STATE MANAGEMENT
 // ==========================================
-const STORAGE_KEY = 'fcaj_report_bilingual_v18';
-const PREV_STORAGE_KEY = 'fcaj_report_bilingual_v17';
+const STORAGE_KEY = 'fcaj_report_bilingual_v19';
+const PREV_STORAGE_KEY = 'fcaj_report_bilingual_v18';
 const LANG_KEY = 'fcaj_report_lang';
 
 class AppLanguageManager {
@@ -1379,6 +1975,7 @@ class AppLanguageManager {
       'fcaj_report_bilingual_v14',
       'fcaj_report_bilingual_v15',
       'fcaj_report_bilingual_v16',
+      'fcaj_report_bilingual_v17',
       'fcaj_internship_report_v2',
       'fcaj_internship_report_v1'
     ];
@@ -1395,12 +1992,14 @@ class AppLanguageManager {
         if (parsed && parsed.worklogs && parsed.worklogs.length > 0) {
           // Thông tin sinh viên chỉ có thể sửa từ code, luôn đồng bộ từ DEFAULT_BILINGUAL_DATA
           parsed.studentInfo = JSON.parse(JSON.stringify(DEFAULT_BILINGUAL_DATA.studentInfo));
-          // Luôn đồng bộ nội dung chuẩn của Tuần 1, 2, 3, 4, 5 từ code
-          [1, 2, 3, 4, 5].forEach(wNum => {
+          // Luôn đồng bộ nội dung chuẩn của Tuần 1 đến 12 từ code
+          Array.from({ length: 12 }, (_, i) => i + 1).forEach(wNum => {
             const defWeek = DEFAULT_BILINGUAL_DATA.worklogs.find(w => w.weekNum === wNum);
             const pIdx = parsed.worklogs.findIndex(w => w.weekNum === wNum);
             if (defWeek && pIdx !== -1) {
               parsed.worklogs[pIdx] = JSON.parse(JSON.stringify(defWeek));
+            } else if (defWeek && pIdx === -1) {
+              parsed.worklogs.push(JSON.parse(JSON.stringify(defWeek)));
             }
           });
           // Luôn đồng bộ các bài blog chuẩn (Blog 1-4) từ DEFAULT_BILINGUAL_DATA
@@ -1452,22 +2051,24 @@ class AppLanguageManager {
         }
       }
       // Migrate student personal details while using fresh 2026 calendar & report content
-      const prev = localStorage.getItem(PREV_STORAGE_KEY) || localStorage.getItem('fcaj_report_bilingual_v16');
+      const prev = localStorage.getItem(PREV_STORAGE_KEY) || localStorage.getItem('fcaj_report_bilingual_v17');
       const fresh = JSON.parse(JSON.stringify(DEFAULT_BILINGUAL_DATA));
       if (prev) {
         const prevParsed = JSON.parse(prev);
         if (prevParsed.worklogs && prevParsed.worklogs.length > 0) {
           fresh.worklogs = prevParsed.worklogs;
-          [1, 2, 3, 4, 5].forEach(wNum => {
+          Array.from({ length: 12 }, (_, i) => i + 1).forEach(wNum => {
             const defWeek = DEFAULT_BILINGUAL_DATA.worklogs.find(w => w.weekNum === wNum);
             const pIdx = fresh.worklogs.findIndex(w => w.weekNum === wNum);
             if (defWeek && pIdx !== -1) {
               fresh.worklogs[pIdx] = JSON.parse(JSON.stringify(defWeek));
+            } else if (defWeek && pIdx === -1) {
+              fresh.worklogs.push(JSON.parse(JSON.stringify(defWeek)));
             }
           });
         }
         if (prevParsed.currentWeek) fresh.currentWeek = prevParsed.currentWeek;
-        else fresh.currentWeek = 5;
+        else fresh.currentWeek = 9;
         if (prevParsed.studentInfo) {
           if (prevParsed.studentInfo.fullName) fresh.studentInfo.fullName = prevParsed.studentInfo.fullName;
           if (prevParsed.studentInfo.phone && prevParsed.studentInfo.phone !== '0989888999') {
@@ -2247,7 +2848,7 @@ function formatWorklogDate(dateStr) {
   if (!dateStr) return '-';
   if (/^\d{4}-\d{2}-\d{2}$/.test(dateStr)) {
     const [y, m, d] = dateStr.split('-');
-    return app.currentLang === 'vi' ? `${d}/${m}/${y}` : `${m}/${d}/${y}`;
+    return `${d}/${m}/${y}`;
   }
   return dateStr;
 }
